@@ -190,7 +190,6 @@ h1{margin:2px 0 4px;font-size:clamp(28px,4.8cqw,48px);line-height:1.15;font-weig
 
 button:focus-visible,a:focus-visible,[role=button]:focus-visible{outline:3px solid #2563eb;outline-offset:3px}
 
-/* ===== استجابة الشاشات ===== */
 @media(min-width:760px){
   #stage{border-radius:28px;margin:18px;height:calc(100dvh - 36px)}
   #home{padding:28px 38px}
@@ -218,7 +217,6 @@ button:focus-visible,a:focus-visible,[role=button]:focus-visible{outline:3px sol
 <body>
 <div id="stage">
 
-<!-- ============ الرئيسية ============ -->
 <div class="scr on" id="home">
   <div class="top">
     <span class="pill" id="stwrap">⭐ <b id="st">0</b></span>
@@ -264,7 +262,6 @@ button:focus-visible,a:focus-visible,[role=button]:focus-visible{outline:3px sol
   <p class="sig">© مكتبة الرواد للطباعة والتصوير</p>
 </div>
 
-<!-- ============ الدرس ============ -->
 <div class="scr" id="lesson">
   <div class="top">
     <button class="btn b sm" id="back1" style="padding:8px 14px;" aria-label="الرئيسية">🏠</button>
@@ -286,7 +283,6 @@ button:focus-visible,a:focus-visible,[role=button]:focus-visible{outline:3px sol
   </div>
 </div>
 
-<!-- ============ الاختبار ============ -->
 <div class="scr" id="quiz">
   <div class="top">
     <button class="btn b sm" id="back2" style="padding:8px 14px;" aria-label="الرئيسية">🏠</button>
@@ -302,7 +298,6 @@ button:focus-visible,a:focus-visible,[role=button]:focus-visible{outline:3px sol
   </div>
 </div>
 
-<!-- ============ النتائج ============ -->
 <div class="scr" id="result">
   <div class="top">
     <button class="btn b sm" id="back3" style="padding:8px 14px;" aria-label="الرئيسية">🏠</button>
@@ -317,7 +312,6 @@ button:focus-visible,a:focus-visible,[role=button]:focus-visible{outline:3px sol
   </div>
 </div>
 
-<!-- ============ التقدم ============ -->
 <div class="scr" id="progress">
   <div class="top">
     <button class="btn b sm" id="back4" style="padding:8px 14px;" aria-label="الرئيسية">🏠</button>
@@ -333,7 +327,6 @@ button:focus-visible,a:focus-visible,[role=button]:focus-visible{outline:3px sol
   </div>
 </div>
 
-<!-- ============ عن التطبيق ============ -->
 <div class="scr" id="about">
   <div class="top">
     <button class="btn b sm" id="back5" style="padding:8px 14px;" aria-label="الرئيسية">🏠</button>
@@ -345,7 +338,7 @@ button:focus-visible,a:focus-visible,[role=button]:focus-visible{outline:3px sol
     <h2>🐻 عالم الدب الصغير</h2>
     <p>تطبيق تعليمي تفاعلي للأطفال<br>أنشطة ممتعة للتعلّم — ويُفضّل استخدامه بإشراف الكبار</p>
     <a href="https://rawad-store.github.io/" target="_blank" class="btn b" style="margin:16px auto;width:100%">🌐 زيارة موقع المكتبة</a>
-    <p style="font-size:14px;color:#8292a5;margin-top:6px">الإصدار 7.0 (النسخة النهائية)</p>
+    <p style="font-size:14px;color:#8292a5;margin-top:6px">الإصدار 9.0 (النسخة النهائية)</p>
     <div class="copy">
       تطوير وإنتاج<br>
       <b>مكتبة الرواد للطباعة والتصوير</b><br>
@@ -354,10 +347,8 @@ button:focus-visible,a:focus-visible,[role=button]:focus-visible{outline:3px sol
   </div>
 </div>
 
-<!-- نافذة التأكيد -->
 <div id="ov"><div><span id="ovm"></span><br><button class="btn" id="yes">نعم</button> <button class="btn b" id="no">لا</button></div></div>
 
-<!-- إشعار الدعاية -->
 <div id="ad-toast">
   <span>🎁 اطلب مطبوعاتك الآن من المكتبة!</span>
   <a href="https://rawad-store.github.io/" target="_blank">زيارة</a>
@@ -369,10 +360,19 @@ button:focus-visible,a:focus-visible,[role=button]:focus-visible{outline:3px sol
 (function(){
 'use strict';
 var $=function(i){return document.getElementById(i)};
+
+// دالة parse موجودة في البداية لضمان عدم حدوث خطأ
+function parse(str){return str.split('|').map(function(x){var a=x.split(',');return{w:a[0]||'',g:a[1]||'',c:a[2]||'',l:a[3]||'',f:a[4]||''}})};
+
 var N=['واحد','اثنان','ثلاثة','أربعة','خمسة','ستة','سبعة','ثمانية','تسعة','عشرة','أحد عشر','اثنا عشر','ثلاثة عشر','أربعة عشر','خمسة عشر','ستة عشر','سبعة عشر','ثمانية عشر','تسعة عشر','عشرون'];
-var AR='١٢٣٤٥٦٧٨٩';
+var AR_DIGITS = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
 var FACTS_NUM=['تفاحة واحدة','تفاحتان','ثلاث تفاحات','أربع تفاحات','خمس تفاحات','ست تفاحات','سبع تفاحات','ثماني تفاحات','تسع تفاحات','عشر تفاحات','أحد عشر تفاحة','اثنتا عشرة تفاحة','ثلاث عشرة تفاحة','أربع عشرة تفاحة','خمس عشرة تفاحة','ست عشرة تفاحة','سبع عشرة تفاحة','ثماني عشرة تفاحة','تسع عشرة تفاحة','عشرون تفاحة'];
-var nums=N.map(function(w,i){return{w:w,l:i<9?AR[i]:String(i+1).replace(/\d/g,function(d){return AR[d]}),g:'🍎'.repeat(i+1),f:FACTS_NUM[i]}});
+
+var nums=N.map(function(w,i){
+    var numStr = String(i+1);
+    var arNumStr = numStr.split('').map(function(d){return AR_DIGITS[+d]}).join('');
+    return {w:w, l:arNumStr, g:'🍎'.repeat(i+1), f:FACTS_NUM[i]}
+});
 
 var letters=[
 {w:'أرنب',g:'🐰',l:'أ',f:'الأرنب يقفز بسرعة'},{w:'بطة',g:'🦆',l:'ب',f:'البطة تسبح في الماء'},{w:'تفاحة',g:'🍎',l:'ت',f:'التفاحة فاكهة حمراء'},{w:'ثعلب',g:'🦊',l:'ث',f:'الثعلب حيوان سريع الحركة'},{w:'جمل',g:'🐪',l:'ج',f:'الجمل سفينة الصحراء'},{w:'حصان',g:'🐴',l:'ح',f:'الحصان يجري بسرعة'},{w:'خروف',g:'🐑',l:'خ',f:'الخروف صوفه ناعم'},{w:'دجاجة',g:'🐔',l:'د',f:'الدجاجة تعطينا البيض'},{w:'ذرة',g:'🌽',l:'ذ',f:'الذرة صفراء ولذيذة'},{w:'ريشة',g:'🪶',l:'ر',f:'الريشة خفيفة جداً'},{w:'زرافة',g:'🦒',l:'ز',f:'الزرافة طويلة جداً'},{w:'سمكة',g:'🐟',l:'س',f:'السمكة تعيش في الماء'},{w:'شمس',g:'☀️',l:'ش',f:'الشمس تعطينا الضوء'},{w:'صاروخ',g:'🚀',l:'ص',f:'الصاروخ يطير للفضاء'},{w:'ضفدع',g:'🐸',l:'ض',f:'الضفدع يقفز وينقّ'},{w:'طاووس',g:'🦚',l:'ط',f:'الطاووس جميل الألوان'},{w:'ظرف',g:'✉️',l:'ظ',f:'الظرف يحمل الرسائل'},{w:'عنب',g:'🍇',l:'ع',f:'العنب حلو المذاق'},{w:'غيمة',g:'☁️',l:'غ',f:'الغيمة في السماء'},{w:'فيل',g:'🐘',l:'ف',f:'الفيل كبير وله خرطوم'},{w:'قرد',g:'🐒',l:'ق',f:'القرد يحب الموز'},{w:'كتاب',g:'📖',l:'ك',f:'الكتاب صديقنا'},{w:'ليمون',g:'🍋',l:'ل',f:'الليمون حامض'},{w:'موزة',g:'🍌',l:'م',f:'الموزة صفراء ولذيذة'},{w:'نجمة',g:'⭐',l:'ن',f:'النجمة تلمع في الليل'},{w:'هلال',g:'🌙',l:'ه',f:'الهلال يظهر في أول الشهر'},{w:'وردة',g:'🌹',l:'و',f:'الوردة جميلة ورائحتها طيبة'},{w:'يد',g:'✋',l:'ي',f:'اليد لها خمسة أصابع'}
@@ -506,8 +506,9 @@ C.forEach(function(c){
   g.appendChild(b);
 });
 
-function show(){
-  stopAuto(); var it=cur.d[idx],b=$('big');
+function show(isAuto){
+  if(!isAuto) stopAuto();
+  var it=cur.d[idx],b=$('big');
   b.style.animation='none';void b.offsetWidth;b.style.animation='';
   var html='';
   if(cur.m==='num'||cur.m==='let'){ html='<div class="m">'+it.l+'</div><div class="r">'+it.g+'</div><div class="w">'+it.w+'</div>'+(it.f?'<div class="fact">'+it.f+'</div>':''); }
@@ -531,7 +532,21 @@ $('gotoq').onclick=function(){click();qCount=0;qCorrect=0;streak=0;go('quiz');as
 $('again').onclick=function(){speakQ();pop()};
 
 function stopAuto(){ if(autoTimer){clearTimeout(autoTimer);autoTimer=null} autoMode=false; var a=$('auto'); if(a){a.textContent='▶ تلقائي';a.setAttribute('aria-pressed','false')} }
-$('auto').onclick=function(){ if(autoMode){stopAuto();return} autoMode=true; this.textContent='⏸ إيقاف'; this.setAttribute('aria-pressed','true'); (function step(){ if(!autoMode)return; autoTimer=setTimeout(function(){ if(!$('lesson').classList.contains('on')){stopAuto();return} idx=(idx+1)%cur.d.length;show(); if(autoMode)step(); },3400) })(); };
+$('auto').onclick=function(){ 
+  if(autoMode){stopAuto();return} 
+  autoMode=true; 
+  this.textContent='⏸ إيقاف'; 
+  this.setAttribute('aria-pressed','true'); 
+  (function step(){ 
+    if(!autoMode)return; 
+    autoTimer=setTimeout(function(){ 
+      if(!$('lesson').classList.contains('on')){stopAuto();return} 
+      idx=(idx+1)%cur.d.length;
+      show(true);
+      if(autoMode)step(); 
+    },3400) 
+  })(); 
+};
 
 $('snd').onclick=function(){ on=!on; this.textContent=on?'🔊':'🔇'; this.setAttribute('aria-pressed',on?'true':'false'); if(!on){stopSay();stopAuto()} click(); };
 $('snd').addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){e.preventDefault();this.click()} });
