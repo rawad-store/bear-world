@@ -1,4 +1,4 @@
-const CACHE = 'bear-world-v31'; 
+const CACHE = 'bear-world-v33'; 
 const ASSETS = [
   './',
   './index.html',
