@@ -4,24 +4,32 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#eaf4ff">
-<meta name="description" content="تطبيق تعليمي تفاعلي للأطفال: دروس في الأرقام، الحروف، الألوان، الحيوانات، والأشكال. متعة التعلم في كل وقت!">
+<meta name="description" content="عالم الدب الصغير التعليمي — تطبيق تعليمي تفاعلي للأطفال: أرقام، حروف، ألوان، حيوانات، وأكثر. متعة التعلم في كل وقت!">
 <meta name="keywords" content="تطبيق تعليمي, تعلم الأطفال, حروف عربية, أرقام, ألوان, أشكال هندسية, ألعاب تعليمية, رياض أطفال, مكتبة الرواد">
 
+<!-- ====== وسوم المشاركة (مهمة جداً لواتساب وفيسبوك) ====== -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://rawad-store.github.io/bear-world/">
+<meta property="og:title" content="🐻 عالم الدب الصغير التعليمي">
+<meta property="og:description" content="تطبيق تعليمي تفاعلي للأطفال — متعة التعلم في كل وقت!">
+<meta property="og:image" content="https://rawad-store.github.io/bear-world/bear-world.png">
+<meta property="og:image:secure_url" content="https://rawad-store.github.io/bear-world/bear-world.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="ar_AR">
+
+<!-- ====== تويتر ====== -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="🐻 عالم الدب الصغير التعليمي">
+<meta name="twitter:description" content="تطبيق تعليمي تفاعلي للأطفال — متعة التعلم في كل وقت!">
+<meta name="twitter:image" content="https://rawad-store.github.io/bear-world/bear-world.png">
+
+<!-- ====== الخطوط والأيقونات ====== -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700;800;900&display=swap" rel="stylesheet">
 
-<!-- توثيق الملكية والمشاركة -->
-<meta name="author" content="مكتبة الرواد للطباعة والتصوير">
-<meta property="og:type" content="website">
-<meta property="og:title" content="🐻 عالم الدب الصغير التعليمي">
-<meta property="og:description" content="تطبيق تعليمي تفاعلي للأطفال — متعة التعلم في كل وقت!">
-<meta property="og:image" content="https://rawad-store.github.io/bear-world/bear-world.png">
-<meta property="og:url" content="https://rawad-store.github.io/bear-world/">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="color-scheme" content="light">
-
-<!-- الأيقونات -->
 <link rel="apple-touch-icon" href="icon-192.png">
 <link rel="icon" type="image/png" href="icon-192.png">
 <link rel="manifest" href="manifest.json">
@@ -64,29 +72,21 @@ button{font-family:inherit}
 .scr.on{display:flex}
 @keyframes enter{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
-/* ===== الشريط العلوي (مُحسّن) ===== */
-.top{
-  display:flex;align-items:center;justify-content:space-between;
-  gap:6px;width:100%;flex-wrap:nowrap;z-index:5;
-  margin-bottom: 10px;
-}
+/* ===== الشريط العلوي ===== */
+.top{display:flex;align-items:center;justify-content:space-between;gap:6px;width:100%;flex-wrap:nowrap;z-index:5;margin-bottom:10px;}
 .pill{
-  background:#fff;border:1px solid #e6edf7;border-radius:999px;
-  padding:7px 11px;
+  background:#fff;border:1px solid #e6edf7;border-radius:999px;padding:7px 11px;
   font-weight:900;font-size:clamp(12px,1.5cqw,16px);color:var(--ink);
-  box-shadow:0 4px 12px rgba(42,72,115,.07);
-  display:inline-flex;align-items:center;justify-content:center;gap:4px;
-  text-decoration:none;transition:transform .15s,box-shadow .15s;cursor:pointer;
-  white-space:nowrap;
+  box-shadow:0 4px 12px rgba(42,72,115,.07);display:inline-flex;align-items:center;justify-content:center;gap:4px;
+  text-decoration:none;transition:transform .15s,box-shadow .15s;cursor:pointer;white-space:nowrap;
 }
 .pill:hover{transform:translateY(-2px);box-shadow:0 7px 16px rgba(42,72,115,.12)}
 .pill.link{background:#fff5cc;border-color:#ffe18a;color:#765000}
 
-/* إخفاء النص على الهواتف الصغيرة جداً (أقل من 380px) */
+/* إخفاء النصوص على الشاشات الصغيرة جداً */
 @media(max-width:380px){
   .pill#pwrap{font-size:0;padding:7px 9px}
   .pill#pwrap::before{content:"📊";font-size:14px}
-  .pill#pwrap b{font-size:14px}
   .pill.link{font-size:0;padding:7px 9px}
   .pill.link::before{content:"🏪";font-size:14px}
 }
@@ -105,45 +105,22 @@ h1{margin:2px 0 4px;font-size:clamp(28px,4.8cqw,48px);line-height:1.15;font-weig
 .home-banner span{font-size:clamp(13px,1.6cqw,17px);color:#795c18;font-weight:700}
 
 /* ===== شبكة البطاقات ===== */
-#grid{
-  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;
-  width:100%;padding:2px 2px 14px;align-content:start;overflow:visible;flex:1;
-}
+#grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;width:100%;padding:2px 2px 14px;align-content:start;overflow:visible;flex:1;}
 .card{
-  position:relative;border:0;border-radius:22px;
-  min-height:clamp(112px,15cqw,158px);padding:18px 10px 16px;
-  color:#fff;
-  font:900 clamp(17px,2.1cqw,23px) 'Tajawal',sans-serif;
+  position:relative;border:0;border-radius:22px;min-height:clamp(112px,15cqw,158px);padding:18px 10px 16px;
+  color:#fff;font:900 clamp(17px,2.1cqw,23px) 'Tajawal',sans-serif;
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
-  cursor:pointer;
-  box-shadow:0 6px 0 rgba(26,54,82,.14),0 12px 22px rgba(36,66,101,.14),inset 0 1px 0 rgba(255,255,255,.25);
-  border:1px solid rgba(255,255,255,.7);
-  text-shadow:0 1px 3px rgba(0,0,0,.35);
-  transition:transform .16s,box-shadow .16s;overflow:hidden;
+  cursor:pointer;box-shadow:0 6px 0 rgba(26,54,82,.14),0 12px 22px rgba(36,66,101,.14),inset 0 1px 0 rgba(255,255,255,.25);
+  border:1px solid rgba(255,255,255,.7);text-shadow:0 1px 3px rgba(0,0,0,.35);transition:transform .16s,box-shadow .16s;overflow:hidden;
 }
-.card:before{
-  content:"";position:absolute;inset:0;
-  background:linear-gradient(145deg,rgba(255,255,255,.25),transparent 60%);
-  pointer-events:none;
-}
+.card:before{content:"";position:absolute;inset:0;background:linear-gradient(145deg,rgba(255,255,255,.25),transparent 60%);pointer-events:none;}
 .card:hover{transform:translateY(-4px);box-shadow:0 9px 0 rgba(26,54,82,.10),0 17px 26px rgba(36,66,101,.18)}
 .card:active{transform:translateY(1px);box-shadow:0 3px 0 rgba(26,54,82,.10)}
 .card span.e{font-size:clamp(38px,6.3cqw,66px);line-height:1;filter:drop-shadow(0 3px 3px rgba(0,0,0,.2))}
-.card .badge{
-  position:absolute;top:10px;left:10px;background:#16a878;color:white;border-radius:50%;
-  font-size:15px;width:26px;height:26px;display:flex;align-items:center;justify-content:center;
-  font-weight:900;box-shadow:0 2px 5px #0003;
-}
+.card .badge{position:absolute;top:10px;left:10px;background:#16a878;color:white;border-radius:50%;font-size:15px;width:26px;height:26px;display:flex;align-items:center;justify-content:center;font-weight:900;box-shadow:0 2px 5px #0003;}
 
 /* ===== الأزرار ===== */
-.btn{
-  border:0;border-radius:16px;padding:13px 20px;
-  font:900 clamp(15px,1.9cqw,20px) 'Tajawal',sans-serif;color:#fff;
-  background:linear-gradient(180deg,#ff8d82,#f46c69);
-  box-shadow:0 4px 0 #d94d4d,0 8px 15px rgba(239,100,100,.14);
-  cursor:pointer;transition:transform .12s,filter .12s;
-  display:inline-flex;align-items:center;justify-content:center;text-decoration:none;gap:7px;
-}
+.btn{border:0;border-radius:16px;padding:13px 20px;font:900 clamp(15px,1.9cqw,20px) 'Tajawal',sans-serif;color:#fff;background:linear-gradient(180deg,#ff8d82,#f46c69);box-shadow:0 4px 0 #d94d4d,0 8px 15px rgba(239,100,100,.14);cursor:pointer;transition:transform .12s,filter .12s;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;gap:7px;}
 .btn:hover{filter:brightness(1.04);transform:translateY(-1px)}
 .btn:active{transform:translateY(3px);box-shadow:0 1px 0 #d94d4d}
 .btn.b{background:linear-gradient(180deg,#68b5ff,#4389f5);box-shadow:0 4px 0 #2862c7,0 8px 15px rgba(59,130,246,.13)}
@@ -155,12 +132,7 @@ h1{margin:2px 0 4px;font-size:clamp(28px,4.8cqw,48px);line-height:1.15;font-weig
 .btn.sm{padding:9px 14px;font-size:clamp(14px,1.6cqw,17px);border-radius:13px}
 
 /* ===== شاشة الدرس ===== */
-#big{
-  margin:18px auto 0;width:100%;max-width:820px;flex:1;min-height:280px;
-  border-radius:28px;background:linear-gradient(160deg,#fff,#f5faff);border:2px solid #e8f1fb;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;
-  cursor:pointer;box-shadow:var(--shadow);overflow:hidden;padding:clamp(20px,5cqw,48px);color:#1e293b;
-}
+#big{margin:18px auto 0;width:100%;max-width:820px;flex:1;min-height:280px;border-radius:28px;background:linear-gradient(160deg,#fff,#f5faff);border:2px solid #e8f1fb;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;cursor:pointer;box-shadow:var(--shadow);overflow:hidden;padding:clamp(20px,5cqw,48px);color:#1e293b;}
 #big .m{font-size:clamp(76px,15cqw,150px);line-height:1;font-weight:900;color:var(--coral);text-shadow:0 4px 0 #ffe3df}
 #big .r{font-size:clamp(55px,10cqw,100px);line-height:1.2;font-weight:800}
 #big .w{font-size:clamp(32px,7cqw,64px);font-weight:900;color:#2563b9;background:#e8f3ff;padding:8px 26px;border-radius:18px}
@@ -180,12 +152,7 @@ h1{margin:2px 0 4px;font-size:clamp(28px,4.8cqw,48px);line-height:1.15;font-weig
 #q .p{font-size:clamp(56px,11cqw,105px);line-height:1.2;font-weight:900;color:#243b53}
 
 #opts{display:flex;gap:clamp(10px,2cqw,20px);margin:20px auto 0;width:100%;justify-content:center;flex-wrap:wrap}
-.opt{
-  width:clamp(88px,16cqw,150px);aspect-ratio:1;border:2px solid #e5edf7;border-radius:24px;
-  background:#fff;font-size:clamp(38px,7cqw,68px);font-weight:900;color:#1e293b;
-  display:flex;align-items:center;justify-content:center;cursor:pointer;
-  box-shadow:0 5px 0 #dbe6f2,0 9px 16px #27476b10;transition:transform .12s,background .12s;
-}
+.opt{width:clamp(88px,16cqw,150px);aspect-ratio:1;border:2px solid #e5edf7;border-radius:24px;background:#fff;font-size:clamp(38px,7cqw,68px);font-weight:900;color:#1e293b;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 5px 0 #dbe6f2,0 9px 16px #27476b10;transition:transform .12s,background .12s;}
 .opt:hover{transform:translateY(-3px)}
 .opt:active{transform:translateY(2px)}
 .opt.ok{background:#d7f8e9;color:#08794e;border-color:#43c895;animation:pop .3s}
@@ -198,11 +165,7 @@ h1{margin:2px 0 4px;font-size:clamp(28px,4.8cqw,48px);line-height:1.15;font-weig
 #fb.show{color:#16885d}
 
 /* ===== الشاشات الداخلية ===== */
-#result .box,#progress .box,#about .box{
-  background:#fff;border:1px solid #e6edf7;border-radius:30px;
-  padding:clamp(24px,5cqw,48px);text-align:center;box-shadow:var(--shadow);
-  width:100%;max-width:720px;margin:auto;align-self:center;color:var(--ink);
-}
+#result .box,#progress .box,#about .box{background:#fff;border:1px solid #e6edf7;border-radius:30px;padding:clamp(24px,5cqw,48px);text-align:center;box-shadow:var(--shadow);width:100%;max-width:720px;margin:auto;align-self:center;color:var(--ink);}
 #result .big{font-size:clamp(48px,10cqw,92px);font-weight:900;color:#1c4775}
 .sub{font-size:clamp(19px,3cqw,28px);font-weight:800;color:#6a7d91;margin-top:8px}
 .stars{font-size:clamp(38px,7cqw,64px);margin:20px 0;letter-spacing:4px}
@@ -216,14 +179,7 @@ h1{margin:2px 0 4px;font-size:clamp(28px,4.8cqw,48px);line-height:1.15;font-weig
 #about .box .copy{font-size:16px;color:#8292a5;border-top:1px solid #edf1f7;padding-top:18px;margin-top:20px;font-weight:800}
 #about .box .copy b{color:#c68a0b}
 
-#ad-toast{
-  position:fixed;bottom:18px;left:50%;transform:translateX(-50%) translateY(120%);
-  background:#fff;color:#1e293b;padding:14px 18px;border-radius:18px;
-  font-size:16px;font-weight:900;box-shadow:0 12px 35px #17324d25;
-  display:flex;align-items:center;gap:14px;z-index:50;opacity:0;transition:all .35s;
-  width:min(92%,560px);justify-content:space-between;
-  border:1px solid #ffe18a;border-bottom:4px solid #ffc93d;
-}
+#ad-toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%) translateY(120%);background:#fff;color:#1e293b;padding:14px 18px;border-radius:18px;font-size:16px;font-weight:900;box-shadow:0 12px 35px #17324d25;display:flex;align-items:center;gap:14px;z-index:50;opacity:0;transition:all .35s;width:min(92%,560px);justify-content:space-between;border:1px solid #ffe18a;border-bottom:4px solid #ffc93d;}
 #ad-toast.show{transform:translateX(-50%) translateY(0);opacity:1}
 #ad-toast a{color:#624600;background:#ffdc67;padding:8px 12px;border-radius:10px;text-decoration:none;font-size:14px;white-space:nowrap}
 
@@ -303,12 +259,13 @@ button:focus-visible,a:focus-visible,[role=button]:focus-visible{outline:3px sol
     <span aria-hidden="true" style="font-size:34px">🎒</span>
   </div>
   <div id="grid"></div>
+  
   <div style="text-align:center; padding: 0 15px; margin-top: 10px;">
-  <p style="font-size: 13px; color: #61758d; line-height: 1.6; font-weight: 700; margin-bottom: 8px;">
-    تطبيق تعليمي للأطفال يضم دروساً ممتعة في الأرقام، الحروف، الألوان، الحيوانات، الأشكال، واللغة الإنجليزية. مناسب لمرحلة رياض الأطفال والمرحلة الابتدائية.
-  </p>
-</div>
-<p class="sig">© مكتبة الرواد للطباعة والتصوير</p>
+    <p style="font-size: 13px; color: #61758d; line-height: 1.6; font-weight: 700; margin-bottom: 8px;">
+      تطبيق تعليمي للأطفال يضم دروساً ممتعة في الأرقام، الحروف، الألوان، الحيوانات، الأشكال، واللغة الإنجليزية. مناسب لمرحلة رياض الأطفال والمرحلة الابتدائية.
+    </p>
+  </div>
+  <p class="sig">© مكتبة الرواد للطباعة والتصوير</p>
 </div>
 
 <!-- ============ الدرس ============ -->
@@ -392,7 +349,7 @@ button:focus-visible,a:focus-visible,[role=button]:focus-visible{outline:3px sol
     <h2>🐻 عالم الدب الصغير</h2>
     <p>تطبيق تعليمي تفاعلي للأطفال<br>أنشطة ممتعة للتعلّم — ويُفضّل استخدامه بإشراف الكبار</p>
     <a href="https://rawad-store.github.io/" target="_blank" class="btn b" style="margin:16px auto;width:100%">🌐 زيارة موقع المكتبة</a>
-    <p style="font-size:14px;color:#8292a5;margin-top:6px">الإصدار 4.1 (محسّن)</p>
+    <p style="font-size:14px;color:#8292a5;margin-top:6px">الإصدار 5.0 (النسخة النهائية)</p>
     <div class="copy">
       تطوير وإنتاج<br>
       <b>مكتبة الرواد للطباعة والتصوير</b><br>
