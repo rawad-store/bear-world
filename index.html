@@ -8,10 +8,10 @@
 
 <!-- ====== توثيق الملكية ====== -->
 <meta name="author" content="مكتبة الرواد للطباعة والتصوير">
-<meta name="copyright" content="© 2026 مكتبة الرواد للطباعة والتصوير — جميع الحقوق محفوظة">
+<meta name="copyright" content="© 2025 مكتبة الرواد للطباعة والتصوير — جميع الحقوق محفوظة">
 <meta name="robots" content="index, follow">
 
-<!-- ====== Open Graph (فيسبوك، واتساب، لينكدإن) ====== -->
+<!-- ====== Open Graph ====== -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="عالم الدب الصغير التعليمي">
 <meta property="og:title" content="🐻 عالم الدب الصغير التعليمي">
@@ -120,7 +120,6 @@ box-shadow:inset 0 -1.5cqw 0 rgba(0,0,0,.1),0 2cqw 3cqw rgba(0,0,0,.2);font-fami
 #about .box .copy{font-size:3.8cqw;color:#888;border-top:1px dashed #ddd;padding-top:3cqw;margin-top:3cqw;line-height:1.6}
 #about .box .copy b{color:var(--blue)}
 @media (max-width:480px){.card{font-size:4.7cqw}.btn{font-size:4.5cqw}}
-#note{display:none;background:#fff3cd;border-radius:4cqw;padding:1.4cqw 3cqw;font-size:3.5cqw;font-weight:700;text-align:center;margin-top:1cqw}
 #ov{position:absolute;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:20}
 #ov.on{display:flex}#ov>div{background:#fff;border-radius:7cqw;padding:6cqw;text-align:center;font-weight:800;font-size:6cqw;width:78cqw}#ov .btn{margin:3cqw 1cqw 0}
 .sig{font-size:3.2cqw;color:rgba(43,34,80,.55);text-align:center;font-weight:700;margin:2cqw 0 0;flex:none}
@@ -154,9 +153,8 @@ box-shadow:inset 0 -1.5cqw 0 rgba(0,0,0,.1),0 2cqw 3cqw rgba(0,0,0,.2);font-fami
     <path d="M150 152 V160 M126 164 Q150 188 174 164" stroke="#3a2a22" stroke-width="5" fill="none" stroke-linecap="round"/>
   </svg>
   <h1>اختر درساً!</h1>
-  <div id="note">🔇 جهازك لا يحتوي صوتاً عربياً، فالنطق قد لا يعمل. الصور والأصوات تعمل بشكل طبيعي.</div>
   <div id="grid"></div>
-  <p class="sig">© 2026 مكتبة الرواد للطباعة والتصوير — جميع الحقوق محفوظة</p>
+  <p class="sig">© 2025 مكتبة الرواد للطباعة والتصوير — جميع الحقوق محفوظة</p>
 </div>
 
 <!-- ============ الدرس ============ -->
@@ -236,11 +234,11 @@ box-shadow:inset 0 -1.5cqw 0 rgba(0,0,0,.1),0 2cqw 3cqw rgba(0,0,0,.2);font-fami
     <img src="icon-512.png" alt="شعار مكتبة الرواد" onerror="this.style.display='none'">
     <h2>🐻 عالم الدب الصغير</h2>
     <p>تطبيق تعليمي تفاعلي للأطفال<br>يعمل بدون إنترنت — آمن تمامًا</p>
-    <p style="font-size:4cqw;color:#666">الإصدار 1.0</p>
+    <p style="font-size:4cqw;color:#666">الإصدار 1.1 (جديد)</p>
     <div class="copy">
       تطوير وإنتاج<br>
       <b>مكتبة الرواد للطباعة والتصوير</b><br>
-      © 2026 — جميع الحقوق محفوظة
+      © 2025 — جميع الحقوق محفوظة
     </div>
   </div>
 </div>
@@ -289,6 +287,64 @@ var letters=[
 {w:'يد',g:'✋',l:'ي',f:'اليد لها خمسة أصابع'}
 ];
 
+/* ====== الدرس الجديد 1: الأشكال الهندسية ====== */
+var shapes=[
+{w:'مربع',g:'🟦',f:'المربع له 4 أضلاع متساوية'},
+{w:'دائرة',g:'🔴',f:'الدائرة مستديرة بلا زوايا'},
+{w:'مثلث',g:'🔺',f:'المثلث له 3 أضلاع'},
+{w:'مستطيل',g:'🟩',f:'المستطيل طوله أكبر من عرضه'},
+{w:'معين',g:'🔶',f:'المعين يشبه الألماسة'},
+{w:'نجمة',g:'⭐',f:'النجمة لها 5 نقاط'},
+{w:'قلب',g:'❤️',f:'القلب رمز الحب'},
+{w:'هلال',g:'🌙',f:'الهلال مثل القمر'},
+{w:'سهم',g:'➡️',f:'السهم يشير إلى الاتجاه'},
+{w:'صليب',g:'➕',f:'الصليب علامة الجمع'}
+];
+
+/* ====== الدرس الجديد 2: الأصوات ====== */
+var sounds=[
+{w:'قطة',g:'🐱',f:'القطة تقول: مياؤ مياؤ'},
+{w:'كلب',g:'🐶',f:'الكلب يقول: هاو هاو'},
+{w:'بقرة',g:'🐮',f:'البقرة تقول: مووو'},
+{w:'خروف',g:'🐑',f:'الخروف يقول: ماع ماع'},
+{w:'دجاجة',g:'🐔',f:'الدجاجة تقول: كاك كاك'},
+{w:'بطة',g:'🦆',f:'البطة تقول: بط بط'},
+{w:'حصان',g:'🐴',f:'الحصان يصهل: هيييي'},
+{w:'أسد',g:'🦁',f:'الأسد يزأر: رررر'},
+{w:'ضفدع',g:'🐸',f:'الضفدع ينق: كواك كواك'},
+{w:'فيل',g:'🐘',f:'الفيل يصيح: بااار'}
+];
+
+/* ====== الدرس الجديد 3: الحروف الإنجليزية ====== */
+var english=[
+{w:'A - Apple',g:'🍎',f:'A for Apple (تفاحة)'},
+{w:'B - Ball',g:'⚽',f:'B for Ball (كرة)'},
+{w:'C - Cat',g:'🐱',f:'C for Cat (قطة)'},
+{w:'D - Dog',g:'🐶',f:'D for Dog (كلب)'},
+{w:'E - Elephant',g:'🐘',f:'E for Elephant (فيل)'},
+{w:'F - Fish',g:'🐟',f:'F for Fish (سمكة)'},
+{w:'G - Grapes',g:'🍇',f:'G for Grapes (عنب)'},
+{w:'H - House',g:'🏠',f:'H for House (منزل)'},
+{w:'I - Ice',g:'🧊',f:'I for Ice (ثلج)'},
+{w:'J - Juice',g:'🧃',f:'J for Juice (عصير)'},
+{w:'K - Key',g:'🔑',f:'K for Key (مفتاح)'},
+{w:'L - Lion',g:'🦁',f:'L for Lion (أسد)'},
+{w:'M - Moon',g:'🌙',f:'M for Moon (قمر)'},
+{w:'N - Nest',g:'🪹',f:'N for Nest (عش)'},
+{w:'O - Orange',g:'🍊',f:'O for Orange (برتقالة)'},
+{w:'P - Pen',g:'✏️',f:'P for Pen (قلم)'},
+{w:'Q - Queen',g:'👑',f:'Q for Queen (ملكة)'},
+{w:'R - Rabbit',g:'🐰',f:'R for Rabbit (أرنب)'},
+{w:'S - Sun',g:'☀️',f:'S for Sun (شمس)'},
+{w:'T - Tree',g:'🌳',f:'T for Tree (شجرة)'},
+{w:'U - Umbrella',g:'☂️',f:'U for Umbrella (مظلة)'},
+{w:'V - Van',g:'🚐',f:'V for Van (شاحنة)'},
+{w:'W - Watch',g:'⌚',f:'W for Watch (ساعة)'},
+{w:'X - Xylophone',g:'🎹',f:'X for Xylophone (زيلوفون)'},
+{w:'Y - Yacht',g:'🛥️',f:'Y for Yacht (يخت)'},
+{w:'Z - Zebra',g:'🦓',f:'Z for Zebra (حمار وحشي)'}
+];
+
 function parse(str){return str.split('|').map(function(x){var a=x.split(',');return{w:a[0]||'',g:a[1]||'',c:a[2]||'',l:a[3]||'',f:a[4]||''}})};
 
 var C=[
@@ -298,11 +354,14 @@ var C=[
 {n:'الحيوانات',e:'🦁',k:'#d4902f',m:'pic',d:parse('أسد,🦁,,,الأسد ملك الغابة|فيل,🐘,,,الفيل أكبر حيوان بري|قطة,🐱,,,القطة تقول مياؤ|كلب,🐶,,,الكلب صديق وفي|حصان,🐴,,,الحصان يجري بسرعة|بقرة,🐮,,,البقرة تعطينا الحليب|خروف,🐑,,,الخروف صوفه ناعم|دجاجة,🐔,,,الدجاجة تعطينا البيض|أرنب,🐰,,,الأرنب يحب الجزر|زرافة,🦒,,,الزرافة أطول حيوان|قرد,🐒,,,القرد يحب الموز|سمكة,🐟,,,السمكة تسبح في الماء|جمل,🐪,,,الجمل يتحمل العطش|بطة,🦆,,,البطة تقول بطبط|ثعلب,🦊,,,الثعلب مكار وذكي|دب,🐻,,,الدب يحب العسل')},
 {n:'الفواكه',e:'🍓',k:'#e8434f',m:'pic',d:parse('تفاحة,🍎,,,التفاحة فاكهة حمراء|موزة,🍌,,,الموزة صفراء ولذيذة|برتقالة,🍊,,,البرتقالة غنية بفيتامين سي|عنب,🍇,,,العنب حلو المذاق|بطيخ,🍉,,,البطيخ أحمر من الداخل|فراولة,🍓,,,الفراولة صغيرة وحمراء|ليمون,🍋,,,الليمون حامض|كرز,🍒,,,الكرز أحمر صغير|أناناس,🍍,,,الأناناس له تاج|خوخ,🍑,,,الخوخ ناعم وحلو')},
 {n:'الخضروات',e:'🥕',k:'#4fa54f',m:'pic',d:parse('جزرة,🥕,,,الجزرة برتقالية ومفيدة|طماطم,🍅,,,الطماطم حمراء مستديرة|ذرة,🌽,,,الذرة صفراء ولذيذة|خيار,🥒,,,الخيار أخضر طويل|بطاطا,🥔,,,البطاطا تنمو تحت الأرض|بصل,🧅,,,البصل يبكي العين|ثوم,🧄,,,الثوم صحي وقوي|فلفل,🌶️,,,الفلفل حار|باذنجان,🍆,,,الباذنجان بنفسجي|بروكلي,🥦,,,البروكلي أخضر ومفيد')},
-{n:'الأشكال',e:'🔺',k:'#8e5be0',m:'pic',d:parse('دائرة,🔴,,,الدائرة مستديرة بلا زوايا|مربع,🟦,,,المربع له أربعة أضلاع متساوية|مثلث,🔺,,,المثلث له ثلاثة أضلاع|نجمة,⭐,,,النجمة لها خمس نقاط|قلب,❤️,,,القلب رمز الحب|معين,🔶,,,المعين مثل الألماسة|هلال,🌙,,,الهلال مثل القمر|مستطيل,🟩,,,المستطيل طوله أكبر من عرضه')},
+{n:'الأشكال',e:'🔺',k:'#8e5be0',m:'pic',d:shapes},
 {n:'الجسم',e:'🖐️',k:'#e0589a',m:'pic',d:parse('عين,👁️,,,بالعين نرى|أذن,👂,,,بالأذن نسمع|أنف,👃,,,بالأنف نشم|فم,👄,,,بالفم نأكل ونتكلم|يد,✋,,,باليد نكتب ونمسك|قدم,🦶,,,بالقدم نمشي|سن,🦷,,,بالأسنان نمضغ|عضلة,💪,,,العضلة تجعلنا أقوياء')},
 {n:'المركبات',e:'🚗',k:'#2fa5c8',m:'pic',d:parse('سيارة,🚗,,,السيارة تسير على الطريق|طائرة,✈️,,,الطائرة تطير في السماء|قطار,🚆,,,القطار يسير على القضبان|سفينة,🚢,,,السفينة تسير في البحر|دراجة,🚲,,,الدراجة لها عجلتان|حافلة,🚌,,,الحافلة تنقل الناس|صاروخ,🚀,,,الصاروخ يطير للفضاء|مروحية,🚁,,,المروحية تطير عمودياً|إسعاف,🚑,,,الإسعاف ينقذ المرضى|شاحنة,🚚,,,الشاحنة تحمل البضائع')},
 {n:'أيام الأسبوع',e:'📅',k:'#6a7ae8',m:'pic',d:parse('السبت,1️⃣,,,السبت أول أيام الأسبوع|الأحد,2️⃣,,,الأحد ثاني أيام الأسبوع|الاثنين,3️⃣,,,الاثنين ثالث أيام الأسبوع|الثلاثاء,4️⃣,,,الثلاثاء رابع أيام الأسبوع|الأربعاء,5️⃣,,,الأربعاء خامس أيام الأسبوع|الخميس,6️⃣,,,الخميس سادس أيام الأسبوع|الجمعة,7️⃣,,,الجمعة يوم عطلة')},
-{n:'كلمات جميلة',e:'💖',k:'#f0709a',m:'pic',d:parse('السلام عليكم,🤝,,,تحية الإسلام|شكراً,🙏,,,كلمة شكر|من فضلك,😊,,,كلمة طيبة|عفواً,🌷,,,رد على الشكر|صباح الخير,🌅,,,تحية الصباح|مساء الخير,🌙,,,تحية المساء|بسم الله,🍽️,,,نقولها قبل الأكل|الحمد لله,🤲,,,نقولها بعد الأكل')}
+{n:'كلمات جميلة',e:'💖',k:'#f0709a',m:'pic',d:parse('السلام عليكم,🤝,,,تحية الإسلام|شكراً,🙏,,,كلمة شكر|من فضلك,😊,,,كلمة طيبة|عفواً,🌷,,,رد على الشكر|صباح الخير,🌅,,,تحية الصباح|مساء الخير,🌙,,,تحية المساء|بسم الله,🍽️,,,نقولها قبل الأكل|الحمد لله,🤲,,,نقولها بعد الأكل')},
+/* الدروس الجديدة */
+{n:'الأصوات',e:'🎵',k:'#d9408a',m:'pic',d:sounds},
+{n:'إنجليزي',e:'🔠',k:'#3a8dd9',m:'pic',d:english}
 ];
 
 var missed=false,TT=[],voices=[],ovcb=null,sw2=false,sx=null;
@@ -332,10 +391,6 @@ function loadV(){try{voices=speechSynthesis.getVoices()||[]}catch(e){}}
 if('speechSynthesis' in window){
   loadV();
   try{speechSynthesis.onvoiceschanged=loadV}catch(e){}
-  setTimeout(function(){
-    loadV();
-    if(voices.length&&!voices.some(function(v){return v.lang&&v.lang.slice(0,2)==='ar'}))$('note').style.display='block';
-  },2000);
 }
 function say(t){if(!on||!t||!('speechSynthesis' in window))return;try{speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);u.lang='ar-SA';u.rate=.88;u.pitch=1.35;var v=voices.filter(function(x){return x.lang&&x.lang.slice(0,2)==='ar'})[0];if(v)u.voice=v;speechSynthesis.speak(u)}catch(e){}}
 function stopSay(){try{speechSynthesis.cancel()}catch(e){}}
@@ -610,7 +665,7 @@ document.body.addEventListener('click',function(){ctx()},{once:true});
 
 upd();
 
-/* تسجيل Service Worker (يعمل فقط على HTTPS أو localhost) */
+/* تسجيل Service Worker */
 if('serviceWorker' in navigator){
   window.addEventListener('load',function(){
     navigator.serviceWorker.register('sw.js').catch(function(){});
