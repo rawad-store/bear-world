@@ -63,16 +63,32 @@ button{font-family:inherit}
 .scr.on{display:flex}
 @keyframes enter{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
-/* ===== الشريط العلوي ===== */
-.top{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;flex-wrap:wrap;z-index:5}
+/* ===== الشريط العلوي (مُحسّن) ===== */
+.top{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:6px;width:100%;flex-wrap:nowrap;z-index:5;
+  margin-bottom: 10px;
+}
 .pill{
-  background:#fff;border:1px solid #e6edf7;border-radius:999px;padding:8px 14px;
-  font-weight:900;font-size:clamp(13px,1.6cqw,18px);color:var(--ink);
-  box-shadow:0 4px 12px rgba(42,72,115,.07);display:inline-flex;align-items:center;justify-content:center;gap:7px;
+  background:#fff;border:1px solid #e6edf7;border-radius:999px;
+  padding:7px 11px;
+  font-weight:900;font-size:clamp(12px,1.5cqw,16px);color:var(--ink);
+  box-shadow:0 4px 12px rgba(42,72,115,.07);
+  display:inline-flex;align-items:center;justify-content:center;gap:4px;
   text-decoration:none;transition:transform .15s,box-shadow .15s;cursor:pointer;
+  white-space:nowrap;
 }
 .pill:hover{transform:translateY(-2px);box-shadow:0 7px 16px rgba(42,72,115,.12)}
 .pill.link{background:#fff5cc;border-color:#ffe18a;color:#765000}
+
+/* إخفاء النص على الهواتف الصغيرة جداً (أقل من 380px) */
+@media(max-width:380px){
+  .pill#pwrap{font-size:0;padding:7px 9px}
+  .pill#pwrap::before{content:"📊";font-size:14px}
+  .pill#pwrap b{font-size:14px}
+  .pill.link{font-size:0;padding:7px 9px}
+  .pill.link::before{content:"🏪";font-size:14px}
+}
 
 /* ===== الدب ===== */
 .hero{position:relative;margin:clamp(12px,2cqw,22px) auto 4px;display:flex;flex-direction:column;align-items:center;text-align:center;width:100%}
@@ -95,13 +111,13 @@ h1{margin:2px 0 4px;font-size:clamp(28px,4.8cqw,48px);line-height:1.15;font-weig
 .card{
   position:relative;border:0;border-radius:22px;
   min-height:clamp(112px,15cqw,158px);padding:18px 10px 16px;
-  color:#fff; /* أبيض افتراضي */
+  color:#fff;
   font:900 clamp(17px,2.1cqw,23px) 'Tajawal',sans-serif;
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
   cursor:pointer;
   box-shadow:0 6px 0 rgba(26,54,82,.14),0 12px 22px rgba(36,66,101,.14),inset 0 1px 0 rgba(255,255,255,.25);
   border:1px solid rgba(255,255,255,.7);
-  text-shadow:0 1px 3px rgba(0,0,0,.35); /* ظل نصي قوي لتباين أفضل */
+  text-shadow:0 1px 3px rgba(0,0,0,.35);
   transition:transform .16s,box-shadow .16s;overflow:hidden;
 }
 .card:before{
@@ -233,7 +249,7 @@ button:focus-visible,a:focus-visible,[role=button]:focus-visible{outline:3px sol
 @media(max-width:520px){
   .scr{padding:12px}
   .top{gap:6px}
-  .pill{padding:8px 10px}
+  .pill{padding:7px 10px}
   #grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
   .card{min-height:108px;border-radius:19px;padding:14px 8px;font-size:15px}
   .card span.e{font-size:42px}
@@ -370,7 +386,7 @@ button:focus-visible,a:focus-visible,[role=button]:focus-visible{outline:3px sol
     <h2>🐻 عالم الدب الصغير</h2>
     <p>تطبيق تعليمي تفاعلي للأطفال<br>أنشطة ممتعة للتعلّم — ويُفضّل استخدامه بإشراف الكبار</p>
     <a href="https://rawad-store.github.io/" target="_blank" class="btn b" style="margin:16px auto;width:100%">🌐 زيارة موقع المكتبة</a>
-    <p style="font-size:14px;color:#8292a5;margin-top:6px">الإصدار 4.0 (نهائي)</p>
+    <p style="font-size:14px;color:#8292a5;margin-top:6px">الإصدار 4.1 (محسّن)</p>
     <div class="copy">
       تطوير وإنتاج<br>
       <b>مكتبة الرواد للطباعة والتصوير</b><br>
