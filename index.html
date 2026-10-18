@@ -4,6 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#eaf4ff">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="الدب الصغير">
 <meta name="description" content="عالم الدب الصغير التعليمي — تطبيق تفاعلي شامل للأطفال: أرقام، حروف عربية وإنجليزية، تربية إسلامية، علوم ومفاهيم رياضية.">
 <meta name="keywords" content="تطبيق تعليمي, تعلم الأطفال, حروف عربية, حروف إنجليزية, أرقام, تربية إسلامية, مكتبة الرواد">
 <meta property="og:type" content="website">
@@ -34,7 +37,7 @@ html{background:#eaf4ff}
 body{height:100dvh;display:flex;justify-content:center;background:radial-gradient(circle at 10% 10%,#fff1bd 0,transparent 25%),radial-gradient(circle at 90% 15%,#d9f8ed 0,transparent 26%),linear-gradient(135deg,#eaf4ff,#f8f2ff 55%,#fff8e8);color:var(--ink)}
 button,a,[role=button]{touch-action:manipulation}
 button{font-family:inherit}
-#stage{position:relative;isolation:isolate;container-type:inline-size;width:100%;max-width:1120px;height:100dvh;overflow:hidden;background:rgba(255,255,255,.72);box-shadow:0 0 60px rgba(42,72,115,.1);user-select:none}
+#stage{position:relative;isolation:isolate;container-type:inline-size;width:100%;max-width:1120px;height:100dvh;overflow:hidden;background:rgba(255,255,255,.72);box-shadow:0 0 60px rgba(42,72,115,.1);user-select:none;display:flex;flex-direction:column}
 #stage:before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.38;background-image:radial-gradient(#b9d8ff 1.5px,transparent 1.5px);background-size:28px 28px;-webkit-mask-image:linear-gradient(to bottom,black,transparent 70%);mask-image:linear-gradient(to bottom,black,transparent 70%)}
 .scr{position:absolute;inset:0;display:none;flex-direction:column;padding:clamp(14px,3.2cqw,32px);padding-top:max(clamp(14px,3.2cqw,32px),env(safe-area-inset-top));padding-bottom:max(14px,env(safe-area-inset-bottom));overflow-y:auto;overflow-x:hidden;animation:enter .28s ease-out;z-index:1;-webkit-overflow-scrolling:touch}
 .scr.on{display:flex}
@@ -54,7 +57,8 @@ h1{margin:2px 0 4px;text-align:center;font-size:clamp(28px,4.8cqw,48px);line-hei
 .home-banner{display:flex;align-items:center;justify-content:space-between;gap:12px;background:linear-gradient(110deg,#fff0b3,#fff9e8);border:1px solid #ffe59a;border-radius:22px;padding:12px 18px;margin:4px 0 16px;box-shadow:0 8px 18px rgba(195,146,29,.08)}
 .home-banner strong{font-size:clamp(16px,2.2cqw,23px)}
 .home-banner span{font-size:clamp(13px,1.6cqw,17px);color:#795c18;font-weight:700}
-#grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;width:100%;padding:2px 2px 14px;align-content:start;flex:1}
+#grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;width:100%;padding:2px 2px 14px;align-content:start;flex:none}
+.sec{grid-column:1/-1;font-weight:900;font-size:clamp(18px,2.5cqw,26px);color:#183b63;margin:12px 4px 0;display:flex;align-items:center;gap:8px;border-bottom:3px dashed #d5e4f5;padding-bottom:6px}
 .card{position:relative;border-radius:22px;min-height:clamp(112px,15cqw,158px);padding:18px 10px 16px;color:#fff;font:900 clamp(17px,2.1cqw,23px) 'Tajawal',sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;cursor:pointer;box-shadow:0 6px 0 rgba(26,54,82,.14),0 12px 22px rgba(36,66,101,.14);border:1px solid rgba(255,255,255,.7);text-shadow:0 1px 3px rgba(0,0,0,.35);transition:transform .16s;overflow:hidden}
 .card:before{content:"";position:absolute;inset:0;background:linear-gradient(145deg,rgba(255,255,255,.25),transparent 60%);pointer-events:none}
 .card:hover{transform:translateY(-4px)}
@@ -71,9 +75,9 @@ h1{margin:2px 0 4px;text-align:center;font-size:clamp(28px,4.8cqw,48px);line-hei
 #big .m{font-size:clamp(76px,15cqw,150px);line-height:1;font-weight:900;color:var(--coral);text-shadow:0 4px 0 #ffe3df;display:flex;align-items:center;justify-content:center;min-height:1.2em}
 #big .r{font-size:clamp(55px,10cqw,100px);line-height:1.2;font-weight:800;text-align:center;word-break:break-all}
 #big .w{font-size:clamp(32px,7cqw,64px);font-weight:900;color:#2563b9;background:#e8f3ff;padding:8px 26px;border-radius:18px;text-align:center}
-#big .fact{font-size:clamp(16px,2.5cqw,24px);color:#52687e;text-align:center;font-weight:800;background:#f0f8f5;padding:12px 18px;border-radius:16px;max-width:650px}
+#big .fact{font-size:clamp(16px,2.5cqw,24px);color:#52687e;text-align:center;font-weight:800;background:#f0f8f5;padding:12px 18px;border-radius:16px;max-width:650px;line-height:1.7}
 .sw{display:block;width:clamp(100px,19cqw,180px);height:clamp(100px,19cqw,180px);border-radius:50%;border:8px solid #fff;outline:2px solid #d5deea;outline-offset:-2px;box-shadow:inset -10px -10px 20px rgba(0,0,0,.12),0 8px 15px rgba(0,0,0,.1)}
-.prog{width:100%;max-width:820px;height:12px;background:#e4edf7;border-radius:99px;margin:18px auto 8px;overflow:hidden}
+.prog{width:100%;max-width:820px;height:12px;background:#e4edf7;border-radius:99px;margin:18px auto 8px;overflow:hidden;flex:none}
 .prog .bar{height:100%;background:linear-gradient(90deg,#36c98f,#9be9c7);border-radius:99px;transition:width .3s;width:0}
 .nav{display:flex;gap:12px;margin:10px auto;align-items:center;justify-content:center;font-weight:900;font-size:18px;flex-wrap:wrap}
 #q{margin:20px auto 0;background:#fff;border:2px solid #e8f1fb;border-radius:28px;padding:clamp(20px,4cqw,38px);text-align:center;width:100%;max-width:820px;box-shadow:var(--shadow);color:#1e293b}
@@ -113,6 +117,7 @@ button:focus-visible,a:focus-visible,[role=button]:focus-visible{outline:3px sol
 </style>
 </head>
 <body>
+<noscript><p style="text-align:center;font:700 18px sans-serif;padding:30px">يحتاج التطبيق إلى تفعيل جافاسكربت ليعمل.</p></noscript>
 <div id="stage">
 <div class="scr on" id="home">
   <div class="top">
@@ -134,7 +139,7 @@ button:focus-visible,a:focus-visible,[role=button]:focus-visible{outline:3px sol
   </div>
   <div id="grid"></div>
   <div style="text-align:center;padding:0 15px;margin-top:10px">
-    <p style="font-size:13px;color:#61758d;line-height:1.6;font-weight:700;margin-bottom:8px">تطبيق تعليمي تفاعلي متكامل يتوافق مع المناهج الدراسية والأنشطة الحديثة لمرحلة رياض الأطفال والصفوف الأولى: أرقام، حروف عربية وإنجليزية، علوم ومفاهيم، تربية إسلامية، وقيم أخلاقية.</p>
+    <p style="font-size:13px;color:#61758d;line-height:1.6;font-weight:700;margin-bottom:8px">تطبيق تعليمي تفاعلي متكامل لمرحلة رياض الأطفال والصفوف الأولى: أرقام ورياضيات، حروف عربية وإنجليزية، علوم وحياة، تربية إسلامية، وقيم أخلاقية.</p>
   </div>
   <p class="sig">© مكتبة الرواد للطباعة والتصوير</p>
 </div>
@@ -214,14 +219,13 @@ button:focus-visible,a:focus-visible,[role=button]:focus-visible{outline:3px sol
     <h2>🐻 عالم الدب الصغير</h2>
     <p>تطبيق تعليمي تفاعلي متكامل للأطفال<br>أنشطة ممتعة وفق المناهج والأنشطة الحديثة</p>
     <a href="https://rawad-store.github.io/" target="_blank" rel="noopener" class="btn b" style="margin:16px auto;width:100%">🌐 زيارة موقع المكتبة</a>
-    <p style="font-size:14px;color:#8292a5;margin-top:6px">الإصدار 16.0 (النسخة النهائية)</p>
+    <p style="font-size:14px;color:#8292a5;margin-top:6px">الإصدار 24.0</p>
     <div class="copy">تطوير وإنتاج<br><b>مكتبة الرواد للطباعة والتصوير</b><br>© جميع الحقوق محفوظة</div>
   </div>
 </div>
 
 <div id="ad-toast"><span>🎁 اطلب مطبوعاتك الآن من المكتبة!</span><a href="https://rawad-store.github.io/" target="_blank" rel="noopener">زيارة</a></div>
 </div>
-
 <script>
 (function(){
 'use strict';
@@ -231,89 +235,85 @@ function esc(s){return String(s).replace(/[&<>"']/g,function(c){return{'&':'&amp
 
 var N=['واحد','اثنان','ثلاثة','أربعة','خمسة','ستة','سبعة','ثمانية','تسعة','عشرة','أحد عشر','اثنا عشر','ثلاثة عشر','أربعة عشر','خمسة عشر','ستة عشر','سبعة عشر','ثمانية عشر','تسعة عشر','عشرون'];
 var AR=['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
-var FN=['تفاحة واحدة','تفاحتان','ثلاث تفاحات','أربع تفاحات','خمس تفاحات','ست تفاحات','سبع تفاحات','ثماني تفاحات','تسع تفاحات','عشر تفاحات','أحد عشر تفاحة','اثنتا عشرة تفاحة','ثلاث عشرة تفاحة','أربع عشرة تفاحة','خمس عشرة تفاحة','ست عشرة تفاحة','سبع عشرة تفاحة','ثماني عشرة تفاحة','تسع عشرة تفاحة','عشرون تفاحة'];
-var nums=N.map(function(w,i){return{w:w,l:String(i+1).split('').map(function(d){return AR[+d]}).join(''),g:'🍎'.repeat(i+1),f:FN[i]}});
+function ar(n){return String(n).split('').map(function(d){return AR[+d]}).join('')}
+var FN=['تفاحة واحدة','تفاحتان','ثلاث تفاحات','أربع تفاحات','خمس تفاحات','ست تفاحات','سبع تفاحات','ثماني تفاحات','تسع تفاحات','عشر تفاحات','إحدى عشرة تفاحة','اثنتا عشرة تفاحة','ثلاث عشرة تفاحة','أربع عشرة تفاحة','خمس عشرة تفاحة','ست عشرة تفاحة','سبع عشرة تفاحة','ثماني عشرة تفاحة','تسع عشرة تفاحة','عشرون تفاحة'];
+var nums=N.map(function(w,i){return{w:w,l:ar(i+1),g:'🍎'.repeat(i+1),f:FN[i]}});
 
 var letters=[
-{w:'أرنب',g:'🐰',l:'أ',f:'الأرنب يقفز بسرعة وينشط صباحاً'},{w:'بطة',g:'🦆',l:'ب',f:'البطة تسبح في الماء برفق'},{w:'تفاحة',g:'🍎',l:'ت',f:'التفاحة فاكهة طازجة ولذيذة'},{w:'ثعلب',g:'🦊',l:'ث',f:'الثعلب حيوان ذكي وسريع'},{w:'جمل',g:'🐪',l:'ج',f:'الجمل سفينة الصحراء يتحمل العطش'},{w:'حصان',g:'🐴',l:'ح',f:'الحصان قوي يجري بسرعة'},{w:'خروف',g:'🐑',l:'خ',f:'الخروف صوفه ناعم ويعطينا اللحم'},{w:'دجاجة',g:'🐔',l:'د',f:'الدجاجة تعطينا البيض واللحم'},{w:'ذرة',g:'🌽',l:'ذ',f:'الذرة صفراء ومغذية'},{w:'ريشة',g:'🪶',l:'ر',f:'الريشة خفيفة وزاهية الألوان'},{w:'زرافة',g:'🦒',l:'ز',f:'الزرافة أطول الحيوانات رقبة'},{w:'سمكة',g:'🐟',l:'س',f:'السمكة تتنفس بالخياشيم وتعيش في الماء'},{w:'شمس',g:'☀️',l:'ش',f:'الشمس تمدنا بالضوء والحرارة'},{w:'صاروخ',g:'🚀',l:'ص',f:'الصاروخ ينطلق نحو الفضاء'},{w:'ضفدع',g:'🐸',l:'ض',f:'الضفدع حيوان برمائي يقفز'},{w:'طاووس',g:'🦚',l:'ط',f:'الطاووس ريشه جميل ومزخرف'},{w:'ظبي',g:'🦌',l:'ظ',f:'الظبي حيوان رشيق وسريع'},{w:'عنب',g:'🍇',l:'ع',f:'العنب فاكهة لذيذة ومفيدة'},{w:'غيمة',g:'☁️',l:'غ',f:'الغيمة تأتي بالأمطار والخير'},{w:'فيل',g:'🐘',l:'ف',f:'الفيل أقوى وأضخم الحيوانات البرية'},{w:'قرد',g:'🐒',l:'ق',f:'القرد ماهر في التسلق'},{w:'كتاب',g:'📖',l:'ك',f:'الكتاب ينير العقول بالمعرفة'},{w:'ليمون',g:'🍋',l:'ل',f:'الليمون غني بفيتامين سي'},{w:'موزة',g:'🍌',l:'م',f:'الموزة فاكهة غنية بالفيتامينات'},{w:'نجمة',g:'⭐',l:'ن',f:'النجمة تتلألأ في السماء ليلاً'},{w:'هلال',g:'🌙',l:'ه',f:'الهلال هو شكل القمر بداية الشهر'},{w:'وردة',g:'🌹',l:'و',f:'الوردة تعطر المكان برائحتها'},{w:'يمامة',g:'🕊️',l:'ي',f:'اليمامة رمز السلام والهدوء'}
+{w:'أرنب',g:'🐰',l:'أ',f:'الأرنب يقفز بسرعة ويحب أكل الجزر'},{w:'بطة',g:'🦆',l:'ب',f:'البطة تسبح في الماء برفق'},{w:'تفاحة',g:'🍎',l:'ت',f:'التفاحة فاكهة طازجة ولذيذة'},{w:'ثعلب',g:'🦊',l:'ث',f:'الثعلب حيوان ذكي وسريع'},{w:'جمل',g:'🐪',l:'ج',f:'الجمل سفينة الصحراء ويتحمل العطش'},{w:'حصان',g:'🐴',l:'ح',f:'الحصان قوي ويجري بسرعة'},{w:'خروف',g:'🐑',l:'خ',f:'الخروف صوفه ناعم'},{w:'دجاجة',g:'🐔',l:'د',f:'الدجاجة تعطينا البيض'},{w:'ذرة',g:'🌽',l:'ذ',f:'الذرة صفراء ومغذية'},{w:'ريشة',g:'🪶',l:'ر',f:'الريشة خفيفة وزاهية الألوان'},{w:'زرافة',g:'🦒',l:'ز',f:'الزرافة أطول الحيوانات رقبة'},{w:'سمكة',g:'🐟',l:'س',f:'السمكة تتنفس بالخياشيم وتعيش في الماء'},{w:'شمس',g:'☀️',l:'ش',f:'الشمس تمدنا بالضوء والحرارة'},{w:'صاروخ',g:'🚀',l:'ص',f:'الصاروخ ينطلق نحو الفضاء'},{w:'ضفدع',g:'🐸',l:'ض',f:'الضفدع حيوان برمائي يقفز'},{w:'طاووس',g:'🦚',l:'ط',f:'الطاووس ريشه جميل ومزخرف'},{w:'ظبي',g:'🦌',l:'ظ',f:'الظبي حيوان رشيق وسريع'},{w:'عنب',g:'🍇',l:'ع',f:'العنب فاكهة لذيذة ومفيدة'},{w:'غيمة',g:'☁️',l:'غ',f:'الغيمة تأتي بالأمطار والخير'},{w:'فيل',g:'🐘',l:'ف',f:'الفيل من أكبر الحيوانات البرية'},{w:'قرد',g:'🐒',l:'ق',f:'القرد ماهر في التسلق'},{w:'كتاب',g:'📖',l:'ك',f:'الكتاب ينير العقول بالمعرفة'},{w:'ليمون',g:'🍋',l:'ل',f:'الليمون غني بفيتامين سي'},{w:'موزة',g:'🍌',l:'م',f:'الموزة فاكهة غنية بالفيتامينات'},{w:'نجمة',g:'⭐',l:'ن',f:'النجمة تتلألأ في السماء ليلاً'},{w:'هلال',g:'🌙',l:'ه',f:'الهلال هو شكل القمر في بداية الشهر'},{w:'وردة',g:'🌹',l:'و',f:'الوردة تعطر المكان برائحتها'},{w:'يمامة',g:'🕊️',l:'ي',f:'اليمامة طائر هادئ جميل'}
 ];
 
 var vowels=[
-{w:'فتحة ( َ )',g:'بَ',f:'الفتحة نفتح فمنا عند النطق بها: أَبَ تَ'},
-{w:'ضمة ( ُ )',g:'بُ',f:'الضمة نضم شفتينا عند النطق بها: أُ بُ تُ'},
-{w:'كسرة ( ِ )',g:'بِ',f:'الكسرة نكسر فمنا لأسفل: إِ بِ تِ'},
-{w:'سكون ( ْ )',g:'بْ',f:'السكون حركة الوقوف اللطيفة: أَبْ أَتْ'},
-{w:'شدة ( ّ )',g:'بَّ',f:'الشدة حرفان أدغما معاً: بَّ تَّ'},
-{w:'تنوين فتح',g:'بً',f:'التنوين ينطق نوناً ساكنة في نهاية الاسم: بً كِتَاباً'}
+{w:'فتحة ( َ )',g:'بَ',f:'الفتحة تكون فوق الحرف، ونفتح فمنا عند النطق بها: بَ تَ ثَ'},
+{w:'ضمة ( ُ )',g:'بُ',f:'الضمة تكون فوق الحرف، ونضم شفتينا عند النطق بها: بُ تُ ثُ'},
+{w:'كسرة ( ِ )',g:'بِ',f:'الكسرة تكون تحت الحرف، ونخفض فكنا السفلي قليلاً عند النطق بها: بِ تِ ثِ'},
+{w:'سكون ( ْ )',g:'بْ',f:'السكون علامة تدل على أن الحرف ساكن لا حركة له: أَبْ أَخْ'},
+{w:'شدة ( ّ )',g:'بَّ',f:'الشدة علامة تدل على حرفين متشابهين اجتمعا معاً: مَدَّ رَبَّ'},
+{w:'تنوين فتح',g:'بً',f:'التنوين نون ساكنة تلفظ في آخر الاسم ولا تكتب: كِتَاباً'}
 ];
-
 var longV=[
 {w:'مد الألف',g:'با',f:'مد الألف يطيل حركة الفتحة: با - تا - باب'},
-{w:'مد الواو',g:'بو',f:'مد الواو يطيل حركة الضمة: بو - تو - بوق'},
+{w:'مد الواو',g:'بو',f:'مد الواو يطيل حركة الضمة: بو - تو - نور'},
 {w:'مد الياء',g:'بي',f:'مد الياء يطيل حركة الكسرة: بي - تي - بيت'}
 ];
-
-var demoGrammar=[
-{w:'هذا / هذه',g:'👉',f:'أسماء الإشارة: هذا للمذكر (هذا كتاب)، هذه للمؤنث (هذه وردة)'},
+var grammar=[
+{w:'هذا / هذه',g:'👉',f:'أسماء الإشارة: هذا للمذكر مثل هذا كتاب، وهذه للمؤنث مثل هذه وردة'},
 {w:'اللام الشمسية',g:'☀️',f:'تكتب ولا تلفظ والحرف بعدها مشدد: الشَّمْس ، التَّمْر'},
 {w:'اللام القمرية',g:'🌙',f:'تكتب وتلفظ وسكونها ظاهر: الْقَمَر ، الْكِتَاب'},
-{w:'أنا / نحن',g:'🙋‍♂️',f:'ضمائر المتكلم: أنا للمفرد، نحن للمجموعة'}
+{w:'أنا / نحن',g:'🙋',f:'ضمائر المتكلم: أنا للمفرد، ونحن للجماعة'}
 ];
-
 var islamic=[
 {w:'الشهادتان',g:'☝️',f:'أشهد أن لا إله إلا الله وأشهد أن محمداً رسول الله'},
-{w:'أركان الإسلام الخمسة',g:'🖐️',f:'الشهادتان، الصلاة، الزكاة، صوم رمضان، حج البيت لمن استطاع إليه سبيلا'},
+{w:'أركان الإسلام الخمسة',g:'🖐️',f:'الشهادتان، والصلاة، والزكاة، وصوم رمضان، وحج البيت لمن استطاع إليه سبيلا'},
 {w:'أركان الإيمان',g:'🌟',f:'الإيمان بالله وملائكته وكتبه ورسله واليوم الآخر والقدر خيره وشره'},
-{w:'الصلوات الخمس',g:'🕌',f:'الفجر، الظهر، العصر، المغرب، العشاء'},
-{w:'الوضوء الصحيح',g:'💧',f:'غسل اليدين، المضمضة، الاستنشاق، غسل الوجه واليدين والمسح على الرأس والرجلين'},
-{w:'آداب الطعام',g:'🍽️',f:'أقول بسم الله، آكل بيميني ومما يليني، وأقول الحمد لله'},
+{w:'الصلوات الخمس',g:'🕌',f:'الفجر ركعتان، والظهر أربع، والعصر أربع، والمغرب ثلاث، والعشاء أربع'},
+{w:'الوضوء الصحيح',g:'💧',f:'أقول بسم الله، وأغسل كفيّ، ثم أتمضمض وأستنشق، وأغسل وجهي ويديّ إلى المرفقين، وأمسح رأسي وأذنيّ، وأغسل رجليّ إلى الكعبين'},
+{w:'آداب الطعام',g:'🍽️',f:'أقول بسم الله، وآكل بيميني ومما يليني، وأقول الحمد لله بعد الأكل'},
 {w:'إفشاء السلام',g:'🤝',f:'تحية الإسلام: السلام عليكم ورحمة الله وبركاته'},
-{w:'بر الوالدين',g:'❤️',f:'قال تعالى: "وَوَصَّيْنَا الْإِنسَانَ بِوَالِدَيْهِ إِحْسَانًا"'}
+{w:'بر الوالدين',g:'❤️',f:'قال الله تعالى في سورة الإسراء (الآية ٢٣): وَبِالْوَالِدَيْنِ إِحْسَانًا'}
 ];
-
+var duas=parse('عند الاستيقاظ,⏰,,,الحمد لله الذي أحيانا بعد ما أماتنا وإليه النشور|عند النوم,🛏️,,,باسمك اللهم أموت وأحيا|قبل الطعام,🍽️,,,بسم الله|بعد الطعام,🥛,,,الحمد لله|عند العطاس,🤧,,,أقول الحمد لله ويقول من يسمعني يرحمك الله فأقول يهديكم الله ويصلح بالكم|عند ركوب السيارة,🚗,,,بسم الله ، الحمد لله ، سبحان الذي سخر لنا هذا وما كنا له مقرنين وإنا إلى ربنا لمنقلبون');
+var hijri=parse('محرم,١,,,محرم هو الشهر الأول من السنة الهجرية|صفر,٢,,,صفر هو الشهر الثاني|ربيع الأول,٣,,,ربيع الأول هو الشهر الثالث|ربيع الآخر,٤,,,ربيع الآخر هو الشهر الرابع|جمادى الأولى,٥,,,جمادى الأولى هو الشهر الخامس|جمادى الآخرة,٦,,,جمادى الآخرة هو الشهر السادس|رجب,٧,,,رجب هو الشهر السابع وهو من الأشهر الحرم|شعبان,٨,,,شعبان هو الشهر الثامن|رمضان,٩,,,رمضان هو الشهر التاسع وهو شهر الصيام|شوال,١٠,,,شوال هو الشهر العاشر وفي أول يوم منه عيد الفطر|ذو القعدة,١١,,,ذو القعدة هو الشهر الحادي عشر وهو من الأشهر الحرم|ذو الحجة,١٢,,,ذو الحجة هو الشهر الثاني عشر وفيه الحج وعيد الأضحى');
 var days=[
-{w:'السبت',g:'1️⃣',f:'بداية الأسبوع السعيد'},
-{w:'الأحد',g:'2️⃣',f:'اليوم الثاني من الأسبوع'},
-{w:'الإثنين',g:'3️⃣',f:'اليوم الثالث من الأسبوع'},
-{w:'الثلاثاء',g:'4️⃣',f:'اليوم الرابع من الأسبوع'},
-{w:'الأربعاء',g:'5️⃣',f:'اليوم الخامس من الأسبوع'},
-{w:'الخميس',g:'6️⃣',f:'اليوم السادس من الأسبوع'},
-{w:'الجمعة',g:'7️⃣',f:'يوم الجمعة عيد المسلمين الأسبوعي'}
+{w:'السبت',g:'1️⃣',f:'السبت هو اليوم الأول من الأسبوع'},
+{w:'الأحد',g:'2️⃣',f:'الأحد هو اليوم الثاني من الأسبوع'},
+{w:'الاثنين',g:'3️⃣',f:'الاثنين هو اليوم الثالث من الأسبوع'},
+{w:'الثلاثاء',g:'4️⃣',f:'الثلاثاء هو اليوم الرابع من الأسبوع'},
+{w:'الأربعاء',g:'5️⃣',f:'الأربعاء هو اليوم الخامس من الأسبوع'},
+{w:'الخميس',g:'6️⃣',f:'الخميس هو اليوم السادس من الأسبوع'},
+{w:'الجمعة',g:'7️⃣',f:'الجمعة هو اليوم السابع وهو عيد المسلمين الأسبوعي'}
 ];
-
 var seasons=[
-{w:'الربيع',g:'🌸',f:'تتفتح الأزهار وتعتدل درجات الحرارة'},
-{w:'الصيف',g:'☀️',f:'تسطع الشمس ويصبح الجو حاراً ونذهب للبحر'},
-{w:'الخريف',g:'🍂',f:'تتساقط أوراق الأشجار وتتغير ألوانها'},
-{w:'الشتاء',g:'🌧️',f:'ينزل المطر ونرتدي الملابس دافئة'}
+{w:'الربيع',g:'🌸',f:'في كثير من المناطق، تتفتح الأزهار ويكون الجو معتدلاً'},
+{w:'الصيف',g:'☀️',f:'تسطع الشمس ويصبح الجو حاراً في كثير من المناطق'},
+{w:'الخريف',g:'🍂',f:'تتساقط أوراق بعض الأشجار وتتغير ألوانها في المناطق المعتدلة'},
+{w:'الشتاء',g:'🌧️',f:'قد يكثر المطر في بعض المناطق ونرتدي الملابس الدافئة'}
 ];
-
 var plantParts=[
 {w:'الجذور',g:'🌱',f:'تثبت النبتة في التربة وتمتص الماء والمغذيات'},
-{w:'الساق',g:'🪵',f:'يحمل الأوراق والأزهار وينقل الماء'},
+{w:'الساق',g:'🪵',f:'تحمل الأوراق والأزهار وتنقل الماء'},
 {w:'الأوراق',g:'🍃',f:'تصنع الغذاء للنبتة باستخدام ضوء الشمس'},
-{w:'الزهرة',g:'🌺',f:'تعطي النبتة شكلاً جميلاً وتتكون منها الثمار'}
+{w:'الزهرة',g:'🌺',f:'تساعد الزهرة في تكوين البذور والثمار في كثير من النباتات بعد التلقيح'}
 ];
-
 var shapes=[
 {w:'دائرة',g:'🔴',f:'الدائرة منحنى مغلق ليس له زوايا أو أضلاع'},
 {w:'مربع',g:'🟦',f:'المربع له ٤ أضلاع متساوية في الطول و٤ زوايا'},
 {w:'مثلث',g:'🔺',f:'المثلث له ٣ أضلاع و٣ زوايا'},
 {w:'مستطيل',g:'▬',f:'المستطيل له ٤ أضلاع كل ضلعين متقابلين متساويان'},
 {w:'مكعب',g:'🎲',f:'المكعب مجسم له ٦ وجوه مربعة'},
-{w:'كرة',g:'⚽',f:'الكرة مجسم مستدير ينحدر ويدور في كل الاتجاهات'}
+{w:'كرة',g:'⚽',f:'الكرة مجسم مستدير يتدحرج في كل الاتجاهات'}
 ];
-
 var math=[
-{w:'١ + ١ = ٢',g:'🍎 + 🍎 = 🍎🍎',f:'واحد زائد واحد يساوي اثنان'},
-{w:'٢ + ١ = ٣',g:'🍎🍎 + 🍎 = 🍎🍎🍎',f:'اثنان زائد واحد يساوي ثلاثة'},
-{w:'٣ + ٢ = ٥',g:'🍌🍌🍌 + 🍌🍌 = 🍌🍌🍌🍌🍌',f:'ثلاثة زائد اثنان يساوي خمسة'},
-{w:'٥ + ٥ = ١٠',g:'🖐️ + 🖐️ = 🔟',f:'خمسة زائد خمسة يساوي عشرة'},
-{w:'٣ − ١ = ٢',g:'🍎🍎🍎 − 🍎 = 🍎🍎',f:'ثلاثة ناقص واحد يساوي اثنان'},
-{w:'٥ − ٢ = ٣',g:'🍌🍌🍌🍌🍌 − 🍌🍌 = 🍌🍌🍌',f:'خمسة ناقص اثنان يساوي ثلاثة'},
-{w:'١٠ − ٥ = ٥',g:'🔟 − 🖐️ = 🖐️',f:'عشرة ناقص خمسة يساوي خمسة'}
+{w:'١ + ١ = ٢',g:'➕',f:'واحد زائد واحد يساوي اثنان'},
+{w:'٢ + ١ = ٣',g:'➕',f:'اثنان زائد واحد يساوي ثلاثة'},
+{w:'٣ + ٢ = ٥',g:'➕',f:'ثلاثة زائد اثنان يساوي خمسة'},
+{w:'٥ + ٥ = ١٠',g:'➕',f:'خمسة زائد خمسة يساوي عشرة'},
+{w:'٣ − ١ = ٢',g:'➖',f:'ثلاثة ناقص واحد يساوي اثنان'},
+{w:'٥ − ٢ = ٣',g:'➖',f:'خمسة ناقص اثنان يساوي ثلاثة'},
+{w:'١٠ − ٥ = ٥',g:'➖',f:'عشرة ناقص خمسة يساوي خمسة'}
 ];
-
+var mathPool=[];for(var mi=0;mi<=10;mi++)mathPool.push({w:'',g:ar(mi),l:ar(mi),f:''});
+var mq='';
 var comp=[
 {w:'أكبر من',g:'🐘 > 🐭',f:'الفيل أكبر حجماً من الفأر'},
 {w:'أصغر من',g:'🐭 < 🐘',f:'الفأر أصغر حجماً من الفيل'},
@@ -321,72 +321,93 @@ var comp=[
 {w:'أثقل من',g:'🪨 > 🪶',f:'الحجر أثقل من الريشة'},
 {w:'يساوي',g:'🍎 = 🍎',f:'المجموعتان متساويتان في العدد'}
 ];
-
 var patterns=[
 {w:'نمط ثنائي',g:'🔴🔵🔴🔵',f:'تكرار بالترتيب: أحمر، أزرق، أحمر، أزرق'},
 {w:'نمط الأشكال',g:'🔺🟦🔺🟦',f:'تكرار منتظم: مثلث، مربع، مثلث، مربع'},
 {w:'نمط العناصر',g:'🍎🍌🍎🍌',f:'تكرار النمط: تفاحة، موزة، تفاحة، موزة'}
 ];
-
+var ordinals=parse('الأول,١,,,الأول يأتي في البداية|الثاني,٢,,,الثاني يأتي بعد الأول|الثالث,٣,,,الثالث يأتي بعد الثاني|الرابع,٤,,,الرابع يأتي بعد الثالث|الخامس,٥,,,الخامس يأتي بعد الرابع|السادس,٦,,,السادس يأتي بعد الخامس|السابع,٧,,,السابع يأتي بعد السادس|الثامن,٨,,,الثامن يأتي بعد السابع|التاسع,٩,,,التاسع يأتي قبل العاشر|العاشر,١٠,,,العاشر هو آخر الترتيب في العشرة');
+var dirs=parse('فوق,⬆️,,,الطائر فوق الشجرة|تحت,⬇️,,,القطة تحت الطاولة|يمين,➡️,,,اليمين جهة اليد اليمنى|يسار,⬅️,,,اليسار جهة اليد اليسرى|داخل,📥,,,الكرة داخل الصندوق|خارج,📤,,,الكرة خارج الصندوق');
+var opp=parse('كبير وصغير,🐘↔🐭,,,الفيل كبير والفأر صغير|طويل وقصير,🦒↔🐶,,,الزرافة طويلة والكلب قصير|ساخن وبارد,🔥↔🧊,,,النار ساخنة والثلج بارد|ثقيل وخفيف,🪨↔🪶,,,الحجر ثقيل والريشة خفيفة|سريع وبطيء,🐆↔🐢,,,الفهد سريع والسلحفاة بطيئة|نهار وليل,☀️↔🌙,,,نرى الشمس في النهار والقمر في الليل');
 var life=[
-{w:'غسيل اليدين',g:'🧼',f:'نغسل أيدينا بالماء والصابون لمدة ٢٠ ثانية'},
-{w:'الصدق والأمانة',g:'⭐',f:'الصدق يهديني إلى البر والجنة'},
+{w:'غسل اليدين',g:'🧼',f:'نغسل أيدينا بالماء والصابون لمدة ٢٠ ثانية'},
+{w:'الصدق والأمانة',g:'⭐',f:'الصدق يهدي إلى البر والبر يهدي إلى الجنة'},
 {w:'الاحترام والتعاون',g:'🤗',f:'نحترم الكبير ونساعد أصدقاءنا برفق'},
-{w:'النظافة والترتيب',g:'🧹',f:'النظافة من الإيمان ونرتب ألعابنا بعد اللعب'}
+{w:'النظافة والترتيب',g:'🧹',f:'الطهور شطر الإيمان ونرتب ألعابنا بعد اللعب'}
 ];
-
 var sounds=[
-{w:'صوت القطة',g:'🐱',f:'القطة تموء: مياؤ مياؤ'},
-{w:'صوت الكلب',g:'🐶',f:'الكلب ينبح: هاو هاو'},{w:'صوت البقرة',g:'🐮',f:'البقرة تخور: مووو'},
+{w:'صوت القطة',g:'🐱',f:'القطة تموء: مياو مياو'},
+{w:'صوت الكلب',g:'🐶',f:'الكلب ينبح: هاو هاو'},
+{w:'صوت البقرة',g:'🐮',f:'البقرة تخور: موو'},
 {w:'صوت الخروف',g:'🐑',f:'الخروف يثغو: ماع ماع'},
-{w:'صوت الحصان',g:'🐴',f:'الحصان يصهل: صهيل'},
-{w:'صوت الأسد',g:'🦁',f:'الأسد يزأر: زئير'}
+{w:'صوت الحصان',g:'🐴',f:'الحصان يصهل: ايهيهي'},
+{w:'صوت الأسد',g:'🦁',f:'الأسد يزأر: غررر'}
 ];
-
 var body=[
 {w:'الرأس والدماغ',g:'🧠',f:'الرأس يحوي الدماغ الذي يفكر ويوجه الجسم'},
-{w:'العينان',g:'👁️',f:'نرى بهما الألوان والأشكال والأشياء من حولنا'},
+{w:'العينان',g:'👁️',f:'نرى بهما الألوان والأشكال من حولنا'},
 {w:'الأذنان',g:'👂',f:'نسمع بهما الأصوات الهادئة والعالية'},
-{w:'الأنف',g:'👃',f:'نشم به الروايح ونستنشق الهواء النقي'},
+{w:'الأنف',g:'👃',f:'نشم به الروائح ونستنشق الهواء النقي'},
 {w:'اللسان',g:'👅',f:'نتذوق به الأطعمة الحلوة والحامضة والمالحة'},
 {w:'اليدان والأصابع',g:'✋',f:'نلمس ونكتب ونمسك الأشياء بحذر'}
 ];
-
+var feelings=parse('سعيد,😀,,,أشعر بالسعادة عندما ألعب مع أصدقائي|حزين,😢,,,عندما أحزن أتحدث مع أمي أو أبي|غاضب,😠,,,عندما أغضب آخذ نفساً عميقاً وأهدأ|خائف,😨,,,عندما أخاف أخبر شخصاً كبيراً أثق به|متفاجئ,😮,,,أتفاجأ عندما أرى شيئاً جديداً|متعب,😴,,,عندما أتعب آخذ قسطاً من الراحة والنوم');
+var family=parse('أب,👨,,,أبي يحبني ويرعاني|أم,👩,,,أمي تحبني وتعتني بي|أخ,👦,,,أخي يلعب معي|أخت,👧,,,أختي تساعدني|جد,👴,,,جدي هو والد أبي أو والد أمي|جدة,👵,,,جدتي هي والدة أبي أو والدة أمي');
+var jobs=parse('طبيب,👨‍⚕️,,,الطبيب يعالج المرضى|معلم,👨‍🏫,,,المعلم يعلمنا القراءة والكتابة|شرطي,👮,,,الشرطي يحافظ على أمن الناس|مزارع,👨‍🌾,,,المزارع يزرع الخضروات والفواكه|طيار,👨‍✈️,,,الطيار يقود الطائرة في السماء|طباخ,👨‍🍳,,,الطباخ يعد لنا الطعام اللذيذ|إطفائي,🧑‍🚒,,,الإطفائي يطفئ الحرائق وينقذ الناس');
+var trans=parse('سيارة,🚗,,,السيارة تسير على الطريق|حافلة,🚌,,,الحافلة تنقل الركاب إلى المدرسة|طائرة,✈️,,,الطائرة تطير في السماء|قطار,🚆,,,القطار يسير على السكة الحديدية|سفينة,🚢,,,السفينة تسير في البحر|دراجة,🚲,,,الدراجة تسير بقوة أقدامنا|سيارة إسعاف,🚑,,,سيارة الإسعاف تنقل المرضى بسرعة');
+var food=parse('موزة,🍌,,,الموزة فاكهة صفراء غنية بالفيتامينات|برتقالة,🍊,,,البرتقالة غنية بفيتامين سي|فراولة,🍓,,,الفراولة حمراء وحلوة|بطيخة,🍉,,,البطيخ يحتوي على الكثير من الماء|تمر,🌴,,,التمر فاكهة حلوة وغنية بالطاقة|جزرة,🥕,,,الجزر غني بفيتامين أ المفيد للعينين|طماطم,🍅,,,الطماطم خضار حمراء نضيفها إلى السلطة|خيار,🥒,,,الخيار خضار منعش|بطاطس,🥔,,,البطاطس تنمو تحت التربة');
+var space=parse('الشمس,☀️,,,الشمس نجم كبير يعطينا الضوء والحرارة|القمر,🌙,,,القمر يدور حول الأرض وينعكس عليه ضوء الشمس|الأرض,🌍,,,الأرض هي كوكبنا الذي نعيش عليه|النجوم,✨,,,النجوم كثيرة تتلألأ في سماء الليل|زحل,🪐,,,زحل كوكب له حلقات جميلة|صاروخ,🚀,,,الصاروخ ينقل الرواد إلى الفضاء|رائد الفضاء,🧑‍🚀,,,رائد الفضاء يسافر إلى الفضاء');
 var enA=[
 {w:'Apple',l:'Aa',g:'🍎',f:'A is for Apple'},{w:'Ball',l:'Bb',g:'⚽',f:'B is for Ball'},{w:'Cat',l:'Cc',g:'🐱',f:'C is for Cat'},{w:'Dog',l:'Dd',g:'🐶',f:'D is for Dog'},{w:'Egg',l:'Ee',g:'🥚',f:'E is for Egg'},{w:'Fish',l:'Ff',g:'🐟',f:'F is for Fish'},{w:'Grapes',l:'Gg',g:'🍇',f:'G is for Grapes'},{w:'House',l:'Hh',g:'🏠',f:'H is for House'},{w:'Ice cream',l:'Ii',g:'🍦',f:'I is for Ice cream'},{w:'Juice',l:'Jj',g:'🥤',f:'J is for Juice'},{w:'Kangaroo',l:'Kk',g:'🦘',f:'K is for Kangaroo'},{w:'Lion',l:'Ll',g:'🦁',f:'L is for Lion'},{w:'Moon',l:'Mm',g:'🌙',f:'M is for Moon'},{w:'Nest',l:'Nn',g:'🪹',f:'N is for Nest'},{w:'Orange',l:'Oo',g:'🍊',f:'O is for Orange'},{w:'Pen',l:'Pp',g:'🖊️',f:'P is for Pen'},{w:'Queen',l:'Qq',g:'👑',f:'Q is for Queen'},{w:'Rabbit',l:'Rr',g:'🐰',f:'R is for Rabbit'},{w:'Sun',l:'Ss',g:'☀️',f:'S is for Sun'},{w:'Tree',l:'Tt',g:'🌳',f:'T is for Tree'},{w:'Umbrella',l:'Uu',g:'☂️',f:'U is for Umbrella'},{w:'Van',l:'Vv',g:'🚐',f:'V is for Van'},{w:'Watermelon',l:'Ww',g:'🍉',f:'W is for Watermelon'},{w:'X-ray',l:'Xx',g:'🦴',f:'X is for X-ray'},{w:'Yellow',l:'Yy',g:'🟡',f:'Y is for Yellow'},{w:'Zebra',l:'Zz',g:'🦓',f:'Z is for Zebra'}
 ];
-
 var enCVC=[
 {w:'Cat',g:'🐱',f:'C - A - T : Cat (قطة)'},{w:'Dog',g:'🐶',f:'D - O - G : Dog (كلب)'},{w:'Sun',g:'☀️',f:'S - U - N : Sun (شمس)'},{w:'Bed',g:'🛌',f:'B - E - D : Bed (سرير)'},{w:'Pen',g:'🖊️',f:'P - E - N : Pen (قلم)'},{w:'Box',g:'📦',f:'B - O - X : Box (صندوق)'},{w:'Bus',g:'🚌',f:'B - U - S : Bus (حافلة)'},{w:'Map',g:'🗺️',f:'M - A - P : Map (خريطة)'}
 ];
-
 var enN=[
 {w:'One',g:'1️⃣',f:'1 - One'},{w:'Two',g:'2️⃣',f:'2 - Two'},{w:'Three',g:'3️⃣',f:'3 - Three'},{w:'Four',g:'4️⃣',f:'4 - Four'},{w:'Five',g:'5️⃣',f:'5 - Five'},{w:'Six',g:'6️⃣',f:'6 - Six'},{w:'Seven',g:'7️⃣',f:'7 - Seven'},{w:'Eight',g:'8️⃣',f:'8 - Eight'},{w:'Nine',g:'9️⃣',f:'9 - Nine'},{w:'Ten',g:'🔟',f:'10 - Ten'}
 ];
+var enColors=parse('Red,🍎,#e53935,,Red means أحمر|Blue,🌊,#1e88e5,,Blue means أزرق|Yellow,🌻,#fdd835,,Yellow means أصفر|Green,🌿,#43a047,,Green means أخضر|Orange,🍊,#fb8c00,,Orange means برتقالي|Purple,🍇,#8e24aa,,Purple means بنفسجي|Pink,🌸,#f48fb1,,Pink means وردي|White,☁️,#ffffff,,White means أبيض|Black,🎩,#212121,,Black means أسود|Brown,🍫,#795548,,Brown means بني');
+var enAnimals=parse('Lion,🦁,,,Lion means أسد|Elephant,🐘,,,Elephant means فيل|Cat,🐱,,,Cat means قطة|Dog,🐶,,,Dog means كلب|Horse,🐴,,,Horse means حصان|Cow,🐮,,,Cow means بقرة|Sheep,🐑,,,Sheep means خروف|Rabbit,🐰,,,Rabbit means أرنب|Monkey,🐒,,,Monkey means قرد|Fish,🐟,,,Fish means سمكة');
+var animals=parse('أسد,🦁,,,الأسد ملك الغابة القوي|فيل,🐘,,,الفيل ضخم وله خرطوم طويل|قطة,🐱,,,القطة أليفة ونظيفة|كلب,🐶,,,الكلب صديق وفي وحارس أمين|حصان,🐴,,,الحصان قوي وسريع|بقرة,🐮,,,البقرة تعطينا الحليب المفيد|خروف,🐑,,,الخروف صوفه ناعم|دجاجة,🐔,,,الدجاجة تعطينا البيض|أرنب,🐰,,,الأرنب يحب أكل الجزر|زرافة,🦒,,,الزرافة أطول الحيوانات|قرد,🐒,,,القرد ماهر في التسلق|سمكة,🐟,,,السمكة تعيش في الماء');
+var colors=parse('أحمر,🍎,#e53935,,اللون الأحمر المبهج|أزرق,🌊,#1e88e5,,الأزرق مثل لون البحر والسماء|أصفر,🌻,#fdd835,,الأصفر مثل لون الشمس المشرقة|أخضر,🌿,#43a047,,الأخضر مثل لون الأشجار والأوراق|برتقالي,🍊,#fb8c00,,البرتقالي مثل لون فاكهة البرتقال|بنفسجي,🍇,#8e24aa,,البنفسجي مثل لون العنب|وردي,🌸,#f48fb1,,الوردي مثل زهور الربيع|أبيض,☁️,#ffffff,,الأبيض مثل السحاب النقي|أسود,🎩,#212121,,الأسود مثل سكون الليل|بني,🍫,#795548,,البني مثل الشوكولاتة والتربة');
 
 var C=[
-{n:'الأرقام والعد',e:'🔢',k:'#ef4444',m:'num',q:'كم العدد؟',d:nums},
-{n:'الحروف الهجائية',e:'🔤',k:'#3b82f6',m:'let',q:'ما أول حرف في كلمة',d:letters},
+{s:'🔢 الأرقام والرياضيات',n:'الأرقام والعد',e:'🔢',k:'#ef4444',m:'num',q:'كم العدد؟',d:nums},
+{n:'الأعداد الترتيبية',e:'🥇',k:'#dc2626',m:'pic',d:ordinals,qp:'ما رقم '},
+{n:'مفاهيم رياضية',e:'➕',k:'#0ea5e9',m:'math',d:math},
+{n:'المقارنة والقياس',e:'⚖️',k:'#14b8a6',m:'pic',d:comp},
+{n:'الأشكال والمجسمات',e:'🔺',k:'#84cc16',m:'pic',d:shapes},
+{n:'الأنماط التسلسلية',e:'🔁',k:'#10b981',m:'pic',d:patterns},
+{n:'الاتجاهات والمواقع',e:'🧭',k:'#0891b2',m:'pic',d:dirs},
+{n:'الأضداد',e:'↔️',k:'#7c3aed',m:'pic',d:opp},
+{s:'🔤 اللغة العربية',n:'الحروف الهجائية',e:'🔤',k:'#3b82f6',m:'let',q:'ما أول حرف في كلمة',d:letters},
 {n:'الحركات والتنوين',e:'🔠',k:'#f59e0b',m:'pic',d:vowels},
 {n:'المدود الثلاثة',e:'➖',k:'#f97316',m:'pic',d:longV},
-{n:'تأسيس لغوي',e:'📝',k:'#8b5cf6',m:'pic',d:demoGrammar},
-{n:'التربية الإسلامية',e:'🕌',k:'#059669',m:'pic',d:islamic},
-{n:'فصول السنة والطقس',e:'🌤️',k:'#0284c7',m:'pic',d:seasons},
-{n:'أجزاء النبتة',e:'🌱',k:'#16a34a',m:'pic',d:plantParts},
-{n:'أيام الأسبوع',e:'📅',k:'#2563eb',m:'pic',d:days},
-{n:'الأشكال والمجسمات',e:'🔺',k:'#84cc16',m:'pic',d:shapes},
-{n:'مفاهيم رياضية',e:'➕',k:'#0ea5e9',m:'pic',d:math},
-{n:'المقارنة والقياس',e:'⚖️',k:'#14b8a6',m:'pic',d:comp},
-{n:'الأنماط التسلسلية',e:'🔁',k:'#10b981',m:'pic',d:patterns},
-{n:'الألوان الجميلة',e:'🎨',k:'#eab308',m:'pic',d:parse('أحمر,🍎,#e53935,,اللون الأحمر المبهج|أزرق,🌊,#1e88e5,,الأزرق مثل لون البحر والسماء|أصفر,🌻,#fdd835,,الأصفر مثل لون الشمس المشرقة|أخضر,🌿,#43a047,,الأخضر مثل لون الأشجار والأوراق|برتقالي,🍊,#fb8c00,,البرتقالي مثل لون فاكهة البرتقال|بنفسجي,🍇,#8e24aa,,البنفسجي مثل لون العنب|وردي,🌸,#f48fb1,,الوردي مثل زهور الربيع|أبيض,☁️,#ffffff,,الأبيض مثل السحاب النقي|أسود,🎩,#212121,,الأسود مثل سكون الليل|بني,🍫,#795548,,البني مثل الشوكولاتة والتربة')},
-{n:'أعضاء الجسم والحواس',e:'🖐️',k:'#06b6d4',m:'pic',d:body},
-{n:'عالم الحيوانات',e:'🦁',k:'#a855f7',m:'pic',d:parse('أسد,🦁,,,الأسد ملك الغابة القوي|فيل,🐘,,,الفيل ضخم وله خرطوم طويل|قطة,🐱,,,القطة أليفة ونظيفة|كلب,🐶,,,الكلب صديق حارس ووفي|حصان,🐴,,,الحصان قوي وسريع|بقرة,🐮,,,البقرة تعطينا الحليب المفيد|خروف,🐑,,,الخروف صوفه ناعم|دجاجة,🐔,,,الدجاجة تعطينا البيض واللحم|أرنب,🐰,,,الأرنب يحب أكل الجزر|زرافة,🦒,,,الزرافة أطول الحيوانات|قرد,🐒,,,القرد ماهر في التسلق|سمكة,🐟,,,السمكة تعيش في الماء')},
-{n:'أصوات الحيوانات',e:'🎵',k:'#d946ef',m:'pic',d:sounds},
+{n:'تأسيس لغوي',e:'📝',k:'#8b5cf6',m:'pic',d:grammar},
+{n:'الألوان الجميلة',e:'🎨',k:'#eab308',m:'pic',d:colors,qp:'أين اللون '},
+{s:'🕌 التربية الإسلامية والقيم',n:'التربية الإسلامية',e:'🕌',k:'#059669',m:'pic',d:islamic},
+{n:'الأدعية اليومية',e:'🤲',k:'#0d9488',m:'pic',d:duas},
+{n:'الأشهر الهجرية',e:'🌙',k:'#4f46e5',m:'pic',d:hijri,qp:'ما ترتيب شهر '},
 {n:'القيم والأخلاق',e:'🌱',k:'#10b981',m:'pic',d:life},
-{n:'English Alphabet',e:'🅰️',k:'#3b82f6',m:'eng',q:'Which word starts with letter',d:enA},
+{s:'🌍 العلوم والحياة',n:'فصول السنة والطقس',e:'🌤️',k:'#0284c7',m:'pic',d:seasons},
+{n:'أيام الأسبوع',e:'📅',k:'#2563eb',m:'pic',d:days},
+{n:'أجزاء النبتة',e:'🌱',k:'#16a34a',m:'pic',d:plantParts},
+{n:'أعضاء الجسم والحواس',e:'🖐️',k:'#06b6d4',m:'pic',d:body},
+{n:'عالم الحيوانات',e:'🦁',k:'#a855f7',m:'pic',d:animals,qp:'أين صورة '},
+{n:'أصوات الحيوانات',e:'🎵',k:'#d946ef',m:'pic',d:sounds},
+{n:'الفواكه والخضروات',e:'🍓',k:'#e11d48',m:'pic',d:food,qp:'أين صورة '},
+{n:'الفضاء والكواكب',e:'🪐',k:'#4338ca',m:'pic',d:space},
+{n:'المشاعر',e:'😀',k:'#f59e0b',m:'pic',d:feelings,qp:'أين وجه '},
+{n:'أفراد الأسرة',e:'👨‍👩‍👧',k:'#ec4899',m:'pic',d:family,qp:'أين صورة '},
+{n:'المهن',e:'👨‍🏫',k:'#ea580c',m:'pic',d:jobs,qp:'أين صورة '},
+{n:'وسائل النقل',e:'🚌',k:'#0369a1',m:'pic',d:trans,qp:'أين صورة '},
+{s:'🅰️ English',n:'English Alphabet',e:'🅰️',k:'#3b82f6',m:'eng',q:'Which word starts with letter',d:enA},
 {n:'English CVC Words',e:'📖',k:'#0ea5e9',m:'pic',d:enCVC},
-{n:'English Numbers',e:'🔢',k:'#0284c7',m:'pic',d:enN}
+{n:'English Numbers',e:'🔢',k:'#0284c7',m:'pic',d:enN},
+{n:'English Colors',e:'🌈',k:'#c026d3',m:'pic',d:enColors},
+{n:'English Animals',e:'🐾',k:'#65a30d',m:'pic',d:enAnimals}
 ];
+function isEn(s){return /^[A-Za-z]/.test(s)}
 
 var missed=false,TT=[],voices=[],sw2=false,sx=null;
 var on=true,AC=null,stars=0,cur=null,idx=0,ans=null,lock=false;
@@ -419,7 +440,6 @@ function showToast(m,ms){
     setTimeout(function(){t.style.transition='opacity .4s';t.style.opacity='0';setTimeout(function(){try{t.remove()}catch(e){}},400)},ms||4000);
   }catch(e){}
 }
-
 function maybeShowAdToast(){
   var t=$('ad-toast'),s;
   try{s=localStorage.getItem('toastShown')}catch(e){s=null}
@@ -466,8 +486,8 @@ function actuallySay(t){
           u=new SpeechSynthesisUtterance(s),
           v=pickVoice(en?'en':'ar');
       if(v){u.voice=v;u.lang=v.lang}else u.lang=en?'en-US':'ar-SA';
-      u.rate = en ? 0.8 : 0.88;
-      u.pitch = 1.15;
+      u.rate=en?0.8:0.88;
+      u.pitch=1.15;
       speechSynthesis.speak(u);
     });
   }catch(e){}
@@ -483,7 +503,7 @@ function say(t){
   }catch(e){}
 }
 function stopSay(){if(sayTimer){clearTimeout(sayTimer);sayTimer=null}try{speechSynthesis.cancel()}catch(e){}}
-function cardText(it){return cur.m==='eng'?(it.l+' — '+it.w):(it.w+(it.f?' — '+it.f:''))}
+function cardText(it){if(cur.m==='math')return it.f;return cur.m==='eng'?(it.l+' — '+it.w):(it.w+(it.f?' — '+it.f:''))}
 
 function later(f,ms){var id=setTimeout(function(){TT=TT.filter(function(x){return x!==id});f()},ms);TT.push(id)}
 function clearT(){TT.forEach(clearTimeout);TT=[]}
@@ -499,15 +519,16 @@ function go(id){
 function burst(big){var st=$('stage'),n=big?24:14,arr=big?['⭐','✨','🌟','💫','🏆']:['⭐','✨','🌟','💫'];for(var i=0;i<n;i++){var s=document.createElement('div');s.className='star';s.textContent=arr[i%arr.length];s.style.left=(20+Math.random()*60)+'%';s.style.top=(40+Math.random()*20)+'%';s.style.setProperty('--x',(Math.random()*90-45)+'px');s.style.setProperty('--y',(-Math.random()*200-40)+'px');st.appendChild(s);(function(x){setTimeout(function(){try{x.remove()}catch(e){}},1500)})(s)}}
 function vibrate(p){if(navigator.vibrate){try{navigator.vibrate(p||35)}catch(e){}}}
 function swt(it){return '<i class="sw" style="background:'+esc(it.c)+'"></i>'}
-function main(it){return it.c?swt(it):'<span class="m" dir="ltr">'+esc(it.g)+'</span>'}
+function main(it){if(it.c)return swt(it);var n=Array.from(it.g.replace(/[\u064B-\u065F\uFE0F\u200D]/g,'')).length,st=n>2?' style="font-size:clamp(36px,'+(n>5?7:10)+'cqw,'+(n>5?80:110)+'px)"':'';return '<span class="m"'+st+' dir="ltr">'+esc(it.g)+'</span>'}
 function bigSize(s){var n=Array.from(s).length;if(n>14)return ' style="font-size:clamp(16px,2.6cqw,32px);line-height:1.2"';if(n>10)return ' style="font-size:clamp(26px,4.5cqw,56px);line-height:1.1"';if(n>7)return ' style="font-size:clamp(36px,6.5cqw,76px)"';return ''}
 
 var g=$('grid');
 function mkCards(){
   g.innerHTML='';
   C.forEach(function(c){
+    if(c.s){var h=document.createElement('div');h.className='sec';h.textContent=c.s;g.appendChild(h)}
     var b=document.createElement('button');b.className='card';b.style.background=c.k;b.setAttribute('aria-label','درس '+c.n);
-    b.innerHTML='<span class="e" aria-hidden="true">'+c.e+'</span>'+c.n+(completedLessons[c.n]?'<span class="badge">✓</span>':'');
+    b.innerHTML='<span class="e" aria-hidden="true">'+c.e+'</span>'+esc(c.n)+(completedLessons[c.n]?'<span class="badge">✓</span>':'');
     b.onclick=function(){ctx();click();cur=c;idx=0;$('ltitle').textContent=c.n;$('qtitle').textContent=c.n;go('lesson');show()};
     g.appendChild(b);
   });
@@ -549,7 +570,7 @@ function stopAuto(){if(autoTimer){clearTimeout(autoTimer);autoTimer=null}autoMod
 $('auto').onclick=function(){
   if(autoMode){stopAuto();return}
   autoMode=true;this.textContent='⏸ إيقاف';this.setAttribute('aria-pressed','true');
-  (function step(){if(!autoMode)return;autoTimer=setTimeout(function(){if(!$('lesson').classList.contains('on')){stopAuto();return}idx=(idx+1)%cur.d.length;show(true);if(autoMode)step()},3600)})();
+  (function step(){if(!autoMode)return;autoTimer=setTimeout(function(){if(!$('lesson').classList.contains('on')){stopAuto();return}idx=(idx+1)%cur.d.length;show(true);if(autoMode)step()},4200)})();
 };
 $('snd').onclick=function(){
   if(!speechOk){var s=this;s.textContent='🚫';setTimeout(function(){s.textContent='🔇'},600);return}
@@ -591,12 +612,14 @@ stw.addEventListener('pointerdown',function(){
 });
 ['pointerup','pointerleave','pointercancel'].forEach(function(ev){stw.addEventListener(ev,function(){clearTimeout(stT)})});
 
+function whereQ(w){return isEn(w)?'Where is '+w+'?':((cur&&cur.qp)||'أين ')+w+'؟'}
 function speakQ(){
   if(!ans)return;
   if(cur.m==='num')say(cur.q);
+  else if(cur.m==='math')say('ما ناتج '+mq.replace('+','زائد').replace('−','ناقص').replace('= ؟',''));
   else if(cur.m==='let')say(cur.q+' '+ans.w);
   else if(cur.m==='eng')say('Which word starts with letter '+ans.l.charAt(0));
-  else say('أين '+ans.w+'؟');
+  else say(whereQ(ans.w));
 }
 function shuffle(a){return a.slice().sort(function(){return Math.random()-.5})}
 
@@ -604,16 +627,27 @@ function ask(){
   if(qCount>=QMAX){showResult();return}
   qCount++;lock=false;missed=false;qCounted=false;
   $('fb').textContent='';$('fb').classList.remove('show');
-  var pool=cur.m==='num'?cur.d.slice(0,10):cur.d;
-  var d=shuffle(pool);ans=d[0];
+  var d;
+  if(cur.m==='math'){
+    var x=1+Math.floor(Math.random()*6),y=1+Math.floor(Math.random()*4),pl=Math.random()<.6;
+    if(!pl){if(x<2)pl=true;else y=1+Math.floor(Math.random()*(x-1))}
+    var r=pl?x+y:x-y;
+    mq=ar(x)+(pl?' + ':' − ')+ar(y)+' = ؟';
+    ans=mathPool[r];
+    d=[ans].concat(shuffle(mathPool.filter(function(i){return i!==ans})));
+  }else{
+    var pool=cur.m==='num'?cur.d.slice(0,10):cur.d;
+    d=shuffle(pool);ans=d[0];
+  }
   var pick=[ans],seen={};seen[disp(ans)]=1;
   d.slice(1).forEach(function(it){var k=disp(it);if(pick.length<3&&!seen[k]){seen[k]=1;pick.push(it)}});
   pick=shuffle(pick);
   var byWord=pick.length<3,ql;
   if(cur.m==='num'){$('q').innerHTML='<div class="p"'+bigSize(ans.g)+' dir="ltr">'+ans.g+'</div><div class="t">'+cur.q+'</div>';ql='كم العدد؟'}
+  else if(cur.m==='math'){$('q').innerHTML='<div class="p" dir="ltr">'+mq+'</div><div class="t">ما الناتج؟</div>';ql='ما ناتج '+mq}
   else if(cur.m==='let'){$('q').innerHTML='<div class="p">'+ans.g+'</div><div class="t">'+cur.q+' '+esc(ans.w)+'</div>';ql='ما أول حرف في كلمة '+ans.w+'؟'}
-  else if(cur.m==='eng'){$('q').innerHTML='<div class="p" dir="ltr">'+ans.l+'</div><div class="t">'+cur.q+' '+ans.l.charAt(0)+'؟</div>';ql=cur.q+' '+ans.l.charAt(0)+'؟'}
-  else{$('q').innerHTML='<div class="t" dir="auto">أين '+esc(ans.w)+'؟</div>';ql='أين '+ans.w+'؟'}
+  else if(cur.m==='eng'){$('q').innerHTML='<div class="p" dir="ltr">'+ans.l+'</div><div class="t" dir="ltr">'+cur.q+' '+ans.l.charAt(0)+'?</div>';ql=cur.q+' '+ans.l.charAt(0)+'?'}
+  else{$('q').innerHTML='<div class="t" dir="auto">'+esc(whereQ(ans.w))+'</div>';ql=whereQ(ans.w)}
   $('q').setAttribute('aria-label','السؤال: '+ql);
   var o=$('opts');o.innerHTML='';var n=0;
   pick.forEach(function(it){
@@ -630,10 +664,10 @@ function ask(){
       b.setAttribute('aria-label','خيار '+n+': '+it.w);
     }
     else{
-      var gl=Array.from(it.g||'').length,
-          fs=(cur.m==='num'||cur.m==='let'||it.c)?'':(gl>8?'.26em':gl>4?'.38em':'');
+      var gl=Array.from((it.g||'').replace(/[\u064B-\u065F\uFE0F\u200D]/g,'')).length,
+          fs=(cur.m==='num'||cur.m==='let'||it.c)?'':(gl>8?'.26em':gl>2?'.4em':'');
       b.innerHTML=(cur.m==='num'||cur.m==='let')?esc(it.l):(it.c?swt(it):(fs?'<span style="font-size:'+fs+';line-height:1.25;padding:4px;word-break:break-all">'+esc(it.g)+'</span>':esc(it.g)));
-      b.setAttribute('aria-label','خيار '+n);
+      b.setAttribute('aria-label','خيار '+n+(it.w?': '+it.w:''));
     }
     b.onclick=function(){
       if(lock)return;
@@ -699,15 +733,12 @@ function parentGate(onSuccess){
   o.innerHTML='<div role="dialog" aria-modal="true" aria-label="بوابة الأهل" style="background:#fff;border-radius:24px;padding:24px;text-align:center;width:min(92%,380px);font-weight:900;color:#17324d;direction:rtl"><div style="font-size:18px;margin-bottom:6px">🔒 للكبار فقط</div><div style="font-size:14px;color:#62758a;margin-bottom:12px">حل المسألة للمتابعة</div><div style="font-size:28px;margin-bottom:12px;direction:ltr">'+a+' × '+b+' = ?</div><input id="pgIn" type="text" inputmode="numeric" autocomplete="off" aria-label="إجابة المسألة" style="width:100%;font:900 24px Tajawal;text-align:center;padding:10px;border:2px solid #e5edf7;border-radius:14px"><div style="display:flex;gap:8px;margin-top:14px"><button class="btn g" id="pgOk" style="flex:1">متابعة</button><button class="btn b" id="pgNo" style="flex:1">إلغاء</button></div></div>';
   document.body.appendChild(o);
   var inp=o.querySelector('#pgIn');inp.focus();
-
   function escHandler(e){ if(e.key==='Escape'){ e.preventDefault(); close(); } }
   document.addEventListener('keydown', escHandler);
-
   function close(){
     try{ document.removeEventListener('keydown', escHandler); }catch(e){}
     try{ o.remove(); }catch(e){}
   }
-
   o.querySelector('#pgNo').onclick=close;
   function ok(){
     if(+normDigits(inp.value.trim())===a*b){
