@@ -1,17 +1,50 @@
 {
+  "id": "/?pwa=1",
   "name": "عالم الدب الصغير التعليمي",
   "short_name": "الدب الصغير",
-  "description": "تطبيق تعليمي تفاعلي للأطفال — مكتبة الرواد",
-  "lang": "ar-EG",
+  "description": "تطبيق تعليمي تفاعلي متكامل للأطفال: أرقام وحروف وعلوم وقصص ومرسم تلوين — مكتبة الرواد",
+  "lang": "ar-SA",
   "dir": "rtl",
-  "start_url": "./",
+  "start_url": "./?source=pwa",
   "scope": "./",
   "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "browser"],
   "orientation": "any",
   "background_color": "#eaf4ff",
   "theme_color": "#eaf4ff",
+  "categories": ["education", "kids", "games"],
+  "prefer_related_applications": false,
+  "launch_handler": { "client_mode": "navigate-existing" },
+  "handle_links": "preferred",
   "icons": [
+    { "src": "icon-96.png", "sizes": "96x96", "type": "image/png", "purpose": "any" },
     { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
-    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "screenshots": [
+    { "src": "screenshots/home-wide.png", "sizes": "1280x720", "type": "image/png", "form_factor": "wide", "label": "الصفحة الرئيسية" },
+    { "src": "screenshots/draw-wide.png", "sizes": "1280x720", "type": "image/png", "form_factor": "wide", "label": "مرسم التلوين" },
+    { "src": "screenshots/quiz-narrow.png", "sizes": "720x1280", "type": "image/png", "form_factor": "narrow", "label": "اختبار تفاعلي" }
+  ],
+  "shortcuts": [
+    {
+      "name": "مرسم التلوين",
+      "short_name": "المرسم",
+      "url": "./?screen=draw",
+      "icons": [{ "src": "icon-96.png", "sizes": "96x96", "type": "image/png" }]
+    },
+    {
+      "name": "الأرقام والعد",
+      "short_name": "الأرقام",
+      "url": "./?screen=numbers",
+      "icons": [{ "src": "icon-96.png", "sizes": "96x96", "type": "image/png" }]
+    },
+    {
+      "name": "الحروف الهجائية",
+      "short_name": "الحروف",
+      "url": "./?screen=letters",
+      "icons": [{ "src": "icon-96.png", "sizes": "96x96", "type": "image/png" }]
+    }
   ]
 }
