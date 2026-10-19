@@ -8,6 +8,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800;900&display=swap" rel="stylesheet">
+
+<!-- ═══════════ إعدادات تطبيق الويب التقدمي (PWA) ═══════════ -->
+<link rel="manifest" href="./manifest.json">
+<link rel="apple-touch-icon" href="./icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="الدب الصغير">
+
 <style>
 :root{--ink:#17324d;--coral:#ff7b72;--shadow:0 14px 34px rgba(34,65,103,.14)}
 *{box-sizing:border-box}
@@ -582,7 +590,6 @@ var sounds=[
 {w:'صوت الدجاجة',g:'🐔',f:'الدجاجة تقاقي: كوكو'},
 {w:'صوت الضفدع',g:'🐸',f:'الضفدع ينق: نق نق'}
 ];
-/* ✅ إعادة تسمية body → bodyParts لتجنب إخفاء document.body */
 var bodyParts=[
 {w:'الرأس',g:'🧠',f:'يحوي الدماغ الذي يفكر'},
 {w:'العينان',g:'👁️',f:'نرى بهما'},
@@ -1590,7 +1597,6 @@ function initDraw(){
     ctx2d.lineWidth=brushSize;
     ctx2d.strokeStyle=currentColor==='rainbow'?'#000':currentColor;
     ctx2d.fillStyle=currentColor==='rainbow'?'#000':currentColor;
-    /* ✅ ضبط MAX_UNDO ديناميكياً حسب حجم اللوحة */
     try{
       var px=w*h;
       MAX_UNDO=px>800000?8:(px>300000?12:20);
@@ -1611,7 +1617,6 @@ function initDraw(){
 
   if(drawInitDone){
     resizeCanvas();
-    /* ✅ تلميح ترحيبي عند العودة */
     setTimeout(function(){
       showDrawHint('مرحباً بعودتك 🎨');
       if(speechOk) say('مرحباً بعودتك');
@@ -1620,7 +1625,6 @@ function initDraw(){
   }
   drawInitDone=true;
   resizeCanvas();
-  /* ✅ إعادة تحجيم آمنة بعد استقرار التخطيط */
   setTimeout(resizeCanvas,100);
 
   if(!canvas._resized){
@@ -1672,14 +1676,12 @@ function initDraw(){
     pal.appendChild(rainbow);
   }
 
-  /* ✅ تغيير الخلفية: لا يمسح الرسمة */
   document.querySelectorAll('#bgPicker .bg-btn').forEach(function(b){
     b.onclick=function(){
       saveUndo();
       var newBg=b.getAttribute('data-bg')||'white';
       bgMode=newBg;
       _applyBg();
-      /* تحذير لطيف عند الخلفية الداكنة + لون داكن */
       if(newBg==='night'&&isDarkColor(currentColor)){
         showDrawHint('الخلفية داكنة — جرّب لوناً فاتحاً');
         say('الخلفية داكنة، جرّب لوناً فاتحاً');
@@ -2162,7 +2164,6 @@ function setDrawComplexity(advanced){
 (function(){
   var saved='simple';
   try{saved=localStorage.getItem('bearDrawMode')||'simple'}catch(e){}
-  /* ✅ تطبيق الوضع المحفوظ بصمت — بدون نطق عند تحميل الصفحة */
   try{
     document.body.classList.toggle('draw-advanced', saved==='advanced');
     var sBtn=$('drawModeSimple'), aBtn=$('drawModeAdvanced');
@@ -2214,7 +2215,28 @@ if('serviceWorker' in navigator){
     }).catch(function(){});
   });
 }
+
+/* ✅ دعم اختصارات PWA — داخل نطاق التطبيق للوصول للمتغيرات */
+(function(){
+  try{
+    var params = new URLSearchParams(location.search);
+    var screen = params.get('screen');
+    if(!screen) return;
+    setTimeout(function(){
+      if(screen === 'draw'){
+        go('draw'); initDraw();
+      } else if(screen === 'numbers'){
+        var l = C.find(function(c){ return c.n === 'الأرقام والعد'; });
+        if(l){ cur = l; idx = 0; $('ltitle').textContent = cur.n; $('qtitle').textContent = cur.n; go('lesson'); show(); }
+      } else if(screen === 'letters'){
+        var l2 = C.find(function(c){ return c.n === 'الحروف الهجائية'; });
+        if(l2){ cur = l2; idx = 0; $('ltitle').textContent = cur.n; $('qtitle').textContent = cur.n; go('lesson'); show(); }
+      }
+    }, 500);
+  }catch(e){}
 })();
+
+})(); // 👈 إغلاق التطبيق بالكامل
 </script>
 </body>
 </html>
