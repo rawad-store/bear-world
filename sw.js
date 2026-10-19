@@ -2,7 +2,7 @@
    Service Worker — عالم الدب الصغير v33
    ══════════════════════════════════════════════════════════════ */
 
-const VERSION = 'bear-world-v33';
+const VERSION = 'bear-world-v34';
 
 const CORE = [
   './',
