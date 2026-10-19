@@ -107,7 +107,19 @@ button:focus-visible,a:focus-visible,[role=button]:focus-visible{outline:3px sol
    ══════════════════════════════════════════════════════════════ */
 #draw{padding:6px;gap:4px;background:linear-gradient(150deg,#fff7ed 0%,#f0f9ff 40%,#fdf4ff 100%);overflow:hidden}
 @media(max-height:650px){#draw{overflow-y:auto}}
-.draw-header{display:flex;align-items:center;gap:6px;width:100%;padding:6px 8px;background:linear-gradient(90deg,#fff,#f0f9ff);border-radius:16px;border:2px solid #bfdbfe;box-shadow:0 3px 10px rgba(59,130,246,.08);flex-shrink:0}
+.draw-header{
+  display:flex;align-items:center;gap:6px;width:100%;padding:6px 8px;
+  background:linear-gradient(90deg,#fff,#f0f9ff);border-radius:16px;
+  border:2px solid #bfdbfe;box-shadow:0 3px 10px rgba(59,130,246,.08);
+  flex-shrink:0;
+  overflow-x:auto; 
+  flex-wrap:nowrap; 
+  justify-content:flex-start; 
+  -webkit-overflow-scrolling:touch; 
+}
+.draw-header::-webkit-scrollbar{display:none} 
+.draw-header{-ms-overflow-style:none;scrollbar-width:none}
+.draw-header>*{flex-shrink:0} 
 .draw-header .pill{font-size:clamp(11px,1.4cqw,14px);padding:6px 10px;background:linear-gradient(90deg,#fff7ed,#dbeafe);border-color:#93c5fd}
 .draw-header button{width:44px;height:44px;border-radius:14px;border:2px solid #e2e8f0;background:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 0 #cbd5e1;transition:transform .12s;flex-shrink:0}
 .draw-header button:active{transform:translateY(2px);box-shadow:0 1px 0 #cbd5e1}
@@ -1792,18 +1804,19 @@ function initDraw(){
   if($('redoCanvas'))$('redoCanvas').onclick=function(){performRedo()};
 
   if($('clearCanvas'))$('clearCanvas').onclick=function(){
-    if(!stickers.length&&!baseInk){
-      showDrawHint('اللوحة فارغة بالفعل');say('اللوحة فارغة بالفعل');return;
-    }
-    parentGate(function(){
-      saveUndo();
-      stickers=[];selectedSticker=-1;dragSticker=-1;
-      fillPaper();paintAll();updateTools();click();
-      showDrawHint('لوحة جديدة — ابدأ الرسم 🎨');
-      say('لوحة جديدة، ابدأ الرسم');
-      try{localStorage.removeItem(AUTOSAVE_KEY)}catch(e){}
-    });
-  };
+  if($('clearCanvas'))$('clearCanvas').onclick=function(){
+  if(!stickers.length&&!baseInk){
+    showDrawHint('اللوحة فارغة بالفعل');say('اللوحة فارغة بالفعل');return;
+  }
+  parentGate(function(){
+    saveUndo();
+    stickers=[];selectedSticker=-1;dragSticker=-1;
+    fillPaper();paintAll();updateTools();click();
+    showDrawHint('لوحة جديدة — ابدأ الرسم 🎨');
+    say('لوحة جديدة، ابدأ الرسم');
+    try{localStorage.removeItem(AUTOSAVE_KEY)}catch(e){}
+  });
+};
 
   if($('fullscreenBtn'))$('fullscreenBtn').onclick=function(){
     var isFs=document.body.classList.toggle('draw-fullscreen');
