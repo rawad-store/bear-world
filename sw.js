@@ -1,26 +1,29 @@
 /* ══════════════════════════════════════════════════════════════
-   Service Worker — عالم الدب الصغير v33
+   Service Worker — عالم الدب الصغير v36
    ══════════════════════════════════════════════════════════════ */
 
 const VERSION = 'bear-world-v36';
 
+/* الملفات الأساسية التي يجب تحميلها عند التثبيت */
 const CORE = [
   './',
   './index.html',
   './manifest.json',
-  './bear.png',  // 👈 تمت إضافتها هنا
+  './bear.png',
   './icon-96.png',
   './icon-192.png',
   './icon-512.png',
   './icon-maskable-512.png'
 ];
 
+/* ملفات اختيارية (لن يفشل التثبيت إذا لم تكن موجودة) */
 const OPTIONAL = [
   './screenshots/home-wide.png',
   './screenshots/draw-wide.png',
   './screenshots/quiz-narrow.png'
 ];
 
+/* صفحة احتياطية أنيقة تظهر فقط إذا كان الجهاز بدون إنترنت تماماً */
 const OFFLINE_HTML =
   '<!doctype html><html lang="ar" dir="rtl"><meta charset="utf-8">' +
   '<meta name="viewport" content="width=device-width,initial-scale=1">' +
@@ -39,6 +42,7 @@ const OFFLINE_HTML =
   '<p>افتح التطبيق مرة واحدة وأنت متصل ليُحمَّل للاستخدام دون اتصال.</p>' +
   '<button onclick="location.reload()">🔄 إعادة المحاولة</button></div></html>';
 
+/* ─────────────── تثبيت SW ─────────────── */
 self.addEventListener('install', (event) => {
   event.waitUntil((async () => {
     const cache = await caches.open(VERSION);
@@ -50,6 +54,7 @@ self.addEventListener('install', (event) => {
   })());
 });
 
+/* ─────────────── تفعيل SW ─────────────── */
 self.addEventListener('activate', (event) => {
   event.waitUntil((async () => {
     const keys = await caches.keys();
@@ -62,6 +67,7 @@ self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'SKIP_WAITING') self.skipWaiting();
 });
 
+/* ─────────────── دوال مساعدة ─────────────── */
 function withTimeout(promise, ms) {
   return Promise.race([
     promise,
@@ -78,6 +84,7 @@ async function putInCache(key, response) {
   } catch (e) {}
 }
 
+/* ─────────────── استراتيجية الجلب (Fetch) ─────────────── */
 self.addEventListener('fetch', (event) => {
   const request = event.request;
   if (request.method !== 'GET') return;
@@ -87,6 +94,7 @@ self.addEventListener('fetch', (event) => {
   if (!url.protocol.startsWith('http')) return;
   if (request.headers.has('range')) return;
 
+  /* 1) طلبات فتح الصفحة (HTML) - Network First مع مهلة 5 ثوانٍ */
   if (request.mode === 'navigate') {
     event.respondWith((async () => {
       try {
@@ -110,12 +118,14 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
+  /* 2) تصفية الروابط (السماح بالخطوط فقط من خارج الموقع) */
   const isFont =
     url.hostname === 'fonts.googleapis.com' ||
     url.hostname === 'fonts.gstatic.com';
   const sameOrigin = url.origin === self.location.origin;
   if (!sameOrigin && !isFont) return;
 
+  /* 3) الملفات الثابتة والصور - Stale While Revalidate */
   event.respondWith((async () => {
     const cached = await caches.match(request);
     const networkPromise = (async () => {
