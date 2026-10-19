@@ -2,12 +2,13 @@
    Service Worker — عالم الدب الصغير v33
    ══════════════════════════════════════════════════════════════ */
 
-const VERSION = 'bear-world-v34';
+const VERSION = 'bear-world-v35';
 
 const CORE = [
   './',
   './index.html',
   './manifest.json',
+  './bear.png',  // 👈 تمت إضافتها هنا
   './icon-96.png',
   './icon-192.png',
   './icon-512.png',
