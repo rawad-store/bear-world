@@ -103,53 +103,56 @@ button:focus-visible,a:focus-visible,[role=button]:focus-visible{outline:3px sol
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 
 /* ══════════════════════════════════════════════════════════════
-   مرسم الأطفال الاحترافي — نسخة 5.2 (نهائية معتمدة)
+   مرسم الأطفال — تصميم مضغوط لمساحة رسم أكبر
    ══════════════════════════════════════════════════════════════ */
-#draw{padding:6px;gap:4px;background:linear-gradient(150deg,#fff7ed 0%,#f0f9ff 40%,#fdf4ff 100%);overflow:hidden}
+#draw{padding:4px;gap:4px;background:linear-gradient(150deg,#fff7ed 0%,#f0f9ff 40%,#fdf4ff 100%);overflow:hidden}
 @media(max-height:650px){#draw{overflow-y:auto}}
 .draw-header{
-  display:flex;align-items:center;gap:6px;width:100%;padding:6px 8px;
-  background:linear-gradient(90deg,#fff,#f0f9ff);border-radius:16px;
-  border:2px solid #bfdbfe;box-shadow:0 3px 10px rgba(59,130,246,.08);
-  flex-shrink:0;
-  overflow-x:auto; 
-  flex-wrap:nowrap; 
-  justify-content:flex-start; 
-  -webkit-overflow-scrolling:touch; 
+  display:flex;align-items:center;gap:4px;width:100%;padding:4px 6px;
+  background:linear-gradient(90deg,#fff,#f0f9ff);border-radius:12px;
+  border:2px solid #bfdbfe;box-shadow:0 2px 6px rgba(59,130,246,.08);
+  flex-shrink:0; overflow-x:auto; flex-wrap:nowrap; justify-content:flex-start; 
 }
 .draw-header::-webkit-scrollbar{display:none} 
 .draw-header{-ms-overflow-style:none;scrollbar-width:none}
 .draw-header>*{flex-shrink:0} 
-.draw-header .pill{font-size:clamp(11px,1.4cqw,14px);padding:6px 10px;background:linear-gradient(90deg,#fff7ed,#dbeafe);border-color:#93c5fd}
-.draw-header button{width:44px;height:44px;border-radius:14px;border:2px solid #e2e8f0;background:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 0 #cbd5e1;transition:transform .12s;flex-shrink:0}
-.draw-header button:active{transform:translateY(2px);box-shadow:0 1px 0 #cbd5e1}
-#canvas-container{flex:1;width:100%;min-height:140px;background:#ffffff;border-radius:20px;border:3px solid #93c5fd;overflow:hidden;margin:0;box-shadow:0 6px 22px rgba(59,130,246,.15),inset 0 1px 0 #fff;position:relative;touch-action:none;transition:border-color .2s}
-#canvas-container:focus-within{border-color:#2563eb;box-shadow:0 0 0 4px rgba(37,99,235,.15)}
+.draw-header .pill{font-size:12px;padding:4px 8px;background:linear-gradient(90deg,#fff7ed,#dbeafe);border-color:#93c5fd}
+.draw-header button{width:36px;height:36px;border-radius:10px;border:2px solid #e2e8f0;background:#fff;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 0 #cbd5e1;flex-shrink:0}
+
+/* مساحة الرسم تأخذ كل المساحة المتاحة */
+#canvas-container{flex:1;width:100%;min-height:180px;background:#ffffff;border-radius:16px;border:3px solid #93c5fd;overflow:hidden;margin:2px 0;box-shadow:0 4px 15px rgba(59,130,246,.1);position:relative;touch-action:none}
 #paintCanvas{display:block;width:100%;height:100%;touch-action:none;cursor:crosshair;-webkit-user-select:none;user-select:none}
-.draw-hint{position:absolute;top:10px;left:50%;transform:translateX(-50%);background:linear-gradient(90deg,#1e3a5f,#2563eb);color:#fff;font-size:13px;font-weight:800;padding:8px 18px;border-radius:999px;pointer-events:none;z-index:6;opacity:0;transition:opacity .3s;white-space:nowrap;box-shadow:0 4px 14px rgba(37,99,235,.35);max-width:90%;text-align:center}
+
+.draw-hint{position:absolute;top:8px;left:50%;transform:translateX(-50%);background:#2563eb;color:#fff;font-size:12px;font-weight:800;padding:6px 14px;border-radius:999px;pointer-events:none;z-index:6;opacity:0;transition:opacity .3s;white-space:nowrap;box-shadow:0 4px 10px rgba(37,99,235,.3)}
 .draw-hint.show{opacity:1}
-.draw-toolbar{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;align-items:center;width:100%;padding:6px 8px;background:linear-gradient(180deg,#ffffff,#eff6ff);border-radius:16px;border:2px solid #bfdbfe;box-shadow:0 4px 12px rgba(37,99,235,.08);flex-shrink:0}
-.draw-toolbar .tool{width:48px;height:48px;border-radius:14px;border:2px solid #e2e8f0;background:#fff;font-size:22px;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 3px 0 #cbd5e1;transition:transform .12s,background .15s,border-color .15s;position:relative}
-.draw-toolbar .tool:active{transform:translateY(2px);box-shadow:0 1px 0 #cbd5e1}
-.draw-toolbar .tool.on{border-color:#3b82f6;background:linear-gradient(180deg,#dbeafe,#bfdbfe);box-shadow:0 3px 0 #60a5fa;animation:toolPulse 1.2s ease-in-out infinite alternate}
-@keyframes toolPulse{from{filter:brightness(1)}to{filter:brightness(1.1)}}
-.size-btn{min-width:44px;height:40px;border-radius:12px;border:2px solid #e2e8f0;background:#fff;font-weight:900;font-size:14px;color:#1e3a5f;cursor:pointer;padding:0 10px;box-shadow:0 2px 0 #cbd5e1;transition:transform .12s}
-.size-btn:active{transform:translateY(1px);box-shadow:0 1px 0 #cbd5e1}
+
+/* شريط الأدوات: أزرار أصغر لتناسب الشاشة */
+.draw-toolbar{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;align-items:center;width:100%;padding:4px 6px;background:#ffffff;border-radius:12px;border:2px solid #bfdbfe;flex-shrink:0}
+.draw-toolbar .tool{width:40px;height:40px;border-radius:10px;border:2px solid #e2e8f0;background:#fff;font-size:18px;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 0 #cbd5e1;transition:transform .1s,background .1s}
+.draw-toolbar .tool:active{transform:translateY(2px);box-shadow:0 0 0 #cbd5e1}
+.draw-toolbar .tool.on{border-color:#3b82f6;background:#dbeafe;box-shadow:0 2px 0 #60a5fa}
+
+/* دمج أزرار الحجم وأزرار التحكم في سطر واحد */
+.tools-row{display:flex;justify-content:space-between;align-items:center;width:100%;gap:4px;padding:4px;background:#ffffff;border-radius:12px;border:2px solid #bfdbfe;flex-shrink:0}
+.size-btn{min-width:38px;height:36px;border-radius:10px;border:2px solid #e2e8f0;background:#fff;font-weight:900;font-size:13px;color:#1e3a5f;cursor:pointer;padding:0 6px;box-shadow:0 2px 0 #cbd5e1}
 .size-btn.on{border-color:#8b5cf6;background:#ede9fe;box-shadow:0 2px 0 #a78bfa}
-.draw-tools{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;align-items:center;width:100%;padding:8px;background:rgba(255,255,255,.95);border-radius:14px;border:2px solid #fce7f3;box-shadow:0 3px 10px rgba(236,72,153,.06);flex-shrink:0}
-.color-btn{width:40px;height:40px;border-radius:50%;border:3px solid transparent;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.18);transition:transform .15s,box-shadow .15s;position:relative}
-.color-btn:hover{transform:scale(1.1)}
-.color-btn.active{border-color:#fff;transform:scale(1.2);box-shadow:0 0 0 4px #3b82f6,0 4px 12px rgba(0,0,0,.25)}
-.color-btn:active{transform:scale(.85)}
-.color-btn.special{background:conic-gradient(from 0deg,#ff0000,#ff7f00,#ffff00,#00ff00,#0000ff,#4b0082,#9400d3,#ff0000);position:relative}
-.color-btn.special::after{content:"✨";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:16px;text-shadow:0 1px 2px rgba(0,0,0,.5);pointer-events:none}
-.stamp-row{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;width:100%;padding:6px;background:linear-gradient(180deg,#fffbeb,#fef3c7);border-radius:14px;border:2px solid #fde68a;flex-shrink:0}
-.stamp-btn{width:48px;height:48px;border-radius:12px;border:2px solid #fde68a;background:#fff;font-size:26px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 0 #fcd34d;transition:transform .12s}
+
+/* الألوان أنحف */
+.draw-tools{display:flex;gap:4px;flex-wrap:wrap;justify-content:center;align-items:center;width:100%;padding:4px;background:#ffffff;border-radius:12px;border:2px solid #fce7f3;flex-shrink:0}
+.color-btn{width:32px;height:32px;border-radius:50%;border:2px solid transparent;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.15)}
+.color-btn.active{border-color:#fff;transform:scale(1.15);box-shadow:0 0 0 3px #3b82f6}
+
+/* الملصقات أنحف */
+.stamp-row{display:flex;gap:4px;flex-wrap:wrap;justify-content:center;width:100%;padding:4px;background:#fef3c7;border-radius:12px;border:2px solid #fde68a;flex-shrink:0}
+.stamp-btn{width:38px;height:38px;border-radius:10px;border:2px solid #fde68a;background:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 0 #fcd34d}
 .stamp-btn.on{border-color:#f59e0b;background:#fff7ed;transform:scale(1.1);box-shadow:0 2px 0 #f59e0b}
-.stamp-btn:active{transform:scale(.85)}
-.draw-mode-bar{display:flex;gap:8px;justify-content:center;width:100%;margin:4px 0;flex-shrink:0}
-.draw-mode-bar button{flex:1;max-width:170px;border:2px solid #bfdbfe;background:#fff;border-radius:14px;padding:10px 12px;font:900 15px Tajawal,sans-serif;color:#1e3a5f;cursor:pointer;box-shadow:0 2px 0 #93c5fd}
-.draw-mode-bar button.on{background:linear-gradient(180deg,#dbeafe,#93c5fd);border-color:#3b82f6;color:#1e3a8a}
+
+/* شريط الوضع البسيط/المتقدم */
+.draw-mode-bar{display:flex;gap:4px;justify-content:center;width:100%;margin:0;flex-shrink:0}
+.draw-mode-bar button{flex:1;max-width:140px;border:2px solid #bfdbfe;background:#fff;border-radius:10px;padding:6px;font:900 13px Tajawal,sans-serif;color:#1e3a5f;cursor:pointer;box-shadow:0 2px 0 #93c5fd}
+.draw-mode-bar button.on{background:#dbeafe;border-color:#3b82f6;color:#1e3a8a}
+
+/* الأزرار المخفية */
 .draw-advanced-only{display:none!important}
 body.draw-advanced .draw-advanced-only{display:flex!important}
 body:not(.draw-advanced) #toolSpray,
@@ -160,47 +163,12 @@ body:not(.draw-advanced) #toolRect,
 body:not(.draw-advanced) #toolFill,
 body:not(.draw-advanced) #toolText,
 body:not(.draw-advanced) #palette .color-btn:nth-child(n+9):not(.special){display:none}
-body.draw-fullscreen #draw.on{position:fixed;inset:0;z-index:150;border-radius:0;padding:8px;max-width:100vw!important;width:100vw;height:100vh;height:100dvh;display:flex}
-body.draw-fullscreen #stage{max-width:100vw;max-height:100dvh;margin:0;border-radius:0;height:100dvh}
-#templateModal{display:none;position:fixed;inset:0;z-index:210;background:rgba(15,30,55,.6);align-items:center;justify-content:center;padding:16px;backdrop-filter:blur(4px)}
-#templateModal.show{display:flex}
-#templateModal .box{background:#fff;border-radius:24px;padding:20px;width:min(92%,480px);max-height:90vh;overflow-y:auto;box-shadow:0 20px 50px rgba(0,0,0,.3);direction:rtl;animation:modalPop .25s ease-out}
-#templateModal h3{margin:0 0 14px;font-size:20px;color:#1e3a5f;text-align:center}
-.template-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
-.template-item{aspect-ratio:1;border-radius:16px;border:2px solid #e2e8f0;background:#fff;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px;gap:4px;transition:transform .15s,box-shadow .15s,border-color .15s;box-shadow:0 3px 8px rgba(0,0,0,.06)}
-.template-item:hover{transform:translateY(-3px);border-color:#3b82f6;box-shadow:0 6px 16px rgba(59,130,246,.15)}
-.template-item:active{transform:translateY(0)}
-.template-item svg{width:70%;height:70%;max-width:80px;max-height:80px}
-.template-item span{font-size:12px;font-weight:800;color:#52687e}
-#fxLayer{position:absolute;inset:0;pointer-events:none;z-index:4;overflow:hidden;border-radius:20px}
-.fx-spark{position:absolute;width:8px;height:8px;border-radius:50%;pointer-events:none;animation:fxSpark .7s ease-out forwards;box-shadow:0 0 8px currentColor}
-@keyframes fxSpark{0%{opacity:1;transform:translate(0,0) scale(1)}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(0)}}
-.fx-ring{position:absolute;border:3px solid #60a5fa;border-radius:50%;pointer-events:none;animation:fxRing .55s ease-out forwards}
-@keyframes fxRing{0%{opacity:.9;transform:translate(-50%,-50%) scale(.3)}100%{opacity:0;transform:translate(-50%,-50%) scale(1.8)}}
-.fx-confetti{position:absolute;width:10px;height:14px;border-radius:2px;pointer-events:none;animation:fxConfetti 1.2s ease-in forwards}
-@keyframes fxConfetti{0%{opacity:1;transform:translateY(0) rotate(0deg)}100%{opacity:0;transform:translateY(120px) rotate(400deg)}}
-#canvas-container.bg-sky{background:linear-gradient(180deg,#bae6fd 0%,#e0f2fe 60%,#f0fdf4 100%)}
-#canvas-container.bg-field{background:linear-gradient(180deg,#bfdbfe 0%,#dcfce7 40%,#bbf7d0 100%)}
-#canvas-container.bg-beach{background:linear-gradient(180deg,#7dd3fc 0%,#fef3c7 55%,#fde68a 100%)}
-#canvas-container.bg-night{background:linear-gradient(180deg,#1e1b4b 0%,#312e81 60%,#4c1d95 100%)}
-#canvas-container.bg-candy{background:linear-gradient(180deg,#fce7f3 0%,#fbcfe8 50%,#fef3c7 100%)}
-.bg-btn{transition:transform .15s,border-color .15s,box-shadow .15s}
-.bg-btn.active{border-color:#3b82f6!important;box-shadow:0 0 0 3px rgba(59,130,246,.35),0 3px 8px rgba(0,0,0,.15)!important;transform:scale(1.08)}
-#textModal{display:none;position:fixed;inset:0;z-index:200;background:rgba(15,30,55,.55);align-items:center;justify-content:center;padding:16px;backdrop-filter:blur(3px)}
-#textModal.show{display:flex}
-#textModal .box{background:#fff;border-radius:22px;padding:20px;width:min(92%,360px);box-shadow:0 20px 50px rgba(0,0,0,.25);text-align:center;direction:rtl;animation:modalPop .25s ease-out}
-@keyframes modalPop{from{transform:scale(.9);opacity:0}to{transform:scale(1);opacity:1}}
-#textModal h3{margin:0 0 12px;font-size:20px;color:#1e3a5f}
-#textModal input{width:100%;font:800 22px Tajawal,sans-serif;padding:12px;border:2px solid #dbeafe;border-radius:14px;text-align:center;margin-bottom:12px;color:#1e293b}
-#textModal input:focus{outline:none;border-color:#3b82f6;box-shadow:0 0 0 3px rgba(59,130,246,.15)}
-#textModal .row{display:flex;gap:8px;justify-content:center}
-#offlineBadge{display:none;position:fixed;top:max(10px,env(safe-area-inset-top));left:50%;transform:translateX(-50%);z-index:200;background:#1e293b;color:#fff;font:900 13px Tajawal,sans-serif;padding:8px 14px;border-radius:999px;box-shadow:0 8px 20px rgba(0,0,0,.25)}
-#offlineBadge.show{display:block}
-.draw-toolbar,#palette,.stamp-row{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;-webkit-overflow-scrolling:touch}
+
+/* خلفيات وأدوات التمرير الأفقي */
+.draw-toolbar,#palette,.stamp-row{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;padding-bottom:2px}
+.draw-toolbar::-webkit-scrollbar,#palette::-webkit-scrollbar,.stamp-row::-webkit-scrollbar{height:4px}
+.draw-toolbar::-webkit-scrollbar-thumb,#palette::-webkit-scrollbar-thumb,.stamp-row::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:4px}
 .draw-toolbar>*,#palette>*,.stamp-row>*{flex-shrink:0}
-@media(pointer:coarse){.draw-toolbar .tool{width:52px;height:52px;font-size:24px}.size-btn{height:44px;min-width:48px;font-size:15px}.color-btn{width:44px;height:44px}.stamp-btn{width:52px;height:52px;font-size:28px}.draw-header button{width:46px;height:46px}}
-@media(max-height:640px){.draw-tools{padding:4px}.color-btn{width:36px;height:36px}.stamp-btn{width:44px;height:44px;font-size:24px}.draw-toolbar .tool{width:44px;height:44px;font-size:20px}.draw-toolbar{padding:4px}.size-btn{min-width:38px;height:36px;font-size:13px}}
-@supports not (width:1cqw){.scr{padding:16px;padding-top:max(16px,env(safe-area-inset-top))}#bear{width:clamp(120px,23vw,210px)}.hero-glow{width:clamp(140px,24vw,240px);height:clamp(140px,24vw,240px)}h1{font-size:clamp(26px,6vw,44px)}.home-subtitle{font-size:clamp(15px,3.2vw,20px)}.card{min-height:clamp(112px,22vw,158px);font-size:clamp(15px,3.4vw,22px)}.card span.e{font-size:clamp(38px,10vw,64px)}#big .m{font-size:clamp(76px,22vw,140px)}#big .r{font-size:clamp(55px,16vw,96px)}#big .w{font-size:clamp(30px,9vw,60px)}#big .fact{font-size:clamp(16px,4vw,22px)}#q .t{font-size:clamp(22px,6vw,36px)}#q .p{font-size:clamp(56px,16vw,100px)}.opt{width:clamp(88px,26vw,140px);font-size:clamp(38px,10vw,64px)}.sw{width:clamp(100px,28vw,170px);height:clamp(100px,28vw,170px)}.btn{font-size:clamp(15px,3.8vw,19px)}.pill{font-size:clamp(12px,3vw,15px)}}
 </style>
 </head>
 <body>
@@ -333,8 +301,6 @@ body.draw-fullscreen #stage{max-width:100vw;max-height:100dvh;margin:0;border-ra
       <button id="back6" aria-label="العودة">🏠</button>
       <div class="pill">🎨 مرسمي الإبداعي</div>
       <button id="templatesBtn" aria-label="قوالب">🖼️</button>
-      <button id="undoCanvas" aria-label="تراجع">↩️</button>
-      <button id="redoCanvas" aria-label="إعادة">↪️</button>
       <button id="fullscreenBtn" aria-label="ملء الشاشة" aria-pressed="false">⛶</button>
       <button id="shareCanvas" aria-label="مشاركة">📤</button>
       <button id="downloadCanvas" aria-label="تحميل">⬇️</button>
@@ -367,23 +333,30 @@ body.draw-fullscreen #stage{max-width:100vw;max-height:100dvh;margin:0;border-ra
       <button id="toolDup" class="tool draw-advanced-only" aria-label="نسخ">⧉</button>
     </div>
 
-    <div class="draw-toolbar">
-      <button class="size-btn" data-size="6" aria-label="رفيع">•</button>
-      <button class="size-btn on" data-size="18" aria-label="متوسط">●</button>
-      <button class="size-btn" data-size="36" aria-label="سميك">⬤</button>
-      <button id="clearCanvas" class="tool" aria-label="لوحة جديدة" style="margin-right:auto">🗑️</button>
+    <!-- شريط الحجم والتحكم المدمج -->
+    <div class="tools-row">
+      <div style="display:flex;gap:4px">
+        <button class="size-btn" data-size="6" aria-label="رفيع">•</button>
+        <button class="size-btn on" data-size="18" aria-label="متوسط">●</button>
+        <button class="size-btn" data-size="36" aria-label="سميك">⬤</button>
+      </div>
+      <div style="display:flex;gap:4px">
+        <button id="undoCanvas" class="tool" aria-label="تراجع" style="width:38px;height:36px;border-radius:10px;font-size:16px">↩️</button>
+        <button id="redoCanvas" class="tool" aria-label="إعادة" style="width:38px;height:36px;border-radius:10px;font-size:16px">↪️</button>
+        <button id="clearCanvas" class="tool" aria-label="لوحة جديدة" style="width:38px;height:36px;border-radius:10px;font-size:16px">🗑️</button>
+      </div>
     </div>
 
     <div class="draw-tools" id="palette"></div>
 
     <div class="draw-toolbar" id="bgPicker" style="font-weight:900;font-size:13px;color:#1e3a5f">
       <span style="padding:0 4px">خلفية:</span>
-      <button class="bg-btn active" data-bg="white" aria-label="بيضاء" style="width:36px;height:36px;border-radius:10px;border:2px solid #e2e8f0;background:#fff;cursor:pointer">⚪</button>
-      <button class="bg-btn" data-bg="sky" aria-label="سماء" style="width:36px;height:36px;border-radius:10px;border:2px solid #e2e8f0;background:#bae6fd;cursor:pointer">☁️</button>
-      <button class="bg-btn" data-bg="field" aria-label="حقل" style="width:36px;height:36px;border-radius:10px;border:2px solid #e2e8f0;background:#bbf7d0;cursor:pointer">🌿</button>
-      <button class="bg-btn" data-bg="beach" aria-label="شاطئ" style="width:36px;height:36px;border-radius:10px;border:2px solid #e2e8f0;background:#fde68a;cursor:pointer">🏖️</button>
-      <button class="bg-btn" data-bg="night" aria-label="ليل" style="width:36px;height:36px;border-radius:10px;border:2px solid #e2e8f0;background:#312e81;cursor:pointer">🌙</button>
-      <button class="bg-btn" data-bg="candy" aria-label="حلوى" style="width:36px;height:36px;border-radius:10px;border:2px solid #e2e8f0;background:#fbcfe8;cursor:pointer">🍭</button>
+      <button class="bg-btn active" data-bg="white" aria-label="بيضاء" style="width:32px;height:32px;border-radius:8px;border:2px solid #e2e8f0;background:#fff;cursor:pointer">⚪</button>
+      <button class="bg-btn" data-bg="sky" aria-label="سماء" style="width:32px;height:32px;border-radius:8px;border:2px solid #e2e8f0;background:#bae6fd;cursor:pointer">☁️</button>
+      <button class="bg-btn" data-bg="field" aria-label="حقل" style="width:32px;height:32px;border-radius:8px;border:2px solid #e2e8f0;background:#bbf7d0;cursor:pointer">🌿</button>
+      <button class="bg-btn" data-bg="beach" aria-label="شاطئ" style="width:32px;height:32px;border-radius:8px;border:2px solid #e2e8f0;background:#fde68a;cursor:pointer">🏖️</button>
+      <button class="bg-btn" data-bg="night" aria-label="ليل" style="width:32px;height:32px;border-radius:8px;border:2px solid #e2e8f0;background:#312e81;cursor:pointer">🌙</button>
+      <button class="bg-btn" data-bg="candy" aria-label="حلوى" style="width:32px;height:32px;border-radius:8px;border:2px solid #e2e8f0;background:#fbcfe8;cursor:pointer">🍭</button>
     </div>
 
     <div class="stamp-row">
@@ -431,7 +404,7 @@ body.draw-fullscreen #stage{max-width:100vw;max-height:100dvh;margin:0;border-ra
 
 <div id="ad-toast">
   <span>🎁 اطلب مطبوعاتك الآن من المكتبة!</span>
-  <a href="https://example.com/library" target="_blank" rel="noopener">زيارة</a>
+  <a href="https://rawad-store.github.io/" target="_blank" rel="noopener">زيارة</a>
 </div>
 
 <script>
@@ -1179,7 +1152,7 @@ document.addEventListener('click',function(e){
 },true);
 
 /* ══════════════════════════════════════════════════════════════
-   منطق المرسم الاحترافي — نسخة 5.2 (نهائية معتمدة)
+   منطق المرسم الاحترافي — نسخة 5.3 (تصميم مضغوط)
    ══════════════════════════════════════════════════════════════ */
 var canvas=null,ctx2d=null,isDrawing=false;
 var currentColor='#e53935';
