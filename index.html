@@ -103,7 +103,7 @@ button:focus-visible,a:focus-visible,[role=button]:focus-visible{outline:3px sol
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 
 /* ══════════════════════════════════════════════════════════════
-   مرسم الأطفال — تصميم مضغوط لمساحة رسم أكبر
+   مرسم الأطفال — تصميم مضغوط لمساحة رسم أكبر (نسخة 5.3)
    ══════════════════════════════════════════════════════════════ */
 #draw{padding:4px;gap:4px;background:linear-gradient(150deg,#fff7ed 0%,#f0f9ff 40%,#fdf4ff 100%);overflow:hidden}
 @media(max-height:650px){#draw{overflow-y:auto}}
@@ -169,6 +169,55 @@ body:not(.draw-advanced) #palette .color-btn:nth-child(n+9):not(.special){displa
 .draw-toolbar::-webkit-scrollbar,#palette::-webkit-scrollbar,.stamp-row::-webkit-scrollbar{height:4px}
 .draw-toolbar::-webkit-scrollbar-thumb,#palette::-webkit-scrollbar-thumb,.stamp-row::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:4px}
 .draw-toolbar>*,#palette>*,.stamp-row>*{flex-shrink:0}
+
+/* خلفيات اللوحة */
+#canvas-container.bg-sky{background:linear-gradient(180deg,#bae6fd 0%,#e0f2fe 60%,#f0fdf4 100%)}
+#canvas-container.bg-field{background:linear-gradient(180deg,#bfdbfe 0%,#dcfce7 40%,#bbf7d0 100%)}
+#canvas-container.bg-beach{background:linear-gradient(180deg,#7dd3fc 0%,#fef3c7 55%,#fde68a 100%)}
+#canvas-container.bg-night{background:linear-gradient(180deg,#1e1b4b 0%,#312e81 60%,#4c1d95 100%)}
+#canvas-container.bg-candy{background:linear-gradient(180deg,#fce7f3 0%,#fbcfe8 50%,#fef3c7 100%)}
+.bg-btn{transition:transform .15s,border-color .15s,box-shadow .15s}
+.bg-btn.active{border-color:#3b82f6!important;box-shadow:0 0 0 3px rgba(59,130,246,.35),0 3px 8px rgba(0,0,0,.15)!important;transform:scale(1.08)}
+
+/* ✅ النوافذ المنبثقة (النص والقوالب) — تم إصلاحها */
+#textModal, #templateModal {
+  display:none; position:fixed; inset:0; z-index:200;
+  background:rgba(15,30,55,.55); align-items:center; justify-content:center;
+  padding:16px; backdrop-filter:blur(3px);
+}
+#textModal.show, #templateModal.show { display:flex; }
+#textModal .box, #templateModal .box {
+  background:#fff; border-radius:22px; padding:20px;
+  box-shadow:0 20px 50px rgba(0,0,0,.25); text-align:center; direction:rtl;
+  animation:modalPop .25s ease-out;
+}
+#textModal .box { width:min(92%,360px); }
+#templateModal .box { width:min(92%,480px); max-height:90vh; overflow-y:auto; }
+@keyframes modalPop{from{transform:scale(.9);opacity:0}to{transform:scale(1);opacity:1}}
+#textModal h3, #templateModal h3 { margin:0 0 12px; font-size:20px; color:#1e3a5f; }
+#textModal input { width:100%; font:800 22px Tajawal,sans-serif; padding:12px; border:2px solid #dbeafe; border-radius:14px; text-align:center; margin-bottom:12px; color:#1e293b; }
+#textModal input:focus { outline:none; border-color:#3b82f6; box-shadow:0 0 0 3px rgba(59,130,246,.15); }
+#textModal .row, #templateModal .row { display:flex; gap:8px; justify-content:center; }
+.template-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:14px; }
+.template-item { aspect-ratio:1; border-radius:16px; border:2px solid #e2e8f0; background:#fff; cursor:pointer; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:8px; gap:4px; transition:transform .15s,box-shadow .15s,border-color .15s; box-shadow:0 3px 8px rgba(0,0,0,.06); }
+.template-item:hover { transform:translateY(-3px); border-color:#3b82f6; box-shadow:0 6px 16px rgba(59,130,246,.15); }
+.template-item:active { transform:translateY(0); }
+.template-item svg { width:70%; height:70%; max-width:80px; max-height:80px; }
+.template-item span { font-size:12px; font-weight:800; color:#52687e; }
+#fxLayer{position:absolute;inset:0;pointer-events:none;z-index:4;overflow:hidden;border-radius:16px}
+
+/* تأثيرات بصرية */
+.fx-spark{position:absolute;width:8px;height:8px;border-radius:50%;pointer-events:none;animation:fxSpark .7s ease-out forwards;box-shadow:0 0 8px currentColor}
+@keyframes fxSpark{0%{opacity:1;transform:translate(0,0) scale(1)}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(0)}}
+.fx-ring{position:absolute;border:3px solid #60a5fa;border-radius:50%;pointer-events:none;animation:fxRing .55s ease-out forwards}
+@keyframes fxRing{0%{opacity:.9;transform:translate(-50%,-50%) scale(.3)}100%{opacity:0;transform:translate(-50%,-50%) scale(1.8)}}
+.fx-confetti{position:absolute;width:10px;height:14px;border-radius:2px;pointer-events:none;animation:fxConfetti 1.2s ease-in forwards}
+@keyframes fxConfetti{0%{opacity:1;transform:translateY(0) rotate(0deg)}100%{opacity:0;transform:translateY(120px) rotate(400deg)}}
+
+#offlineBadge{display:none;position:fixed;top:max(10px,env(safe-area-inset-top));left:50%;transform:translateX(-50%);z-index:200;background:#1e293b;color:#fff;font:900 13px Tajawal,sans-serif;padding:8px 14px;border-radius:999px;box-shadow:0 8px 20px rgba(0,0,0,.25)}
+#offlineBadge.show{display:block}
+
+@supports not (width:1cqw){.scr{padding:16px;padding-top:max(16px,env(safe-area-inset-top))}#bear{width:clamp(120px,23vw,210px)}.hero-glow{width:clamp(140px,24vw,240px);height:clamp(140px,24vw,240px)}h1{font-size:clamp(26px,6vw,44px)}.home-subtitle{font-size:clamp(15px,3.2vw,20px)}.card{min-height:clamp(112px,22vw,158px);font-size:clamp(15px,3.4vw,22px)}.card span.e{font-size:clamp(38px,10vw,64px)}#big .m{font-size:clamp(76px,22vw,140px)}#big .r{font-size:clamp(55px,16vw,96px)}#big .w{font-size:clamp(30px,9vw,60px)}#big .fact{font-size:clamp(16px,4vw,22px)}#q .t{font-size:clamp(22px,6vw,36px)}#q .p{font-size:clamp(56px,16vw,100px)}.opt{width:clamp(88px,26vw,140px);font-size:clamp(38px,10vw,64px)}.sw{width:clamp(100px,28vw,170px);height:clamp(100px,28vw,170px)}.btn{font-size:clamp(15px,3.8vw,19px)}.pill{font-size:clamp(12px,3vw,15px)}}
 </style>
 </head>
 <body>
@@ -333,7 +382,6 @@ body:not(.draw-advanced) #palette .color-btn:nth-child(n+9):not(.special){displa
       <button id="toolDup" class="tool draw-advanced-only" aria-label="نسخ">⧉</button>
     </div>
 
-    <!-- شريط الحجم والتحكم المدمج -->
     <div class="tools-row">
       <div style="display:flex;gap:4px">
         <button class="size-btn" data-size="6" aria-label="رفيع">•</button>
