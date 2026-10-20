@@ -1,29 +1,20 @@
 /* ══════════════════════════════════════════════════════════════
-   Service Worker — عالم الدب الصغير v39
+   Service Worker — عالم الدب الصغير v40
+   التحديث: إزالة الملفات غير الموجودة من CORE
    ══════════════════════════════════════════════════════════════ */
+const VERSION = 'bear-world-v40';
 
-const VERSION = 'bear-world-v39';
-
-/* الملفات الأساسية التي يجب تحميلها عند التثبيت */
 const CORE = [
   './',
   './index.html',
   './manifest.json',
   './bear.png',
-  './icon-96.png',
   './icon-192.png',
-  './icon-512.png',
-  './icon-maskable-512.png'
+  './icon-512.png'
 ];
 
-/* ملفات اختيارية (لن يفشل التثبيت إذا لم تكن موجودة) */
-const OPTIONAL = [
-  './screenshots/home-wide.png',
-  './screenshots/draw-wide.png',
-  './screenshots/quiz-narrow.png'
-];
+const OPTIONAL = [];
 
-/* صفحة احتياطية أنيقة تظهر فقط إذا كان الجهاز بدون إنترنت تماماً */
 const OFFLINE_HTML =
   '<!doctype html><html lang="ar" dir="rtl"><meta charset="utf-8">' +
   '<meta name="viewport" content="width=device-width,initial-scale=1">' +
@@ -42,7 +33,6 @@ const OFFLINE_HTML =
   '<p>افتح التطبيق مرة واحدة وأنت متصل ليُحمَّل للاستخدام دون اتصال.</p>' +
   '<button onclick="location.reload()">🔄 إعادة المحاولة</button></div></html>';
 
-/* ─────────────── تثبيت SW ─────────────── */
 self.addEventListener('install', (event) => {
   event.waitUntil((async () => {
     const cache = await caches.open(VERSION);
@@ -54,7 +44,6 @@ self.addEventListener('install', (event) => {
   })());
 });
 
-/* ─────────────── تفعيل SW ─────────────── */
 self.addEventListener('activate', (event) => {
   event.waitUntil((async () => {
     const keys = await caches.keys();
@@ -67,7 +56,6 @@ self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'SKIP_WAITING') self.skipWaiting();
 });
 
-/* ─────────────── دوال مساعدة ─────────────── */
 function withTimeout(promise, ms) {
   return Promise.race([
     promise,
@@ -84,17 +72,14 @@ async function putInCache(key, response) {
   } catch (e) {}
 }
 
-/* ─────────────── استراتيجية الجلب (Fetch) ─────────────── */
 self.addEventListener('fetch', (event) => {
   const request = event.request;
   if (request.method !== 'GET') return;
-
   let url;
   try { url = new URL(request.url); } catch (e) { return; }
   if (!url.protocol.startsWith('http')) return;
   if (request.headers.has('range')) return;
 
-  /* 1) طلبات فتح الصفحة (HTML) - Network First مع مهلة 5 ثوانٍ */
   if (request.mode === 'navigate') {
     event.respondWith((async () => {
       try {
@@ -118,14 +103,12 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  /* 2) تصفية الروابط (السماح بالخطوط فقط من خارج الموقع) */
   const isFont =
     url.hostname === 'fonts.googleapis.com' ||
     url.hostname === 'fonts.gstatic.com';
   const sameOrigin = url.origin === self.location.origin;
   if (!sameOrigin && !isFont) return;
 
-  /* 3) الملفات الثابتة والصور - Stale While Revalidate */
   event.respondWith((async () => {
     const cached = await caches.match(request);
     const networkPromise = (async () => {
