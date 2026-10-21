@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://rawad-store.github.io/bear-world/sitemap.xml
