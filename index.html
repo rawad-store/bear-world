@@ -1,0 +1,2574 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,viewport-fit=cover">
+<meta name="theme-color" content="#eaf4ff">
+<title>عالم الدب الصغير التعليمي</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800;900&display=swap" rel="stylesheet">
+
+<!-- ═══════════ إعدادات تطبيق الويب التقدمي (PWA) ═══════════ -->
+<link rel="manifest" href="./manifest.json">
+<link rel="apple-touch-icon" href="./icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="الدب الصغير">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="icon" type="image/png" href="./icon-192.png">
+<meta name="description" content="عالم الدب الصغير التعليمي — تطبيق تفاعلي شامل للأطفال: أرقام، حروف، تربية إسلامية، قصص أنبياء، مرسم تلوين، وألغاز.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://rawad-store.github.io/bear-world/">
+<meta property="og:title" content="🐻 عالم الدب الصغير التعليمي">
+<meta property="og:description" content="تطبيق تعليمي تفاعلي للأطفال — متعة التعلم في كل وقت!">
+<meta property="og:image" content="https://rawad-store.github.io/bear-world/bear-world.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="ar_EG">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://rawad-store.github.io/bear-world/bear-world.png">
+
+<style>
+:root{--ink:#17324d;--coral:#ff7b72;--shadow:0 14px 34px rgba(34,65,103,.14)}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;font-family:'Tajawal','Segoe UI',Tahoma,Arial,system-ui,sans-serif;-webkit-tap-highlight-color:transparent;overflow:hidden}
+html{background:#eaf4ff}
+body{height:100dvh;display:flex;justify-content:center;background:radial-gradient(circle at 10% 10%,#fff1bd 0,transparent 25%),radial-gradient(circle at 90% 15%,#d9f8ed 0,transparent 26%),linear-gradient(135deg,#eaf4ff,#f8f2ff 55%,#fff8e8);color:var(--ink)}
+button,a,[role=button]{touch-action:manipulation}
+button{font-family:inherit}
+#stage{position:relative;isolation:isolate;container-type:inline-size;width:100%;max-width:1120px;height:100dvh;overflow:hidden;background:rgba(255,255,255,.72);box-shadow:0 0 60px rgba(42,72,115,.1);user-select:none;display:flex;flex-direction:column}
+#stage:before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.38;background-image:radial-gradient(#b9d8ff 1.5px,transparent 1.5px);background-size:28px 28px;-webkit-mask-image:linear-gradient(to bottom,black,transparent 70%);mask-image:linear-gradient(to bottom,black,transparent 70%)}
+.scr{position:absolute;inset:0;display:none;flex-direction:column;padding:clamp(14px,3.2cqw,32px);padding-top:max(clamp(14px,3.2cqw,32px),env(safe-area-inset-top));padding-bottom:max(14px,env(safe-area-inset-bottom));overflow-y:auto;overflow-x:hidden;animation:enter .28s ease-out;z-index:1;-webkit-overflow-scrolling:touch}
+.scr.on{display:flex}
+@keyframes enter{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.top{display:flex;align-items:center;justify-content:space-between;gap:6px;width:100%;z-index:5;margin-bottom:10px}
+.pill{background:#fff;border:1px solid #e6edf7;border-radius:999px;padding:7px 11px;font-weight:900;font-size:clamp(12px,1.5cqw,16px);color:var(--ink);box-shadow:0 4px 12px rgba(42,72,115,.07);display:inline-flex;align-items:center;justify-content:center;gap:4px;text-decoration:none;transition:transform .15s;cursor:pointer;white-space:nowrap}
+.pill:hover{transform:translateY(-2px)}
+.pill.link{background:#fff5cc;border-color:#ffe18a;color:#765000}
+@media(max-width:380px){.pill#pwrap,.pill.link{font-size:0;padding:7px 9px}.pill#pwrap::before{content:"📊";font-size:14px}.pill.link::before{content:"🏪";font-size:14px}}
+.hero{position:relative;margin:clamp(12px,2cqw,22px) auto 4px;display:flex;flex-direction:column;align-items:center;width:100%}
+#bear{width:clamp(120px,23cqw,210px);max-height:230px;object-fit:contain;filter:drop-shadow(0 15px 15px rgba(63,75,95,.2));animation:float 3.4s ease-in-out infinite;cursor:pointer;z-index:2;border-radius:20px}
+.hero-glow{position:absolute;top:48%;left:50%;transform:translate(-50%,-50%);width:clamp(140px,24cqw,240px);height:clamp(140px,24cqw,240px);background:#ffe27a;filter:blur(28px);opacity:.48;border-radius:50%;animation:pulse 3s infinite alternate}
+@keyframes float{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-8px) rotate(1deg)}}
+@keyframes pulse{from{opacity:.25;scale:.9}to{opacity:.5;scale:1.08}}
+h1{margin:2px 0 4px;text-align:center;font-size:clamp(28px,4.8cqw,48px);line-height:1.15;font-weight:900;color:#183b63}
+.home-subtitle{margin:0 auto 16px;text-align:center;font-size:clamp(15px,2cqw,20px);font-weight:800;color:#61758d}
+.home-banner{display:flex;align-items:center;justify-content:space-between;gap:12px;background:linear-gradient(110deg,#fff0b3,#fff9e8);border:1px solid #ffe59a;border-radius:22px;padding:12px 18px;margin:4px 0 16px;box-shadow:0 8px 18px rgba(195,146,29,.08)}
+.home-banner strong{font-size:clamp(16px,2.2cqw,23px)}
+.home-banner span{font-size:clamp(13px,1.6cqw,17px);color:#795c18;font-weight:700}
+#grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;width:100%;padding:2px 2px 14px;align-content:start;flex:none}
+.sec{grid-column:1/-1;font-weight:900;font-size:clamp(18px,2.5cqw,26px);color:#183b63;margin:12px 4px 0;display:flex;align-items:center;gap:8px;border-bottom:3px dashed #d5e4f5;padding-bottom:6px}
+.card{position:relative;border-radius:22px;min-height:clamp(112px,15cqw,158px);padding:18px 10px 16px;color:#fff;font:900 clamp(17px,2.1cqw,23px) 'Tajawal',sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;cursor:pointer;box-shadow:0 6px 0 rgba(26,54,82,.14),0 12px 22px rgba(36,66,101,.14);border:1px solid rgba(255,255,255,.7);text-shadow:0 1px 3px rgba(0,0,0,.35);transition:transform .16s;overflow:hidden}
+.card:before{content:"";position:absolute;inset:0;background:linear-gradient(145deg,rgba(255,255,255,.25),transparent 60%);pointer-events:none}
+.card:hover{transform:translateY(-4px)}
+.card:active{transform:translateY(1px)}
+.card span.e{font-size:clamp(38px,6.3cqw,66px);line-height:1;filter:drop-shadow(0 3px 3px rgba(0,0,0,.2))}
+.card .badge{position:absolute;top:10px;left:10px;background:#16a878;color:#fff;border-radius:50%;font-size:15px;width:26px;height:26px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 5px #0003}
+.btn{border:0;border-radius:16px;padding:13px 20px;font:900 clamp(15px,1.9cqw,20px) 'Tajawal',sans-serif;color:#fff;background:linear-gradient(180deg,#ff8d82,#f46c69);box-shadow:0 4px 0 #d94d4d;cursor:pointer;transition:transform .12s;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;gap:7px}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 #d94d4d}
+.btn.b{background:linear-gradient(180deg,#68b5ff,#4389f5);box-shadow:0 4px 0 #2862c7}
+.btn.g{background:linear-gradient(180deg,#5de0ae,#26b985);box-shadow:0 4px 0 #15966a}
+.btn.gold{background:linear-gradient(180deg,#ffdc67,#f7b928);color:#654500;box-shadow:0 4px 0 #d99a0b}
+.btn.sm{padding:9px 14px;font-size:clamp(14px,1.6cqw,17px);border-radius:13px}
+#big{margin:18px auto 0;width:100%;max-width:820px;flex:1;min-height:280px;border-radius:28px;background:linear-gradient(160deg,#fff,#f5faff);border:2px solid #e8f1fb;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;cursor:pointer;box-shadow:var(--shadow);overflow-y:auto;padding:clamp(20px,5cqw,48px);color:#1e293b}
+#big .m{font-size:clamp(76px,15cqw,150px);line-height:1;font-weight:900;color:var(--coral);text-shadow:0 4px 0 #ffe3df;display:flex;align-items:center;justify-content:center;min-height:1.2em}
+#big .r{font-size:clamp(55px,10cqw,100px);line-height:1.2;font-weight:800;text-align:center;word-break:break-all}
+#big .w{font-size:clamp(32px,7cqw,64px);font-weight:900;color:#2563b9;background:#e8f3ff;padding:8px 26px;border-radius:18px;text-align:center}
+#big .fact{font-size:clamp(16px,2.5cqw,24px);color:#52687e;text-align:center;font-weight:800;background:#f0f8f5;padding:12px 18px;border-radius:16px;max-width:650px;line-height:1.7}
+.sw{display:block;width:clamp(100px,19cqw,180px);height:clamp(100px,19cqw,180px);border-radius:50%;border:8px solid #fff;outline:2px solid #d5deea;outline-offset:-2px;box-shadow:inset -10px -10px 20px rgba(0,0,0,.12),0 8px 15px rgba(0,0,0,.1)}
+.prog{width:100%;max-width:820px;height:12px;background:#e4edf7;border-radius:99px;margin:18px auto 8px;overflow:hidden;flex:none}
+.prog .bar{height:100%;background:linear-gradient(90deg,#36c98f,#9be9c7);border-radius:99px;transition:width .3s;width:0}
+.nav{display:flex;gap:12px;margin:10px auto;align-items:center;justify-content:center;font-weight:900;font-size:18px;flex-wrap:wrap}
+#q{margin:20px auto 0;background:#fff;border:2px solid #e8f1fb;border-radius:28px;padding:clamp(20px,4cqw,38px);text-align:center;width:100%;max-width:820px;box-shadow:var(--shadow);color:#1e293b}
+#q .t{font-size:clamp(23px,4cqw,38px);font-weight:900;color:#2563b9;line-height:1.35}
+#q .p{font-size:clamp(56px,11cqw,105px);line-height:1.2;font-weight:900;color:#243b53}
+#opts{display:flex;gap:clamp(10px,2cqw,20px);margin:20px auto 0;width:100%;justify-content:center;flex-wrap:wrap}
+.opt{width:clamp(88px,16cqw,150px);aspect-ratio:1;border:2px solid #e5edf7;border-radius:24px;background:#fff;font-size:clamp(38px,7cqw,68px);font-weight:900;color:#1e293b;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 5px 0 #dbe6f2;transition:transform .12s}
+.opt:hover{transform:translateY(-3px)}
+.opt.ok{background:#d7f8e9;color:#08794e;border-color:#43c895;animation:pop .3s}
+.opt.no{background:#ffe5e2;color:#b91c1c;border-color:#ff8c82;animation:shake .3s}
+.opt .sw{width:62%;height:62%;border-width:5px}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+@keyframes pop{0%{transform:scale(.86)}100%{transform:scale(1)}}
+#fb{font-size:clamp(22px,3.5cqw,32px);font-weight:900;margin:14px auto 0;color:transparent;min-height:1.5em;text-align:center}
+#fb.show{color:#16885d}
+#result .box,#progress .box,#about .box{background:#fff;border:1px solid #e6edf7;border-radius:30px;padding:clamp(24px,5cqw,48px);text-align:center;box-shadow:var(--shadow);width:100%;max-width:720px;margin:auto;align-self:center}
+#result .big{font-size:clamp(48px,10cqw,92px);font-weight:900;color:#1c4775}
+.sub{font-size:clamp(19px,3cqw,28px);font-weight:800;color:#6a7d91;margin-top:8px}
+.stars{font-size:clamp(38px,7cqw,64px);margin:20px 0;letter-spacing:4px}
+#progress .row{display:flex;justify-content:space-between;gap:14px;font-weight:900;font-size:clamp(17px,2.5cqw,24px);padding:17px 0;border-bottom:1px solid #edf1f7}
+#progress .row b{color:#e3a10c;font-size:clamp(20px,3cqw,28px)}
+#about .box img{width:clamp(90px,15cqw,140px);height:clamp(90px,15cqw,140px);object-fit:contain;margin-bottom:10px}
+#about .box h2{font-size:clamp(25px,4cqw,38px);color:#1c4775;margin:0}
+#about .box p{font-size:clamp(16px,2.3cqw,22px);color:#61758a;margin:12px 0;font-weight:800}
+#about .box .copy{font-size:16px;color:#8292a5;border-top:1px solid #edf1f7;padding-top:18px;margin-top:20px;font-weight:800}
+#about .box .copy b{color:#c68a0b}
+#ad-toast{position:fixed;bottom:max(18px, calc(env(safe-area-inset-bottom, 0px) + 8px));left:50%;transform:translateX(-50%) translateY(120%);background:#fff;color:#1e293b;padding:14px 18px;border-radius:18px;font-size:16px;font-weight:900;box-shadow:0 12px 35px #17324d25;display:flex;align-items:center;gap:14px;z-index:50;opacity:0;transition:all .35s;width:min(92%,560px);justify-content:space-between;border:1px solid #ffe18a;border-bottom:4px solid #ffc93d}
+#ad-toast.show{transform:translateX(-50%);opacity:1}
+#ad-toast a{color:#624600;background:#ffdc67;padding:8px 12px;border-radius:10px;text-decoration:none;font-size:14px;white-space:nowrap}
+.sig{font-size:14px;color:#8292a5;text-align:center;font-weight:800;margin:16px 0 0}
+.star{position:absolute;font-size:28px;animation:fly 1.2s ease-out forwards;pointer-events:none;z-index:99}
+@keyframes fly{to{transform:translate(var(--x),var(--y)) rotate(360deg) scale(.2);opacity:0}}
+button:focus-visible,a:focus-visible,[role=button]:focus-visible{outline:3px solid #2563eb;outline-offset:3px}
+@media(min-width:760px){#stage{border-radius:28px;margin:18px;height:calc(100dvh - 36px)}#home{padding:28px 38px}#grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}.scr:not(#home){padding:28px 5cqw}}
+@media(max-width:520px){.scr{padding-left:12px;padding-right:12px}#grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.card{min-height:108px;border-radius:19px;padding:14px 8px;font-size:15px}.card span.e{font-size:42px}.home-banner{border-radius:17px;padding:10px 12px}#big{min-height:240px;border-radius:22px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+
+/* ═════════ مرسم الأطفال v6 — لوحة كبيرة وأدوات مطوية ═════════ */
+.scr#draw{padding:4px;gap:4px;background:linear-gradient(150deg,#fff7ed,#f0f9ff 40%,#fdf4ff);overflow:hidden}
+.draw-header{display:flex;align-items:center;gap:4px;width:100%;padding:4px 6px;background:#fff;border-radius:14px;border:2px solid #bfdbfe;flex-shrink:0}
+.draw-header .pill{flex:1;min-width:0;justify-content:center;font-size:13px;padding:4px 8px;overflow:hidden;text-overflow:ellipsis;background:linear-gradient(90deg,#fff7ed,#dbeafe);border-color:#93c5fd}
+.draw-header button,.fsbar button{width:40px;height:40px;border-radius:12px;border:2px solid #e2e8f0;background:#fff;font-size:18px;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 0 #cbd5e1;flex-shrink:0;padding:0}
+.draw-header button:active,.fsbar button:active{transform:translateY(2px);box-shadow:none}
+@media(max-width:420px){.draw-header .pill{display:none}.draw-header{justify-content:space-between}}
+#canvas-container{flex:1;min-height:0;width:100%;background:#fff;border-radius:16px;border:3px solid #93c5fd;overflow:hidden;position:relative;touch-action:none;box-shadow:0 4px 15px rgba(59,130,246,.1)}
+#paintCanvas{display:block;width:100%;height:100%;touch-action:none;cursor:crosshair;-webkit-user-select:none;user-select:none}
+.draw-hint{position:absolute;top:8px;left:50%;transform:translateX(-50%);background:#2563eb;color:#fff;font-size:13px;font-weight:800;padding:6px 14px;border-radius:999px;pointer-events:none;z-index:6;opacity:0;transition:opacity .3s;width:max-content;max-width:90%;text-align:center;box-shadow:0 4px 10px rgba(37,99,235,.3)}
+.draw-hint.show{opacity:1}
+.fsbar{display:none;position:absolute;top:6px;right:6px;gap:6px;z-index:8}
+body.draw-fullscreen .fsbar{display:flex}
+.fsbar button{width:38px;height:38px;opacity:.92}
+.dockwrap{position:relative;flex-shrink:0}
+.dk{display:flex;justify-content:center;gap:4px;padding:4px;background:#fff;border-radius:14px;border:2px solid #bfdbfe;align-items:center}
+.dk .tool,.advtools .tool{flex:1 1 0;min-width:0;max-width:64px;height:46px;border-radius:12px;border:2px solid #e2e8f0;background:#fff;font-size:20px;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 0 #cbd5e1;padding:0}
+.dk .tool:active,.advtools .tool:active{transform:translateY(2px);box-shadow:none}
+.dk .tool.on,.advtools .tool.on{border-color:#3b82f6;background:#dbeafe;box-shadow:0 2px 0 #60a5fa}
+#btnColors i{display:block;width:26px;height:26px;border-radius:50%;background:var(--sw,#e53935);border:2px solid #fff;box-shadow:0 0 0 2px #94a3b8}
+#btnColors.rb i{background:conic-gradient(red,orange,yellow,lime,cyan,blue,magenta,red)}
+.sheet{display:none;position:absolute;left:0;right:0;bottom:100%;margin-bottom:6px;background:#fff;border:2px solid #bfdbfe;border-radius:16px;padding:8px;box-shadow:0 -8px 24px rgba(30,58,95,.22);z-index:30;max-height:50vh;overflow-y:auto}
+.sheet.open{display:block}
+.sheet h4{margin:6px 0 4px;font-size:13px;color:#52687e;text-align:center}
+#palette{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:4px 0}
+.color-btn{width:40px;height:40px;border-radius:50%;border:2px solid transparent;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.25)}
+.color-btn.active{border-color:#fff;box-shadow:0 0 0 3px #3b82f6}
+.color-btn.special{background:conic-gradient(red,orange,yellow,lime,cyan,blue,magenta,red)}
+.szrow{display:flex;gap:8px;justify-content:center;margin-top:4px}
+.size-btn{min-width:60px;height:44px;border-radius:12px;border:2px solid #e2e8f0;background:#fff;font-weight:900;font-size:16px;color:#1e3a5f;cursor:pointer;box-shadow:0 2px 0 #cbd5e1}
+.size-btn.on{border-color:#8b5cf6;background:#ede9fe;box-shadow:0 2px 0 #a78bfa}
+.stamp-row{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.stamp-btn{width:48px;height:48px;border-radius:12px;border:2px solid #fde68a;background:#fff;font-size:24px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 0 #fcd34d;padding:0}
+.stamp-btn.on{border-color:#f59e0b;background:#fff7ed}
+.draw-mode-bar{display:flex;gap:6px;justify-content:center;margin-bottom:6px}
+.draw-mode-bar button{flex:1;max-width:160px;border:2px solid #bfdbfe;background:#fff;border-radius:12px;padding:8px;font:900 14px Tajawal,sans-serif;color:#1e3a5f;cursor:pointer;box-shadow:0 2px 0 #93c5fd}
+.draw-mode-bar button.on{background:#dbeafe;border-color:#3b82f6;color:#1e3a8a}
+.advtools{display:none;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:6px}
+body.draw-advanced .advtools{display:flex}
+.advtools .tool{flex:0 0 auto;width:46px}
+#bgPicker{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.bg-btn{width:42px;height:42px;border-radius:12px;border:2px solid #e2e8f0;cursor:pointer;font-size:18px;padding:0;display:flex;align-items:center;justify-content:center}
+.bg-btn.active{border-color:#3b82f6;box-shadow:0 0 0 3px rgba(59,130,246,.35)}
+.more-actions{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:8px}
+.act{border:2px solid #bfdbfe;background:#f8fbff;border-radius:12px;padding:10px 12px;font:900 14px Tajawal,sans-serif;color:#1e3a5f;cursor:pointer;min-height:44px}
+.act:active{background:#dbeafe}
+body.draw-fullscreen #stage{margin:0;border-radius:0;height:100dvh;max-width:none}
+body.draw-fullscreen .scr#draw{padding:2px;padding-top:max(2px,env(safe-area-inset-top))}
+body.draw-fullscreen .draw-header{display:none}
+@media(orientation:landscape) and (max-height:520px){
+ .scr#draw.on{display:grid;grid-template-columns:auto minmax(0,1fr) auto;grid-template-rows:minmax(0,1fr)}
+ body.draw-fullscreen .scr#draw.on{grid-template-columns:minmax(0,1fr) auto}
+ .draw-header{flex-direction:column;width:auto;height:100%;justify-content:flex-start;padding:4px;overflow-y:auto}
+ .draw-header .pill{display:none}
+ .draw-header button{width:38px;height:38px}
+ .dockwrap{height:100%;position:static}
+ .dk{flex-direction:column;height:100%;padding:4px;overflow-y:auto;justify-content:space-around}
+ .dk .tool{flex:0 0 auto;width:44px;height:40px;max-width:none}
+ .sheet{left:62px;right:auto;bottom:6px;width:min(440px,62%);margin:0;max-height:80%}
+}
+@media(prefers-reduced-motion:no-preference){.draw-hint{transition:opacity .3s}}
+#confirmModal{display:none;position:fixed;inset:0;z-index:260;background:rgba(15,30,55,.55);align-items:center;justify-content:center;padding:16px}
+#confirmModal.show{display:flex}
+#confirmModal .box{background:#fff;border-radius:22px;padding:20px;width:min(92%,340px);text-align:center;direction:rtl;box-shadow:0 20px 50px rgba(0,0,0,.25)}
+#confirmModal h3{margin:0 0 14px;font-size:19px;color:#1e3a5f}
+#confirmModal .row{display:flex;gap:8px;justify-content:center}
+
+/* خلفيات اللوحة */
+#canvas-container.bg-sky{background:linear-gradient(180deg,#bae6fd 0%,#e0f2fe 60%,#f0fdf4 100%)}
+#canvas-container.bg-field{background:linear-gradient(180deg,#bfdbfe 0%,#dcfce7 40%,#bbf7d0 100%)}
+#canvas-container.bg-beach{background:linear-gradient(180deg,#7dd3fc 0%,#fef3c7 55%,#fde68a 100%)}
+#canvas-container.bg-night{background:linear-gradient(180deg,#1e1b4b 0%,#312e81 60%,#4c1d95 100%)}
+#canvas-container.bg-candy{background:linear-gradient(180deg,#fce7f3 0%,#fbcfe8 50%,#fef3c7 100%)}
+.bg-btn{transition:transform .15s,border-color .15s,box-shadow .15s}
+.bg-btn.active{border-color:#3b82f6!important;box-shadow:0 0 0 3px rgba(59,130,246,.35),0 3px 8px rgba(0,0,0,.15)!important;transform:scale(1.08)}
+
+/* ✅ النوافذ المنبثقة (النص والقوالب) — تم إصلاحها */
+#textModal, #templateModal {
+  display:none; position:fixed; inset:0; z-index:200;
+  background:rgba(15,30,55,.55); align-items:center; justify-content:center;
+  padding:16px; backdrop-filter:blur(3px);
+}
+#textModal.show, #templateModal.show { display:flex; }
+#textModal .box, #templateModal .box {
+  background:#fff; border-radius:22px; padding:20px;
+  box-shadow:0 20px 50px rgba(0,0,0,.25); text-align:center; direction:rtl;
+  animation:modalPop .25s ease-out;
+}
+#textModal .box { width:min(92%,360px); }
+#templateModal .box { width:min(92%,480px); max-height:90vh; overflow-y:auto; }
+@keyframes modalPop{from{transform:scale(.9);opacity:0}to{transform:scale(1);opacity:1}}
+#textModal h3, #templateModal h3 { margin:0 0 12px; font-size:20px; color:#1e3a5f; }
+#textModal input { width:100%; font:800 22px Tajawal,sans-serif; padding:12px; border:2px solid #dbeafe; border-radius:14px; text-align:center; margin-bottom:12px; color:#1e293b; }
+#textModal input:focus { outline:none; border-color:#3b82f6; box-shadow:0 0 0 3px rgba(59,130,246,.15); }
+#textModal .row, #templateModal .row { display:flex; gap:8px; justify-content:center; }
+.template-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:14px; }
+.template-item { aspect-ratio:1; border-radius:16px; border:2px solid #e2e8f0; background:#fff; cursor:pointer; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:8px; gap:4px; transition:transform .15s,box-shadow .15s,border-color .15s; box-shadow:0 3px 8px rgba(0,0,0,.06); }
+.template-item:hover { transform:translateY(-3px); border-color:#3b82f6; box-shadow:0 6px 16px rgba(59,130,246,.15); }
+.template-item:active { transform:translateY(0); }
+.template-item svg { width:70%; height:70%; max-width:80px; max-height:80px; }
+.template-item span { font-size:12px; font-weight:800; color:#52687e; }
+#fxLayer{position:absolute;inset:0;pointer-events:none;z-index:4;overflow:hidden;border-radius:16px}
+
+/* تأثيرات بصرية */
+.fx-spark{position:absolute;width:8px;height:8px;border-radius:50%;pointer-events:none;animation:fxSpark .7s ease-out forwards;box-shadow:0 0 8px currentColor}
+@keyframes fxSpark{0%{opacity:1;transform:translate(0,0) scale(1)}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(0)}}
+.fx-ring{position:absolute;border:3px solid #60a5fa;border-radius:50%;pointer-events:none;animation:fxRing .55s ease-out forwards}
+@keyframes fxRing{0%{opacity:.9;transform:translate(-50%,-50%) scale(.3)}100%{opacity:0;transform:translate(-50%,-50%) scale(1.8)}}
+.fx-confetti{position:absolute;width:10px;height:14px;border-radius:2px;pointer-events:none;animation:fxConfetti 1.2s ease-in forwards}
+@keyframes fxConfetti{0%{opacity:1;transform:translateY(0) rotate(0deg)}100%{opacity:0;transform:translateY(120px) rotate(400deg)}}
+
+#offlineBadge{display:none;position:fixed;top:max(10px,env(safe-area-inset-top));left:50%;transform:translateX(-50%);z-index:200;background:#1e293b;color:#fff;font:900 13px Tajawal,sans-serif;padding:8px 14px;border-radius:999px;box-shadow:0 8px 20px rgba(0,0,0,.25)}
+#offlineBadge.show{display:block}
+
+@supports not (width:1cqw){.scr{padding:16px;padding-top:max(16px,env(safe-area-inset-top))}#bear{width:clamp(120px,23vw,210px)}.hero-glow{width:clamp(140px,24vw,240px);height:clamp(140px,24vw,240px)}h1{font-size:clamp(26px,6vw,44px)}.home-subtitle{font-size:clamp(15px,3.2vw,20px)}.card{min-height:clamp(112px,22vw,158px);font-size:clamp(15px,3.4vw,22px)}.card span.e{font-size:clamp(38px,10vw,64px)}#big .m{font-size:clamp(76px,22vw,140px)}#big .r{font-size:clamp(55px,16vw,96px)}#big .w{font-size:clamp(30px,9vw,60px)}#big .fact{font-size:clamp(16px,4vw,22px)}#q .t{font-size:clamp(22px,6vw,36px)}#q .p{font-size:clamp(56px,16vw,100px)}.opt{width:clamp(88px,26vw,140px);font-size:clamp(38px,10vw,64px)}.sw{width:clamp(100px,28vw,170px);height:clamp(100px,28vw,170px)}.btn{font-size:clamp(15px,3.8vw,19px)}.pill{font-size:clamp(12px,3vw,15px)}}
+
+.bg-white{background:#fff}.bg-sky-b{background:#bae6fd}.bg-field-b{background:#bbf7d0}.bg-beach-b{background:#fde68a}.bg-night-b{background:#312e81}.bg-candy-b{background:#fbcfe8}
+</style>
+</head>
+<body>
+<noscript><p style="padding:20px;text-align:center;font-weight:900">يحتاج التطبيق إلى تفعيل جافاسكربت ليعمل.</p></noscript>
+
+<div id="offlineBadge">📡 وضع دون اتصال — التطبيق يعمل</div>
+
+<div id="stage">
+
+  <section id="home" class="scr on">
+    <div class="top">
+      <button class="pill" id="stwrap" aria-label="نجومي"><span id="st">0</span> ⭐</button>
+      <a class="pill link" href="https://rawad-store.github.io/" target="_blank" rel="noopener">🏪 المكتبة</a>
+      <button class="pill" id="pwrap">📊 تقدمي</button>
+      <button class="pill" id="awrap">ℹ️</button>
+      <button class="pill" id="snd" aria-pressed="true" aria-label="الصوت">🔊</button>
+    </div>
+
+    <div class="hero">
+      <div class="hero-glow"></div>
+      <img id="bear" alt="الدب الصغير" src="./bear.png">
+    </div>
+
+    <h1>🐻 عالم الدب الصغير</h1>
+    <p class="home-subtitle">نتعلّم ونلعب ونكتشف كل يوم! ✨</p>
+
+    <div class="home-banner">
+      <div>
+        <strong>جاهز للمغامرة؟ 🌈</strong><br>
+        <span>اختر نشاطك واجمع النجوم مع الدب الصغير</span>
+      </div>
+      <span style="font-size:42px">🎒</span>
+    </div>
+
+    <div id="grid"></div>
+  </section>
+
+  <section id="lesson" class="scr">
+    <div class="top">
+      <button class="pill" id="back1">🏠</button>
+      <button class="pill" id="stwrap2"><span class="stc">0</span> ⭐</button>
+    </div>
+    <h2 id="ltitle" style="text-align:center;color:#183b63;margin:6px 0"></h2>
+    <div class="prog"><div class="bar" id="pbar"></div></div>
+    <div id="big" tabindex="0" role="button"></div>
+    <div class="nav">
+      <button class="btn b sm" id="pv" aria-label="السابق">▶</button>
+      <span id="cnt">1 / 1</span>
+      <button class="btn b sm" id="nx" aria-label="التالي">◀</button>
+    </div>
+    <div class="nav">
+      <button class="btn g sm" id="auto" aria-pressed="false">▶ تلقائي</button>
+      <button class="btn sm" id="gotoq">🎮 اختبار</button>
+    </div>
+    <div class="nav">
+      <button class="btn b sm" id="prevLesson">⏮ الدرس السابق</button>
+      <button class="btn b sm" id="nextLesson">الدرس التالي ⏭</button>
+    </div>
+  </section>
+
+  <section id="quiz" class="scr">
+    <div class="top">
+      <button class="pill" id="back2">🏠</button>
+      <button class="pill" id="stwrap3"><span class="stc">0</span> ⭐</button>
+    </div>
+    <h2 id="qtitle" style="text-align:center;color:#183b63;margin:6px 0"></h2>
+    <div id="q"></div>
+    <div id="opts"></div>
+    <div id="fb"></div>
+    <div class="nav">
+      <button class="btn b sm" id="again">🔊 أعد السؤال</button>
+      <button class="btn g sm" id="gotol">📖 الدرس</button>
+    </div>
+  </section>
+
+  <section id="result" class="scr">
+    <div class="top">
+      <button class="pill" id="back3">🏠</button>
+      <button class="pill" id="stwrap4"><span class="stc">0</span> ⭐</button>
+    </div>
+    <div class="box">
+      <div class="big" id="rscore">0 / 5</div>
+      <div class="sub" id="rmsg">أحسنت!</div>
+      <div class="stars" id="rstars">⭐</div>
+      <div class="nav">
+        <a class="btn gold sm" href="https://rawad-store.github.io/" target="_blank" rel="noopener">🏆 تصفح موقع المكتبة</a>
+        <button class="btn g" id="ragain">🔁 العب مرة أخرى</button>
+        <button class="btn b" id="nextLessonR">الدرس التالي ⏭</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="progress" class="scr">
+    <div class="top">
+      <button class="pill" id="back4">🏠</button>
+      <button class="pill" id="stwrap5">📊 تقدمي</button>
+      <button class="pill" id="stwrap6"><span class="stc">0</span> ⭐</button>
+    </div>
+    <div class="box">
+      <div style="display:none;font-size:26px;font-weight:900;color:#1c4775;margin-bottom:14px">النجوم <b id="pStars" style="color:#e3a10c">0</b></div>
+      <div class="row"><span>النجوم</span><b id="pStars2">0</b></div>
+      <div class="row"><span>الدروس المكتملة</span><b id="pLessons">0</b></div>
+      <div class="row"><span>أسئلة صحيحة</span><b id="pCorrect">0</b></div>
+      <div class="row"><span>نسبة النجاح الكلية</span><b id="pRate">0%</b></div>
+      <div class="row"><span>الجلسة الحالية</span><b id="pSess">—</b></div>
+      <div class="nav" style="margin-top:20px">
+        <button class="btn" id="resetProg">🗑️ إعادة تعيين</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="scr">
+    <div class="top">
+      <button class="pill" id="back5">🏠</button>
+      <button class="pill">ℹ️ عن التطبيق</button>
+      <button class="pill" id="stwrap7"><span class="stc">0</span> ⭐</button>
+    </div>
+    <div class="box">
+      <img alt="الدب" src="./bear.png">
+      <h2>🐻 عالم الدب الصغير</h2>
+      <p>تطبيق تعليمي تفاعلي متكامل للأطفال</p>
+      <p>أنشطة ممتعة وفق المناهج والأنشطة الحديثة</p>
+      <p style="font-size:14px;line-height:1.7;color:#61758a;font-weight:700">ويُفضّل استخدامه بإشراف الكبار. يعرض التطبيق أحياناً رسالة تعريفية بمطبوعات مكتبة الرواد، ولا تُفتح الروابط الخارجية إلا بعد حلّ مسألة حسابية مخصصة للكبار (بوابة الأهل).</p>
+      <a class="btn gold sm" href="https://rawad-store.github.io/" target="_blank" rel="noopener" style="margin-top:8px">🌐 زيارة موقع المكتبة</a>
+      <p style="margin-top:18px;font-size:14px">الإصدار 34.3</p>
+      <div class="copy">
+        تطوير وإنتاج<br>
+        <b>مكتبة الرواد للطباعة والتصوير</b><br>
+        © جميع الحقوق محفوظة
+      </div>
+    </div>
+  </section>
+
+  <section id="draw" class="scr">
+    <div class="draw-header">
+      <button id="back6" aria-label="العودة للرئيسية">🏠</button>
+      <div class="pill">🎨 مرسمي الإبداعي</div>
+      <button id="templatesBtn" aria-label="قوالب التلوين">🖼️</button>
+      <button id="undoCanvas" aria-label="تراجع">↩️</button>
+      <button id="redoCanvas" aria-label="إعادة">↪️</button>
+      <button id="fullscreenBtn" aria-label="ملء الشاشة" aria-pressed="false">⛶</button>
+    </div>
+    <div id="canvas-container">
+      <div id="fxLayer"></div>
+      <canvas id="paintCanvas"></canvas>
+      <div class="fsbar"><button id="fsExit" aria-label="إنهاء ملء الشاشة">⤡</button><button id="fsUndo" aria-label="تراجع">↩️</button><button id="fsRedo" aria-label="إعادة">↪️</button><button id="fsTpl" aria-label="قوالب التلوين">🖼️</button></div>
+      <div class="draw-hint" id="drawHint">ابدأ الرسم أو اختر ملصقاً</div>
+    </div>
+    <div class="dockwrap">
+      <div class="sheet" id="sheetColors" role="group" aria-label="الألوان والحجم">
+        <div id="palette"></div>
+        <h4>حجم الفرشاة</h4>
+        <div class="szrow">
+          <button class="size-btn" data-size="6" aria-label="رفيع">•</button>
+          <button class="size-btn on" data-size="18" aria-label="متوسط">●</button>
+          <button class="size-btn" data-size="36" aria-label="سميك">⬤</button>
+        </div>
+      </div>
+      <div class="sheet" id="sheetStamps" role="group" aria-label="الملصقات">
+        <div class="stamp-row">
+          <button class="stamp-btn" data-stamp="⭐">⭐</button><button class="stamp-btn" data-stamp="❤️">❤️</button><button class="stamp-btn" data-stamp="🌸">🌸</button><button class="stamp-btn" data-stamp="🌟">🌟</button>
+          <button class="stamp-btn" data-stamp="🎈">🎈</button><button class="stamp-btn" data-stamp="🦋">🦋</button><button class="stamp-btn" data-stamp="🌈">🌈</button><button class="stamp-btn" data-stamp="🐻">🐻</button>
+          <button class="stamp-btn" data-stamp="🐶">🐶</button><button class="stamp-btn" data-stamp="🐱">🐱</button><button class="stamp-btn" data-stamp="🌳">🌳</button><button class="stamp-btn" data-stamp="☀️">☀️</button>
+          <button class="stamp-btn" data-stamp="🌙">🌙</button><button class="stamp-btn" data-stamp="🍎">🍎</button><button class="stamp-btn" data-stamp="🚗">🚗</button><button class="stamp-btn" data-stamp="🏠">🏠</button>
+        </div>
+      </div>
+      <div class="sheet" id="sheetMore" role="group" aria-label="المزيد">
+        <div class="draw-mode-bar">
+          <button id="drawModeSimple" class="on" aria-pressed="true">🧒 بسيط</button>
+          <button id="drawModeAdvanced" aria-pressed="false">🛠️ متقدم</button>
+        </div>
+        <div class="advtools">
+          <button id="toolSpray" class="tool" aria-label="رش">💦</button>
+          <button id="toolMagic" class="tool" aria-label="فرشاة سحرية">✨</button>
+          <button id="toolText" class="tool" aria-label="كتابة">🔤</button>
+          <button id="toolLine" class="tool" aria-label="خط">📏</button>
+          <button id="toolCircle" class="tool" aria-label="دائرة">⭕</button>
+          <button id="toolRect" class="tool" aria-label="مستطيل">⬜</button>
+          <button id="toolDup" class="tool" aria-label="نسخ الملصق">⧉</button>
+        </div>
+        <h4>الخلفية</h4>
+        <div id="bgPicker">
+          <button class="bg-btn bg-white active" data-bg="white" aria-label="بيضاء"></button>
+          <button class="bg-btn bg-sky-b" data-bg="sky" aria-label="سماء">☁️</button>
+          <button class="bg-btn bg-field-b" data-bg="field" aria-label="حقل">🌿</button>
+          <button class="bg-btn bg-beach-b" data-bg="beach" aria-label="شاطئ">🏖️</button>
+          <button class="bg-btn bg-night-b" data-bg="night" aria-label="ليل">🌙</button>
+          <button class="bg-btn bg-candy-b" data-bg="candy" aria-label="حلوى">🍭</button>
+        </div>
+        <div class="more-actions">
+          <button class="act" id="downloadCanvas">💾 حفظ الصورة</button>
+          <button class="act" id="shareCanvas">📤 مشاركة</button>
+          <button class="act" id="toolDelete">❌ حذف الملصق</button>
+          <button class="act" id="clearCanvas">🗑️ لوحة جديدة</button>
+        </div>
+      </div>
+      <div class="dk" role="toolbar" aria-label="أدوات الرسم">
+        <button id="toolBrush" class="tool on" aria-label="فرشاة">✏️</button>
+        <button id="toolEraser" class="tool" aria-label="ممحاة">🧽</button>
+        <button id="toolFill" class="tool" aria-label="تعبئة اللون">🪣</button>
+        <button id="toolStamp" class="tool" aria-label="ملصقات">😊</button>
+        <button id="toolMove" class="tool" aria-label="تحريك الملصقات">✋</button>
+        <button id="btnColors" class="tool" aria-label="الألوان" aria-expanded="false"><i></i></button>
+        <button id="btnMore" class="tool" aria-label="المزيد" aria-expanded="false">⚙️</button>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<div id="confirmModal" aria-hidden="true"><div class="box" role="dialog" aria-modal="true"><h3 id="confirmMsg"></h3><div class="row"><button class="btn g" id="confirmYes">نعم</button><button class="btn b" id="confirmNo">لا</button></div></div></div>
+
+<div id="textModal" aria-hidden="true">
+  <div class="box">
+    <h3>🔤 اكتب نصك هنا</h3>
+    <input id="textInput" type="text" maxlength="30" placeholder="اكتب..." aria-label="نص الرسم">
+    <div class="row">
+      <button class="btn g" id="textOk">إضافة</button>
+      <button class="btn b" id="textCancel">إلغاء</button>
+    </div>
+  </div>
+</div>
+
+<div id="templateModal" aria-hidden="true">
+  <div class="box">
+    <h3>🖼️ اختر قالباً للتلوين</h3>
+    <div class="template-grid" id="templateGrid"></div>
+    <div class="row" style="display:flex;gap:8px;justify-content:center">
+      <button class="btn b" id="templateCancel">إلغاء</button>
+    </div>
+  </div>
+</div>
+
+<div id="ad-toast">
+  <span>🎁 اطلب مطبوعاتك الآن من المكتبة!</span>
+  <a href="https://rawad-store.github.io/" target="_blank" rel="noopener">زيارة</a>
+</div>
+
+<script>
+(function(){
+'use strict';
+var $=function(i){return document.getElementById(i)};
+function parse(s){return s.split('|').map(function(x){var a=x.split(',');return{w:a[0]||'',g:a[1]||'',c:a[2]||'',l:a[3]||'',f:a[4]||''}})}
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+
+/* ══════════════ البيانات ══════════════ */
+var N=['واحد','اثنان','ثلاثة','أربعة','خمسة','ستة','سبعة','ثمانية','تسعة','عشرة','أحد عشر','اثنا عشر','ثلاثة عشر','أربعة عشر','خمسة عشر','ستة عشر','سبعة عشر','ثمانية عشر','تسعة عشر','عشرون'];
+var AR=['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+function ar(n){return String(n).split('').map(function(d){return AR[+d]}).join('')}
+var FN=['تفاحة واحدة','تفاحتان','ثلاث تفاحات','أربع تفاحات','خمس تفاحات','ست تفاحات','سبع تفاحات','ثماني تفاحات','تسع تفاحات','عشر تفاحات','إحدى عشرة تفاحة','اثنتا عشرة تفاحة','ثلاث عشرة تفاحة','أربع عشرة تفاحة','خمس عشرة تفاحة','ست عشرة تفاحة','سبع عشرة تفاحة','ثماني عشرة تفاحة','تسع عشرة تفاحة','عشرون تفاحة'];
+var nums=N.map(function(w,i){return{w:w,l:ar(i+1),g:'🍎'.repeat(i+1),f:FN[i]}});
+
+var letters=[
+{w:'أرنب',g:'🐰',l:'أ',f:'الأرنب يقفز بسرعة ويحب أكل الجزر'},{w:'بطة',g:'🦆',l:'ب',f:'البطة تسبح في الماء برفق'},{w:'تفاحة',g:'🍎',l:'ت',f:'التفاحة فاكهة طازجة ولذيذة'},{w:'ثعلب',g:'🦊',l:'ث',f:'الثعلب حيوان ذكي وسريع'},{w:'جمل',g:'🐪',l:'ج',f:'الجمل سفينة الصحراء ويتحمل العطش'},{w:'حصان',g:'🐴',l:'ح',f:'الحصان قوي ويجري بسرعة'},{w:'خروف',g:'🐑',l:'خ',f:'الخروف صوفه ناعم'},{w:'دجاجة',g:'🐔',l:'د',f:'الدجاجة تعطينا البيض'},{w:'ذرة',g:'🌽',l:'ذ',f:'الذرة صفراء ومغذية'},{w:'ريشة',g:'🪶',l:'ر',f:'الريشة خفيفة وزاهية الألوان'},{w:'زرافة',g:'🦒',l:'ز',f:'الزرافة لها أطول رقبة بين الحيوانات'},{w:'سمكة',g:'🐟',l:'س',f:'السمكة تتنفس بالخياشيم وتعيش في الماء'},{w:'شمس',g:'☀️',l:'ش',f:'الشمس تمدنا بالضوء والحرارة'},{w:'صاروخ',g:'🚀',l:'ص',f:'الصاروخ ينطلق نحو الفضاء'},{w:'ضفدع',g:'🐸',l:'ض',f:'الضفدع حيوان برمائي يقفز'},{w:'طاووس',g:'🦚',l:'ط',f:'الطاووس ريشه جميل ومزخرف'},{w:'ظبي',g:'🦌',l:'ظ',f:'الظبي حيوان رشيق وسريع'},{w:'عنب',g:'🍇',l:'ع',f:'العنب فاكهة لذيذة ومفيدة'},{w:'غيمة',g:'☁️',l:'غ',f:'الغيمة تأتي بالأمطار والخير'},{w:'فيل',g:'🐘',l:'ف',f:'الفيل من أكبر الحيوانات البرية'},{w:'قرد',g:'🐒',l:'ق',f:'القرد ماهر في التسلق'},{w:'كتاب',g:'📖',l:'ك',f:'الكتاب ينير العقول بالمعرفة'},{w:'ليمون',g:'🍋',l:'ل',f:'الليمون غني بفيتامين سي'},{w:'موزة',g:'🍌',l:'م',f:'الموزة فاكهة غنية بالفيتامينات'},{w:'نجمة',g:'⭐',l:'ن',f:'النجمة تتلألأ في السماء ليلاً'},{w:'هلال',g:'🌙',l:'ه',f:'الهلال هو شكل القمر في بداية الشهر'},{w:'وردة',g:'🌹',l:'و',f:'الوردة تعطر المكان برائحتها'},{w:'يمامة',g:'🕊️',l:'ي',f:'اليمامة طائر هادئ جميل'}
+];
+
+var vowels=[
+{w:'فتحة ( َ )',g:'بَ',f:'الفتحة تكون فوق الحرف، ونفتح فمنا عند النطق بها: بَ تَ ثَ'},
+{w:'ضمة ( ُ )',g:'بُ',f:'الضمة تكون فوق الحرف، ونضم شفتينا عند النطق بها: بُ تُ ثُ'},
+{w:'كسرة ( ِ )',g:'بِ',f:'الكسرة تكون تحت الحرف، وننطق بها مع خفض الفك السفلي: بِ تِ ثِ'},
+{w:'سكون ( ْ )',g:'بْ',f:'السكون علامة تدل على أن الحرف ساكن لا حركة له: أَبْ أَخْ'},
+{w:'شدة ( ّ )',g:'بَّ',f:'الشدة علامة تدل على حرفين متشابهين اجتمعا معاً: مَدَّ رَبَّ'},
+{w:'تنوين فتح ( ً )',g:'بً',f:'تنوين الفتح نون ساكنة في آخر الاسم: رأيتُ كِتَابًا'},
+{w:'تنوين ضم ( ٌ )',g:'بٌ',f:'تنوين الضم نون ساكنة في آخر الاسم: هذا كِتَابٌ'},
+{w:'تنوين كسر ( ٍ )',g:'بٍ',f:'تنوين الكسر نون ساكنة في آخر الاسم: نظرتُ إلى كِتَابٍ'}
+];
+var longV=[
+{w:'مد الألف',g:'با',f:'مد الألف يطيل حركة الفتحة: با - تا - باب'},
+{w:'مد الواو',g:'بو',f:'مد الواو يطيل حركة الضمة: بو - تو - نور'},
+{w:'مد الياء',g:'بي',f:'مد الياء يطيل حركة الكسرة: بي - تي - بيت'}
+];
+var grammar=[
+{w:'هذا / هذه',g:'👉',f:'أسماء الإشارة: هذا للمذكر مثل هذا كتاب، وهذه للمؤنث مثل هذه وردة'},
+{w:'اللام الشمسية',g:'☀️',f:'تكتب ولا تلفظ والحرف بعدها مشدد: الشَّمْس ، التَّمْر'},
+{w:'اللام القمرية',g:'🌙',f:'تكتب وتلفظ وسكونها ظاهر: الْقَمَر ، الْكِتَاب'},
+{w:'أنا / نحن',g:'🙋',f:'ضمائر المتكلم: أنا للمفرد، ونحن للجماعة'},
+{w:'هو / هي',g:'👤',f:'ضمائر الغائب: هو للمذكر، وهي للمؤنث'},
+{w:'أنت / أنتِ',g:'👈',f:'ضمائر المخاطب: أنتَ للمذكر، وأنتِ للمؤنث'}
+];
+var islamic=[
+{w:'الشهادتان',g:'☝️',f:'أشهد أن لا إله إلا الله وأشهد أن محمداً رسول الله'},
+{w:'أركان الإسلام الخمسة',g:'🖐️',f:'الشهادتان، والصلاة، والزكاة، وصوم رمضان، وحج البيت لمن استطاع إليه سبيلا'},
+{w:'أركان الإيمان',g:'🌟',f:'الإيمان بالله وملائكته وكتبه ورسله واليوم الآخر والقدر خيره وشره'},
+{w:'الصلوات الخمس',g:'🕌',f:'الفجر ركعتان، والظهر أربع، والعصر أربع، والمغرب ثلاث، والعشاء أربع'},
+{w:'الوضوء الصحيح',g:'💧',f:'أقول بسم الله، وأغسل كفيّ، ثم أتمضمض وأستنشق، وأغسل وجهي ويديّ إلى المرفقين، وأمسح رأسي وأذنيّ، وأغسل رجليّ إلى الكعبين'},
+{w:'آداب الطعام',g:'🍽️',f:'أقول بسم الله، وآكل بيميني ومما يليني، وأقول الحمد لله بعد الأكل'},
+{w:'إفشاء السلام',g:'🤝',f:'تحية الإسلام: السلام عليكم ورحمة الله وبركاته'},
+{w:'بر الوالدين',g:'❤️',f:'أمرنا الله بالإحسان إلى الوالدين، قال تعالى: ﴿وَبِالْوَالِدَيْنِ إِحْسَانًا﴾ [الإسراء: 23]'},
+{w:'الصدق',g:'🗣️',f:'الصدق من أعظم الصفات، والمسلم يحرص على قول الصدق ويبتعد عن الكذب'},
+{w:'الأمانة',g:'🤲',f:'الأمانة خلق عظيم، نؤدي الحقوق لأصحابها'},
+{w:'النظافة',g:'🧼',f:'الطهور شطر الإيمان، نغسل أيدينا ونحافظ على طهارتنا'}
+];
+var duas=parse('عند الاستيقاظ,⏰,,,الحمد لله الذي أحيانا بعد ما أماتنا وإليه النشور|عند النوم,🛏️,,,باسمك اللهم أموت وأحيا|قبل الطعام,🍽️,,,بسم الله|بعد الطعام,🥛,,,الحمد لله الذي أطعمني هذا ورزقنيه من غير حول مني ولا قوة|عند العطاس,🤧,,,أقول الحمد لله ويقول من يسمعني يرحمك الله فأقول يهديكم الله ويصلح بالكم|عند ركوب السيارة,🚗,,,بسم الله والحمد لله، سبحان الذي سخر لنا هذا وما كنا له مقرنين وإنا إلى ربنا لمنقلبون|عند الخروج من المنزل,🚪,,,بسم الله توكلت على الله|قبل دخول الخلاء,🚽,,,اللهم إني أعوذ بك من الخبث والخبائث|بعد السلام من الصلاة,🕌,,,أستغفر الله، أستغفر الله، أستغفر الله|دعاء عام,🤲,,,ربِّ زدني علماً');
+var hijri=parse('محرم,١,,,محرم هو الشهر الأول من السنة الهجرية|صفر,٢,,,صفر هو الشهر الثاني|ربيع الأول,٣,,,ربيع الأول هو الشهر الثالث|ربيع الآخر,٤,,,ربيع الآخر هو الشهر الرابع|جمادى الأولى,٥,,,جمادى الأولى هو الشهر الخامس|جمادى الآخرة,٦,,,جمادى الآخرة هو الشهر السادس|رجب,٧,,,رجب هو الشهر السابع وهو من الأشهر الحرم|شعبان,٨,,,شعبان هو الشهر الثامن|رمضان,٩,,,رمضان هو الشهر التاسع وهو شهر الصيام|شوال,١٠,,,شوال هو الشهر العاشر وفي أول يوم منه عيد الفطر|ذو القعدة,١١,,,ذو القعدة هو الشهر الحادي عشر وهو من الأشهر الحرم|ذو الحجة,١٢,,,ذو الحجة هو الشهر الثاني عشر وفيه الحج وعيد الأضحى');
+
+var days=[
+{w:'السبت',g:'1️⃣',f:'السبت هو اليوم الأول من الأسبوع'},
+{w:'الأحد',g:'2️⃣',f:'الأحد هو اليوم الثاني من الأسبوع'},
+{w:'الاثنين',g:'3️⃣',f:'الاثنين هو اليوم الثالث من الأسبوع'},
+{w:'الثلاثاء',g:'4️⃣',f:'الثلاثاء هو اليوم الرابع من الأسبوع'},
+{w:'الأربعاء',g:'5️⃣',f:'الأربعاء هو اليوم الخامس من الأسبوع'},
+{w:'الخميس',g:'6️⃣',f:'الخميس هو اليوم السادس من الأسبوع'},
+{w:'الجمعة',g:'7️⃣',f:'الجمعة هو اليوم السابع وهو عيد المسلمين الأسبوعي'}
+];
+
+var seasons=[
+{w:'الربيع',g:'🌸',f:'في كثير من المناطق، تتفتح الأزهار ويكون الجو معتدلاً'},
+{w:'الصيف',g:'☀️',f:'تسطع الشمس ويصبح الجو حاراً في كثير من المناطق'},
+{w:'الخريف',g:'🍂',f:'تتساقط أوراق بعض الأشجار وتتغير ألوانها في المناطق المعتدلة'},
+{w:'الشتاء',g:'🌧️',f:'قد يكثر المطر في بعض المناطق ونرتدي الملابس الدافئة'}
+];
+var plantParts=[
+{w:'الجذور',g:'🌱',f:'تثبت النبتة في التربة وتمتص الماء والمغذيات'},
+{w:'الساق',g:'🪵',f:'تحمل الأوراق والأزهار وتنقل الماء'},
+{w:'الأوراق',g:'🍃',f:'تصنع الغذاء للنبتة باستخدام ضوء الشمس'},
+{w:'الزهرة',g:'🌺',f:'تساعد الزهرة في تكوين البذور والثمار بعد التلقيح'},
+{w:'الثمرة',g:'🍎',f:'الثمرة تحتوي على البذور وتحميها'},
+{w:'البذرة',g:'🌰',f:'من البذرة تنمو نبتة جديدة إذا توفر لها الماء والتربة والدفء'}
+];
+var shapes=[
+{w:'دائرة',g:'🔴',f:'الدائرة منحنى مغلق ليس له زوايا أو أضلاع'},
+{w:'مربع',g:'🟦',f:'المربع له ٤ أضلاع متساوية في الطول و٤ زوايا قائمة'},
+{w:'مثلث',g:'🔺',f:'المثلث له ٣ أضلاع و٣ زوايا'},
+{w:'مستطيل',g:'▬',f:'المستطيل له ٤ أضلاع كل ضلعين متقابلين متساويان'},
+{w:'مكعب',g:'🎲',f:'المكعب مجسم له ٦ وجوه مربعة'},
+{w:'كرة',g:'⚽',f:'الكرة مجسم مستدير يتدحرج في كل الاتجاهات'},
+{w:'بيضاوي',g:'🥚',f:'الشكل البيضاوي يشبه البيضة'},
+{w:'نجمة',g:'⭐',f:'النجمة لها أطراف مدببة'},
+{w:'قلب',g:'❤️',f:'شكل القلب نراه في الرسوم والبطاقات'},
+{w:'هلال',g:'🌙',f:'الهلال شكل منحني مثل القمر في أوله'}
+];
+var math=[
+{w:'١ + ١ = ٢',g:'➕',f:'واحد زائد واحد يساوي اثنين'},
+{w:'٢ + ١ = ٣',g:'➕',f:'اثنان زائد واحد يساوي ثلاثة'},
+{w:'٢ + ٢ = ٤',g:'➕',f:'اثنان زائد اثنان يساوي أربعة'},
+{w:'٣ + ٢ = ٥',g:'➕',f:'ثلاثة زائد اثنان يساوي خمسة'},
+{w:'٤ + ٣ = ٧',g:'➕',f:'أربعة زائد ثلاثة يساوي سبعة'},
+{w:'٥ + ٥ = ١٠',g:'➕',f:'خمسة زائد خمسة يساوي عشرة'},
+{w:'٣ − ١ = ٢',g:'➖',f:'ثلاثة ناقص واحد يساوي اثنين'},
+{w:'٤ − ٢ = ٢',g:'➖',f:'أربعة ناقص اثنان يساوي اثنين'},
+{w:'٥ − ٢ = ٣',g:'➖',f:'خمسة ناقص اثنان يساوي ثلاثة'},
+{w:'٦ − ٣ = ٣',g:'➖',f:'ستة ناقص ثلاثة يساوي ثلاثة'},
+{w:'٨ − ٤ = ٤',g:'➖',f:'ثمانية ناقص أربعة يساوي أربعة'},
+{w:'١٠ − ٥ = ٥',g:'➖',f:'عشرة ناقص خمسة يساوي خمسة'}
+];
+var mathPool=[];for(var mi=0;mi<=10;mi++)mathPool.push({w:'',g:ar(mi),l:ar(mi),f:''});
+var mq='';
+var comp=[
+{w:'أكبر من',g:'🐘 > 🐭',f:'الفيل أكبر حجماً من الفأر'},
+{w:'أصغر من',g:'🐭 < 🐘',f:'الفأر أصغر حجماً من الفيل'},
+{w:'أطول من',g:'🦒 > 🐢',f:'الزرافة أطول من السلحفاة'},
+{w:'أقصر من',g:'🐜 < 🦒',f:'النملة أقصر من الزرافة'},
+{w:'أثقل من',g:'🪨 > 🪶',f:'الحجر أثقل من الريشة'},
+{w:'أخف من',g:'🪶 < 🪨',f:'الريشة أخف من الحجر'},
+{w:'أكثر من',g:'5️⃣ > 2️⃣',f:'خمسة أكثر من اثنين'},
+{w:'أقل من',g:'2️⃣ < 5️⃣',f:'اثنان أقل من خمسة'},
+{w:'يساوي',g:'🍎 = 🍎',f:'المجموعتان متساويتان في العدد'}
+];
+var patterns=[
+{w:'نمط ثنائي',g:'🔴🔵🔴🔵',f:'تكرار بالترتيب: أحمر، أزرق، أحمر، أزرق'},
+{w:'نمط الأشكال',g:'🔺🟦🔺🟦',f:'تكرار منتظم: مثلث، مربع، مثلث، مربع'},
+{w:'نمط العناصر',g:'🍎🍌🍎🍌',f:'تكرار النمط: تفاحة، موزة، تفاحة، موزة'},
+{w:'نمط ثلاثي',g:'⭐🌙☀️⭐🌙☀️',f:'تكرار ثلاثة عناصر: نجمة، قمر، شمس'},
+{w:'نمط حيوانات',g:'🐱🐶🐱🐶',f:'قطة، كلب، قطة، كلب'},
+{w:'نمط أرقام',g:'١ ٢ ١ ٢',f:'واحد، اثنان، واحد، اثنان'}
+];
+var ordinals=parse('الأول,١,,,الأول يأتي في البداية|الثاني,٢,,,الثاني يأتي بعد الأول|الثالث,٣,,,الثالث يأتي بعد الثاني|الرابع,٤,,,الرابع يأتي بعد الثالث|الخامس,٥,,,الخامس يأتي بعد الرابع|السادس,٦,,,السادس يأتي بعد الخامس|السابع,٧,,,السابع يأتي بعد السادس|الثامن,٨,,,الثامن يأتي بعد السابع|التاسع,٩,,,التاسع يأتي قبل العاشر|العاشر,١٠,,,العاشر هو آخر الترتيب في العشرة');
+var dirs=parse('فوق,⬆️,,,الطائر فوق الشجرة|تحت,⬇️,,,القطة تحت الطاولة|يمين,➡️,,,اليمين جهة اليد اليمنى|يسار,⬅️,,,اليسار جهة اليد اليسرى|داخل,📥,,,الكرة داخل الصندوق|خارج,📤,,,الكرة خارج الصندوق|أمام,🚗🏠,,,السيارة أمام المنزل|خلف,🏠🌳,,,الحديقة خلف المنزل|بجانب,📕✏️,,,الكتاب بجانب القلم|بين,🌳🌸🌳,,,الزهرة بين الشجرتين');
+var opp=parse('كبير وصغير,🐘↔🐭,,,الفيل كبير والفأر صغير|طويل وقصير,🦒↔🐶,,,الزرافة طويلة والكلب قصير|ساخن وبارد,🔥↔🧊,,,النار ساخنة والثلج بارد|ثقيل وخفيف,🪨↔🪶,,,الحجر ثقيل والريشة خفيفة|سريع وبطيء,🐆↔🐢,,,الفهد سريع والسلحفاة بطيئة|نهار وليل,☀️↔🌙,,,نرى الشمس في النهار والقمر في الليل|فارغ وممتلئ,🥛↔🫙,,,الكوب فارغ أو ممتلئ|نظيف ومتسخ,✨↔🧽,,,اليد نظيفة أو متسخة|سعيد وحزين,😀↔😢,,,الوجه سعيد أو حزين|قريب وبعيد,📍↔🗺️,,,البيت قريب أو بعيد');
+
+var _svgHead='<svg viewBox="0 0 200 100" role="img" aria-label="',_svgTail='" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block">';
+var _svgs={
+'فارغ وممتلئ':_svgHead+'كوب فارغ وكوب ممتلئ بالماء'+_svgTail+'<path d="M30 15 L70 15 L64 85 L36 85 Z" fill="none" stroke="#475569" stroke-width="4" stroke-linejoin="round"/><path d="M131.7 38 L168.3 38 L164 85 L136 85 Z" fill="#38bdf8"/><path d="M130 15 L170 15 L164 85 L136 85 Z" fill="none" stroke="#475569" stroke-width="4" stroke-linejoin="round"/></svg>',
+'نظيف ومتسخ':_svgHead+'طبق نظيف وطبق متسخ'+_svgTail+'<circle cx="50" cy="52" r="36" fill="#fff" stroke="#94a3b8" stroke-width="4"/><circle cx="50" cy="52" r="24" fill="none" stroke="#cbd5e1" stroke-width="3"/><path d="M78 14 l3 8 8 3 -8 3 -3 8 -3 -8 -8 -3 8 -3z" fill="#fbbf24"/><circle cx="150" cy="52" r="36" fill="#fff" stroke="#94a3b8" stroke-width="4"/><circle cx="150" cy="52" r="24" fill="none" stroke="#cbd5e1" stroke-width="3"/><circle cx="138" cy="44" r="8" fill="#92400e" opacity=".85"/><circle cx="160" cy="58" r="10" fill="#92400e" opacity=".85"/><circle cx="148" cy="68" r="5" fill="#78350f" opacity=".9"/><circle cx="165" cy="40" r="4" fill="#78350f" opacity=".9"/></svg>',
+'قريب وبعيد':_svgHead+'بيت قريب كبير وبيت بعيد صغير'+_svgTail+'<line x1="0" y1="88" x2="200" y2="88" stroke="#94a3b8" stroke-width="3"/><path d="M80 88 L172 74" stroke="#cbd5e1" stroke-width="3" stroke-dasharray="6 5"/><rect x="18" y="36" width="52" height="48" fill="#fca5a5" stroke="#475569" stroke-width="3"/><polygon points="12,38 44,10 76,38" fill="#ef4444" stroke="#475569" stroke-width="3" stroke-linejoin="round"/><rect x="36" y="58" width="16" height="26" fill="#7c2d12"/><rect x="156" y="62" width="16" height="12" fill="#fca5a5" stroke="#475569" stroke-width="2"/><polygon points="153,63 164,53 175,63" fill="#ef4444" stroke="#475569" stroke-width="2" stroke-linejoin="round"/></svg>'
+};
+var _svgFacts={'فارغ وممتلئ':'الكوب الفارغ ليس فيه ماء، والكوب الممتلئ مليء بالماء','نظيف ومتسخ':'الطبق النظيف لامع، والطبق المتسخ عليه بقع','قريب وبعيد':'البيت القريب يبدو كبيراً، والبيت البعيد يبدو صغيراً'};
+opp.forEach(function(o){if(_svgs[o.w]){o.svg=_svgs[o.w];o.g='svg-'+o.w;o.f=_svgFacts[o.w]}});
+var life=[
+{w:'غسل اليدين',g:'🧼',f:'نغسل أيدينا بالماء والصابون لمدة ٢٠ ثانية قبل الأكل وبعده'},
+{w:'الصدق',g:'⭐',f:'نقول الحق دائماً، والصدق من أخلاق المسلم'},
+{w:'الأمانة',g:'🤲',f:'نحافظ على أمانات الناس ونردها لأصحابها'},
+{w:'الاحترام',g:'🧓',f:'نحترم والدينا ومعلمينا والكبار في السن'},
+{w:'التعاون',g:'🤗',f:'نساعد أصدقاءنا ونعمل معاً بروح الفريق'},
+{w:'النظافة والترتيب',g:'🧹',f:'الطهور شطر الإيمان، ونرتب ألعابنا بعد اللعب'},
+{w:'الاعتذار',g:'😊',f:'إذا أخطأنا نعتذر بصدق ونقول: آسف'},
+{w:'الشكر',g:'💐',f:'نشكر الله ونشكر من يساعدنا ونقول: جزاك الله خيراً'}
+];
+var sounds=[
+{w:'صوت القطة',g:'🐱',f:'القطة تموء: مياو مياو'},
+{w:'صوت الكلب',g:'🐶',f:'الكلب ينبح: هاو هاو'},
+{w:'صوت البقرة',g:'🐮',f:'البقرة تخور: موو'},
+{w:'صوت الخروف',g:'🐑',f:'الخروف يثغو: ماع ماع'},
+{w:'صوت الحصان',g:'🐴',f:'الحصان يصهل: ايهيهي'},
+{w:'صوت الأسد',g:'🦁',f:'الأسد يزأر: غررر'},
+{w:'صوت الدجاجة',g:'🐔',f:'الدجاجة تقاقي: كوكو كوكو'},
+{w:'صوت العصفور',g:'🐦',f:'العصفور يغرد: تغريد جميل'},
+{w:'صوت الضفدع',g:'🐸',f:'الضفدع ينق: نق نق'}
+];
+var body=[
+{w:'الرأس والدماغ',g:'🧠',f:'الرأس يحوي الدماغ الذي يفكر ويوجه الجسم'},
+{w:'العينان',g:'👁️',f:'نرى بهما كل شيء من حولنا'},
+{w:'الأذنان',g:'👂',f:'نسمع بهما الأصوات الهادئة والعالية'},
+{w:'الأنف',g:'👃',f:'نشم به الروائح ونستنشق الهواء النقي'},
+{w:'اللسان',g:'👅',f:'نتذوق به الأطعمة الحلوة والحامضة والمالحة'},
+{w:'اليدان والأصابع',g:'✋',f:'نلمس ونكتب ونمسك الأشياء بحذر'},
+{w:'الرجلان',g:'🦵',f:'نمشي ونقفز ونلعب بهما'},
+{w:'القلب',g:'❤️',f:'القلب يضخ الدم إلى كل أجزاء الجسم'},
+{w:'الأسنان',g:'🦷',f:'نمضغ الطعام بها، ونحافظ عليها بالفرشاة'}
+];
+var feelings=parse('سعيد,😀,,,أشعر بالسعادة عندما ألعب مع أصدقائي|حزين,😢,,,عندما أحزن أتحدث مع أمي أو أبي|غاضب,😠,,,عندما أغضب آخذ نفساً عميقاً وأهدأ|خائف,😨,,,عندما أخاف أخبر شخصاً كبيراً أثق به|متفاجئ,😮,,,أتفاجأ عندما أرى شيئاً جديداً|متعب,😴,,,عندما أتعب آخذ قسطاً من الراحة والنوم|محب,🥰,,,أحب عائلتي وأصدقائي|فخور,😎,,,أشعر بالفخر عندما أنجز عملاً جيداً|قلق,😟,,,عندما أقلق أطلب المساعدة ممن أحب|هادئ,😌,,,أشعر بالهدوء عندما أقرأ أو ألون');
+var family=parse('أب,👨,,,أبي يحبني ويرعاني|أم,👩,,,أمي تحبني وتعتني بي|أخ,👦,,,أخي يلعب معي|أخت,👧,,,أختي تساعدني|جد,👴,,,جدي هو والد أبي أو والد أمي|جدة,👵,,,جدتي هي والدة أبي أو والدة أمي|عم,🧔,,,عمي هو أخو أبي|خالة,👩‍🦰,,,خالتي هي أخت أمي|ابن عم,🧑,,,ابن عمي هو ابن أخي أبي|ابنة خالة,👱‍♀️,,,ابنة خالتي هي بنت أخت أمي|عمة,🧕,,,عمتي هي أخت أبي|خال,👳,,,خالي هو أخو أمي');
+var jobs=parse('طبيب,👨‍⚕️,,,الطبيب يعالج المرضى|معلم,👨‍🏫,,,المعلم يعلمنا القراءة والكتابة|شرطي,👮,,,الشرطي يحافظ على أمن الناس|مزارع,👨‍🌾,,,المزارع يزرع الخضروات والفواكه|طيار,👨‍✈️,,,الطيار يقود الطائرة في السماء|طباخ,👨‍🍳,,,الطباخ يعد لنا الطعام اللذيذ|إطفائي,🧑‍🚒,,,الإطفائي يطفئ الحرائق وينقذ الناس|مهندس,👷,,,المهندس يبني المنازل والجسور|خياط,🧵,,,الخياط يخيط الملابس|سائق,🚕,,,السائق يقود السيارة أو الحافلة|صيدلي,💊,,,الصيدلي يعطينا الدواء|ممرض,🧑‍⚕️,,,الممرض يساعد الطبيب ويرعى المرضى');
+var trans=parse('سيارة,🚗,,,السيارة تسير على الطريق|حافلة,🚌,,,الحافلة تنقل الركاب إلى المدرسة|طائرة,✈️,,,الطائرة تطير في السماء|قطار,🚆,,,القطار يسير على السكة الحديدية|سفينة,🚢,,,السفينة تسير في البحر|دراجة,🚲,,,الدراجة تسير بقوة أقدامنا|سيارة إسعاف,🚑,,,سيارة الإسعاف تنقل المرضى بسرعة|دراجة نارية,🏍️,,,الدراجة النارية سريعة ولها محرك|مترو,🚇,,,المترو قطار يسير تحت الأرض|مروحية,🚁,,,المروحية تطير بجناحها الدوار|زورق,🛶,,,الزورق قارب صغير في النهر|شاحنة,🚚,,,الشاحنة تنقل البضائع الثقيلة');
+var food=parse('موزة,🍌,,,الموزة فاكهة صفراء غنية بالفيتامينات|برتقالة,🍊,,,البرتقالة غنية بفيتامين سي|فراولة,🍓,,,الفراولة حمراء وحلوة|بطيخة,🍉,,,البطيخ يحتوي على الكثير من الماء|تمر,🌴,,,التمر فاكهة حلوة وغنية بالطاقة|جزرة,🥕,,,الجزر غني بفيتامين أ المفيد للعينين|طماطم,🍅,,,الطماطم خضار حمراء نضيفها إلى السلطة|خيار,🥒,,,الخيار خضار منعش|بطاطس,🥔,,,البطاطس تنمو تحت التربة|تفاحة,🍎,,,التفاحة فاكهة مفيدة ولذيذة|عنب,🍇,,,العنب حبات صغيرة حلوة|ليمون,🍋,,,الليمون حامض ومفيد|ذرة,🌽,,,الذرة صفراء ومغذية|فلفل,🫑,,,الفلفل قد يكون حلواً أو حاراً|بصل,🧅,,,البصل نستخدمه في الطبخ|خس,🥬,,,الخس ورق أخضر في السلطة');
+var space=parse('الشمس,☀️,,,الشمس نجم كبير يعطينا الضوء والحرارة|القمر,🌙,,,القمر يدور حول الأرض وينعكس عليه ضوء الشمس|الأرض,🌍,,,الأرض هي كوكبنا الذي نعيش عليه|النجوم,✨,,,النجوم كثيرة تتلألأ في سماء الليل|زحل,🪐,,,زحل كوكب له حلقات جميلة|المريخ,🔴,,,المريخ يسمى الكوكب الأحمر|صاروخ,🚀,,,الصاروخ ينقل الرواد إلى الفضاء|رائد الفضاء,🧑‍🚀,,,رائد الفضاء يسافر إلى الفضاء|السماء,🌌,,,السماء واسعة ونرى فيها الشمس والقمر والنجوم|السحاب,☁️,,,السحاب يتكون من قطرات ماء صغيرة جداً وقد يمطر');
+var enA=[
+{w:'Apple',l:'Aa',g:'🍎',f:'A is for Apple'},{w:'Ball',l:'Bb',g:'⚽',f:'B is for Ball'},{w:'Cat',l:'Cc',g:'🐱',f:'C is for Cat'},{w:'Dog',l:'Dd',g:'🐶',f:'D is for Dog'},{w:'Egg',l:'Ee',g:'🥚',f:'E is for Egg'},{w:'Fish',l:'Ff',g:'🐟',f:'F is for Fish'},{w:'Grapes',l:'Gg',g:'🍇',f:'G is for Grapes'},{w:'House',l:'Hh',g:'🏠',f:'H is for House'},{w:'Ice cream',l:'Ii',g:'🍦',f:'I is for Ice cream'},{w:'Juice',l:'Jj',g:'🥤',f:'J is for Juice'},{w:'Kangaroo',l:'Kk',g:'🦘',f:'K is for Kangaroo'},{w:'Lion',l:'Ll',g:'🦁',f:'L is for Lion'},{w:'Moon',l:'Mm',g:'🌙',f:'M is for Moon'},{w:'Nose',l:'Nn',g:'👃',f:'N is for Nose'},{w:'Orange',l:'Oo',g:'🍊',f:'O is for Orange'},{w:'Pen',l:'Pp',g:'🖊️',f:'P is for Pen'},{w:'Queen',l:'Qq',g:'👑',f:'Q is for Queen'},{w:'Rabbit',l:'Rr',g:'🐰',f:'R is for Rabbit'},{w:'Sun',l:'Ss',g:'☀️',f:'S is for Sun'},{w:'Tree',l:'Tt',g:'🌳',f:'T is for Tree'},{w:'Umbrella',l:'Uu',g:'☂️',f:'U is for Umbrella'},{w:'Van',l:'Vv',g:'🚐',f:'V is for Van'},{w:'Watermelon',l:'Ww',g:'🍉',f:'W is for Watermelon'},{w:'X-ray',l:'Xx',g:'🦴',f:'X is for X-ray'},{w:'Yellow',l:'Yy',g:'🟡',f:'Y is for Yellow'},{w:'Zebra',l:'Zz',g:'🦓',f:'Z is for Zebra'}
+];
+var enCVC=[
+{w:'Cat',g:'🐱',f:'C - A - T : Cat (قطة)'},
+{w:'Dog',g:'🐶',f:'D - O - G : Dog (كلب)'},
+{w:'Sun',g:'☀️',f:'S - U - N : Sun (شمس)'},
+{w:'Bed',g:'🛏️',f:'B - E - D : Bed (سرير)'},
+{w:'Pen',g:'🖊️',f:'P - E - N : Pen (قلم)'},
+{w:'Bus',g:'🚌',f:'B - U - S : Bus (حافلة)'},
+{w:'Cup',g:'☕',f:'C - U - P : Cup (كوب)'},
+{w:'Hat',g:'🎩',f:'H - A - T : Hat (قبعة)'},
+{w:'Pin',g:'📌',f:'P - I - N : Pin (دبوس)'},
+{w:'Fox',g:'🦊',f:'F - O - X : Fox (ثعلب)'},
+{w:'Box',g:'📦',f:'B - O - X : Box (صندوق)'},
+{w:'Red',g:'🔴',f:'R - E - D : Red (أحمر)'},
+{w:'Big',g:'🐘',f:'B - I - G : Big (كبير)'},
+{w:'Run',g:'🏃',f:'R - U - N : Run (يركض)'}
+];
+var enN=[
+{w:'One',g:'1️⃣',f:'1 - One (واحد)'},
+{w:'Two',g:'2️⃣',f:'2 - Two (اثنان)'},
+{w:'Three',g:'3️⃣',f:'3 - Three (ثلاثة)'},
+{w:'Four',g:'4️⃣',f:'4 - Four (أربعة)'},
+{w:'Five',g:'5️⃣',f:'5 - Five (خمسة)'},
+{w:'Six',g:'6️⃣',f:'6 - Six (ستة)'},
+{w:'Seven',g:'7️⃣',f:'7 - Seven (سبعة)'},
+{w:'Eight',g:'8️⃣',f:'8 - Eight (ثمانية)'},
+{w:'Nine',g:'9️⃣',f:'9 - Nine (تسعة)'},
+{w:'Ten',g:'🔟',f:'10 - Ten (عشرة)'},
+{w:'Zero',g:'0️⃣',f:'0 - Zero (صفر)'},
+{w:'Eleven',g:'1️⃣1️⃣',f:'11 - Eleven (أحد عشر)'},
+{w:'Twelve',g:'1️⃣2️⃣',f:'12 - Twelve (اثنا عشر)'}
+];
+var enColors=parse('Red,🍎,#e53935,,Red means أحمر|Blue,🌊,#1e88e5,,Blue means أزرق|Yellow,🌻,#fdd835,,Yellow means أصفر|Green,🌿,#43a047,,Green means أخضر|Orange,🍊,#fb8c00,,Orange means برتقالي|Purple,🍇,#8e24aa,,Purple means بنفسجي|Pink,🌸,#f48fb1,,Pink means وردي|White,☁️,#ffffff,,White means أبيض|Black,🎩,#212121,,Black means أسود|Brown,🍫,#795548,,Brown means بني|Gray,🪨,#9e9e9e,,Gray means رمادي');
+var enAnimals=parse('Lion,🦁,,,Lion means أسد|Elephant,🐘,,,Elephant means فيل|Cat,🐱,,,Cat means قطة|Dog,🐶,,,Dog means كلب|Horse,🐴,,,Horse means حصان|Cow,🐮,,,Cow means بقرة|Sheep,🐑,,,Sheep means خروف|Rabbit,🐰,,,Rabbit means أرنب|Monkey,🐒,,,Monkey means قرد|Fish,🐟,,,Fish means سمكة|Bird,🐦,,,Bird means طائر|Duck,🦆,,,Duck means بطة|Frog,🐸,,,Frog means ضفدع|Bee,🐝,,,Bee means نحلة|Butterfly,🦋,,,Butterfly means فراشة');
+var animals=parse('أسد,🦁,,,الأسد ملك الغابة القوي|فيل,🐘,,,الفيل ضخم وله خرطوم طويل|قطة,🐱,,,القطة أليفة ونظيفة|كلب,🐶,,,الكلب صديق وفي وحارس أمين|حصان,🐴,,,الحصان قوي وسريع|بقرة,🐮,,,البقرة تعطينا الحليب المفيد|خروف,🐑,,,الخروف صوفه ناعم|دجاجة,🐔,,,الدجاجة تعطينا البيض|أرنب,🐰,,,الأرنب يحب أكل الجزر|زرافة,🦒,,,الزرافة لها أطول رقبة بين الحيوانات|قرد,🐒,,,القرد ماهر في التسلق|سمكة,🐟,,,السمكة تعيش في الماء|بطة,🦆,,,البطة تسبح في الماء|جمل,🐪,,,الجمل سفينة الصحراء|ثعلب,🦊,,,الثعلب حيوان ذكي|ضفدع,🐸,,,الضفدع يقفز ويعيش قرب الماء|طاووس,🦚,,,الطاووس ريشه جميل|نحلة,🐝,,,النحلة تصنع العسل|فراشة,🦋,,,الفراشة تطير بألوان زاهية|سلحفاة,🐢,,,السلحفاة بطيئة ولها صدفة');
+var colors=parse('أحمر,🍎,#e53935,,اللون الأحمر المبهج|أزرق,🌊,#1e88e5,,الأزرق مثل لون البحر والسماء|أصفر,🌻,#fdd835,,الأصفر مثل لون الشمس المشرقة|أخضر,🌿,#43a047,,الأخضر مثل لون الأشجار والأوراق|برتقالي,🍊,#fb8c00,,البرتقالي مثل لون فاكهة البرتقال|بنفسجي,🍇,#8e24aa,,البنفسجي مثل لون العنب|وردي,🌸,#f48fb1,,الوردي مثل زهور الربيع|أبيض,☁️,#ffffff,,الأبيض مثل السحاب النقي|أسود,🎩,#212121,,الأسود مثل سكون الليل|بني,🍫,#795548,,البني مثل الشوكولاتة والتربة');
+
+var prophets=[
+{w:'آدم عليه السلام',g:'🌳',f:'أبو البشر، خلقه الله بيده وأسكنه الجنة ثم أهبطه للأرض ليعمرها'},
+{w:'نوح عليه السلام',g:'🚢',f:'صنع السفينة بأمر الله، ودعا قومه 950 عاماً لعبادة الله وحده'},
+{w:'إبراهيم عليه السلام',g:'🔥',f:'أبو الأنبياء، حطم الأصنام فألقوه في النار فكانت برداً وسلاماً'},
+{w:'يوسف عليه السلام',g:'👑',f:'ألقاه إخوته في البئر، وصبر حتى صار مسؤولاً عن خزائن مصر'},
+{w:'موسى عليه السلام',g:'🐍',f:'كلمه الله، وأعطاه معجزة العصا، وانفلق له البحر لينجو بقومه'},
+{w:'عيسى عليه السلام',g:'🕊️',f:'خلقه الله من غير أب، وتكلم في المهد بإذن الله، وأحيا الموتى بإذنه'},
+{w:'محمد صلى الله عليه وسلم',g:'🕌',f:'خاتم الأنبياء والمرسلين، أرسل رحمة للعالمين، وبلغ رسالة الإسلام'}
+];
+var riddles=[
+/* مستوى 1 — سهل ومناسب للأطفال الصغار */
+{w:'ما الحيوان الذي يقول مواء؟',f:'القطة',g:'🐱',lvl:1},
+{w:'ما الحيوان الذي يقول هاو هاو؟',f:'الكلب',g:'🐶',lvl:1},
+{w:'ما الفاكهة الصفراء الطويلة؟',f:'الموزة',g:'🍌',lvl:1},
+{w:'ما لونه أصفر ويضيء في النهار؟',f:'الشمس',g:'☀️',lvl:1},
+{w:'ما الذي نراه في الليل ويتلألأ؟',f:'النجوم',g:'✨',lvl:1},
+{w:'بيت بلا أبواب ولا نوافذ؟',f:'البيضة',g:'🥚',lvl:1},
+{w:'له أسنان ولا يعض؟',f:'المشط',g:'🪮',lvl:1},
+{w:'ما هو الشيء الذي يكتب ولا يقرأ؟',f:'القلم',g:'✏️',lvl:1},
+{w:'ما هو الشيء الذي يجري ولا يمشي؟',f:'النهر',g:'🏞️',lvl:1},
+{w:'ما الشيء الذي يرفرف ولا يطير؟',f:'العلم',g:'🏳️',lvl:1},
+{w:'له رقبة بلا رأس؟',f:'الزجاجة',g:'🍾',lvl:1},
+{w:'ما له أذنان ولا يسمع؟',f:'القدر',g:'🍲',lvl:1},
+{w:'ما له قلب ولا روح له؟',f:'الخس',g:'🥬',lvl:1},
+{w:'شيء يطير بلا أجنحة ويبكي بلا عيون؟',f:'السحاب',g:'☁️',lvl:1},
+{w:'ما هو الشيء الذي له عقارب ولا يلدغ؟',f:'الساعة',g:'🕒',lvl:1},
+/* مستوى 2 — أصعب قليلًا (للأطفال الأكبر) */
+{w:'له أوراق وليس بشجرة، وله جلد وليس بحيوان؟',f:'الكتاب',g:'📖',lvl:2},
+{w:'ما هو الشيء الذي يسمع بلا أذن ويتكلم بلا لسان؟',f:'الهاتف',g:'📱',lvl:2},
+{w:'أخضر في الأرض، أسود في السوق، أحمر في البيت؟',f:'الشاي',g:'🍵',lvl:2},
+{w:'ما له رأس ولا عين له؟',f:'الدبوس',g:'📌',lvl:2},
+{w:'شيء إذا أكل عاش وإذا شرب مات؟',f:'النار',g:'🔥',lvl:2},
+{w:'ما هو الشيء الذي يكبر كلما أخذت منه؟',f:'الحفرة',g:'🕳️',lvl:2},
+{w:'ما هو الشيء الذي له عين ولا يرى؟',f:'الإبرة',g:'🪡',lvl:2},
+{w:'ما هو الشيء الذي كلما زاد نقص؟',f:'العمر',g:'⏳',lvl:2},
+{w:'ما هو الشيء الذي نكسره دون أن نلمسه؟',f:'الوعد',g:'🤝',lvl:2}
+];
+
+var C=[
+{s:'🔢 الأرقام والرياضيات',n:'الأرقام والعد',e:'🔢',k:'#ef4444',m:'num',q:'كم العدد؟',d:nums},
+{n:'الأعداد الترتيبية',e:'🥇',k:'#dc2626',m:'pic',d:ordinals,qp:'ما رقم الترتيب '},
+{n:'مفاهيم رياضية',e:'➕',k:'#0ea5e9',m:'math',d:math},
+{n:'المقارنة والقياس',e:'⚖️',k:'#14b8a6',m:'pic',d:comp},
+{n:'الأشكال والمجسمات',e:'🔺',k:'#84cc16',m:'pic',d:shapes},
+{n:'الأنماط التسلسلية',e:'🔁',k:'#10b981',m:'pic',d:patterns},
+{n:'الاتجاهات والمواقع',e:'🧭',k:'#0891b2',m:'pic',d:dirs},
+{n:'الأضداد',e:'↔️',k:'#7c3aed',m:'pic',d:opp},
+{s:'🔤 اللغة العربية',n:'الحروف الهجائية',e:'🔤',k:'#3b82f6',m:'let',q:'ما أول حرف في كلمة',d:letters},
+{n:'الحركات والتنوين',e:'🔠',k:'#f59e0b',m:'pic',d:vowels},
+{n:'المدود الثلاثة',e:'➖',k:'#f97316',m:'pic',d:longV},
+{n:'تأسيس لغوي',e:'📝',k:'#8b5cf6',m:'pic',d:grammar},
+{n:'الألوان الجميلة',e:'🎨',k:'#eab308',m:'pic',d:colors,qp:'أين اللون '},
+{s:'🕌 التربية الإسلامية والقيم',n:'التربية الإسلامية',e:'🕌',k:'#059669',m:'pic',d:islamic},
+{n:'قصص الأنبياء',e:'📚',k:'#14b8a6',m:'pic',d:prophets,qp:'أين رمز '},
+{n:'الأدعية اليومية',e:'🤲',k:'#0d9488',m:'pic',d:duas},
+{n:'الأشهر الهجرية',e:'🌙',k:'#4f46e5',m:'pic',d:hijri,qp:'ما ترتيب شهر '},
+{n:'القيم والأخلاق',e:'🌱',k:'#10b981',m:'pic',d:life},
+{s:'🌍 العلوم والحياة',n:'فصول السنة والطقس',e:'🌤️',k:'#0284c7',m:'pic',d:seasons},
+{n:'أيام الأسبوع',e:'📅',k:'#2563eb',m:'pic',d:days},
+{n:'أجزاء النبتة',e:'🌱',k:'#16a34a',m:'pic',d:plantParts},
+{n:'أعضاء الجسم والحواس',e:'🖐️',k:'#06b6d4',m:'pic',d:body},
+{n:'عالم الحيوانات',e:'🦁',k:'#a855f7',m:'pic',d:animals,qp:'أين صورة '},
+{n:'أصوات الحيوانات',e:'🎵',k:'#d946ef',m:'pic',d:sounds},
+{n:'الفواكه والخضروات',e:'🍓',k:'#e11d48',m:'pic',d:food,qp:'أين صورة '},
+{n:'الفضاء والكواكب',e:'🪐',k:'#4338ca',m:'pic',d:space},
+{n:'المشاعر',e:'😀',k:'#f59e0b',m:'pic',d:feelings,qp:'أين وجه '},
+{n:'أفراد الأسرة',e:'👨‍👩‍👧',k:'#ec4899',m:'pic',d:family,qp:'أين صورة '},
+{n:'المهن',e:'👨‍🏫',k:'#ea580c',m:'pic',d:jobs,qp:'أين صورة '},
+{n:'وسائل النقل',e:'🚌',k:'#0369a1',m:'pic',d:trans,qp:'أين صورة '},
+{s:'🅰️ English',n:'English Alphabet',e:'🅰️',k:'#3b82f6',m:'eng',q:'Which word starts with letter',d:enA},
+{n:'English CVC Words',e:'📖',k:'#0ea5e9',m:'pic',d:enCVC},
+{n:'English Numbers',e:'🔢',k:'#0284c7',m:'pic',d:enN},
+{n:'English Colors',e:'🌈',k:'#c026d3',m:'pic',d:enColors},
+{n:'English Animals',e:'🐾',k:'#65a30d',m:'pic',d:enAnimals},
+{s:'🌟 ركن الإبداع والألعاب',n:'تحديات الذكاء',e:'🧩',k:'#8b5cf6',m:'riddle',d:riddles},
+{n:'مرسم التلوين',e:'🎨',k:'#f59e0b',m:'draw',d:[]}
+];
+
+function isEn(s){return /^[A-Za-z]/.test(s)}
+var _used=[],missed=false,TT=[],sw2=false,sx=null;
+var on=true,AC=null,stars=0,cur=null,idx=0,ans=null,lock=false;
+var qCount=0,qCorrect=0,QMAX=5,streak=0,autoTimer=null,autoMode=false,qCounted=false;
+var totalCorrect=0,totalAsked=0,completedLessons={},sessAsked=0,sessCorrect=0;
+var adTimer=null,adDone=false;
+
+function safeGet(k,f){try{var v=localStorage.getItem(k);return v===null?f:v}catch(e){return f}}
+stars=+safeGet('bearstars',0)||0;
+totalCorrect=+safeGet('beartc',0)||0;
+totalAsked=+safeGet('bearta',0)||0;
+try{completedLessons=JSON.parse(safeGet('bearcl','{}'))||{};if(typeof completedLessons!=='object')completedLessons={}}catch(e){completedLessons={}}
+function save(){try{localStorage.setItem('bearstars',stars);localStorage.setItem('beartc',totalCorrect);localStorage.setItem('bearta',totalAsked);localStorage.setItem('bearcl',JSON.stringify(completedLessons))}catch(e){}}
+function upd(){$('st').textContent=stars;document.querySelectorAll('.stc').forEach(function(x){x.textContent=stars});save()}
+
+/* ══════════════ الأصوات ══════════════ */
+function ctx(){try{if(!AC)AC=new(window.AudioContext||window.webkitAudioContext)();if(AC.state==='suspended')AC.resume()}catch(e){}return AC}
+function tone(f,d,t,v,w){if(!on)return;var a=ctx();if(!a)return;var s=a.currentTime+(w||0),o=a.createOscillator(),g=a.createGain();o.type=t||'triangle';o.frequency.setValueAtTime(f,s);o.frequency.exponentialRampToValueAtTime(Math.max(f*1.45,40),s+d*.55);g.gain.setValueAtTime(v||.2,s);g.gain.exponentialRampToValueAtTime(.001,s+d);o.connect(g);g.connect(a.destination);o.start(s);o.stop(s+d+.05);o.onended=function(){try{o.disconnect();g.disconnect()}catch(e){}}}
+function pop(){tone(620,.15,'triangle',.22)}
+function cheer(){[523,659,784,1047].forEach(function(f,i){tone(f,.28,'triangle',.2,i*.09)})}
+function bigCheer(){[523,659,784,1047,1319].forEach(function(f,i){tone(f,.35,'triangle',.22,i*.08)})}
+function oops(){tone(230,.28,'sine',.2);tone(175,.3,'sine',.16,.12)}
+function click(){tone(440,.07,'square',.09)}
+
+function showToast(m,ms){
+  try{
+    var t=document.createElement('div');
+    t.setAttribute('role','status');t.setAttribute('aria-live','polite');
+    t.style.cssText='position:fixed;top:calc(env(safe-area-inset-top,0px) + 12px);left:50%;transform:translateX(-50%);background:#17324d;color:#fff;padding:12px 18px;border-radius:14px;font-weight:800;z-index:200;font-size:14px;max-width:90%;text-align:center;box-shadow:0 10px 30px #0004;direction:rtl';
+    t.textContent=m;
+    document.body.appendChild(t);
+    setTimeout(function(){t.style.transition='opacity .4s';t.style.opacity='0';setTimeout(function(){try{t.remove()}catch(e){}},400)},ms||4000);
+  }catch(e){}
+}
+
+function maybeShowAdToast(){
+  var t=$('ad-toast'),s;
+  try{s=localStorage.getItem('toastShown')}catch(e){s=null}
+  if(s||adDone||adTimer||!t||!$('home').classList.contains('on'))return;
+  t.classList.add('show');
+  adTimer=setTimeout(function(){t.classList.remove('show');adTimer=null;adDone=true;try{localStorage.setItem('toastShown','1')}catch(e){}},6000);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   وحدة النطق العربي الفصيح — نسخة 2.0
+   ══════════════════════════════════════════════════════════════ */
+var speechModule=(function(){
+  'use strict';
+  var supported=('speechSynthesis' in window)&&('SpeechSynthesisUtterance' in window);
+  var voices=[];
+  var currentQueueId=0;
+  function loadVoices(){
+    if(!supported)return;
+    try{voices=speechSynthesis.getVoices()||[]}catch(e){voices=[]}
+  }
+  if(supported){loadVoices();try{speechSynthesis.onvoiceschanged=loadVoices}catch(e){}}
+  var AR_PRIORITY=['ar-sa','ar-ae','ar-kw','ar-qa','ar-bh','ar-om','ar-jo','ar-eg','ar-ma','ar-dz','ar-tn','ar'];
+  var FEMALE_HINTS=/female|woman|hala|zariyah|laila|sara|salma|amina|maryam|noura|hoda|sana/i;
+  function pickArabicVoice(){
+    for(var i=0;i<AR_PRIORITY.length;i++){
+      var p=AR_PRIORITY[i];
+      var found=voices.filter(function(v){var lang=(v.lang||'').toLowerCase().replace('_','-');return lang.indexOf(p)===0});
+      if(found.length){
+        var female=found.filter(function(v){return FEMALE_HINTS.test(v.name||'')});
+        return female[0]||found[0];
+      }
+    }
+    return null;
+  }
+  function pickEnglishVoice(){
+    var found=voices.filter(function(v){var lang=(v.lang||'').toLowerCase().replace('_','-');return lang.indexOf('en')===0});
+    var female=found.filter(function(v){return FEMALE_HINTS.test(v.name||'')});
+    return female[0]||found[0]||null;
+  }
+  var AR_NUMS=['صفر','واحد','اثنان','ثلاثة','أربعة','خمسة','ستة','سبعة','ثمانية','تسعة','عشرة','أحد عشر','اثنا عشر','ثلاثة عشر','أربعة عشر','خمسة عشر','ستة عشر','سبعة عشر','ثمانية عشر','تسعة عشر','عشرون'];
+  function bigNumWords(n){
+    if(n>999)return String(n).split('').map(function(d){return AR_NUMS[+d]}).join(' ');
+    var T=['','','عشرون','ثلاثون','أربعون','خمسون','ستون','سبعون','ثمانون','تسعون'],
+        H=['','مائة','مائتان','ثلاثمائة','أربعمائة','خمسمائة','ستمائة','سبعمائة','ثمانمائة','تسعمائة'],
+        p=[],h=Math.floor(n/100),r=n%100;
+    if(h)p.push(H[h]);
+    if(r){if(r<=20)p.push(AR_NUMS[r]);else{var u=r%10,t=Math.floor(r/10);p.push(u?AR_NUMS[u]+' و'+T[t]:T[t])}}
+    return p.join(' و');
+  }
+  function digitsToWords(text){
+    return String(text).replace(/[٠-٩0-9]+/g,function(match){
+      var n=parseInt(match.replace(/[٠-٩]/g,function(d){return '٠١٢٣٤٥٦٧٨٩'.indexOf(d)}),10);
+      if(isNaN(n))return match;
+      if(n<=20)return ' '+AR_NUMS[n]+' ';
+      return ' '+bigNumWords(n)+' ';
+    });
+  }
+  function normalize(text){
+    if(!text)return '';
+    var t=String(text);
+    t=t.replace(/ﷺ/g,' صلى الله عليه وسلم ');
+    t=t.replace(/\s*\([^)]*\)\s*/g,' ');
+    t=t.replace(/[\(\)\[\]\{\}«»""'']/g,' ');
+    t=t.replace(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{2190}-\u{21FF}\u{2B00}-\u{2BFF}\u{FE0F}\u{200D}]/gu,' ');
+    t=digitsToWords(t);
+    t=t.replace(/[!?؟]{2,}/g,'!').replace(/\.{2,}/g,'.');
+    t=t.replace(/\s+/g,' ').trim();
+    return t;
+  }
+  function speak(text,opts){
+    if(!supported||!text)return;
+    opts=opts||{};
+    try{speechSynthesis.cancel()}catch(e){}
+    var clean=normalize(text);
+    if(!clean)return;
+    var myId=++currentQueueId;
+    var segments=clean.split(/(\b[A-Za-z][A-Za-z\s'\-]*[A-Za-z]\b)/)
+      .filter(function(s){
+        return s&&s.trim()&&/[A-Za-z\u0600-\u06FF]/.test(s);
+      });
+    if(segments.length===0)segments=[clean];
+    segments.forEach(function(seg){
+      if(myId!==currentQueueId)return;
+      var isEn=/^[A-Za-z]/.test(seg.trim());
+      var u=new SpeechSynthesisUtterance(seg.trim());
+      if(isEn){
+        var ev=pickEnglishVoice();
+        if(ev){u.voice=ev;u.lang=ev.lang}else u.lang='en-US';
+        u.rate=0.82;u.pitch=1.0;
+      }else{
+        var av=pickArabicVoice();
+        if(av){u.voice=av;u.lang=av.lang}else u.lang='ar-SA';
+        u.rate=0.88;u.pitch=1.02;
+      }
+      u.volume=1.0;
+      try{speechSynthesis.speak(u)}catch(e){}
+    });
+  }
+  function stop(){if(!supported)return;currentQueueId++;try{speechSynthesis.cancel()}catch(e){}}
+  return{speak:speak,stop:stop,reload:loadVoices,isSupported:function(){return supported},hasArabic:function(){return !!pickArabicVoice()}};
+})();
+
+var speechOk=speechModule.isSupported();
+var _sayTimer=null;
+function numToArWords(n){
+  n=parseInt(n,10);if(isNaN(n)||n<0)return String(n);
+  if(n===0)return 'صفر';
+  if(n>999)return String(n).split('').map(function(d){return ['صفر','واحد','اثنان','ثلاثة','أربعة','خمسة','ستة','سبعة','ثمانية','تسعة'][+d]||d}).join(' ');
+  var ones=['','واحد','اثنان','ثلاثة','أربعة','خمسة','ستة','سبعة','ثمانية','تسعة'];
+  var teens=['عشرة','أحد عشر','اثنا عشر','ثلاثة عشر','أربعة عشر','خمسة عشر','ستة عشر','سبعة عشر','ثمانية عشر','تسعة عشر'];
+  var tens=['','','عشرون','ثلاثون','أربعون','خمسون','ستون','سبعون','ثمانون','تسعون'];
+  var hundreds=['','مائة','مائتان','ثلاثمائة','أربعمائة','خمسمائة','ستمائة','سبعمائة','ثمانمائة','تسعمائة'];
+  var parts=[],hh=Math.floor(n/100),t=Math.floor((n%100)/10),o=n%10;
+  if(hh)parts.push(hundreds[hh]);
+  if(n%100>=10&&n%100<=19)parts.push(teens[n%100-10]);
+  else{
+    if(t>=2)parts.push(tens[t]);
+    if(o)parts.push(ones[o]);
+    else if(t===1)parts.push(teens[0]);
+  }
+  return parts.join(' و')||String(n);
+}
+function prepareSpeech(t){
+  return String(t).replace(/\d+/g,function(m){return numToArWords(m)});
+}
+function say(t){
+  if(!on||!t||!speechOk)return;
+  t=prepareSpeech(t);
+  if(_sayTimer){clearTimeout(_sayTimer);_sayTimer=null}
+  try{
+    if(speechSynthesis.speaking||speechSynthesis.pending){
+      speechModule.stop();
+      _sayTimer=setTimeout(function(){_sayTimer=null;speechModule.speak(t)},80);
+    }else speechModule.speak(t);
+  }catch(e){}
+}
+function stopSay(){if(_sayTimer){clearTimeout(_sayTimer);_sayTimer=null}speechModule.stop()}
+function retryVoices(){speechModule.reload()}
+document.addEventListener('click',retryVoices,{once:true});
+document.addEventListener('touchstart',retryVoices,{once:true,passive:true});
+if(!speechOk){
+  on=false;
+  var _sb=$('snd');
+  if(_sb){_sb.textContent='🔇';_sb.setAttribute('aria-pressed','false');_sb.setAttribute('aria-label','الصوت غير مدعوم')}
+}else{
+  setTimeout(function(){
+    if(!speechModule.hasArabic()&&speechOk)
+      {var _vn;try{_vn=localStorage.getItem('voiceNote')}catch(e){}if(!_vn){try{localStorage.setItem('voiceNote','1')}catch(e){}showToast('ℹ️ لا يوجد صوت عربي على جهازك',3500)}}
+  },1500);
+}
+
+/* ══════════════ منطق الدروس ══════════════ */
+function cardText(it){if(cur.m==='math')return it.f;if(cur.m==='riddle')return it.w;return cur.m==='eng'?(it.f||it.w):(it.w+(it.f?' — '+it.f:''))}
+function later(f,ms){var id=setTimeout(function(){TT=TT.filter(function(x){return x!==id});f()},ms);TT.push(id)}
+function clearT(){TT.forEach(clearTimeout);TT=[]}
+function disp(it){if(cur.m==='riddle')return it.f;return cur.m==='num'||cur.m==='let'?it.l:(it.c||it.g)}
+
+function go(id){
+  exitDrawFs();
+  clearT();stopSay();stopAuto();
+  try{if(id!=='home')$('ad-toast').classList.remove('show')}catch(e){}
+  document.querySelectorAll('.scr').forEach(function(s){s.classList.remove('on')});
+  $(id).classList.add('on');
+  if(id==='home')setTimeout(maybeShowAdToast,2000);
+}
+
+function burst(big){var st=$('stage'),n=big?24:14,arr=big?['⭐','✨','🌟','💫','🏆']:['⭐','✨','🌟','💫'];for(var i=0;i<n;i++){var s=document.createElement('div');s.className='star';s.textContent=arr[i%arr.length];s.style.left=(20+Math.random()*60)+'%';s.style.top=(40+Math.random()*20)+'%';s.style.setProperty('--x',(Math.random()*90-45)+'px');s.style.setProperty('--y',(-Math.random()*200-40)+'px');st.appendChild(s);(function(x){setTimeout(function(){try{x.remove()}catch(e){}},1500)})(s)}}
+function vibrate(p){if(navigator.vibrate){try{navigator.vibrate(p||35)}catch(e){}}}
+function swt(it){return '<i class="sw" style="background:'+esc(it.c)+'"></i>'}
+function main(it){if(it.c)return swt(it);if(it.svg)return '<span class="m" dir="ltr" style="min-height:0;width:min(86%,340px)">'+it.svg+'</span>';var n=Array.from(it.g.replace(/[\u064B-\u065F\uFE0F\u200D]/g,'')).length,st=n>2?' style="font-size:clamp(36px,'+(n>5?7:10)+'cqw,'+(n>5?80:110)+'px)"':'';return '<span class="m"'+st+' dir="ltr">'+esc(it.g)+'</span>'}
+function bigSize(s){var n=Array.from(s).length;if(n>14)return ' style="font-size:clamp(16px,2.6cqw,32px);line-height:1.2"';if(n>10)return ' style="font-size:clamp(26px,4.5cqw,56px);line-height:1.1"';if(n>7)return ' style="font-size:clamp(36px,6.5cqw,76px)"';return ''}
+
+var g=$('grid');
+function mkCards(){
+  g.innerHTML='';
+  C.forEach(function(c){
+    if(c.s){var h=document.createElement('div');h.className='sec';h.textContent=c.s;g.appendChild(h)}
+    var b=document.createElement('button');
+    b.className='card';b.style.background=c.k;b.setAttribute('aria-label','درس '+c.n);
+    b.innerHTML='<span class="e" aria-hidden="true">'+c.e+'</span>'+esc(c.n)+(completedLessons[c.n]?'<span class="badge">✓</span>':'');
+    b.onclick=function(){
+      ctx();click();
+      if(c.m==='draw'){go('draw');initDraw();return}
+      cur=c;idx=0;
+      $('ltitle').textContent=c.n;
+      $('qtitle').textContent=c.n;
+      go('lesson');show();
+    };
+    g.appendChild(b);
+  });
+}
+mkCards();
+
+function show(isAuto){
+  if(!isAuto)stopAuto();
+  var it=cur.d[idx],b=$('big');
+  b.style.animation='none';void b.offsetWidth;b.style.animation='';
+  var h;
+  if(cur.m==='riddle'){
+    h='<div class="m">🤔</div><div class="w" dir="auto" style="font-size:clamp(22px,4.5cqw,36px);line-height:1.45">'+esc(it.w)+'</div><div class="fact">فكّر جيداً ثم اضغط زر «اختبار» 🎮</div>';
+  }else if(cur.m==='num'||cur.m==='let'||cur.m==='eng'){
+    h='<div class="m" dir="ltr">'+esc(it.l)+'</div><div class="r"'+bigSize(it.g)+' dir="ltr">'+esc(it.g)+'</div><div class="w" dir="auto">'+esc(it.w)+'</div>'+(it.f?'<div class="fact" dir="auto">'+esc(it.f)+'</div>':'');
+  }else{
+    h=main(it)+'<div class="w" dir="auto">'+esc(it.w)+'</div>'+(it.f?'<div class="fact" dir="auto">'+esc(it.f)+'</div>':'');
+  }
+  b.innerHTML=h;
+  if(it.c)b.firstChild.style.margin='2cqw 0';
+  b.setAttribute('aria-label',cur.m==='riddle'?it.w:it.w+(it.f?'. '+it.f:''));
+  $('cnt').textContent=(idx+1)+' / '+cur.d.length;
+  $('pbar').style.width=((idx+1)/cur.d.length*100)+'%';
+  pop();say(cardText(it));
+}
+
+var bgEl=$('big');
+bgEl.setAttribute('tabindex','0');bgEl.setAttribute('role','button');
+bgEl.onpointerdown=function(e){sx=e.clientX;sw2=false};
+bgEl.onpointercancel=function(){sx=null;sw2=false};
+bgEl.onpointerup=function(e){if(sx===null)return;var d=e.clientX-sx;sx=null;if(Math.abs(d)>50){sw2=true;d<0?$('nx').click():$('pv').click()}};
+bgEl.onclick=function(){if(sw2){sw2=false;return}if(!cur)return;say(cardText(cur.d[idx]));pop()};
+bgEl.onkeydown=function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();this.click()}};
+
+$('nx').onclick=function(){idx=(idx+1)%cur.d.length;show()};
+$('pv').onclick=function(){idx=(idx-1+cur.d.length)%cur.d.length;show()};
+['back1','back2','back3','back4','back5'].forEach(function(id){if($(id))$(id).onclick=function(){click();go('home')}});
+$('gotol').onclick=function(){click();go('lesson');show()};
+
+function startQuiz(){_used=[];click();qCount=0;qCorrect=0;streak=0;go('quiz');ask()}
+$('gotoq').onclick=startQuiz;
+$('ragain').onclick=startQuiz;
+$('again').onclick=function(){speakQ();pop()};
+
+function stopAuto(){if(autoTimer){clearTimeout(autoTimer);autoTimer=null}autoMode=false;var a=$('auto');if(a){a.textContent='▶ تلقائي';a.setAttribute('aria-pressed','false')}}
+$('auto').onclick=function(){
+  if(autoMode){stopAuto();return}
+  autoMode=true;this.textContent='⏸ إيقاف';this.setAttribute('aria-pressed','true');
+  (function step(){if(!autoMode)return;autoTimer=setTimeout(function(){if(!$('lesson').classList.contains('on')){stopAuto();return}idx=(idx+1)%cur.d.length;show(true);if(autoMode)step()},4200)})();
+};
+$('snd').onclick=function(){
+  if(!speechOk){var s=this;s.textContent='🚫';setTimeout(function(){s.textContent='🔇'},600);return}
+  on=!on;this.textContent=on?'🔊':'🔇';this.setAttribute('aria-pressed',on?'true':'false');
+  if(!on){stopSay();stopAuto()}
+  click();
+};
+function kbd(id){var el=$(id);if(!el)return;el.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();this.click()}})}
+kbd('snd');kbd('pwrap');kbd('awrap');
+
+$('pwrap').onclick=function(){
+  click();
+  $('pStars').textContent=stars;
+  $('pStars2').textContent=stars;
+  var validNames={};C.forEach(function(c){if(c.m!=='draw')validNames[c.n]=true});
+  var doneCount=Object.keys(completedLessons).filter(function(k){return validNames[k]&&completedLessons[k]}).length;
+  $('pLessons').textContent=doneCount+' / '+C.filter(function(c){return c.m!=='draw'}).length;
+  $('pCorrect').textContent=totalCorrect;
+  $('pRate').textContent=(totalAsked?Math.round(totalCorrect/totalAsked*100):0)+'%';
+  $('pSess').textContent=sessAsked?Math.round(sessCorrect/sessAsked*100)+'%':'—';
+  go('progress');
+};
+$('awrap').onclick=function(){click();go('about')};
+
+$('resetProg').onclick=function(){
+  parentGate(function(){
+    stars=0;totalCorrect=0;totalAsked=0;completedLessons={};sessAsked=0;sessCorrect=0;
+    save();upd();mkCards();
+    $('pStars').textContent=0;$('pStars2').textContent=0;
+    $('pLessons').textContent='0 / '+C.filter(function(c){return c.m!=='draw'}).length;
+    $('pCorrect').textContent=0;$('pRate').textContent='0%';$('pSess').textContent='—';
+    showToast('✅ تمت إعادة تعيين التقدم',3000);
+  });
+};
+
+var stw=$('stwrap'),stT=null;
+stw.setAttribute('role','button');stw.setAttribute('tabindex','0');
+stw.addEventListener('keydown',function(e){
+  if(e.key==='Enter'||e.key===' '){
+    e.preventDefault();
+    parentGate(function(){stars=0;upd();showToast('✅ تم تصفير النجوم',3000)});
+  }
+});
+stw.addEventListener('pointerdown',function(){stT=setTimeout(function(){parentGate(function(){stars=0;upd();showToast('✅ تم تصفير النجوم',3000)})},850)});
+['pointerup','pointerleave','pointercancel'].forEach(function(ev){stw.addEventListener(ev,function(){clearTimeout(stT)})});
+
+function whereQ(w){return isEn(w)?'Where is '+w+'?':((cur&&cur.qp)||'أين ')+w+'؟'}
+function speakQ(){
+  if(!ans)return;
+  if(cur.m==='num')say(cur.q);
+  else if(cur.m==='math')say('ما ناتج '+mq.replace('+','زائد').replace('−','ناقص').replace('= ؟',''));
+  else if(cur.m==='let')say(cur.q+' '+ans.w);
+  else if(cur.m==='eng')say('Which word starts with letter '+ans.l.charAt(0));
+  else if(cur.m==='riddle')say(ans.w);
+  else say(whereQ(ans.w));
+}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
+
+function ask(){
+  if(qCount>=QMAX){showResult();return}
+  qCount++;lock=false;missed=false;qCounted=false;
+  $('fb').textContent='';$('fb').classList.remove('show');
+  var d;
+  if(cur.m==='math'){
+    var x=1+Math.floor(Math.random()*6),y=1+Math.floor(Math.random()*4),pl=Math.random()<.6;
+    if(!pl){if(x<2)pl=true;else y=1+Math.floor(Math.random()*(x-1))}
+    var r=pl?x+y:x-y;
+    mq=ar(x)+(pl?' + ':' − ')+ar(y)+' = ؟';
+    ans=mathPool[r];
+    d=[ans].concat(shuffle(mathPool.filter(function(i){return i!==ans})));
+  }else{
+    var pool=cur.m==='num'?cur.d.slice(0,10):cur.d;
+    d=shuffle(pool);
+    var _f=d.filter(function(i){return _used.indexOf(i)<0});
+    if(_f.length){ans=_f[0];d=[ans].concat(d.filter(function(i){return i!==ans}))}
+    else ans=d[0];
+    _used.push(ans);
+  }
+  var pick=[ans],seen={};seen[disp(ans)]=1;
+  d.slice(1).forEach(function(it){var k=disp(it);if(pick.length<3&&!seen[k]){seen[k]=1;pick.push(it)}});
+  pick=shuffle(pick);
+  var byWord=pick.length<3,ql;
+  if(cur.m==='num'){
+    $('q').innerHTML='<div class="p"'+bigSize(ans.g)+' dir="ltr">'+ans.g+'</div><div class="t">'+cur.q+'</div>';
+    ql='كم العدد؟';
+  }else if(cur.m==='math'){
+    $('q').innerHTML='<div class="p" dir="ltr">'+mq+'</div><div class="t">ما الناتج؟</div>';
+    ql='ما ناتج '+mq;
+  }else if(cur.m==='let'){
+    $('q').innerHTML='<div class="p">'+ans.g+'</div><div class="t">'+cur.q+' '+esc(ans.w)+'</div>';
+    ql='ما أول حرف في كلمة '+ans.w+'؟';
+  }else if(cur.m==='eng'){
+    $('q').innerHTML='<div class="p" dir="ltr">'+ans.l+'</div><div class="t" dir="ltr">'+cur.q+' '+ans.l.charAt(0)+'?</div>';
+    ql=cur.q+' '+ans.l.charAt(0)+'?';
+  }else if(cur.m==='riddle'){
+    $('q').innerHTML='<div class="p" style="font-size:clamp(40px,7cqw,70px)">🤔</div><div class="t" dir="auto" style="font-size:clamp(18px,3.8cqw,28px);line-height:1.5">'+esc(ans.w)+'</div>';
+    ql=ans.w;
+  }else{
+    $('q').innerHTML='<div class="t" dir="auto">'+esc(whereQ(ans.w))+'</div>';
+    ql=whereQ(ans.w);
+  }
+  $('q').setAttribute('aria-label','السؤال: '+ql);
+  var o=$('opts');o.innerHTML='';var n=0;
+  pick.forEach(function(it){
+    n++;var b=document.createElement('button');b.className='opt';b.setAttribute('dir','auto');
+    if(cur.m==='eng'){
+      b.innerHTML='<span style="display:flex;flex-direction:column;align-items:center;gap:4px;direction:ltr;padding:6px;width:100%"><span style="font-size:.72em;line-height:1">'+esc(it.g)+'</span><span style="font-size:.3em;font-weight:900;color:#52687e;line-height:1.1;word-break:break-word;text-align:center">'+esc(it.w)+'</span></span>';
+      b.setAttribute('aria-label','خيار '+n+': '+it.w);
+    }else if(byWord){
+      b.innerHTML='<span style="font-size:.42em;line-height:1.25;padding:6px;word-break:break-word">'+esc(it.w)+'</span>';
+      b.setAttribute('aria-label','خيار '+n+': '+it.w);
+    }else if(cur.m==='riddle'){
+      b.innerHTML='<span style="font-size:clamp(18px,3.2cqw,28px);line-height:1.3;padding:8px;word-break:break-word;font-weight:900">'+esc(it.f)+'</span>';
+      b.setAttribute('aria-label','خيار '+n+': '+it.f);
+    }else{
+      var gl=Array.from((it.g||'').replace(/[\u064B-\u065F\uFE0F\u200D]/g,'')).length;
+      var fs=(cur.m==='num'||cur.m==='let'||it.c)?'':(gl>8?'.26em':gl>2?'.4em':'');
+      b.innerHTML=(cur.m==='num'||cur.m==='let')?esc(it.l):(it.c?swt(it):(fs?'<span style="font-size:'+fs+';line-height:1.25;padding:4px;word-break:break-all">'+esc(it.g)+'</span>':esc(it.g)));
+      if(it.svg)b.innerHTML='<span dir="ltr" style="width:90%;display:block">'+it.svg+'</span>';
+      b.setAttribute('aria-label','خيار '+n+(it.w?': '+it.w:''));
+    }
+    b.onclick=function(){
+      if(lock)return;
+      if(!qCounted){qCounted=true;totalAsked++;sessAsked++}
+      if(it===ans){
+        lock=true;b.classList.add('ok');
+        if(!missed){stars++;qCorrect++;sessCorrect++;streak++;totalCorrect++}
+        upd();
+        if(streak>=3){bigCheer();burst(true);$('fb').textContent='رائع! سلسلة '+streak+'! 🔥';say('رائع')}
+        else{cheer();burst(false);$('fb').textContent='أحسنت! 🎉';say('أحسنت')}
+        $('fb').classList.add('show');vibrate(40);save();later(ask,1700);
+      }else{
+        missed=true;streak=0;b.classList.add('no');oops();vibrate([25,40,25]);
+        $('fb').textContent='حاول مرة أخرى 💪';say('حاول مرة أخرى');$('fb').classList.add('show');
+        save();later(function(){b.classList.remove('no')},550);
+      }
+    };
+    o.appendChild(b);
+  });
+  later(speakQ,280);
+}
+
+function showResult(){
+  var passed=qCorrect>=3;
+  if(passed){completedLessons[cur.n]=true;mkCards()}
+  save();
+  $('rscore').textContent=qCorrect+' / '+QMAX;
+  var msg,sn;
+  if(qCorrect===QMAX){msg='ممتاز! أنت بطل! 🏆';sn=3}
+  else if(passed){msg='جيد جداً! واصل! 👏';sn=2}
+  else{msg='حاول مرة أخرى! 💪';sn=1}
+  $('rmsg').textContent=msg;
+  $('rstars').textContent=Array(sn+1).join('⭐');
+  go('result');
+  if(passed){
+    later(function(){
+      if($('result').classList.contains('on')){
+        if(qCorrect===QMAX){bigCheer();burst(true)}else{cheer();burst(false)}
+        say('أحسنت يا بطل، لقد أكملت الدرس بنجاح');
+      }
+    },150);
+  }
+}
+
+var bearEl=$('bear');
+if(bearEl)bearEl.onclick=function(){
+  say('مرحباً! أنا الدب الصغير. اختر درساً لنتعلم معاً');
+  pop();setTimeout(cheer,450);
+};
+
+document.addEventListener('keydown',function(e){
+  if($('lesson').classList.contains('on')){
+    if(e.key==='ArrowLeft')$('nx').click();
+    if(e.key==='ArrowRight')$('pv').click();
+    if(e.key==='Escape'){stopAuto();$('back1').click()}
+    if(e.key===' '&&e.target===document.body){e.preventDefault();$('auto').click()}
+  }else if($('quiz').classList.contains('on')&&e.key==='Escape')$('back2').click();
+});
+
+document.body.addEventListener('touchstart',function(){ctx()},{once:true,passive:true});
+document.body.addEventListener('click',function(){ctx()},{once:true});
+
+function normDigits(s){
+  return String(s).replace(/[٠-٩]/g,function(d){return '٠١٢٣٤٥٦٧٨٩'.indexOf(d)}).replace(/[۰-۹]/g,function(d){return '۰۱۲۳۴۵۶۷۸۹'.indexOf(d)});
+}
+
+function parentGate(onSuccess){
+  var o=document.createElement('div');
+  o.style.cssText='position:fixed;inset:0;background:rgba(23,50,77,.55);display:flex;align-items:center;justify-content:center;z-index:300;padding:18px';
+  var a=6+Math.floor(Math.random()*4),b=3+Math.floor(Math.random()*7);
+  o.innerHTML='<div role="dialog" aria-modal="true" aria-label="بوابة الأهل" style="background:#fff;border-radius:24px;padding:24px;text-align:center;width:min(92%,380px);font-weight:900;color:#17324d;direction:rtl"><div style="font-size:18px;margin-bottom:6px">🔒 للكبار فقط</div><div style="font-size:14px;color:#62758a;margin-bottom:12px">حل المسألة للمتابعة</div><div style="font-size:28px;margin-bottom:12px;direction:ltr">'+a+' × '+b+' = ?</div><input id="pgIn" type="text" inputmode="numeric" autocomplete="off" aria-label="إجابة المسألة" style="width:100%;font:900 24px Tajawal;text-align:center;padding:10px;border:2px solid #e5edf7;border-radius:14px"><div style="display:flex;gap:8px;margin-top:14px"><button class="btn g" id="pgOk" style="flex:1">متابعة</button><button class="btn b" id="pgNo" style="flex:1">إلغاء</button></div></div>';
+  document.body.appendChild(o);
+  var inp=o.querySelector('#pgIn');inp.focus();
+  function escHandler(e){if(e.key==='Escape'){e.preventDefault();close()}}
+  document.addEventListener('keydown',escHandler);
+  function close(){try{document.removeEventListener('keydown',escHandler)}catch(e){}try{o.remove()}catch(e){}}
+  o.querySelector('#pgNo').onclick=close;
+  function ok(){
+    if(+normDigits(inp.value.trim())===a*b){close();onSuccess()}
+    else{inp.value='';inp.style.borderColor='#ff8c82';oops()}
+  }
+  o.querySelector('#pgOk').onclick=ok;
+  inp.addEventListener('keydown',function(e){if(e.key==='Enter')ok()});
+}
+
+document.addEventListener('click',function(e){
+  var l=e.target.closest&&e.target.closest('a[target="_blank"]');
+  if(!l)return;
+  e.preventDefault();
+  var url=l.href;
+  parentGate(function(){
+    var w=window.open(url,'_blank');
+    if(w){try{w.opener=null}catch(e2){}}else showToast('⚠️ المتصفح منع فتح الرابط — اسمح بالنوافذ المنبثقة',5000);
+  });
+},true);
+
+/* ══════════════════════════════════════════════════════════════
+   منطق المرسم الاحترافي — نسخة 5.3 (تصميم مضغوط)
+   ══════════════════════════════════════════════════════════════ */
+var canvas=null,ctx2d=null,isDrawing=false;
+var currentColor='#e53935';
+var brushSize=18;
+var drawMode='brush';
+var colorsList=['#000000','#e53935','#1e88e5','#43a047','#fdd835','#fb8c00','#8e24aa','#f48fb1','#795548','#00bcd4','#ffffff','#9e9e9e'];
+var colorNames={'#000000':'أسود','#e53935':'أحمر','#1e88e5':'أزرق','#43a047':'أخضر','#fdd835':'أصفر','#fb8c00':'برتقالي','#8e24aa':'بنفسجي','#f48fb1':'وردي','#795548':'بني','#00bcd4':'سماوي','#ffffff':'أبيض','#9e9e9e':'رمادي'};
+var undoStack=[],redoStack=[],MAX_UNDO=20;
+var lastX=0,lastY=0,startX=0,startY=0,snapshot=null,baseInk=null;
+var stickers=[],selectedStamp='⭐',selectedSticker=-1,dragSticker=-1;
+var stickerSize=54;
+var textPending=null,paperMode='white',bgMode='white';
+var dragOffX=0,dragOffY=0;
+var AUTOSAVE_KEY='bearDrawAutosave_v34';var inkMaster=null;var _restorePending=false;
+var drawInitDone=false;
+var brushSoundNode=null;
+var magicHue=0,rainbowHue=0,lastMagicTime=0;
+var _updateToolsFn=null;
+
+function _applyBg(){
+  var c=$('canvas-container');
+  if(c){c.className='';if(bgMode!=='white')c.classList.add('bg-'+bgMode)}
+  document.querySelectorAll('#bgPicker .bg-btn').forEach(function(x){x.classList.toggle('active',x.getAttribute('data-bg')===bgMode)});
+}
+function _paper(cx,w,h){
+  var m={sky:['#bae6fd','#e0f2fe','#f0fdf4',.6],field:['#bfdbfe','#dcfce7','#bbf7d0',.4],beach:['#7dd3fc','#fef3c7','#fde68a',.55],night:['#1e1b4b','#312e81','#4c1d95',.6],candy:['#fce7f3','#fbcfe8','#fef3c7',.5]}[bgMode];
+  if(!m){cx.fillStyle='#fff';cx.fillRect(0,0,w,h);return}
+  var g=cx.createLinearGradient(0,0,0,h);
+  g.addColorStop(0,m[0]);g.addColorStop(m[3],m[1]);g.addColorStop(1,m[2]);
+  cx.fillStyle=g;cx.fillRect(0,0,w,h);
+}
+function showDrawHint(msg){
+  var h=$('drawHint');if(!h)return;
+  h.textContent=msg;h.classList.add('show');
+  clearTimeout(h._t);
+  h._t=setTimeout(function(){h.classList.remove('show')},2800);
+}
+function fxLayerEl(){return $('fxLayer')}
+function spawnSparks(x,y,color){
+  var layer=fxLayerEl();if(!layer)return;
+  var cols=color?[color]:['#fbbf24','#f472b6','#60a5fa','#34d399','#a78bfa','#fb923c'];
+  for(var i=0;i<14;i++){
+    var s=document.createElement('div');s.className='fx-spark';
+    var ang=Math.random()*Math.PI*2,dist=20+Math.random()*40;
+    s.style.left=x+'px';s.style.top=y+'px';
+    s.style.color=cols[i%cols.length];s.style.background=cols[i%cols.length];
+    s.style.setProperty('--dx',(Math.cos(ang)*dist)+'px');
+    s.style.setProperty('--dy',(Math.sin(ang)*dist)+'px');
+    s.style.width=(5+Math.random()*6)+'px';s.style.height=s.style.width;
+    layer.appendChild(s);
+    setTimeout((function(el){return function(){try{el.remove()}catch(e){}}})(s),750);
+  }
+}
+function spawnRing(x,y){
+  var layer=fxLayerEl();if(!layer)return;
+  var r=document.createElement('div');r.className='fx-ring';
+  r.style.left=x+'px';r.style.top=y+'px';
+  r.style.width='28px';r.style.height='28px';
+  layer.appendChild(r);
+  setTimeout(function(){try{r.remove()}catch(e){}},600);
+}
+function spawnConfetti(){
+  var layer=fxLayerEl();if(!layer||!canvas)return;
+  var cols=['#ef4444','#f59e0b','#22c55e','#3b82f6','#a855f7','#ec4899'];
+  for(var i=0;i<28;i++){
+    var c=document.createElement('div');c.className='fx-confetti';
+    c.style.left=(Math.random()*canvas.width)+'px';
+    c.style.top=(Math.random()*canvas.height*0.35)+'px';
+    c.style.background=cols[i%cols.length];
+    c.style.animationDelay=(Math.random()*0.25)+'s';
+    layer.appendChild(c);
+    setTimeout((function(el){return function(){try{el.remove()}catch(e){}}})(c),1400);
+  }
+}
+function startBrushSound(){
+  if(!on)return;
+  stopBrushSound();
+  try{
+    var a=ctx();if(!a)return;
+    brushSoundNode=a.createOscillator();
+    var g=a.createGain();
+    brushSoundNode.type='sine';
+    brushSoundNode.frequency.value=180+Math.random()*60;
+    g.gain.value=0.018;
+    brushSoundNode.connect(g);g.connect(a.destination);
+    brushSoundNode.start();
+    brushSoundNode._g=g;
+  }catch(e){brushSoundNode=null}
+}
+function stopBrushSound(){
+  if(brushSoundNode){
+    try{brushSoundNode.stop()}catch(e){}
+    try{brushSoundNode.disconnect()}catch(e){}
+    if(brushSoundNode._g){try{brushSoundNode._g.disconnect()}catch(e){}}
+    brushSoundNode=null;
+  }
+}
+function captureBase(){
+  try{
+    baseInk=ctx2d.getImageData(0,0,canvas.width,canvas.height);
+  }catch(e){baseInk=null}
+}
+function updateInkMaster(){
+  if(!baseInk)return;
+  try{
+    if(!inkMaster||inkMaster.width!==canvas.width||inkMaster.height!==canvas.height){
+      inkMaster=document.createElement('canvas');
+      inkMaster.width=canvas.width;
+      inkMaster.height=canvas.height;
+    }
+    inkMaster.getContext('2d').putImageData(baseInk,0,0);
+  }catch(e){}
+}
+function paintFromMaster(){
+  if(!inkMaster||!ctx2d||!canvas)return false;
+  try{
+    ctx2d.save();
+    ctx2d.setTransform(1,0,0,1,0,0);
+    ctx2d.globalCompositeOperation='source-over';
+    ctx2d.globalAlpha=1;
+    ctx2d.clearRect(0,0,canvas.width,canvas.height);
+    var same=inkMaster.width===canvas.width&&inkMaster.height===canvas.height;
+    try{ctx2d.imageSmoothingEnabled=!same;ctx2d.imageSmoothingQuality='high'}catch(e){}
+    if(same){ctx2d.drawImage(inkMaster,0,0)}
+    else{
+      /* ملء اللوحة بالكامل من المصدر الأصلي دون سلسلة تكبيرات متكررة */
+      ctx2d.drawImage(inkMaster,0,0,inkMaster.width,inkMaster.height,0,0,canvas.width,canvas.height);
+    }
+    ctx2d.restore();
+    try{baseInk=ctx2d.getImageData(0,0,canvas.width,canvas.height)}catch(e){}
+    return true;
+  }catch(e){return false}
+}
+function fillPaper(){
+  if(!ctx2d||!canvas)return;
+  ctx2d.globalCompositeOperation='source-over';
+  ctx2d.clearRect(0,0,canvas.width,canvas.height);
+  if(paperMode==='lined'){
+    ctx2d.strokeStyle='rgba(191,219,254,.7)';ctx2d.lineWidth=1;
+    for(var y=28;y<canvas.height;y+=28){
+      ctx2d.beginPath();ctx2d.moveTo(0,y);ctx2d.lineTo(canvas.width,y);ctx2d.stroke();
+    }
+  }else if(paperMode==='grid'){
+    ctx2d.strokeStyle='rgba(226,232,240,.8)';ctx2d.lineWidth=1;
+    for(var yy=20;yy<canvas.height;yy+=20){
+      ctx2d.beginPath();ctx2d.moveTo(0,yy);ctx2d.lineTo(canvas.width,yy);ctx2d.stroke();
+    }
+    for(var xx=20;xx<canvas.width;xx+=20){
+      ctx2d.beginPath();ctx2d.moveTo(xx,0);ctx2d.lineTo(xx,canvas.height);ctx2d.stroke();
+    }
+  }
+  captureBase();updateInkMaster();
+}
+function redrawStickers(){
+  var o=$('stkCanvas');
+  if(!o){
+    o=document.createElement('canvas');o.id='stkCanvas';
+    o.style.cssText='position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3';
+    var c=$('canvas-container');if(!c)return;
+    c.insertBefore(o,$('fxLayer'));
+  }
+  if(canvas&&(o.width!==canvas.width||o.height!==canvas.height)){o.width=canvas.width;o.height=canvas.height}
+  var c=o.getContext('2d');
+  c.clearRect(0,0,o.width,o.height);
+  stickers.forEach(function(s,i){
+    var sz=s.sz||stickerSize;
+    c.save();c.translate(s.x,s.y);
+    if(s.rot)c.rotate(s.rot);
+    c.textAlign='center';c.textBaseline='middle';
+    c.shadowColor='rgba(0,0,0,.2)';c.shadowBlur=7;c.shadowOffsetY=2;
+    if(s.type==='text'){
+      c.font='900 '+sz+'px Tajawal, Segoe UI, sans-serif';
+      c.fillStyle=s.color||currentColor;
+      c.lineWidth=Math.max(2,sz/12);
+      c.strokeStyle='rgba(255,255,255,.85)';
+      c.strokeText(s.e,0,0);
+      c.fillText(s.e,0,0);
+    }else{
+      c.font=sz+'px "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", serif';
+      c.fillText(s.e,0,0);
+    }
+    c.restore();
+    if(i===selectedSticker||i===dragSticker){
+      c.save();
+      c.strokeStyle='#3b82f6';c.lineWidth=2.5;
+      c.setLineDash([5,4]);
+      var tw=sz*(s.type==='text'?Math.min(8,(s.e||'').length*0.55):1);
+      c.strokeRect(s.x-tw/2-8,s.y-sz/2-6,tw+16,sz+12);
+      c.restore();
+    }
+  });
+}
+function paintAll(){
+  if(!ctx2d)return;
+  if(baseInk){try{ctx2d.putImageData(baseInk,0,0)}catch(e){fillPaper()}}
+  else fillPaper();
+  redrawStickers();
+}
+function snapshotState(){
+  return{
+    img:baseInk?new ImageData(new Uint8ClampedArray(baseInk.data),baseInk.width,baseInk.height):null,
+    stickers:stickers.map(function(s){return{e:s.e,x:s.x,y:s.y,sz:s.sz,type:s.type,color:s.color,rot:s.rot}}),
+    bgMode:bgMode,paperMode:paperMode
+  };
+}
+function saveUndo(){
+  if(!canvas||!ctx2d)return;
+  try{
+    if(undoStack.length>=MAX_UNDO)undoStack.shift();
+    undoStack.push(snapshotState());
+    redoStack=[];
+  }catch(e){}
+}
+function performUndo(){
+  if(!undoStack.length){showDrawHint('لا يوجد تراجع');return}
+  try{
+    redoStack.push(snapshotState());
+    var st=undoStack.pop();
+    baseInk=st.img;stickers=st.stickers||[];
+    bgMode=st.bgMode||'white';_applyBg();
+    paperMode=st.paperMode||'white';
+    selectedSticker=-1;dragSticker=-1;
+    paintAll();click();scheduleAutosave();
+    say('تراجع');
+  }catch(e){}
+}
+function performRedo(){
+  if(!redoStack.length){showDrawHint('لا يوجد إعادة');return}
+  try{
+    undoStack.push(snapshotState());
+    var st=redoStack.pop();
+    baseInk=st.img;stickers=st.stickers||[];
+    bgMode=st.bgMode||'white';_applyBg();
+    paperMode=st.paperMode||'white';
+    selectedSticker=-1;dragSticker=-1;
+    paintAll();click();scheduleAutosave();
+    say('إعادة');
+  }catch(e){}
+}
+function hexToRgb(hex){
+  if(!hex||hex.charAt(0)!=='#')return null;
+  var h=hex.slice(1);
+  if(h.length===3)h=h[0]+h[0]+h[1]+h[1]+h[2]+h[2];
+  var n=parseInt(h,16);if(isNaN(n))return null;
+  return{r:(n>>16)&255,g:(n>>8)&255,b:n&255};
+}
+function isDarkColor(hex){
+  var rgb=hexToRgb(hex);
+  if(!rgb)return false;
+  return (rgb.r*0.299+rgb.g*0.587+rgb.b*0.114)<80;
+}
+function floodFill(startX,startY,fillColor){
+  if(!ctx2d||!canvas)return;
+  var rgb=hexToRgb(fillColor)||{r:245,g:158,b:11};
+  var w=canvas.width,h=canvas.height,total=w*h;
+  if(total>9000000){showDrawHint('اللوحة كبيرة جداً للتعبئة على هذا الجهاز — جرّب الرسم بالفرشاة أو قالباً أصغر');return false}
+  var imgData;
+  try{imgData=ctx2d.getImageData(0,0,w,h)}catch(e){showDrawHint('تعذرت قراءة اللوحة للتعبئة');return false}
+  var data=imgData.data,sx=Math.floor(startX),sy=Math.floor(startY);
+  if(sx<0||sx>=w||sy<0||sy>=h)return false;
+  var idx=(sy*w+sx)*4,tR=data[idx],tG=data[idx+1],tB=data[idx+2],tA=data[idx+3],tol=64;
+  if(Math.abs(tR-rgb.r)<=tol&&Math.abs(tG-rgb.g)<=tol&&Math.abs(tB-rgb.b)<=tol&&Math.abs(tA-255)<=tol)return false;
+  function matches(pixel){
+    var i=pixel*4;
+    return Math.abs(data[i]-tR)<=tol&&Math.abs(data[i+1]-tG)<=tol&&Math.abs(data[i+2]-tB)<=tol&&Math.abs(data[i+3]-tA)<=tol;
+  }
+  function paint(pixel){
+    var i=pixel*4;
+    data[i]=rgb.r;data[i+1]=rgb.g;data[i+2]=rgb.b;data[i+3]=255;
+  }
+  /* تعبئة خطية: تخزن نقاط بداية المقاطع بدلاً من إنشاء مصفوفة لكل بكسل. */
+  var stack=[sy*w+sx],iterations=0,maxIter=total;
+  while(stack.length&&iterations<maxIter){
+    var seed=stack.pop(),y=Math.floor(seed/w),x=seed-y*w;
+    if(!matches(seed))continue;
+    var left=x,right=x,row=y*w;
+    while(left>0&&matches(row+left-1))left--;
+    while(right<w-1&&matches(row+right+1))right++;
+    for(var xx=left;xx<=right;xx++){paint(row+xx);iterations++}
+    for(var nyIndex=-1;nyIndex<=1;nyIndex+=2){
+      var ny=y+nyIndex;
+      if(ny<0||ny>=h)continue;
+      var nrow=ny*w,inside=false;
+      for(var nx=left;nx<=right;nx++){
+        var candidate=nrow+nx,match=matches(candidate);
+        if(match&&!inside){stack.push(candidate);inside=true}
+        else if(!match){inside=false}
+      }
+    }
+  }
+  try{ctx2d.putImageData(imgData,0,0)}catch(e){showDrawHint('تعذر تطبيق لون التعبئة');return false}
+  return true;
+}
+var autosaveTimer=null;
+function scheduleAutosave(){
+  if(autosaveTimer)clearTimeout(autosaveTimer);
+  autosaveTimer=setTimeout(forceAutosave,2000);
+}
+function forceAutosave(){
+  if(!canvas)return;
+  try{
+    var src=inkMaster||canvas;
+    if(!src||!src.width)return;
+    function pack(maxDim,mime,quality){
+      var sw=src.width,sh=src.height;
+      var scale=Math.min(1,maxDim/Math.max(sw,sh));
+      var tw=Math.max(1,Math.round(sw*scale)),th=Math.max(1,Math.round(sh*scale));
+      var tmp=document.createElement('canvas');tmp.width=tw;tmp.height=th;
+      var tctx=tmp.getContext('2d');
+      try{tctx.imageSmoothingEnabled=true;tctx.imageSmoothingQuality='high'}catch(e){}
+      tctx.drawImage(src,0,0,sw,sh,0,0,tw,th);
+      var url=(mime==='image/jpeg')?tmp.toDataURL('image/jpeg',quality||0.92):tmp.toDataURL('image/png');
+      var stScale=scale;
+      /* إحداثيات الملصقات نسبةً لمصدر الحفظ */
+      return{
+        img:url,width:tw,height:th,scale:stScale,
+        srcW:sw,srcH:sh,
+        stickers:stickers.map(function(st){
+          return{e:st.e,x:st.x*stScale,y:st.y*stScale,sz:(st.sz||stickerSize)*stScale,type:st.type,color:st.color,rot:st.rot};
+        }),
+        bgMode:bgMode,paperMode:paperMode,ts:Date.now(),v:34
+      };
+    }
+    var attempts=[
+      function(){return pack(2400,'image/png')},
+      function(){return pack(2000,'image/png')},
+      function(){return pack(1600,'image/jpeg',0.93)},
+      function(){return pack(1200,'image/jpeg',0.9)}
+    ];
+    var saved=false;
+    for(var i=0;i<attempts.length;i++){
+      try{
+        var payload=attempts[i]();
+        var s=JSON.stringify(payload);
+        if(s.length>4500000)continue;
+        localStorage.setItem(AUTOSAVE_KEY,s);
+        saved=true;
+        break;
+      }catch(err){}
+    }
+    if(!saved){
+      try{if(typeof showToast==='function')showToast('⚠️ تعذر الحفظ التلقائي — احفظ يدويًا',3500)}catch(e){}
+    }
+  }catch(e){}
+}
+function tryRestoreAutosave(){
+  try{
+    var raw=localStorage.getItem(AUTOSAVE_KEY);
+    if(!raw){
+      /* ترحيل الحفظ القديم إن وُجد ثم حذفه */
+      try{
+        var legacy=localStorage.getItem('bearDrawAutosave');
+        if(legacy){
+          var legacyData=JSON.parse(legacy);
+          if(legacyData&&legacyData.img){
+            raw=legacy;
+            try{localStorage.setItem(AUTOSAVE_KEY,legacy)}catch(e){}
+          }
+          try{localStorage.removeItem('bearDrawAutosave')}catch(e){}
+        }
+      }catch(e){}
+      if(!raw)return;
+    }
+    var data=JSON.parse(raw);
+    if(!data||!data.img)return;
+    if(data.ts&&Date.now()-data.ts>7*24*60*60*1000){localStorage.removeItem(AUTOSAVE_KEY);return}
+    bgMode=data.bgMode||'white';setTimeout(_applyBg,0);
+    paperMode=data.paperMode||'white';
+    var container=$('canvas-container');
+    if(container){container.className='';if(bgMode!=='white')container.classList.add('bg-'+bgMode)}
+    _restorePending=true;
+    var img=new Image();
+    img.onload=function(){
+      try{
+        /* المصدر النقي مرة واحدة — لا يُكبَّر ثم يُحفظ ثم يُكبَّر */
+        var mw=img.naturalWidth||Number(data.width)||canvas.width;
+        var mh=img.naturalHeight||Number(data.height)||canvas.height;
+        inkMaster=document.createElement('canvas');
+        inkMaster.width=mw;inkMaster.height=mh;
+        var mctx=inkMaster.getContext('2d');
+        mctx.drawImage(img,0,0);
+        var savedW=Number(data.width)||mw,savedH=Number(data.height)||mh;
+        var restoreScale=Math.min(canvas.width/savedW,canvas.height/savedH);
+        var restoreX=(canvas.width-savedW*restoreScale)/2,restoreY=(canvas.height-savedH*restoreScale)/2;
+        stickers=(Array.isArray(data.stickers)?data.stickers:[]).map(function(st){
+          return Object.assign({},st,{
+            x:(Number(st.x)||0)*restoreScale+restoreX,
+            y:(Number(st.y)||0)*restoreScale+restoreY,
+            sz:(Number(st.sz)||stickerSize)*restoreScale
+          });
+        });
+        paintFromMaster();
+        paintAll();
+        _restorePending=false;
+        setTimeout(function(){
+          showDrawHint('تم استعادة آخر رسمة 🎨');
+          say('تم استعادة آخر رسمة');
+        },300);
+      }catch(e){_restorePending=false}
+    };
+    img.onerror=function(){_restorePending=false};
+    img.src=data.img;
+  }catch(e){_restorePending=false}
+}
+function hitSticker(x,y){
+  for(var i=stickers.length-1;i>=0;i--){
+    var s=stickers[i],sz=s.sz||stickerSize;
+    var hw=s.type==='text'?Math.max(sz,(s.e||'').length*(sz*0.35)):sz;
+    if(Math.abs(x-s.x)<=hw/2+12&&Math.abs(y-s.y)<=sz/2+12)return i;
+  }
+  return -1;
+}
+function getPos(e){
+  var r=canvas.getBoundingClientRect();
+  return{x:(e.clientX-r.left)*(canvas.width/r.width),y:(e.clientY-r.top)*(canvas.height/r.height)};
+}
+function sprayAt(x,y){
+  var density=Math.max(10,brushSize*2.5);
+  ctx2d.fillStyle=currentColor==='rainbow'?getRainbowColor():currentColor;
+  for(var i=0;i<density;i++){
+    var a=Math.random()*Math.PI*2;
+    var r=Math.random()*brushSize*1.6;
+    ctx2d.beginPath();
+    ctx2d.arc(x+Math.cos(a)*r,y+Math.sin(a)*r,Math.max(1,brushSize/5),0,Math.PI*2);
+    ctx2d.fill();
+  }
+}
+function magicStroke(x,y){
+  if(!ctx2d)return;
+  var now=Date.now();
+  if(now-lastMagicTime<16)return;
+  lastMagicTime=now;
+  magicHue=(magicHue+6)%360;
+  ctx2d.globalCompositeOperation='source-over';
+  var g=ctx2d.createRadialGradient(x,y,0,x,y,brushSize*1.5);
+  g.addColorStop(0,'hsl('+magicHue+',90%,60%)');
+  g.addColorStop(.5,'hsl('+((magicHue+40)%360)+',90%,55%)');
+  g.addColorStop(1,'hsla('+((magicHue+80)%360)+',90%,50%,0)');
+  ctx2d.fillStyle=g;
+  ctx2d.beginPath();
+  ctx2d.arc(x,y,brushSize*1.2,0,Math.PI*2);
+  ctx2d.fill();
+  if(Math.random()>0.7)spawnSparks(x,y);
+}
+function getRainbowColor(){
+  rainbowHue=(rainbowHue+8)%360;
+  return 'hsl('+rainbowHue+',85%,55%)';
+}
+function takeSnapshot(){try{snapshot=ctx2d.getImageData(0,0,canvas.width,canvas.height)}catch(e){snapshot=null}}
+function restoreSnapshot(){if(snapshot){try{ctx2d.putImageData(snapshot,0,0)}catch(e){}}}
+
+var coloringTemplates={
+  bear:{name:'دب',svg:'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle cx="100" cy="115" r="55" fill="none" stroke="#333" stroke-width="3"/><circle cx="65" cy="70" r="22" fill="none" stroke="#333" stroke-width="3"/><circle cx="135" cy="70" r="22" fill="none" stroke="#333" stroke-width="3"/><circle cx="80" cy="105" r="6" fill="#333"/><circle cx="120" cy="105" r="6" fill="#333"/><ellipse cx="100" cy="135" rx="18" ry="12" fill="none" stroke="#333" stroke-width="3"/></svg>'},
+  flower:{name:'وردة',svg:'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle cx="100" cy="90" r="18" fill="none" stroke="#333" stroke-width="3"/><ellipse cx="100" cy="50" rx="14" ry="22" fill="none" stroke="#333" stroke-width="3"/><ellipse cx="100" cy="130" rx="14" ry="22" fill="none" stroke="#333" stroke-width="3"/><ellipse cx="60" cy="90" rx="22" ry="14" fill="none" stroke="#333" stroke-width="3"/><ellipse cx="140" cy="90" rx="22" ry="14" fill="none" stroke="#333" stroke-width="3"/><line x1="100" y1="130" x2="100" y2="180" stroke="#333" stroke-width="3"/></svg>'},
+  fish:{name:'سمكة',svg:'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><ellipse cx="100" cy="100" rx="55" ry="30" fill="none" stroke="#333" stroke-width="3"/><path d="M155 100 L185 75 L185 125 Z" fill="none" stroke="#333" stroke-width="3"/><circle cx="75" cy="92" r="4" fill="#333"/></svg>'},
+  sun:{name:'شمس',svg:'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle cx="100" cy="100" r="35" fill="none" stroke="#333" stroke-width="3"/><g stroke="#333" stroke-width="3"><line x1="100" y1="20" x2="100" y2="50"/><line x1="100" y1="150" x2="100" y2="180"/><line x1="20" y1="100" x2="50" y2="100"/><line x1="150" y1="100" x2="180" y2="100"/></g><circle cx="88" cy="92" r="4" fill="#333"/><circle cx="112" cy="92" r="4" fill="#333"/></svg>'},
+  butterfly:{name:'فراشة',svg:'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><ellipse cx="100" cy="100" rx="6" ry="35" fill="none" stroke="#333" stroke-width="3"/><path d="M100 70 Q60 40 50 80 Q45 100 100 100" fill="none" stroke="#333" stroke-width="3"/><path d="M100 70 Q140 40 150 80 Q155 100 100 100" fill="none" stroke="#333" stroke-width="3"/><path d="M100 100 Q60 110 55 140 Q55 165 100 130" fill="none" stroke="#333" stroke-width="3"/><path d="M100 100 Q140 110 145 140 Q145 165 100 130" fill="none" stroke="#333" stroke-width="3"/></svg>'},
+  star:{name:'نجمة',svg:'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><polygon points="100,20 122,80 185,80 135,118 155,180 100,142 45,180 65,118 15,80 78,80" fill="none" stroke="#333" stroke-width="3"/></svg>'},
+  house:{name:'بيت',svg:'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect x="50" y="100" width="100" height="80" fill="none" stroke="#333" stroke-width="3"/><polygon points="40,100 100,40 160,100" fill="none" stroke="#333" stroke-width="3"/><rect x="85" y="140" width="30" height="40" fill="none" stroke="#333" stroke-width="3"/></svg>'},
+  heart:{name:'قلب',svg:'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><path d="M100 175 L40 115 Q20 95 30 65 Q40 35 70 40 Q90 45 100 70 Q110 45 130 40 Q160 35 170 65 Q180 95 160 115 Z" fill="none" stroke="#333" stroke-width="3"/></svg>'},
+  cat:{name:'قطة',svg:'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle cx="100" cy="110" r="50" fill="none" stroke="#333" stroke-width="3"/><polygon points="60,75 70,30 95,65" fill="none" stroke="#333" stroke-width="3"/><polygon points="140,75 130,30 105,65" fill="none" stroke="#333" stroke-width="3"/><circle cx="85" cy="105" r="6" fill="#333"/><circle cx="115" cy="105" r="6" fill="#333"/></svg>'},
+  car:{name:'سيارة',svg:'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect x="20" y="100" width="160" height="50" rx="10" fill="none" stroke="#333" stroke-width="3"/><path d="M50 100 L70 60 L130 60 L150 100" fill="none" stroke="#333" stroke-width="3"/><circle cx="60" cy="155" r="15" fill="none" stroke="#333" stroke-width="3"/><circle cx="140" cy="155" r="15" fill="none" stroke="#333" stroke-width="3"/></svg>'},
+  tree:{name:'شجرة',svg:'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect x="90" y="120" width="20" height="60" fill="none" stroke="#333" stroke-width="3"/><circle cx="100" cy="90" r="40" fill="none" stroke="#333" stroke-width="3"/><circle cx="70" cy="80" r="25" fill="none" stroke="#333" stroke-width="3"/><circle cx="130" cy="80" r="25" fill="none" stroke="#333" stroke-width="3"/></svg>'},
+  rainbow:{name:'قوس قزح',svg:'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><path d="M20 160 Q100 20 180 160" fill="none" stroke="#333" stroke-width="3"/><path d="M40 160 Q100 45 160 160" fill="none" stroke="#333" stroke-width="3"/><path d="M60 160 Q100 70 140 160" fill="none" stroke="#333" stroke-width="3"/><path d="M80 160 Q100 95 120 160" fill="none" stroke="#333" stroke-width="3"/></svg>'}
+};
+
+function openTemplates(){
+  var modal=$('templateModal'),grid=$('templateGrid');
+  if(!modal||!grid)return;
+  grid.innerHTML='';
+  Object.keys(coloringTemplates).forEach(function(key){
+    var tpl=coloringTemplates[key];
+    var item=document.createElement('button');
+    item.className='template-item';
+    item.setAttribute('aria-label','قالب '+tpl.name);
+    item.innerHTML=tpl.svg+'<span>'+esc(tpl.name)+'</span>';
+    item.onclick=function(){loadTemplate(key);closeTemplates();click()};
+    grid.appendChild(item);
+  });
+  modal.classList.add('show');modal.setAttribute('aria-hidden','false');
+  say('اختر قالباً للتلوين');
+}
+function closeTemplates(){
+  var modal=$('templateModal');
+  if(modal){modal.classList.remove('show');modal.setAttribute('aria-hidden','true')}
+}
+function loadTemplate(key){
+  var tpl=coloringTemplates[key];
+  if(!tpl||!canvas||!ctx2d)return;
+  try{
+    var svg=tpl.svg.replace('<svg ','<svg width="200" height="200" ');
+    var blob=new Blob([svg],{type:'image/svg+xml'});
+    var url=URL.createObjectURL(blob);
+    var img=new Image();
+    img.onload=function(){
+      try{
+        saveUndo();
+        ctx2d.globalCompositeOperation='source-over';
+        fillPaper();
+        var scale=Math.min(canvas.width,canvas.height)*0.75/200;
+        var dw=200*scale,dh=200*scale;
+        var dx=(canvas.width-dw)/2,dy=(canvas.height-dh)/2;
+        ctx2d.drawImage(img,dx,dy,dw,dh);
+        captureBase();updateInkMaster();
+        stickers=[];selectedSticker=-1;
+        paintAll();
+        showDrawHint('الآن لوّن القالب بأدواتك 🎨');
+        say('الآن لوّن القالب بأدواتك');
+        scheduleAutosave();
+      }catch(e){}
+      try{URL.revokeObjectURL(url)}catch(e){}
+    };
+    img.onerror=function(){showDrawHint('تعذر تحميل القالب');try{URL.revokeObjectURL(url)}catch(e){}};
+    img.src=url;
+  }catch(e){showDrawHint('تعذر تحميل القالب')}
+}
+
+function initDraw(){
+  canvas=$('paintCanvas');
+  if(!canvas)return;
+  ctx2d=canvas.getContext('2d');
+  var container=$('canvas-container');
+  if(!container)return;
+
+  function resizeCanvas(){
+    var cssW=Math.max(container.clientWidth-4,100);
+    var cssH=Math.max(container.clientHeight-4,100);
+    if(cssW<40||cssH<40)return; /* تخطيط غير جاهز بعد */
+    var dpr=Math.min(window.devicePixelRatio||1,3);
+    var w=Math.max(1,Math.round(cssW*dpr)),h=Math.max(1,Math.round(cssH*dpr));
+    var oldW=canvas.width,oldH=canvas.height;
+    if(oldW===w&&oldH===h){
+      canvas.style.width=cssW+'px';canvas.style.height=cssH+'px';
+      return;
+    }
+    var scale=1,offsetX=0,offsetY=0;
+    if(oldW>0&&oldH>0){
+      scale=Math.min(w/oldW,h/oldH);
+      offsetX=(w-oldW*scale)/2;offsetY=(h-oldH*scale)/2;
+      stickers=stickers.map(function(st){
+        return Object.assign({},st,{x:st.x*scale+offsetX,y:st.y*scale+offsetY,sz:(st.sz||stickerSize)*scale});
+      });
+    }
+    canvas.width=w;canvas.height=h;
+    canvas.style.width=cssW+'px';canvas.style.height=cssH+'px';
+    ctx2d=canvas.getContext('2d');
+    try{ctx2d.lineCap='round';ctx2d.lineJoin='round'}catch(e){}
+    try{
+      var px=w*h;
+      MAX_UNDO=px>800000?8:(px>300000?12:20);
+      if(oldW!==w||oldH!==h){undoStack=[];redoStack=[]}
+    }catch(e){}
+    ctx2d.clearRect(0,0,w,h);
+    /* دائمًا من inkMaster الأصلي — يمنع تراكم الضبابية */
+    if(inkMaster){
+      paintFromMaster();
+    }else if(baseInk&&oldW>0){
+      try{
+        var t=document.createElement('canvas');t.width=baseInk.width;t.height=baseInk.height;
+        t.getContext('2d').putImageData(baseInk,0,0);
+        ctx2d.drawImage(t,0,0,t.width,t.height,offsetX,offsetY,oldW*scale,oldH*scale);
+        try{baseInk=ctx2d.getImageData(0,0,w,h)}catch(e){}
+      }catch(e){fillPaper()}
+    }else{
+      fillPaper();
+    }
+    paintAll();
+    updateTools();
+  }
+
+  if(drawInitDone){
+    resizeCanvas();
+    if(inkMaster){paintFromMaster();paintAll()}
+    setTimeout(function(){
+      showDrawHint('مرحباً بعودتك 🎨');
+      if(speechOk) say('مرحباً بعودتك');
+    },250);
+    return;
+  }
+  drawInitDone=true;
+  resizeCanvas();
+  try{if(window.ResizeObserver){new ResizeObserver(function(){
+    if(_restorePending)return;
+    resizeCanvas();
+  }).observe(container)}}catch(e){}
+
+  if(!canvas._resized){
+    window.addEventListener('resize',function(){
+      var m=$('textModal');
+      if(m&&m.classList.contains('show'))return;
+      if(document.activeElement&&document.activeElement.tagName==='INPUT')return;
+      if(_restorePending)return;
+      resizeCanvas();
+    });
+    canvas._resized=true;
+  }
+  /* انتظر استقرار التخطيط ثم استعد من المصدر النقي */
+  requestAnimationFrame(function(){
+    requestAnimationFrame(function(){
+      resizeCanvas();
+      tryRestoreAutosave();
+    });
+  });
+
+  var pal=$('palette');
+  if(pal){
+    pal.innerHTML='';
+    colorsList.forEach(function(c){
+      var b=document.createElement('div');
+      b.className='color-btn'+(c===currentColor?' active':'');
+      b.style.background=c;
+      if(c==='#ffffff')b.style.boxShadow='inset 0 0 0 1px #ccc,0 2px 5px rgba(0,0,0,.15)';
+      b.setAttribute('role','button');b.setAttribute('tabindex','0');
+      b.setAttribute('aria-label','لون '+(colorNames[c]||c));
+      b.onclick=function(){
+        document.querySelectorAll('#palette .color-btn').forEach(function(el){el.classList.remove('active')});
+        b.classList.add('active');
+        currentColor=c;
+        if(drawMode==='eraser')drawMode='brush';
+        updateTools();click();pop();
+        if(colorNames[c])say(colorNames[c]);
+      };
+      b.onkeydown=function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();this.click()}};
+      pal.appendChild(b);
+    });
+    var rainbow=document.createElement('div');
+    rainbow.className='color-btn special'+(currentColor==='rainbow'?' active':'');
+    rainbow.title='قوس قزح';
+    rainbow.setAttribute('role','button');rainbow.setAttribute('tabindex','0');
+    rainbow.setAttribute('aria-label','لون قوس قزح');
+    rainbow.onclick=function(){
+      document.querySelectorAll('#palette .color-btn').forEach(function(el){el.classList.remove('active')});
+      rainbow.classList.add('active');
+      currentColor='rainbow';
+      if(drawMode==='eraser')drawMode='brush';
+      updateTools();click();pop();
+      say('لون قوس قزح');
+    };
+    rainbow.onkeydown=function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();this.click()}};
+    pal.appendChild(rainbow);
+  }
+
+  document.querySelectorAll('#bgPicker .bg-btn').forEach(function(b){
+    b.onclick=function(){
+      saveUndo();
+      var newBg=b.getAttribute('data-bg')||'white';
+      bgMode=newBg;
+      _applyBg();
+      if(newBg==='night'&&isDarkColor(currentColor)){
+        showDrawHint('الخلفية داكنة — جرّب لوناً فاتحاً');
+        say('الخلفية داكنة، جرّب لوناً فاتحاً');
+      }else{
+        var labelMap={
+          white:'الخلفية البيضاء',
+          sky:'خلفية السماء',
+          field:'خلفية الحقل',
+          beach:'خلفية الشاطئ',
+          night:'خلفية الليل',
+          candy:'خلفية الحلوى'
+        };
+        showDrawHint('تم اختيار '+(labelMap[bgMode]||'خلفية جديدة'));
+        say(labelMap[bgMode]||'خلفية جديدة');
+      }
+      scheduleAutosave();click();
+    };
+  });
+
+  function updateTools(){
+    if(!ctx2d)return;
+    ['brush','spray','magic','text','line','circle','rect','stamp','move','eraser','fill'].forEach(function(m){
+      var id='tool'+m.charAt(0).toUpperCase()+m.slice(1);
+      var el=$(id);
+      if(el)el.classList.toggle('on',drawMode===m);
+    });
+    document.querySelectorAll('.stamp-btn').forEach(function(b){
+      b.classList.toggle('on',drawMode==='stamp'&&b.getAttribute('data-stamp')===selectedStamp);
+    });
+    if(drawMode==='eraser'){
+      ctx2d.globalCompositeOperation='destination-out';
+      ctx2d.strokeStyle='rgba(0,0,0,1)';
+    }else{
+      ctx2d.globalCompositeOperation='source-over';
+      ctx2d.strokeStyle=currentColor==='rainbow'?'#000':currentColor;
+      ctx2d.fillStyle=currentColor==='rainbow'?'#000':currentColor;
+    }
+    ctx2d.lineCap='round';
+    ctx2d.lineJoin='round';
+    ctx2d.miterLimit=2;
+    ctx2d.lineWidth=brushSize;
+    if(drawMode==='move')canvas.style.cursor='grab';
+    else if(drawMode==='stamp')canvas.style.cursor='copy';
+    else canvas.style.cursor='crosshair';
+  }
+  _updateToolsFn=updateTools;
+
+  function setMode(m){
+    drawMode=m;selectedSticker=-1;
+    paintAll();updateTools();click();
+    var hints={
+      brush:'ارسم بإصبعك بحرية',spray:'رشّ اللون كالرذاذ',magic:'فرشاة سحرية متوهجة',
+      text:'اضغط مكان الكتابة على اللوحة',line:'اسحب لرسم خط مستقيم',
+      circle:'اسحب لرسم دائرة',rect:'اسحب لرسم مربع',
+      stamp:'اختر ملصقاً واضغط مكانه',move:'اسحب الملصق لنقله',
+      eraser:'امسح ما تريد',fill:'اضغط داخل الشكل للتعبئة'
+    };
+    showDrawHint(hints[m]||'');
+    if(hints[m])say(hints[m]);
+  }
+
+  ['Brush','Spray','Magic','Text','Line','Circle','Rect','Stamp','Move','Eraser','Fill'].forEach(function(name){
+    var el=$('tool'+name);
+    if(el)el.onclick=function(){setMode(name.toLowerCase())};
+  });
+
+  if($('toolDelete'))$('toolDelete').onclick=function(){
+    if(selectedSticker>=0&&stickers[selectedSticker]){
+      saveUndo();
+      stickers.splice(selectedSticker,1);
+      selectedSticker=-1;
+      paintAll();click();
+      showDrawHint('تم حذف الملصق');say('تم حذف الملصق');
+      scheduleAutosave();
+    }else{
+      showDrawHint('حدد ملصقاً أولاً بأداة النقل');say('حدد ملصقاً أولاً');
+      setMode('move');
+    }
+  };
+
+  if($('toolDup'))$('toolDup').onclick=function(){
+    if(selectedSticker>=0&&stickers[selectedSticker]){
+      saveUndo();
+      var s=stickers[selectedSticker];
+      stickers.push({e:s.e,x:s.x+24,y:s.y+24,sz:s.sz,type:s.type,color:s.color,rot:s.rot});
+      selectedSticker=stickers.length-1;
+      paintAll();spawnSparks(s.x+24,s.y+24);click();
+      showDrawHint('تم نسخ الملصق');say('تم نسخ الملصق');
+      scheduleAutosave();
+    }else{
+      showDrawHint('حدد ملصقاً أولاً بأداة النقل');say('حدد ملصقاً أولاً');
+      setMode('move');
+    }
+  };
+
+  document.querySelectorAll('.size-btn').forEach(function(btn){
+    btn.onclick=function(){
+      document.querySelectorAll('.size-btn').forEach(function(b){b.classList.remove('on')});
+      btn.classList.add('on');
+      brushSize=+btn.getAttribute('data-size')||18;
+      stickerSize=brushSize<=6?40:(brushSize<=18?54:78);
+      ctx2d.lineWidth=brushSize;
+      if(selectedSticker>=0&&stickers[selectedSticker]){
+        stickers[selectedSticker].sz=stickerSize;paintAll();
+      }
+      click();
+    };
+  });
+
+  if($('undoCanvas'))$('undoCanvas').onclick=function(){performUndo()};
+  if($('redoCanvas'))$('redoCanvas').onclick=function(){performRedo()};
+
+  if($('clearCanvas'))$('clearCanvas').onclick=function(){askConfirm('🗑️ هل تريد مسح الرسمة كلها؟',function(){
+    if(!stickers.length&&!baseInk&&!inkMaster){
+      showDrawHint('اللوحة فارغة بالفعل');say('اللوحة فارغة بالفعل');return;
+    }
+    saveUndo();
+    stickers=[];selectedSticker=-1;dragSticker=-1;
+    inkMaster=null;baseInk=null;
+    fillPaper();paintAll();updateTools();click();
+    showDrawHint('لوحة جديدة — ابدأ الرسم 🎨');
+    say('لوحة جديدة، ابدأ الرسم');
+    try{localStorage.removeItem(AUTOSAVE_KEY);localStorage.removeItem('bearDrawAutosave')}catch(e){}
+  })};
+
+  if($('fullscreenBtn'))$('fullscreenBtn').onclick=function(){click();setDrawFs(!document.body.classList.contains('draw-fullscreen'))};
+
+  function exportCanvas(){
+    var exportC=document.createElement('canvas');
+    exportC.width=canvas.width;exportC.height=canvas.height;
+    var ex=exportC.getContext('2d');
+    _paper(ex,exportC.width,exportC.height);
+    if(baseInk){
+      var _t=document.createElement('canvas');
+      _t.width=baseInk.width;_t.height=baseInk.height;
+      _t.getContext('2d').putImageData(baseInk,0,0);
+      ex.drawImage(_t,0,0);
+    }
+    stickers.forEach(function(s){
+      var sz=s.sz||stickerSize;
+      ex.save();ex.translate(s.x,s.y);
+      if(s.rot)ex.rotate(s.rot);
+      ex.textAlign='center';ex.textBaseline='middle';
+      if(s.type==='text'){
+        ex.font='900 '+sz+'px Tajawal, Segoe UI, sans-serif';
+        ex.lineWidth=Math.max(2,sz/12);
+        ex.strokeStyle='rgba(255,255,255,.9)';
+        ex.fillStyle=s.color||'#1e293b';
+        ex.strokeText(s.e,0,0);
+        ex.fillText(s.e,0,0);
+      }else{
+        ex.font=sz+'px "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", serif';
+        ex.fillText(s.e,0,0);
+      }
+      ex.restore();
+    });
+    return exportC;
+  }
+
+  function doDownload(cv){
+    try{
+      cv.toBlob(function(blob){
+        if(!blob){showToast('⚠️ تعذر الحفظ',3000);return}
+        try{
+          var url=URL.createObjectURL(blob);
+          var link=document.createElement('a');
+          link.download='رسمتي-'+Date.now()+'.png';
+          link.href=url;
+          document.body.appendChild(link);
+          link.click();
+          setTimeout(function(){
+            try{link.remove()}catch(e){}
+            try{URL.revokeObjectURL(url)}catch(e){}
+          },500);
+          spawnConfetti();cheer();
+          showToast('✅ تم حفظ رسمتك',2500);
+          say('تم حفظ رسمتك بنجاح');
+        }catch(e){
+          try{
+            var link2=document.createElement('a');
+            link2.download='rasmy-'+Date.now()+'.png';
+            link2.href=cv.toDataURL('image/png');
+            document.body.appendChild(link2);
+            link2.click();
+            setTimeout(function(){try{link2.remove()}catch(e){}},200);
+            spawnConfetti();cheer();
+            showToast('✅ تم حفظ رسمتك',2500);
+            say('تم حفظ رسمتك بنجاح');
+          }catch(e2){showToast('⚠️ تعذر الحفظ',3000)}
+        }
+      },'image/png');
+    }catch(e){showToast('⚠️ تعذر الحفظ',3000)}
+  }
+
+  if($('shareCanvas'))$('shareCanvas').onclick=function(){
+    click();
+    parentGate(function(){
+      try{
+        var exportC=exportCanvas();
+        if(navigator.canShare&&navigator.share&&typeof File!=='undefined'){
+          exportC.toBlob(function(blob){
+            if(!blob){doDownload(exportC);return}
+            try{
+              var file=new File([blob],'rasmy.png',{type:'image/png'});
+              if(navigator.canShare({files:[file]})){
+                navigator.share({files:[file],title:'رسمتي من عالم الدب الصغير',text:'انظر ما رسمت'}).catch(function(){});
+              }else doDownload(exportC);
+            }catch(e){doDownload(exportC)}
+          },'image/png');
+        }else{
+          doDownload(exportC);
+          showToast('📥 تم الحفظ — شاركها مع أهلك',3000);
+        }
+      }catch(e){showToast('⚠️ تعذر المشاركة',3000)}
+    });
+  };
+
+  if($('downloadCanvas'))$('downloadCanvas').onclick=function(){
+    parentGate(function(){
+      try{doDownload(exportCanvas())}
+      catch(e){showToast('⚠️ تعذر الحفظ',3000)}
+    });
+  };
+
+  if($('templatesBtn'))$('templatesBtn').onclick=function(){click();openTemplates()};
+  if($('templateCancel'))$('templateCancel').onclick=function(){closeTemplates();click()};
+
+  document.querySelectorAll('.stamp-btn').forEach(function(btn){
+    btn.onclick=function(){
+      selectedStamp=btn.getAttribute('data-stamp');
+      drawMode='stamp';
+      updateTools();
+      showDrawHint('اضغط على اللوحة لوضع '+selectedStamp);
+      say('اخترت '+selectedStamp);
+      click();
+    };
+  });
+
+  function closeTextModal(){
+    var modal=$('textModal');
+    if(modal){modal.classList.remove('show');modal.setAttribute('aria-hidden','true')}
+    textPending=null;
+  }
+  if($('textCancel'))$('textCancel').onclick=function(){closeTextModal();click()};
+  if($('textOk'))$('textOk').onclick=function(){
+    var inp=$('textInput');
+    var t=inp?inp.value.trim():'';
+    if(!t){showDrawHint('اكتب شيئاً أولاً');say('اكتب شيئاً أولاً');return}
+    if(!textPending){closeTextModal();return}
+    saveUndo();
+    stickers.push({e:t,x:textPending.x,y:textPending.y,sz:Math.max(22,stickerSize-4),type:'text',color:currentColor==='rainbow'?'#e11d48':currentColor});
+    selectedSticker=stickers.length-1;
+    paintAll();
+    spawnSparks(textPending.x,textPending.y,currentColor==='rainbow'?'#ec4899':currentColor);
+    spawnRing(textPending.x,textPending.y);
+    closeTextModal();pop();
+    showDrawHint('تم إضافة النص — حرّكه بأداة النقل');
+    say('تم إضافة النص');
+    scheduleAutosave();
+  };
+  if($('textInput')){
+    $('textInput').onkeydown=function(e){
+      if(e.key==='Enter'){e.preventDefault();if($('textOk'))$('textOk').click()}
+      if(e.key==='Escape'){e.preventDefault();closeTextModal()}
+    };
+  }
+
+  updateTools();
+  showDrawHint('مرحباً أيها الفنان الصغير 🎨');
+  setTimeout(function(){
+    if(stickers.length===0&&speechOk){
+      say('اختر لوناً وابدأ الرسم، أو اضغط على الملصقات لإضافتها');
+    }
+  },1500);
+
+  canvas.onpointerdown=function(e){
+    try{canvas.setPointerCapture(e.pointerId)}catch(err){}
+    var p=getPos(e),x=p.x,y=p.y;
+    startX=x;startY=y;
+
+    if(drawMode==='move'){
+      var hi=hitSticker(x,y);
+      if(hi>=0){
+        saveUndo();
+        dragSticker=hi;selectedSticker=hi;
+        dragOffX=x-stickers[hi].x;
+        dragOffY=y-stickers[hi].y;
+        isDrawing=true;
+        canvas.style.cursor='grabbing';
+        paintAll();
+      }
+      e.preventDefault();return;
+    }
+
+    if(drawMode==='text'){
+      textPending={x:x,y:y};
+      var modal=$('textModal'),inp=$('textInput');
+      if(modal){modal.classList.add('show');modal.setAttribute('aria-hidden','false')}
+      if(inp){inp.value='';setTimeout(function(){inp.focus()},100)}
+      say('اكتب النص الذي تريد');
+      e.preventDefault();return;
+    }
+
+    if(drawMode==='stamp'){
+      saveUndo();
+      stickers.push({e:selectedStamp,x:x,y:y,sz:stickerSize,type:'emoji'});
+      selectedSticker=stickers.length-1;
+      paintAll();spawnSparks(x,y);spawnRing(x,y);pop();
+      var praises=['ما شاء الله','رائع','أحسنت','جميل جداً'];
+      say(praises[Math.floor(Math.random()*praises.length)]);
+      showDrawHint('رائع! حرّكه بأداة النقل أو أضف آخر');
+      scheduleAutosave();
+      e.preventDefault();return;
+    }
+
+    if(drawMode==='fill'){
+      if(baseInk){try{ctx2d.putImageData(baseInk,0,0)}catch(err){}}
+      var beforeFill=snapshotState();
+      var fillChanged=floodFill(x,y,currentColor==='rainbow'?'#f59e0b':currentColor);
+      if(fillChanged){
+        if(undoStack.length>=MAX_UNDO)undoStack.shift();
+        undoStack.push(beforeFill);redoStack=[];
+        captureBase();updateInkMaster();paintAll();updateTools();click();
+        say('تم التلوين');
+        scheduleAutosave();
+      }
+      e.preventDefault();return;
+    }
+
+    isDrawing=true;
+    saveUndo();
+    if(baseInk){try{ctx2d.putImageData(baseInk,0,0)}catch(err){}}
+
+    if(drawMode==='line'||drawMode==='circle'||drawMode==='rect'){
+      takeSnapshot();
+    }else if(drawMode==='spray'){
+      ctx2d.globalCompositeOperation='source-over';
+      sprayAt(x,y);
+    }else if(drawMode==='magic'){
+      ctx2d.globalCompositeOperation='source-over';
+      magicStroke(x,y);
+    }else if(drawMode==='eraser'){
+      ctx2d.globalCompositeOperation='destination-out';
+      ctx2d.strokeStyle='rgba(0,0,0,1)';
+      ctx2d.lineWidth=brushSize;
+      ctx2d.lineCap='round';ctx2d.lineJoin='round';ctx2d.globalAlpha=1;
+      lastX=x;lastY=y;
+      ctx2d.beginPath();ctx2d.moveTo(x,y);ctx2d.lineTo(x+0.01,y);ctx2d.stroke();
+      ctx2d.beginPath();ctx2d.moveTo(x,y);
+    }else{
+      ctx2d.globalCompositeOperation='source-over';
+      ctx2d.strokeStyle=currentColor==='rainbow'?getRainbowColor():currentColor;
+      ctx2d.lineWidth=brushSize;
+      ctx2d.lineCap='round';ctx2d.lineJoin='round';ctx2d.globalAlpha=1;
+      lastX=x;lastY=y;
+      ctx2d.beginPath();ctx2d.moveTo(x,y);
+      startBrushSound();
+      ctx2d.lineTo(x+0.01,y);
+      ctx2d.stroke();
+      ctx2d.beginPath();ctx2d.moveTo(x,y);
+    }
+    e.preventDefault();
+  };
+
+  canvas.onpointermove=function(e){
+    if(!isDrawing)return;
+    var p=getPos(e),x=p.x,y=p.y;
+
+    if(drawMode==='move'&&dragSticker>=0){
+      stickers[dragSticker].x=x-dragOffX;
+      stickers[dragSticker].y=y-dragOffY;
+      paintAll();
+      e.preventDefault();return;
+    }
+
+    if(drawMode==='brush'||drawMode==='eraser'){
+      if(drawMode==='brush'&&currentColor==='rainbow'){
+        ctx2d.strokeStyle=getRainbowColor();
+      }
+      ctx2d.lineCap='round';
+      ctx2d.lineJoin='round';
+      ctx2d.lineWidth=brushSize;
+      ctx2d.globalAlpha=1;
+      /* تعبئة الفجوات عند الحركة السريعة بخط متقطع الكثافة — أوضح من المنحنى */
+      var dx=x-lastX, dy=y-lastY;
+      var dist=Math.sqrt(dx*dx+dy*dy);
+      var step=Math.max(1, brushSize*0.35);
+      if(dist<=step){
+        ctx2d.beginPath();
+        ctx2d.moveTo(lastX,lastY);
+        ctx2d.lineTo(x,y);
+        ctx2d.stroke();
+      }else{
+        var n=Math.ceil(dist/step);
+        ctx2d.beginPath();
+        ctx2d.moveTo(lastX,lastY);
+        for(var i=1;i<=n;i++){
+          var t=i/n;
+          ctx2d.lineTo(lastX+dx*t, lastY+dy*t);
+        }
+        ctx2d.stroke();
+      }
+      lastX=x;lastY=y;
+      e.preventDefault();return;
+    }
+
+    if(drawMode==='spray')sprayAt(x,y);
+    else if(drawMode==='magic')magicStroke(x,y);
+    else if(drawMode==='line'){
+      restoreSnapshot();
+      ctx2d.strokeStyle=currentColor==='rainbow'?getRainbowColor():currentColor;
+      ctx2d.lineWidth=brushSize;
+      ctx2d.beginPath();ctx2d.moveTo(startX,startY);ctx2d.lineTo(x,y);ctx2d.stroke();
+    }else if(drawMode==='circle'){
+      restoreSnapshot();
+      ctx2d.strokeStyle=currentColor==='rainbow'?getRainbowColor():currentColor;
+      ctx2d.lineWidth=brushSize;
+      var rad=Math.sqrt(Math.pow(x-startX,2)+Math.pow(y-startY,2));
+      ctx2d.beginPath();ctx2d.arc(startX,startY,rad,0,Math.PI*2);ctx2d.stroke();
+    }else if(drawMode==='rect'){
+      restoreSnapshot();
+      ctx2d.strokeStyle=currentColor==='rainbow'?getRainbowColor():currentColor;
+      ctx2d.lineWidth=brushSize;
+      ctx2d.strokeRect(startX,startY,x-startX,y-startY);
+    }
+    e.preventDefault();
+  };
+
+  canvas.onpointerup=canvas.onpointercancel=function(e){
+    try{canvas.releasePointerCapture(e.pointerId)}catch(err){}
+    stopBrushSound();
+    if(drawMode==='move'){
+      dragSticker=-1;
+      canvas.style.cursor='grab';
+      paintAll();
+    }else if(isDrawing&&drawMode!=='stamp'&&drawMode!=='fill'){
+      captureBase();updateInkMaster();paintAll();updateTools();
+      scheduleAutosave();
+    }
+    isDrawing=false;snapshot=null;
+    e.preventDefault();
+  };
+}
+
+if($('back6'))$('back6').onclick=function(){
+  if(drawInitDone&&canvas&&baseInk){forceAutosave()}
+  click();go('home');
+};
+
+document.addEventListener('keydown',function(e){
+  if(!$('draw').classList.contains('on'))return;
+  if(e.ctrlKey||e.metaKey){
+    if(e.key==='z'){e.preventDefault();performUndo()}
+    if(e.key==='y'){e.preventDefault();performRedo()}
+    if(e.key==='s'){e.preventDefault();if($('downloadCanvas'))$('downloadCanvas').click()}
+  }
+  if(e.key==='Escape'){
+    if($('textModal').classList.contains('show')){if($('textCancel'))$('textCancel').click()}
+    if($('templateModal').classList.contains('show')){if($('templateCancel'))$('templateCancel').click()}
+  }
+});
+
+window.addEventListener('beforeunload',function(){
+  if(drawInitDone&&canvas&&baseInk&&$('draw').classList.contains('on')){
+    try{forceAutosave()}catch(e){}
+  }
+});
+document.addEventListener('visibilitychange',function(){
+  if(document.hidden){
+    stopBrushSound();
+    if(drawInitDone&&canvas&&baseInk){
+      try{forceAutosave()}catch(e){}
+    }
+  }
+});
+
+function setDrawComplexity(advanced){
+  try{
+    document.body.classList.toggle('draw-advanced',!!advanced);
+    var s=$('drawModeSimple'),a=$('drawModeAdvanced');
+    if(s){s.classList.toggle('on',!advanced);s.setAttribute('aria-pressed',advanced?'false':'true')}
+    if(a){a.classList.toggle('on',!!advanced);a.setAttribute('aria-pressed',advanced?'true':'false')}
+    try{localStorage.setItem('bearDrawMode',advanced?'advanced':'simple')}catch(e){}
+
+    if(!advanced&&['spray','magic','line','circle','rect','fill','text'].indexOf(drawMode)>=0){
+      drawMode='brush';
+      document.querySelectorAll('.dk .tool,.advtools .tool').forEach(function(b){b.classList.remove('on')});
+      var brushBtn=$('toolBrush');
+      if(brushBtn)brushBtn.classList.add('on');
+      try{
+        if(ctx2d){
+          ctx2d.globalCompositeOperation='source-over';
+          ctx2d.strokeStyle=currentColor==='rainbow'?'#000':currentColor;
+          ctx2d.fillStyle=currentColor==='rainbow'?'#000':currentColor;
+          ctx2d.lineWidth=brushSize;
+          if(canvas)canvas.style.cursor='crosshair';
+        }
+      }catch(e){}
+      if(typeof _updateToolsFn==='function'){try{_updateToolsFn()}catch(e){}}
+    }
+    showDrawHint(advanced?'🛠️ الوضع المتقدم — كل الأدوات':'🧒 الوضع البسيط — الأدوات الأساسية');
+    say(advanced?'الوضع المتقدم':'الوضع البسيط');
+  }catch(e){}
+}
+
+(function(){
+  var saved='simple';
+  try{saved=localStorage.getItem('bearDrawMode')||'simple'}catch(e){}
+  try{
+    document.body.classList.toggle('draw-advanced', saved==='advanced');
+    var sBtn=$('drawModeSimple'), aBtn=$('drawModeAdvanced');
+    if(sBtn){
+      sBtn.classList.toggle('on', saved!=='advanced');
+      sBtn.setAttribute('aria-pressed', saved!=='advanced'?'true':'false');
+    }
+    if(aBtn){
+      aBtn.classList.toggle('on', saved==='advanced');
+      aBtn.setAttribute('aria-pressed', saved==='advanced'?'true':'false');
+    }
+  }catch(e){}
+  if($('drawModeSimple'))$('drawModeSimple').onclick=function(){
+    setDrawComplexity(false);
+    if(typeof click==='function')click();
+  };
+  if($('drawModeAdvanced'))$('drawModeAdvanced').onclick=function(){
+    setDrawComplexity(true);
+    if(typeof click==='function')click();
+  };
+})();
+
+upd();
+setTimeout(function(){maybeShowAdToast()},3000);
+
+function updateOfflineBadge(){
+  var b=document.getElementById('offlineBadge');
+  if(!b)return;
+  if(navigator.onLine===false){b.classList.add('show');setTimeout(function(){b.classList.remove('show')},3500)}
+  else b.classList.remove('show');
+}
+window.addEventListener('online',updateOfflineBadge);
+window.addEventListener('offline',updateOfflineBadge);
+updateOfflineBadge();
+
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js',{scope:'./'}).then(function(reg){
+      try{if(reg.update)reg.update()}catch(e){}
+      reg.addEventListener('updatefound',function(){
+        var w=reg.installing;
+        if(!w)return;
+        w.addEventListener('statechange',function(){
+          if(w.state==='installed'&&navigator.serviceWorker.controller){
+            if(typeof showToast==='function')showToast('🔄 يتوفر تحديث — أعد فتح الصفحة',4000);
+          }
+        });
+      });
+    }).catch(function(){});
+  });
+}
+
+/* ✅ دعم اختصارات PWA — داخل نطاق التطبيق للوصول للمتغيرات */
+(function(){
+  try{
+    var params = new URLSearchParams(location.search);
+    var screen = params.get('screen');
+    if(!screen) return;
+    setTimeout(function(){
+      if(screen === 'draw'){
+        go('draw'); initDraw();
+      } else if(screen === 'numbers'){
+        var l = C.find(function(c){ return c.n === 'الأرقام والعد'; });
+        if(l){ cur = l; idx = 0; $('ltitle').textContent = cur.n; $('qtitle').textContent = cur.n; go('lesson'); show(); }
+      } else if(screen === 'letters'){
+        var l2 = C.find(function(c){ return c.n === 'الحروف الهجائية'; });
+        if(l2){ cur = l2; idx = 0; $('ltitle').textContent = cur.n; $('qtitle').textContent = cur.n; go('lesson'); show(); }
+      }
+    }, 500);
+  }catch(e){}
+})();
+
+
+/* ═════════ v6: اللوحات المنزلقة وملء الشاشة والتنقل بين الدروس ═════════ */
+function askConfirm(msg,yes){
+  var m=$('confirmModal');if(!m){yes();return}
+  $('confirmMsg').textContent=msg;m.classList.add('show');m.setAttribute('aria-hidden','false');
+  function close(){m.classList.remove('show');m.setAttribute('aria-hidden','true')}
+  $('confirmYes').onclick=function(){close();yes()};
+  $('confirmNo').onclick=function(){close();click()};
+}
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){
+    var cm=$('confirmModal');
+    if(cm&&cm.classList.contains('show')){cm.classList.remove('show');cm.setAttribute('aria-hidden','true');click()}
+  }
+});
+var SHEETS={colors:'sheetColors',stamps:'sheetStamps',more:'sheetMore'};
+var SHEET_BTN={colors:'btnColors',stamps:'toolStamp',more:'btnMore'};
+function closeSheets(){
+  Object.keys(SHEETS).forEach(function(k){
+    var e=$(SHEETS[k]);if(e)e.classList.remove('open');
+    var b=$(SHEET_BTN[k]);if(b&&b.hasAttribute('aria-expanded'))b.setAttribute('aria-expanded','false');
+  });
+}
+function openSheet(k){
+  closeSheets();
+  var e=$(SHEETS[k]);if(e)e.classList.add('open');
+  var b=$(SHEET_BTN[k]);if(b&&b.hasAttribute('aria-expanded'))b.setAttribute('aria-expanded','true');
+}
+function toggleSheet(k){var e=$(SHEETS[k]);if(e&&e.classList.contains('open'))closeSheets();else openSheet(k)}
+(function(){
+  $('btnColors').onclick=function(){click();toggleSheet('colors')};
+  $('btnMore').onclick=function(){click();toggleSheet('more')};
+  $('toolStamp').addEventListener('click',function(){openSheet('stamps')});
+  ['toolBrush','toolEraser','toolFill','toolMove','toolSpray','toolMagic','toolText','toolLine','toolCircle','toolRect'].forEach(function(id){
+    var b=$(id);if(b)b.addEventListener('click',closeSheets);
+  });
+  document.querySelectorAll('.stamp-btn').forEach(function(b){b.addEventListener('click',closeSheets)});
+  $('palette').addEventListener('click',function(e){
+    var b=e.target.closest&&e.target.closest('.color-btn');if(!b)return;
+    var sp=b.classList.contains('special'),bc=$('btnColors');
+    bc.classList.toggle('rb',sp);
+    if(!sp)bc.style.setProperty('--sw',b.style.background);
+    closeSheets();
+  });
+  $('canvas-container').addEventListener('pointerdown',closeSheets,true);
+  ['downloadCanvas','shareCanvas','toolDelete','toolDup','clearCanvas'].forEach(function(id){var b=$(id);if(b)b.addEventListener('click',closeSheets)});
+  $('fsExit').onclick=function(){click();setDrawFs(false)};
+  $('fsUndo').onclick=function(){$('undoCanvas').click()};
+  $('fsRedo').onclick=function(){$('redoCanvas').click()};
+  $('fsTpl').onclick=function(){$('templatesBtn').click()};
+})();
+
+function isFsReal(){return !!(document.fullscreenElement||document.webkitFullscreenElement)}
+var _fsReal=false;
+function setDrawFs(on){
+  var b=$('fullscreenBtn');
+  document.body.classList.toggle('draw-fullscreen',!!on);
+  if(b){b.setAttribute('aria-pressed',on?'true':'false');b.textContent=on?'⤡':'⛶';b.setAttribute('aria-label',on?'إنهاء ملء الشاشة':'ملء الشاشة')}
+  closeSheets();
+  if(on){
+    var el=document.documentElement,rq=el.requestFullscreen||el.webkitRequestFullscreen;
+    if(rq&&!isFsReal()){
+      try{_fsReal=true;var pr=rq.call(el);if(pr&&pr.catch)pr.catch(function(){_fsReal=false})}catch(e){_fsReal=false}
+    }
+  }else{
+    _fsReal=false;
+    if(isFsReal()){var ex=document.exitFullscreen||document.webkitExitFullscreen;try{var p2=ex.call(document);if(p2&&p2.catch)p2.catch(function(){})}catch(e){}}
+  }
+  setTimeout(function(){try{window.dispatchEvent(new Event('resize'))}catch(e){}},120);
+  var _noApi=!(document.documentElement.requestFullscreen||document.documentElement.webkitRequestFullscreen),
+      _standalone=!!(window.navigator.standalone||(window.matchMedia&&window.matchMedia('(display-mode: standalone)').matches));
+  showDrawHint(on?((_noApi&&!_standalone)?'اللوحة أكبر الآن — لشاشة كاملة ثبّت التطبيق على الشاشة الرئيسية — اضغط ⤡ للخروج':'اللوحة الآن أكبر — اضغط ⤡ للخروج'):'عدنا للوضع العادي');
+}
+function exitDrawFs(){if(document.body.classList.contains('draw-fullscreen'))setDrawFs(false)}
+function onFsChange(){if(_fsReal&&!isFsReal()&&document.body.classList.contains('draw-fullscreen')){_fsReal=false;setDrawFs(false)}}
+document.addEventListener('fullscreenchange',onFsChange);
+document.addEventListener('webkitfullscreenchange',onFsChange);
+
+function lessonList(){return C.filter(function(c){return c.m!=='draw'})}
+function openLesson(c){cur=c;idx=0;$('ltitle').textContent=c.n;$('qtitle').textContent=c.n;go('lesson');show()}
+function stepLesson(d){var L=lessonList(),i=L.indexOf(cur);if(i<0)i=0;openLesson(L[(i+d+L.length)%L.length])}
+$('prevLesson').onclick=function(){click();stepLesson(-1)};
+$('nextLesson').onclick=function(){click();stepLesson(1)};
+$('nextLessonR').onclick=function(){click();stepLesson(1)};
+
+})(); // 👈 إغلاق التطبيق بالكامل
+</script>
+</body>
+</html>
