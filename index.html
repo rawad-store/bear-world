@@ -144,7 +144,14 @@ button:focus-visible,a:focus-visible,[role=button]:focus-visible{outline:3px sol
 .floater{position:absolute;bottom:-50px;pointer-events:none;z-index:0;opacity:.45;animation:drift linear infinite}@keyframes drift{to{transform:translateY(-115dvh) translateX(34px) rotate(25deg)}}
 .dgitem{font-size:clamp(64px,15cqw,110px);width:1.5em;height:1.5em;margin:10px auto;display:flex;align-items:center;justify-content:center;background:#f5faff;border:3px dashed #93c5fd;border-radius:28px;cursor:grab;touch-action:none;position:relative;z-index:5;user-select:none;transition:transform .25s}.dgitem.drag{transition:none;cursor:grabbing;box-shadow:0 18px 30px rgba(0,0,0,.2)}.dgbask{display:flex;gap:14px;justify-content:center;margin-top:14px}.dgb{flex:1;max-width:200px;min-height:110px;border:3px solid #fbbf24;background:#fffbeb;border-radius:22px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:900;font-size:clamp(16px,3cqw,22px);gap:4px;transition:transform .15s}.dgb span{font-size:clamp(34px,8cqw,56px)}.dgb.hov{background:#fef3c7;transform:scale(1.06);border-color:#f59e0b}.dgb.ok{background:#d7f8e9;border-color:#43c895;animation:pop .3s}.dgb.no{background:#ffe5e2;border-color:#ff8c82;animation:shake .3s}
 @media(prefers-reduced-motion:reduce){.floater{display:none}#mascot,#mascot[class]{animation:none}}
-@media(prefers-reduced-motion:reduce){.bear-acc{animation:none}.card,.world{animation:none}.world .e{animation:none}}
+[hidden]{display:none!important}
+.installcard{display:flex;align-items:center;gap:10px;background:linear-gradient(110deg,#e0f7ef,#eef9ff);border:1px solid #a7e8cf;border-radius:22px;padding:10px 12px;margin:0 0 12px;box-shadow:0 8px 18px rgba(22,168,120,.12);animation:cardIn .5s both}
+.installcard .ic{font-size:34px}.installcard div{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}.installcard strong{font-size:clamp(15px,2.1cqw,19px);color:#0f5e46}.installcard div span{font-size:clamp(12px,1.5cqw,14px);color:#3f7d69;font-weight:800}
+#installBtn{animation:instp 2s ease-in-out infinite}@keyframes instp{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
+.xbtn{border:0;background:#fff;color:#5b7a70;width:32px;height:32px;border-radius:50%;font-size:14px;cursor:pointer;flex:none;box-shadow:0 2px 6px rgba(0,0,0,.1)}
+#iosModal{display:none;position:fixed;inset:0;z-index:270;background:rgba(15,30,55,.55);align-items:center;justify-content:center;padding:16px}#iosModal.show{display:flex}
+#iosModal .box{background:#fff;border-radius:22px;padding:20px;width:min(94%,380px);direction:rtl;text-align:right;box-shadow:0 20px 50px rgba(0,0,0,.25)}#iosModal h3{margin:0 0 10px;font-size:18px;color:#1e3a5f;text-align:center}#iosModal ol{padding-right:20px;margin:0 0 16px;font-weight:800;line-height:1.9;color:#33506b}#iosModal .btn{width:100%}
+@media(prefers-reduced-motion:reduce){#installBtn{animation:none}.bear-acc{animation:none}.card,.world{animation:none}.world .e{animation:none}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 
 
@@ -292,6 +299,13 @@ body.draw-fullscreen .draw-header{display:none}
     <p class="home-subtitle">نتعلّم ونلعب ونكتشف كل يوم! ✨</p>
     <div class="rankbox" id="rankbox"><div class="rtop"><span id="rankT"></span><small id="rankN"></small></div><div class="rbar"><u id="rankBar"></u></div></div>
     <div class="medals" id="medals" role="list" aria-label="أوسمة العوالم"></div>
+
+    <div class="installcard" id="installCard" hidden>
+      <span class="ic" aria-hidden="true">📲</span>
+      <div><strong>ثبّت التطبيق على جهازك</strong><span>يعمل بدون إنترنت وبشاشة كاملة مثل أي تطبيق</span></div>
+      <button class="btn g sm" id="installBtn" type="button">تثبيت</button>
+      <button class="xbtn" id="installX" type="button" aria-label="ليس الآن">✕</button>
+    </div>
 
     <div class="home-banner">
       <div>
@@ -484,7 +498,7 @@ body.draw-fullscreen .draw-header{display:none}
   <button id="mascot" aria-label="الدب الصغير — اضغط لتعرف معلومة" type="button"><span id="mbub" role="status" aria-live="polite"></span>🐻</button>
 </div>
 
-<noscript><p style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#fff;font:800 20px Tajawal,sans-serif;text-align:center;padding:24px;z-index:999">يحتاج التطبيق إلى تفعيل JavaScript ليعمل 🐻</p></noscript>
+<div id="iosModal" aria-hidden="true"><div class="box" role="dialog" aria-modal="true" aria-labelledby="iosT"><h3 id="iosT">📲 تثبيت التطبيق على الآيفون / الآيباد</h3><ol><li>اضغط زر المشاركة <b>⬆️</b> في أسفل المتصفح (أو أعلاه)</li><li>اختر <b>«إضافة إلى الشاشة الرئيسية»</b> ➕</li><li>اضغط <b>«إضافة»</b> وسيظهر الدب 🐻 على شاشتك</li></ol><button class="btn g" id="iosOk" type="button">فهمت 👍</button></div></div>
 <div id="confirmModal" aria-hidden="true"><div class="box" role="dialog" aria-modal="true"><h3 id="confirmMsg"></h3><div class="row"><button class="btn g" id="confirmYes">نعم</button><button class="btn b" id="confirmNo">لا</button></div></div></div>
 
 <div id="textModal" aria-hidden="true">
@@ -2809,6 +2823,32 @@ function dragGame(){
   }
   round();
 }
+/* ═════════ 📲 تثبيت التطبيق (أندرويد · الحاسوب · آيفون/آيباد) ═════════ */
+var _dip=null;
+function isStandalone(){return !!((window.matchMedia&&(matchMedia('(display-mode: standalone)').matches||matchMedia('(display-mode: fullscreen)').matches))||window.navigator.standalone)}
+function isIOS(){return /iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1)}
+function instDismissed(){var t=+safeGet('bearInstDismiss',0);return !!t&&Date.now()-t<7*864e5}
+function instMark(k){try{localStorage.setItem(k,String(Date.now()))}catch(e){}}
+function updInstall(){
+  var c=$('installCard');if(!c)return;
+  c.hidden=!(!isStandalone()&&!instDismissed()&&(!!_dip||(isIOS()&&!safeGet('bearInstalled',0))));
+}
+function openIos(){var m=$('iosModal');m.classList.add('show');m.setAttribute('aria-hidden','false');$('iosOk').focus()}
+function closeIos(){var m=$('iosModal');m.classList.remove('show');m.setAttribute('aria-hidden','true')}
+window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();_dip=e;updInstall()});
+window.addEventListener('appinstalled',function(){_dip=null;instMark('bearInstalled');updInstall();showToast('🎉 تم تثبيت التطبيق بنجاح!',3500);bigCheer();burst(true)});
+$('installBtn').onclick=function(){
+  click();
+  if(_dip){var p=_dip;_dip=null;
+    try{p.prompt();p.userChoice.then(function(r){if(!r||r.outcome!=='accepted')instMark('bearInstDismiss');updInstall()}).catch(updInstall)}catch(e){updInstall()}
+  }else if(isIOS())openIos();
+};
+$('installX').onclick=function(){click();instMark('bearInstDismiss');updInstall()};
+$('iosOk').onclick=function(){click();closeIos();instMark('bearInstDismiss');updInstall()};
+$('iosModal').addEventListener('click',function(e){if(e.target===this)closeIos()});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeIos()});
+if(isStandalone())instMark('bearInstalled');
+updInstall();
 $('skBack').onclick=function(){click();if(skIn)skHub();else go('home')};
 
 })(); // 👈 إغلاق التطبيق بالكامل
