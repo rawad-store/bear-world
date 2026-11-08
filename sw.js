@@ -3,11 +3,14 @@
    يضمن أن وضع عدم الاتصال = آخر تحديث مخزَّن للتطبيق
    ══════════════════════════════════════════════════════════════ */
 
-const VERSION = 'bear-world-v51';
+/* ⚠️ غيّر هذا الرقم مع كل إصدار جديد من التطبيق */
+const VERSION = 'bear-world-v52';
+
+/* إلزامي: إن فشل تخزينه يفشل التثبيت ويُعاد لاحقًا بدل تفعيل عامل بلا صفحة مخزّنة */
+const REQUIRED = ['./index.html'];
 
 const CORE = [
   './',
-  './index.html',
   './manifest.json',
   './bear.png',
   './icon-96.png',
@@ -103,10 +106,17 @@ self.addEventListener('install', (event) => {
   event.waitUntil((async () => {
     const cache = await caches.open(VERSION);
 
-    // CORE إلزامي نسبيًا: نستخدم cache: 'reload' لتجاوز HTTP cache
+    // الصفحة الأساسية: إلزامية (الفشل يوقف التثبيت ليُعاد المحاولة لاحقًا)
+    await Promise.all(
+      REQUIRED.map((u) => cache.add(new Request(u, { cache: 'reload' })))
+    );
+
+    // بقية CORE: فشلها لا يوقف التثبيت لكن يُسجَّل للتشخيص
     await Promise.all(
       CORE.map((u) =>
-        cache.add(new Request(u, { cache: 'reload' })).catch(() => {})
+        cache.add(new Request(u, { cache: 'reload' })).catch((err) => {
+          console.warn('[SW] تعذّر تخزين', u, err && err.message);
+        })
       )
     );
 

@@ -1,5 +1,5 @@
 {
-  "id": "/?pwa=1",
+  "id": "./?pwa=1",
   "name": "عالم الدب الصغير التعليمي",
   "short_name": "الدب الصغير",
   "description": "تطبيق تعليمي تفاعلي متكامل للأطفال: أرقام وحروف وعلوم وقصص ومرسم تلوين — مكتبة الرواد",
@@ -17,7 +17,6 @@
   "launch_handler": {
     "client_mode": "navigate-existing"
   },
-  "handle_links": "preferred",
   "icons": [
     {
       "src": "icon-96.png",
