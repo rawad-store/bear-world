@@ -1,9 +1,9 @@
 /* ══════════════════════════════════════════════════════════════
-   Service Worker — عالم الدب الصغير v47
+   Service Worker — عالم الدب الصغير v51
    يضمن أن وضع عدم الاتصال = آخر تحديث مخزَّن للتطبيق
    ══════════════════════════════════════════════════════════════ */
 
-const VERSION = 'bear-world-v50';
+const VERSION = 'bear-world-v51';
 
 const CORE = [
   './',
@@ -34,7 +34,7 @@ const OFFLINE_HTML =
   'box-shadow:0 14px 34px rgba(34,65,103,.14)}h1{font-size:26px;margin:0 0 12px}' +
   'p{color:#61758a;font-weight:700;line-height:1.7}' +
   'button{margin-top:16px;border:0;border-radius:14px;padding:12px 24px;' +
-  'font:900 16px inherit;background:linear-gradient(180deg,#68b5ff,#4389f5);' +
+  'font:900 16px Tahoma,Arial,sans-serif;background:linear-gradient(180deg,#68b5ff,#4389f5);' +
   'color:#fff;box-shadow:0 4px 0 #2862c7;cursor:pointer}</style>' +
   '<div class="box"><div style="font-size:64px">🐻</div>' +
   '<h1>لا يوجد اتصال بالإنترنت</h1>' +
@@ -61,6 +61,13 @@ async function putInCache(key, response) {
 /* مفتاح موحّد لصفحة التطبيق الرئيسية — يُخزَّن دائمًا تحت './index.html' */
 const SHELL_KEY = './index.html';
 
+/* نخزّن استجابة التنقل تحت SHELL_KEY فقط إذا كانت فعلاً صفحة التطبيق
+   (جذر النطاق أو index.html) — حتى لا تحلّ صفحة أخرى داخل النطاق محلّها */
+const SCOPE_PATH = new URL('./', self.registration.scope).pathname;
+function isShellUrl(u) {
+  return u.pathname === SCOPE_PATH || u.pathname === SCOPE_PATH + 'index.html';
+}
+
 /**
  * يعيد آخر نسخة من shell التطبيق المخزَّنة.
  * - يبحث أولًا في الكاش الحالي (VERSION) ثم في أي كاش bear-world- قديم
@@ -69,7 +76,9 @@ const SHELL_KEY = './index.html';
 async function cachedAppShell() {
   // 1) الكاش الحالي أولًا = آخر تحديث
   const current = await caches.open(VERSION);
-  const hit = await current.match(SHELL_KEY, { ignoreSearch: true });
+  const hit =
+    (await current.match(SHELL_KEY, { ignoreSearch: true })) ||
+    (await current.match('./', { ignoreSearch: true }));
   if (hit) return hit;
 
   // 2) خطة احتياطية: أي كاش bear-world- آخر
@@ -80,7 +89,9 @@ async function cachedAppShell() {
     .reverse();
   for (const k of oldKeys) {
     const c = await caches.open(k);
-    const h = await c.match(SHELL_KEY, { ignoreSearch: true });
+    const h =
+      (await c.match(SHELL_KEY, { ignoreSearch: true })) ||
+      (await c.match('./', { ignoreSearch: true }));
     if (h) return h;
   }
   return null;
@@ -137,6 +148,7 @@ self.addEventListener('fetch', (event) => {
   }
   if (!url.protocol.startsWith('http')) return;
   if (request.headers.has('range')) return;
+  if (request.cache === 'only-if-cached' && request.mode !== 'same-origin') return;
 
   /* ── 1) التنقل (navigate): الشبكة أولًا ثم آخر shell مخزَّن ── */
   if (request.mode === 'navigate') {
@@ -146,8 +158,10 @@ self.addEventListener('fetch', (event) => {
         // بل نُخزِّنها فقط تحت SHELL_KEY لضمان أن offline = آخر تحديث للتطبيق
         const network = await fetchWithTimeout(request, 4000);
         if (network && network.ok) {
-          // نُخزِّن تحت مفتاح موحّد (نسخة واحدة فقط — لا clone مرتين)
-          await putInCache(SHELL_KEY, network.clone()).catch(() => {});
+          // نُخزِّن تحت مفتاح موحّد فقط لصفحة التطبيق نفسها
+          if (isShellUrl(url)) {
+            await putInCache(SHELL_KEY, network.clone()).catch(() => {});
+          }
           return network;
         }
       } catch (e) {}
