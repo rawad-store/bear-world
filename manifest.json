@@ -85,7 +85,7 @@
     {
       "name": "الحروف الهجائية",
       "short_name": "الحروف",
-      "description": "تعلّم الحروف العربية والإنجليزية",
+      "description": "تعلّم الحروف الهجائية العربية مع الدب الصغير",
       "url": "./?screen=letters",
       "icons": [{ "src": "icon-96.png", "sizes": "96x96", "type": "image/png" }]
     }

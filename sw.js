@@ -3,7 +3,7 @@
    يضمن أن وضع عدم الاتصال = آخر تحديث مخزَّن للتطبيق
    ══════════════════════════════════════════════════════════════ */
 
-const VERSION = 'bear-world-v47';
+const VERSION = 'bear-world-v49';
 
 const CORE = [
   './',
@@ -176,13 +176,16 @@ self.addEventListener('fetch', (event) => {
     // stale-while-revalidate
     const cached = await cache.match(request);
     if (cached) {
-      fetch(request)
-        .then((response) => {
-          if (response && (response.ok || response.type === 'opaque')) {
-            putInCache(request, response.clone());
-          }
-        })
-        .catch(() => {});
+      // waitUntil يمنع إيقاف العامل قبل اكتمال تحديث الكاش في الخلفية
+      event.waitUntil(
+        fetch(request)
+          .then((response) => {
+            if (response && (response.ok || response.type === 'opaque')) {
+              return putInCache(request, response.clone());
+            }
+          })
+          .catch(() => {})
+      );
       return cached;
     }
 
