@@ -1,10 +1,10 @@
 /* ══════════════════════════════════════════════════════════════
-   Service Worker — عالم الدب الصغير v51
+   Service Worker — عالم الدب الصغير v54
    يضمن أن وضع عدم الاتصال = آخر تحديث مخزَّن للتطبيق
    ══════════════════════════════════════════════════════════════ */
 
 /* ⚠️ غيّر هذا الرقم مع كل إصدار جديد من التطبيق */
-const VERSION = 'bear-world-v52';
+const VERSION = 'bear-world-v54';
 
 /* إلزامي: إن فشل تخزينه يفشل التثبيت ويُعاد لاحقًا بدل تفعيل عامل بلا صفحة مخزّنة */
 const REQUIRED = ['./index.html'];
@@ -16,14 +16,17 @@ const CORE = [
   './icon-96.png',
   './icon-192.png',
   './icon-512.png',
-  './icon-maskable-512.png'
+  './icon-maskable-512.png',
+  './fonts/tajawal-v12-arabic_latin-regular.woff2',
+  './fonts/tajawal-v12-arabic_latin-700.woff2',
+  './fonts/tajawal-v12-arabic_latin-800.woff2',
+  './fonts/tajawal-v12-arabic_latin-900.woff2'
 ];
 
 const OPTIONAL = [
   './screenshots/home-wide.png',
   './screenshots/draw-wide.png',
-  './screenshots/quiz-narrow.png',
-  'https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800;900&display=swap'
+  './screenshots/quiz-narrow.png'
 ];
 
 const OFFLINE_HTML =
@@ -187,12 +190,11 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  /* ── 2) بقية الطلبات: نفس الأصل + الخطوط فقط ── */
-  const isFont =
-    url.hostname === 'fonts.googleapis.com' ||
-    url.hostname === 'fonts.gstatic.com';
+  /* ── 2) بقية الطلبات: نفس الأصل فقط (الخطوط صارت محلية) ── */
   const sameOrigin = url.origin === self.location.origin;
-  if (!sameOrigin && !isFont) return;
+  if (!sameOrigin) return;
+  /* أقل صلاحية: لا نخزّن ولا نتدخل في ملفات خارج مجلد التطبيق (النطاق مشترك مع مواقع أخرى) */
+  if (sameOrigin && !url.pathname.startsWith(SCOPE_PATH)) return;
 
   event.respondWith((async () => {
     const cache = await caches.open(VERSION);

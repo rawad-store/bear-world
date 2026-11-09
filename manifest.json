@@ -8,11 +8,19 @@
   "start_url": "./?source=pwa",
   "scope": "./",
   "display": "standalone",
-  "display_override": ["standalone", "minimal-ui", "browser"],
+  "display_override": [
+    "standalone",
+    "minimal-ui",
+    "browser"
+  ],
   "orientation": "any",
   "background_color": "#eaf4ff",
   "theme_color": "#eaf4ff",
-  "categories": ["education", "kids", "games"],
+  "categories": [
+    "education",
+    "kids",
+    "games"
+  ],
   "prefer_related_applications": false,
   "launch_handler": {
     "client_mode": "navigate-existing"
@@ -72,21 +80,52 @@
       "short_name": "المرسم",
       "description": "افتح مرسم الرسم والتلوين مباشرة",
       "url": "./?screen=draw",
-      "icons": [{ "src": "icon-96.png", "sizes": "96x96", "type": "image/png" }]
+      "icons": [
+        {
+          "src": "icon-96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
     },
     {
       "name": "الأرقام والعد",
       "short_name": "الأرقام",
       "description": "تعلّم الأرقام والعد مع الدب الصغير",
       "url": "./?screen=numbers",
-      "icons": [{ "src": "icon-96.png", "sizes": "96x96", "type": "image/png" }]
+      "icons": [
+        {
+          "src": "icon-96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
     },
     {
       "name": "الحروف الهجائية",
       "short_name": "الحروف",
       "description": "تعلّم الحروف الهجائية العربية مع الدب الصغير",
       "url": "./?screen=letters",
-      "icons": [{ "src": "icon-96.png", "sizes": "96x96", "type": "image/png" }]
+      "icons": [
+        {
+          "src": "icon-96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "نادي الذكاء",
+      "short_name": "الذكاء",
+      "description": "ألعاب الذاكرة والتفكير مع الدب الصغير",
+      "url": "./?screen=skills",
+      "icons": [
+        {
+          "src": "icon-96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
     }
   ]
 }

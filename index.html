@@ -2,13 +2,13 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self'; manifest-src 'self'; worker-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta name="referrer" content="no-referrer">
+<script>if(window.top!==window.self){try{window.top.location.replace(window.self.location.href)}catch(e){document.documentElement.style.display="none"}}</script>
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,viewport-fit=cover">
 <meta name="theme-color" content="#eaf4ff">
 <meta name="color-scheme" content="light">
 <title>عالم الدب الصغير التعليمي</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800;900&display=swap" rel="stylesheet">
 
 <!-- ═══════════ إعدادات تطبيق الويب التقدمي (PWA) ═══════════ -->
 <link rel="manifest" href="./manifest.json">
@@ -31,6 +31,12 @@
 <meta name="twitter:image" content="https://rawad-store.github.io/bear-world/bear-world.png">
 
 <style>
+/* خط Tajawal مستضاف محلياً — لا اتصال بـ Google */
+@font-face{font-family:'Tajawal';font-style:normal;font-weight:400;font-display:swap;src:url('fonts/tajawal-v12-arabic_latin-regular.woff2') format('woff2')}
+@font-face{font-family:'Tajawal';font-style:normal;font-weight:700;font-display:swap;src:url('fonts/tajawal-v12-arabic_latin-700.woff2') format('woff2')}
+@font-face{font-family:'Tajawal';font-style:normal;font-weight:800;font-display:swap;src:url('fonts/tajawal-v12-arabic_latin-800.woff2') format('woff2')}
+@font-face{font-family:'Tajawal';font-style:normal;font-weight:900;font-display:swap;src:url('fonts/tajawal-v12-arabic_latin-900.woff2') format('woff2')}
+
 :root{--ink:#17324d;--coral:#ff7b72;--shadow:0 14px 34px rgba(34,65,103,.14)}
 *{box-sizing:border-box}
 html,body{margin:0;height:100%;font-family:'Tajawal','Segoe UI',Tahoma,Arial,system-ui,sans-serif;-webkit-tap-highlight-color:transparent;overflow:hidden}
@@ -408,7 +414,7 @@ body.draw-fullscreen .draw-header{display:none}
       <a class="btn gold sm" href="#" data-ext="https://rawad-store.github.io/" rel="noopener" style="margin-top:8px">🌐 زيارة موقع المكتبة</a>
       <p style="margin-top:12px;font-size:12px;line-height:1.8;color:#61758a;font-weight:700">ملاحظة تعليمية: المحتوى للتعلم العام والمراجعة، وليس بديلاً عن المقرر الدراسي. تُذكر الأذكار بصيغها المشهورة، ويُستحسن الرجوع إلى المصادر الشرعية المعتمدة للتوسع والتوثيق.</p>
       <p style="margin-top:8px;font-size:12px;line-height:1.8;color:#61758a;font-weight:700">الخصوصية: يحفظ التطبيق التقدّم والرسومات على هذا الجهاز فقط، ولا يجمع بيانات شخصية ولا يرسلها لأي جهة. تُحمَّل الخطوط من خدمة Google Fonts.</p>
-      <p style="margin-top:18px;font-size:14px">الإصدار 34.5</p>
+      <p style="margin-top:18px;font-size:14px">الإصدار 34.7</p>
       <div class="copy">
         تطوير وإنتاج<br>
         <b>مكتبة الرواد للطباعة والتصوير</b><br>
@@ -836,10 +842,10 @@ var adTimer=null,adDone=false,drawActs=0;
 function drawAct(){if(completedLessons['مرسم التلوين'])return;if(++drawActs>=3){completedLessons['مرسم التلوين']=true;save()}}
 
 function safeGet(k,f){try{var v=localStorage.getItem(k);return v===null?f:v}catch(e){return f}}
-stars=+safeGet('bearstars',0)||0;
-totalCorrect=+safeGet('beartc',0)||0;
+stars=Math.max(0,Math.min(1e6,Math.floor(+safeGet('bearstars',0)||0)));
+totalCorrect=Math.max(0,Math.min(1e6,Math.floor(+safeGet('beartc',0)||0)));
 totalAsked=+safeGet('bearta',0)||0;
-try{completedLessons=JSON.parse(safeGet('bearcl','{}'))||{};if(typeof completedLessons!=='object')completedLessons={}}catch(e){completedLessons={}}
+try{var _cl=JSON.parse(safeGet('bearcl','{}'));completedLessons={};if(_cl&&typeof _cl==='object'&&!Array.isArray(_cl)){Object.keys(_cl).slice(0,200).forEach(function(k){if(k.length<80&&_cl[k])completedLessons[k]=true})}}catch(e){completedLessons={}}
 function save(){try{localStorage.setItem('bearstars',stars);localStorage.setItem('beartc',totalCorrect);localStorage.setItem('bearta',totalAsked);localStorage.setItem('bearcl',JSON.stringify(completedLessons))}catch(e){}}
 function upd(){$('st').textContent=stars;document.querySelectorAll('.stc').forEach(function(x){x.textContent=stars});save()}
 
@@ -979,9 +985,9 @@ function numToArWords(n){
   if(hh)parts.push(hundreds[hh]);
   if(n%100>=10&&n%100<=19)parts.push(teens[n%100-10]);
   else{
-    if(t>=2)parts.push(tens[t]);
     if(o)parts.push(ones[o]);
-    else if(t===1)parts.push(teens[0]);
+    if(t>=2)parts.push(tens[t]);
+    else if(t===1&&!o)parts.push(teens[0]);
   }
   return parts.join(' و')||String(n);
 }
@@ -1070,7 +1076,7 @@ function updRewards(){
   $('rankBar').style.width=(N?Math.round((done-R.m)/(N.m-R.m)*100):100)+'%';
   $('bearAcc').textContent=R.a;
   var first=safeGet('bearwb',null)===null,seen=[],rk=+safeGet('bearrk',-1);
-  try{seen=JSON.parse(safeGet('bearwb','[]'))||[]}catch(e){seen=[]}
+  try{seen=JSON.parse(safeGet('bearwb','[]'));seen=Array.isArray(seen)?seen.filter(function(x){return typeof x==='string'&&x.length<80}).slice(0,50):[]}catch(e){seen=[]}
   var m=$('medals');m.innerHTML='';var fresh=[],nowDone=[];
   WLD.forEach(function(w){
     var d=w.items.filter(function(c){return completedLessons[c.n]}).length,full=d===w.items.length,ti=w.t.slice(w.t.indexOf(' ')+1),em=w.t.slice(0,w.t.indexOf(' '));
@@ -1369,6 +1375,7 @@ document.addEventListener('click',function(e){
   if(!l)return;
   e.preventDefault();
   var url=l.getAttribute('data-ext');
+  if(!/^https:\/\/rawad-store\.github\.io\//.test(url||''))return;
   parentGate(function(){
     var w=window.open(url,'_blank');
     if(w){try{w.opener=null}catch(e2){}}else showToast('⚠️ المتصفح منع فتح الرابط — اسمح بالنوافذ المنبثقة',5000);
@@ -1743,7 +1750,7 @@ function tryRestoreAutosave(){
       if(!raw)return;
     }
     var data=JSON.parse(raw);
-    if(!data||!data.img)return;
+    if(!data||typeof data.img!=='string'||data.img.length>12e6||!/^data:image\/(png|jpeg|webp);base64,/.test(data.img)){try{localStorage.removeItem(AUTOSAVE_KEY)}catch(e){}return}
     if(data.ts&&Date.now()-data.ts>7*24*60*60*1000){localStorage.removeItem(AUTOSAVE_KEY);return}
     bgMode=data.bgMode||'white';setTimeout(_applyBg,0);
     paperMode=data.paperMode||'white';
@@ -2611,7 +2618,9 @@ if('serviceWorker' in navigator){
       } else if(screen === 'numbers'){
         var l = C.find(function(c){ return c.n === 'الأرقام والعد'; });
         if(l){ cur = l; idx = 0; $('ltitle').textContent = cur.n; $('qtitle').textContent = cur.n; go('lesson'); show(); }
-      } else if(screen === 'letters'){
+      } else if(screen === 'skills'){
+ go('skills'); skHub();
+} else if(screen === 'letters'){
         var l2 = C.find(function(c){ return c.n === 'الحروف الهجائية'; });
         if(l2){ cur = l2; idx = 0; $('ltitle').textContent = cur.n; $('qtitle').textContent = cur.n; go('lesson'); show(); }
       }
@@ -2706,7 +2715,7 @@ $('nextLessonR').onclick=function(){click();stepLesson(1)};
 
 /* ═════════ 🧠 نادي الذكاء — تنمية المهارات (الذاكرة · الانتباه · المنطق · الحساب الذهني) ═════════ */
 var SK={best:{}},skIn=false;
-try{SK.best=JSON.parse(safeGet('bearsk','{}'))||{}}catch(e){SK.best={}}
+try{var _sb=JSON.parse(safeGet('bearsk','{}'));SK.best={};if(_sb&&typeof _sb==='object'&&!Array.isArray(_sb)){Object.keys(_sb).slice(0,40).forEach(function(k){var v=+_sb[k];if(/^[a-z0-9]{1,12}$/.test(k)&&isFinite(v))SK.best[k]=Math.max(0,Math.min(99,Math.floor(v)))})}}catch(e){SK.best={}}
 var EM=['🐶','🐱','🐰','🦊','🐼','🦁','🐸','🐵','🦄','🐙','🍎','🍌','🍇','🚀','⭐','🌈'];
 var SIM=[['🐶','🐺'],['🍎','🍅'],['🌕','🌝'],['🐱','🐯'],['🚗','🚙'],['😀','😃'],['🍊','🏀'],['🐰','🐭']];
 var SKG=[
