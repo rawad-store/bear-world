@@ -414,8 +414,8 @@ body.draw-fullscreen .draw-header{display:none}
       <p style="font-size:14px;line-height:1.7;color:#61758a;font-weight:700">ويُفضّل استخدامه بإشراف الكبار. يعرض التطبيق أحياناً رسالة تعريفية بمطبوعات مكتبة الرواد، ولا تُفتح الروابط الخارجية إلا بعد اجتياز مسألة حسابية بسيطة للتأكيد؛ وهي خطوة تنبيه وليست وسيلة للتحقق من هوية ولي الأمر أو حماية أبوية متقدمة.</p>
       <a class="btn gold sm" href="#" data-ext="https://rawad-store.github.io/" rel="noopener" style="margin-top:8px">🌐 زيارة موقع المكتبة</a>
       <p style="margin-top:12px;font-size:12px;line-height:1.8;color:#61758a;font-weight:700">ملاحظة تعليمية: المحتوى للتعلم العام والمراجعة، وليس بديلاً عن المقرر الدراسي. تُذكر الأذكار بصيغها المشهورة، ويُستحسن الرجوع إلى المصادر الشرعية المعتمدة للتوسع والتوثيق.</p>
-      <p style="margin-top:8px;font-size:12px;line-height:1.8;color:#61758a;font-weight:700">الخصوصية: يحفظ التطبيق التقدّم والرسومات على هذا الجهاز فقط، ولا يجمع بيانات شخصية ولا يرسلها لأي جهة. تُحمَّل الخطوط من خدمة Google Fonts.</p>
-      <p style="margin-top:18px;font-size:14px">الإصدار 34.8</p>
+      <p style="margin-top:8px;font-size:12px;line-height:1.8;color:#61758a;font-weight:700">الخصوصية: يحفظ التطبيق التقدّم والرسومات على هذا الجهاز فقط، ولا يجمع بيانات شخصية ولا يرسلها لأي جهة. الخطوط مضمَّنة مع التطبيق ولا يتصل بأي خدمة خارجية لتحميلها.</p>
+      <p style="margin-top:18px;font-size:14px">الإصدار 35.0</p>
       <div class="copy">
         تطوير وإنتاج<br>
         <b>مكتبة الرواد للطباعة والتصوير</b><br>
@@ -2725,7 +2725,13 @@ var SKG=[
 {k:'pat',n:'أكمل النمط',e:'🧩',d:'ما الذي يأتي بعد ذلك؟',c:'#10b981'},
 {k:'cnt',n:'العدّاد السريع',e:'⚡',d:'احسب بسرعة وذكاء',c:'#f59e0b'},
 {k:'drag',n:'سلّة التصنيف',e:'🧺',d:'اسحب كل شيء إلى مكانه',c:'#0d9488'},
-{k:'seq',n:'تذكّر الأنغام',e:'🎹',d:'كرّر ما يعزفه الدب',c:'#8b5cf6'}];
+{k:'seq',n:'تذكّر الأنغام',e:'🎹',d:'كرّر ما يعزفه الدب',c:'#8b5cf6'},
+{k:'miss',n:'ما الذي اختفى؟',e:'🔍',d:'الذاكرة البصرية والانتباه',c:'#e11d48'},
+{k:'shd',n:'صاحب الظل',e:'🌓',d:'الإدراك البصري والتمييز',c:'#475569'},
+{k:'cob',n:'عُدّ معي',e:'🔢',d:'العدّ وحس الأرقام',c:'#0891b2'},
+{k:'ord',n:'رتّب الأعداد',e:'📶',d:'من الأصغر إلى الأكبر',c:'#65a30d'},
+{k:'cmp',n:'الأكثر أم الأقل؟',e:'⚖️',d:'المقارنة والتقدير',c:'#c026d3'},
+{k:'ph',n:'مَن يبدأ بحرف؟',e:'🔤',d:'الأصوات والمفردات',c:'#ea580c'}];
 function rnd(n){return Math.floor(Math.random()*n)}
 function shuf(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=rnd(i+1),t=a[i];a[i]=a[j];a[j]=t}return a}
 function skStars(n){return '⭐'.repeat(n)+'☆'.repeat(3-n)}
@@ -2733,14 +2739,14 @@ function skWin(k,score){stars++;completedLessons['نادي الذكاء']=1;if(s
 function skHub(){
   skIn=false;clearT();stopSay();
   $('skTitle').textContent='🧠 نادي الذكاء';
-  $('sk').innerHTML='<p class="home-subtitle" style="margin:6px 0 14px">اختر لعبة ودرّب عقلك مع الدب! 🐻</p><div class="skg">'+SKG.map(function(g){var b=g.k==='mem'?Math.max(SK.best.mem||0,SK.best.mem3||0,SK.best.mem4||0,SK.best.mem6||0):(SK.best[g.k]||0);return '<button class="card" data-g="'+g.k+'" style="background:'+g.c+'" aria-label="'+g.n+'"><span class="e" aria-hidden="true">'+g.e+'</span>'+g.n+'<small>'+g.d+'</small>'+(b?'<em class="skb">'+skStars(Math.min(b,3))+'</em>':'')+'</button>'}).join('')+'</div>';
+  $('sk').innerHTML='<p class="home-subtitle" style="margin:6px 0 14px">اختر لعبة ودرّب عقلك مع الدب! 🐻<br><small>أنجزتَ '+ar(SKG.filter(function(g){return g.k==='mem'?(SK.best.mem3||SK.best.mem4||SK.best.mem6):SK.best[g.k]}).length)+' من '+ar(SKG.length)+' ألعاب</small></p><div class="skg">'+SKG.map(function(g){var b=g.k==='mem'?Math.max(SK.best.mem||0,SK.best.mem3||0,SK.best.mem4||0,SK.best.mem6||0):(SK.best[g.k]||0);return '<button class="card" data-g="'+g.k+'" style="background:'+g.c+'" aria-label="'+g.n+'"><span class="e" aria-hidden="true">'+g.e+'</span>'+g.n+'<small>'+g.d+'</small>'+(b?'<em class="skb">'+skStars(Math.min(b,3))+'</em>':'')+'</button>'}).join('')+'</div>';
   $('sk').querySelectorAll('.card').forEach(function(b){b.onclick=function(){click();skStart(b.getAttribute('data-g'))}});
 }
 function skStart(k){
   skIn=true;clearT();var g=SKG.filter(function(x){return x.k===k})[0];
   $('skTitle').textContent=g.e+' '+g.n;
   if(k==='mem')memMenu();else if(k==='seq')seqGame();else if(k==='drag')dragGame();
-  else skQuiz(k,k==='odd'?genOdd:k==='pat'?genPat:genCnt);
+  else if(k==='ord')ordGame();else if(k==='miss')missGame();else skQuiz(k,GEN[k]);
 }
 function skDone(k,e,title,msg,n){
   $('sk').innerHTML='<div class="skq"><div class="skbig">'+e+'</div><h2 style="margin:6px 0;color:#1c4775">'+title+'</h2><div class="stars">'+skStars(n)+'</div><div class="sub">'+msg+'</div><div class="skrow"><button class="btn g" id="skAgain">🔄 مرة أخرى</button><button class="btn b" id="skMenu">🎮 الألعاب</button></div></div>';
@@ -2791,7 +2797,7 @@ function memMenu(){
   $('sk').querySelectorAll('[data-p]').forEach(function(b){b.onclick=function(){click();memPlay(+b.getAttribute('data-p'))}});
 }
 function memPlay(P){
-  var deck=shuf(shuf(EM).slice(0,P).concat(shuf(EM).slice(0,0))),cards=[];
+  var cards=[];
   var pk=shuf(EM).slice(0,P);cards=shuf(pk.concat(pk));
   var cols=P===3?3:4,first=null,busy=false,moves=0,found=0;
   $('sk').innerHTML='<div class="sks" id="mv">الحركات: '+ar(0)+'</div><div class="skmem" style="grid-template-columns:repeat('+cols+',1fr)">'+cards.map(function(c,i){return '<button class="mc" data-i="'+i+'" aria-label="بطاقة مغلقة">❓</button>'}).join('')+'</div>';
@@ -2824,6 +2830,66 @@ function seqGame(){
   }});
   play();
 }
+/* ═════════ 🧠 ألعاب جديدة: الانتباه · الإدراك · العدّ · الترتيب · المقارنة · الأصوات ═════════ */
+var SHP=['🐘','🦒','🐢','🐧','🦆','🐟','🦋','🐌','🚀','✈️','🏠','🌳','⭐','🔔','🍄','🐙'];
+function genShd(r){var n=r<3?3:4,pk=shuf(SHP).slice(0,n),a=rnd(n);
+  return{q:'<span style="filter:brightness(0) opacity(.8)">'+pk[a]+'</span>',t:'ما صاحب هذا الظل؟',o:pk,a:a,s:'ما صاحب هذا الظل؟'}}
+function genCob(r){var n=1+rnd(Math.min(10,4+r*2)),e=shuf(EM.slice(0,10))[0],o=[n];
+  while(o.length<3){var w=Math.max(1,n+(rnd(2)?1:-1)*(1+rnd(2)));if(o.indexOf(w)<0)o.push(w)}o=shuf(o);
+  return{q:'<span style="font-size:.62em;line-height:1.25">'+new Array(n+1).join(e)+'</span>',t:'كم عددها؟',o:o.map(ar),a:o.indexOf(n),s:'كم عدد الأشكال؟'}}
+function genPh(r){var k=shuf(letters).slice(0,3),a=rnd(3);
+  return{q:k[a].l,t:'أيّ صورة يبدأ اسمها بحرف '+k[a].l+'؟',o:k.map(function(x){return x.g}),a:a,s:'أي صورة يبدأ اسمها بحرف '+k[a].l}}
+function genCmp(r){var e=shuf(EM.slice(0,10))[0],mx=r<2?5:9,b=1+rnd(mx),a=b;
+  while(Math.abs(a-b)<(r<2?2:1)||a<1||a>9){a=1+rnd(mx)}
+  var more=rnd(2)===0,c=[a,b],ans=more?(a>b?0:1):(a<b?0:1);
+  return{q:'⚖️',t:'أيّ المجموعتين فيها '+(more?'أكثر':'أقل')+'؟',s:'أي المجموعتين فيها '+(more?'أكثر':'أقل'),a:ans,
+    o:c.map(function(n){return '<span style="font-size:.3em;line-height:1.15;display:block;padding:4px;word-break:break-all">'+new Array(n+1).join(e)+'</span>'})}}
+var GEN={odd:genOdd,pat:genPat,cnt:genCnt,shd:genShd,cob:genCob,ph:genPh,cmp:genCmp};
+function skFin(k,e,title,msg,ok,T){var n=ok>=T?3:ok>=T-1?2:ok>=T-2?1:0;if(n>=2)skWin(k,n);skDone(k,n>=2?e:'💪',n>=2?title:'محاولة جميلة!',msg,n)}
+function skBar(r,T){return '<div class="prog" style="margin:4px auto 10px"><div class="bar" style="width:'+(r/T*100)+'%"></div></div>'}
+/* ما الذي اختفى؟ — ذاكرة بصرية */
+function missGame(){
+  var r=0,ok=0,T=5;
+  function round(){
+    if(r>=T)return skFin('miss','🔍','مراقب ماهر!','تذكّرت '+ar(ok)+' من '+ar(T)+' بشكل صحيح',ok,T);
+    var n=3+Math.min(r,3),pk=shuf(EM).slice(0,n+2),sh=pk.slice(0,n),g=rnd(n),hd=function(h){return '<div class="sks">الجولة '+ar(r+1)+' من '+ar(T)+'</div>'+h};
+    var row=function(a){return '<div class="skopts" dir="ltr" style="font-size:clamp(40px,10cqw,64px)">'+a.map(function(e){return '<span>'+e+'</span>'}).join('')+'</div>'};
+    $('sk').innerHTML=skBar(r,T)+'<div class="skq">'+hd('<div class="skp">تذكّر الصور جيداً 👀</div>'+row(sh))+'</div>';
+    say('تذكر الصور جيدا');
+    later(function(){
+      var rest=sh.filter(function(_,i){return i!==g}),o=shuf([sh[g],pk[n],pk[n+1]]),a=o.indexOf(sh[g]),lock=false;
+      $('sk').innerHTML=skBar(r,T)+'<div class="skq">'+hd(row(rest)+'<div class="skp">ما الذي اختفى؟ 🤔</div><div class="skopts">'+o.map(function(h,i){return '<button class="opt" data-i="'+i+'" dir="ltr">'+h+'</button>'}).join('')+'</div><div id="skf" class="skf" aria-live="polite"></div>')+'</div>';
+      say('ما الذي اختفى؟');
+      var bs=$('sk').querySelectorAll('.opt');
+      bs.forEach(function(b){b.onclick=function(){
+        if(lock)return;lock=true;
+        if(+b.getAttribute('data-i')===a){ok++;b.classList.add('ok');cheer();vibrate();$('skf').textContent='عينان حادّتان! 🌟'}
+        else{b.classList.add('no');bs[a].classList.add('ok');oops();$('skf').textContent='الصحيح باللون الأخضر 💚'}
+        r++;later(round,1300);
+      }});
+    },2400+n*450);
+  }
+  round();
+}
+/* رتّب الأعداد — من الأصغر إلى الأكبر */
+function ordGame(){
+  var r=0,ok=0,T=5;
+  function round(){
+    if(r>=T)return skFin('ord','📶','مرتِّب ماهر!','رتّبت '+ar(ok)+' من '+ar(T)+' جولات بلا أخطاء',ok,T);
+    var cnt=4+Math.min(r,2),mx=r<2?10:r<4?20:30,pool=[];
+    while(pool.length<cnt){var v=1+rnd(mx);if(pool.indexOf(v)<0)pool.push(v)}
+    var srt=pool.slice().sort(function(a,b){return a-b}),nx=0,err=false;
+    $('sk').innerHTML=skBar(r,T)+'<div class="skq"><div class="sks">الجولة '+ar(r+1)+' من '+ar(T)+'</div><div class="skp">اضغط الأعداد من الأصغر إلى الأكبر 👆</div><div class="skopts">'+shuf(pool).map(function(v){return '<button class="opt" data-v="'+v+'">'+ar(v)+'</button>'}).join('')+'</div><div id="skf" class="skf" aria-live="polite"></div></div>';
+    say('اضغط الأعداد من الأصغر إلى الأكبر');
+    $('sk').querySelectorAll('.opt').forEach(function(b){b.onclick=function(){
+      if(b.classList.contains('ok'))return;
+      if(+b.getAttribute('data-v')===srt[nx]){b.classList.add('ok');b.disabled=true;pop();vibrate(15);nx++;
+        if(nx===cnt){if(!err)ok++;r++;cheer();$('skf').textContent=err?'أحسنت، أكملتَ الترتيب! ✅':'ترتيب مثالي! 🌟';later(round,1100)}}
+      else{err=true;b.classList.add('no');oops();later(function(){b.classList.remove('no')},450);$('skf').textContent='ابحث عن العدد الأصغر 🔎'}
+    }});
+  }
+  round();
+}
 /* ═════════ حركة وتفاعل: الدب المرافق · شرارات اللمس · عناصر عائمة · لعبة السحب ═════════ */
 var _mt=null,FACTS=['الأخطبوط له ثلاثة قلوب 🐙','الزرافة أطول الحيوانات البرية قامةً 🦒','القمر يدور حول الأرض 🌙','نحل العسل يصنع العسل 🍯','الفيل يستطيع السباحة 🐘','الشمس نجمة كبيرة جداً ☀️','يُقسّم قوس المطر تقليدياً إلى سبعة ألوان 🌈','القطط تنام ساعات طويلة 😺','الدلفين يتنفس الهواء مثلنا 🐬','النمل يعمل معاً كفريق 🐜'],_fi=0;
 function mascot(k,t){
@@ -2854,9 +2920,13 @@ function dragGame(){
     el.onpointerup=function(e){
       if(!drag)return;drag=false;el.classList.remove('drag');bk.forEach(function(b){b.classList.remove('hov')});
       var u=under(e);if(!u){el.style.transform='';return}
+      judge(u)};
+    function judge(u){
+      if(lock)return;
       if(+u.getAttribute('data-i')===ans){lock=true;if(!miss)ok++;u.classList.add('ok');el.style.opacity='0';cheer();vibrate();$('skf').textContent=['أحسنت! 🌟','رائع! 👏','ممتاز! 🎉'][rnd(3)];r++;later(round,1000)}
       else{miss=true;u.classList.add('no');setTimeout(function(){u.classList.remove('no')},400);el.style.transform='';oops();$('skf').textContent='جرّب السلة الأخرى 🔄'}
-    };
+    }
+    bk.forEach(function(b){b.setAttribute('role','button');b.setAttribute('tabindex','0');b.onclick=function(){if(!drag){pop();judge(b)}};b.onkeydown=function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();judge(b)}}});
   }
   round();
 }
