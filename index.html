@@ -313,13 +313,24 @@ body.draw-fullscreen .draw-header{display:none}
 #toasts{position:fixed;left:0;right:0;bottom:max(86px,calc(env(safe-area-inset-bottom,0px) + 80px));display:flex;flex-direction:column;align-items:center;gap:8px;z-index:200;pointer-events:none}
 #toasts .toast{background:#17324d;color:#fff;padding:12px 18px;border-radius:16px;font-weight:800;font-size:15px;max-width:min(92%,520px);text-align:center;box-shadow:0 10px 30px #0004;direction:rtl;animation:toastIn .3s ease-out;transition:opacity .4s}
 @keyframes toastIn{from{transform:translateY(14px);opacity:0}to{transform:none;opacity:1}}
-.world:first-child{grid-column:span 1}
-@media(min-width:760px){.world:first-child{grid-column:span 3}}
-@media(max-width:520px){.world:first-child,.world:last-child{grid-column:span 2}}
 html,body,.scr{overscroll-behavior:none}
 .skb.new{background:#fde68a;color:#7c2d12}
 @media(prefers-reduced-motion:reduce){#toasts .toast{animation:none}}
-@media(max-width:520px){.skg .card:last-child:nth-child(odd){grid-column:1/-1}}
+
+/* ═ شبكة موحّدة: صفوف متوسّطة وبطاقات متطابقة على كل الشاشات ═ */
+#grid,.skg{display:flex;flex-wrap:wrap;justify-content:center;align-content:flex-start;--n:3;--g:14px;gap:var(--g)}
+#grid>.card,#grid>.world,.skg>.card{flex:0 0 calc((100% - (var(--n) - 1)*var(--g))/var(--n));min-width:0;box-sizing:border-box}
+#grid>.sec{flex:0 0 100%}
+#grid>.wback{flex:0 0 100%;max-width:max-content;margin-inline-end:auto}
+.skg{--n:3}.skg .card{min-height:184px}
+#grid>.world{min-height:196px}
+#grid>.card{min-height:132px}
+#grid>.world:first-child{flex-basis:calc((100% - (var(--n) - 1)*var(--g))/var(--n))}
+@media(min-width:760px){#grid{--n:4;--g:16px}.skg{--n:4;--g:16px}
+ #grid>.world:first-child{flex-basis:calc(3*(100% - 3*var(--g))/4 + 2*var(--g))}.skg .card{min-height:214px}#grid>.card{min-height:140px}#grid>.world{min-height:200px}}
+@media(min-width:1000px){#grid>.card{min-height:162px}}
+@media(max-width:520px){#grid,.skg{--n:2;--g:10px}.skg .card{min-height:172px}#grid>.world{min-height:196px}#grid>.card{min-height:124px}
+ #grid>.world:first-child,#grid>.world:last-child{flex-basis:100%}}
 </style>
 </head>
 <body>
@@ -458,7 +469,7 @@ html,body,.scr{overscroll-behavior:none}
       <a class="btn gold sm" href="#" data-ext="https://rawad-store.github.io/" rel="noopener" style="margin-top:8px">🌐 زيارة موقع المكتبة</a>
       <p style="margin-top:12px;font-size:12px;line-height:1.8;color:#61758a;font-weight:700">ملاحظة تعليمية: المحتوى للتعلم العام والمراجعة، وليس بديلاً عن المقرر الدراسي. تُذكر الأذكار بصيغها المشهورة، ويُستحسن الرجوع إلى المصادر الشرعية المعتمدة للتوسع والتوثيق.</p>
       <p style="margin-top:8px;font-size:12px;line-height:1.8;color:#61758a;font-weight:700">الخصوصية: يحفظ التطبيق التقدّم والرسومات على هذا الجهاز فقط، ولا يجمع بيانات شخصية ولا يرسلها لأي جهة. الخطوط مضمَّنة مع التطبيق ولا يتصل بأي خدمة خارجية لتحميلها.</p>
-      <p style="margin-top:18px;font-size:14px">الإصدار 36.4</p>
+      <p style="margin-top:18px;font-size:14px">الإصدار 36.7</p>
       <div class="copy">
         تطوير وإنتاج<br>
         <b>مكتبة الرواد للطباعة والتصوير</b><br>
@@ -2917,7 +2928,7 @@ function genSum(r){
 }
 function genClr(r){
   var C=[['أحمر','#ef4444'],['أزرق','#2563eb'],['أخضر','#16a34a'],['أصفر','#facc15'],['برتقالي','#f97316'],['بنفسجي','#8b5cf6'],['وردي','#ec4899'],['بنّي','#8b5a2b']],p=shuf(C).slice(0,3),a=rnd(3);
-  return{q:'<span style="display:inline-block;width:1.3em;height:1.3em;border-radius:50%;border:4px solid #fff;box-shadow:0 4px 10px rgba(0,0,0,.25);background:'+p[a][1]+'"></span>',t:'ما اسم هذا اللون؟',o:p.map(function(x){return x[0]}),a:a,s:'ما اسم هذا اللون؟'};
+  return{q:'<span style="display:inline-block;width:1.3em;height:1.3em;border-radius:50%;border:4px solid #fff;box-shadow:0 4px 10px rgba(0,0,0,.25);background:'+p[a][1]+'"></span>',t:'ما اسم هذا اللون؟',o:p.map(function(x){return '<span style="font-size:.6em;white-space:nowrap">'+x[0]+'</span>'}),a:a,s:'ما اسم هذا اللون؟'};
 }
 var GEN={sum:genSum,clr:genClr,odd:genOdd,pat:genPat,cnt:genCnt,shd:genShd,cob:genCob,ph:genPh,cmp:genCmp};
 function skFin(k,e,title,msg,ok,T){var n=ok>=T?3:ok>=T-1?2:ok>=T-2?1:0;if(n>=2)skWin(k,n);skDone(k,n>=2?e:'💪',n>=2?title:'محاولة جميلة!',msg,n)}
