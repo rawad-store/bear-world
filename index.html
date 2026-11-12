@@ -977,19 +977,29 @@ var speechModule=(function(){
     try{voices=speechSynthesis.getVoices()||[]}catch(e){voices=[]}
   }
   if(supported){loadVoices();try{speechSynthesis.onvoiceschanged=loadVoices}catch(e){}}
-  var AR_PRIORITY=['ar-sa','ar-ae','ar-kw','ar-qa','ar-bh','ar-om','ar-jo','ar-eg','ar-ma','ar-dz','ar-tn','ar'];
-  var FEMALE_HINTS=/female|woman|hala|zariyah|laila|sara|salma|amina|maryam|noura|hoda|sana/i;
-  function pickArabicVoice(){
-    for(var i=0;i<AR_PRIORITY.length;i++){
-      var p=AR_PRIORITY[i];
-      var found=voices.filter(function(v){var lang=(v.lang||'').toLowerCase().replace('_','-');return lang.indexOf(p)===0});
-      if(found.length){
-        var female=found.filter(function(v){return FEMALE_HINTS.test(v.name||'')});
-        return female[0]||found[0];
-      }
-    }
-    return null;
+  /* ترتيب الأصوات: الفصحى المعيارية أولاً (السعودية/الخليج/ar العامة)، اللهجات المصرية والمغاربية أخيراً */
+  var MSA_RANK={'ar-sa':0,'ar':1,'ar-xa':1,'ar-001':1,'ar-ae':2,'ar-kw':2,'ar-qa':2,'ar-bh':2,'ar-om':2,'ar-jo':3,'ar-lb':3,'ar-sy':3,'ar-iq':3,'ar-ps':3,'ar-eg':4,'ar-ma':5,'ar-dz':5,'ar-tn':5,'ar-ly':5,'ar-sd':5,'ar-ye':4};
+  var FEMALE_HINTS=/female|woman|hala|zariyah|laila|sara|salma|amina|maryam|noura|hoda|sana|zariyah/i;
+  var HQ_HINTS=/natural|neural|online|google|premium|enhanced|wavenet|siri/i;
+  var LQ_HINTS=/compact|espeak|robot|novelty/i;
+  function langKey(v){return String(v.lang||'').toLowerCase().replace('_','-')}
+  function voiceScore(v){
+    var lang=langKey(v),name=v.name||'',rank=MSA_RANK[lang];
+    if(rank===undefined)rank=lang.indexOf('ar')===0?4:99;
+    var q=HQ_HINTS.test(name)?0:LQ_HINTS.test(name)?3:1;
+    return rank*10+q-(FEMALE_HINTS.test(name)?.5:0);
   }
+  function pickArabicVoice(){
+    var best=null,bs=1e9;
+    voices.forEach(function(v){
+      if(langKey(v).indexOf('ar')!==0)return;
+      var s=voiceScore(v);
+      if(s<bs){bs=s;best=v}
+    });
+    return best;
+  }
+  /* هل أفضل صوت متاح فصيح معياري؟ (وليس لهجة) */
+  function isMSAVoice(){var v=pickArabicVoice();return !!v&&voiceScore(v)<40}
   function pickEnglishVoice(){
     var found=voices.filter(function(v){var lang=(v.lang||'').toLowerCase().replace('_','-');return lang.indexOf('en')===0});
     var female=found.filter(function(v){return FEMALE_HINTS.test(v.name||'')});
@@ -1013,6 +1023,81 @@ var speechModule=(function(){
       return ' '+bigNumWords(n)+' ';
     });
   }
+
+  /* ═══ قاموس الفصحى: يشكّل العبارات الثابتة والأعداد قبل النطق لتُقرأ إعراباً صحيحاً ═══
+     المفاتيح بلا تشكيل (المطابقة تتجاهل أي تشكيل موجود)، والقيم مشكولة.
+     لإضافة عبارة جديدة أضف زوجاً [النص العادي, النص المشكول]. */
+  var FUSHA=[
+    /* تشجيع */
+    ['أحسنت','أَحْسَنْتَ'],['رائع','رَائِع'],['ممتاز','مُمْتَاز'],['يا بطل','يَا بَطَل'],
+    ['إجابة صحيحة','إِجَابَةٌ صَحِيحَة'],['أنت عبقري','أَنْتَ عَبْقَرِيّ'],['مذهل','مُذْهِل'],
+    ['برافو','بِرَافُو'],['ما شاء الله','مَا شَاءَ اللَّه'],
+    ['ثلاث إجابات صحيحة متتالية','ثَلَاثُ إِجَابَاتٍ صَحِيحَةٍ مُتَتَالِيَة'],
+    ['خمس إجابات صحيحة متتالية','خَمْسُ إِجَابَاتٍ صَحِيحَةٍ مُتَتَالِيَة'],
+    ['ثماني إجابات متتالية','ثَمَانِي إِجَابَاتٍ مُتَتَالِيَة'],
+    ['ثلاث إجابات متتالية','ثَلَاثُ إِجَابَاتٍ مُتَتَالِيَة'],['أربع إجابات متتالية','أَرْبَعُ إِجَابَاتٍ مُتَتَالِيَة'],
+    ['خمس إجابات متتالية','خَمْسُ إِجَابَاتٍ مُتَتَالِيَة'],
+    ['أنت بطل خارق','أَنْتَ بَطَلٌ خَارِق'],['أنت ملك الذكاء','أَنْتَ مَلِكُ الذَّكَاء'],['أنت بطل','أَنْتَ بَطَل'],
+    ['مبروك','مَبْرُوك'],
+    /* محاولة أخرى */
+    ['حاول مرة أخرى','حَاوِلْ مَرَّةً أُخْرَى'],['حاول مرة ثانية','حَاوِلْ مَرَّةً ثَانِيَة'],
+    ['أنت تستطيع','أَنْتَ تَسْتَطِيع'],['لا بأس','لَا بَأْس'],['جرب ثانية','جَرِّبْ ثَانِيَة'],['قريب جدا','قَرِيبٌ جِدًّا'],
+    /* ختام ونتائج */
+    ['لقد أجبت على كل الأسئلة إجابة صحيحة','لَقَدْ أَجَبْتَ عَلَى كُلِّ الْأَسْئِلَةِ إِجَابَةً صَحِيحَة'],
+    ['وأكملت الدرس بنجاح','وَأَكْمَلْتَ الدَّرْسَ بِنَجَاح'],
+    ['لقد أكملت الدرس بنجاح','لَقَدْ أَكْمَلْتَ الدَّرْسَ بِنَجَاح'],
+    ['التعلم يحتاج إلى تدريب','التَّعَلُّمُ يَحْتَاجُ إِلَى تَدْرِيب'],['وستنجح','وَسَتَنْجَح'],
+    ['حصلت على وسام','حَصَلْتَ عَلَى وِسَام'],['أصبحت','أَصْبَحْتَ'],
+    /* ترحيب */
+    ['مرحبا بعودتك','مَرْحَبًا بِعَوْدَتِك'],['مرحبا','مَرْحَبًا'],['أنا الدب الصغير','أَنَا الدُّبُّ الصَّغِير'],
+    ['اختر درسا لنتعلم معا','اخْتَرْ دَرْسًا لِنَتَعَلَّمَ مَعًا'],['هل تعلم','هَلْ تَعْلَم'],
+    /* أسئلة */
+    ['كم العدد','كَمِ الْعَدَد'],['ما أول حرف في كلمة','مَا أَوَّلُ حَرْفٍ فِي كَلِمَةِ'],
+    ['أين رمز المقارنة','أَيْنَ رَمْزُ الْمُقَارَنَة'],['أين رمز دعاء','أَيْنَ رَمْزُ دُعَاءِ'],
+    ['أين صورة','أَيْنَ صُورَةُ'],['أين وجه','أَيْنَ وَجْهُ'],['أين اللون','أَيْنَ اللَّوْنُ'],['أين رمز','أَيْنَ رَمْزُ'],
+    ['ما ترتيب شهر','مَا تَرْتِيبُ شَهْرِ'],['ما ترتيب يوم','مَا تَرْتِيبُ يَوْمِ'],['ما رقم الترتيب','مَا رَقْمُ التَّرْتِيبِ'],
+    ['ما الذي اختفى','مَا الَّذِي اخْتَفَى'],['ما ناتج','مَا نَاتِجُ'],['زائد','زَائِد'],['ناقص','نَاقِص'],
+    ['تذكر الصور جيدا','تَذَكَّرِ الصُّوَرَ جَيِّدًا'],['فكر جيدا','فَكِّرْ جَيِّدًا'],
+    ['اضغط الأعداد من الأصغر إلى الأكبر','اضْغَطِ الْأَعْدَادَ مِنَ الْأَصْغَرِ إِلَى الْأَكْبَرِ'],
+    /* المرسم */
+    ['اختر قالبا للتلوين','اخْتَرْ قَالِبًا لِلتَّلْوِين'],['الآن لوّن القالب بأدواتك','الْآنَ لَوِّنِ الْقَالِبَ بِأَدَوَاتِك'],
+    ['اختر لونا وابدأ الرسم','اخْتَرْ لَوْنًا وَابْدَأِ الرَّسْم'],['أو اضغط على الملصقات لإضافتها','أَوِ اضْغَطْ عَلَى الْمُلْصَقَاتِ لِإِضَافَتِهَا'],
+    ['اخترت','اخْتَرْتَ'],['تراجع','تَرَاجُع'],['إعادة','إِعَادَة'],
+    ['تم إضافة النص','تَمَّتْ إِضَافَةُ النَّصّ'],['تم استعادة آخر رسمة','تَمَّتِ اسْتِعَادَةُ آخِرِ رَسْمَة'],
+    ['تم التلوين','تَمَّ التَّلْوِين'],['تم حذف الملصق','تَمَّ حَذْفُ الْمُلْصَق'],['تم نسخ الملصق','تَمَّ نَسْخُ الْمُلْصَق'],
+    ['تم حفظ رسمتك بنجاح','تَمَّ حِفْظُ رَسْمَتِكَ بِنَجَاح'],
+    ['حدد ملصقا أولا','حَدِّدْ مُلْصَقًا أَوَّلًا'],['الخلفية داكنة','الْخَلْفِيَّةُ دَاكِنَة'],['جرب لونا فاتحا','جَرِّبْ لَوْنًا فَاتِحًا'],
+    ['اللوحة فارغة بالفعل','اللَّوْحَةُ فَارِغَةٌ بِالْفِعْل'],['لوحة جديدة','لَوْحَةٌ جَدِيدَة'],['ابدأ الرسم','ابْدَأِ الرَّسْم'],
+    ['لون قوس قزح','لَوْنُ قَوْسِ قُزَح'],['اكتب النص الذي تريد','اكْتُبِ النَّصَّ الَّذِي تُرِيد'],['اكتب شيئا أولا','اكْتُبْ شَيْئًا أَوَّلًا'],
+    ['أحسنت، جمعت','أَحْسَنْتَ، جَمَعْتَ'],['الوضع المتقدم','الْوَضْعُ الْمُتَقَدِّم'],['الوضع البسيط','الْوَضْعُ الْبَسِيط'],
+    /* الأعداد */
+    ['وعشرون','وَعِشْرُون'],['وثلاثون','وَثَلَاثُون'],['وأربعون','وَأَرْبَعُون'],['وخمسون','وَخَمْسُون'],
+    ['وستون','وَسِتُّون'],['وسبعون','وَسَبْعُون'],['وثمانون','وَثَمَانُون'],['وتسعون','وَتِسْعُون'],
+    ['صفر','صِفْر'],['واحد','وَاحِد'],['اثنان','اثْنَان'],['ثلاثة','ثَلَاثَة'],['أربعة','أَرْبَعَة'],['خمسة','خَمْسَة'],
+    ['ستة','سِتَّة'],['سبعة','سَبْعَة'],['ثمانية','ثَمَانِيَة'],['تسعة','تِسْعَة'],['عشرة','عَشَرَة'],
+    ['أحد عشر','أَحَدَ عَشَر'],['اثنا عشر','اثْنَا عَشَر'],['ثلاثة عشر','ثَلَاثَةَ عَشَر'],['أربعة عشر','أَرْبَعَةَ عَشَر'],
+    ['خمسة عشر','خَمْسَةَ عَشَر'],['ستة عشر','سِتَّةَ عَشَر'],['سبعة عشر','سَبْعَةَ عَشَر'],['ثمانية عشر','ثَمَانِيَةَ عَشَر'],
+    ['تسعة عشر','تِسْعَةَ عَشَر'],['عشرون','عِشْرُون'],['ثلاثون','ثَلَاثُون'],['أربعون','أَرْبَعُون'],['خمسون','خَمْسُون'],
+    ['ستون','سِتُّون'],['سبعون','سَبْعُون'],['ثمانون','ثَمَانُون'],['تسعون','تِسْعُون'],['مائة','مِائَة']
+  ];
+  var FUSHA_RE=(function(){
+    function toRe(k){
+      var s=k.split('').map(function(ch){
+        if(ch===' ')return '\\s+';
+        if(ch==='،')return '[،,]';
+        return ch.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'[\\u064B-\\u0652]*';
+      }).join('');
+      return new RegExp('(^|[^\\u0621-\\u064A])'+s+'(?![\\u0621-\\u064A])','g');
+    }
+    return FUSHA.slice().sort(function(a,b){return b[0].length-a[0].length}).map(function(p){return{re:toRe(p[0]),to:p[1]}});
+  })();
+  function applyFusha(t){
+    for(var i=0;i<FUSHA_RE.length;i++){
+      var e=FUSHA_RE[i];
+      t=t.replace(e.re,function(m,pre){return pre+e.to});
+    }
+    return t;
+  }
   function normalize(text){
     if(!text)return '';
     var t=String(text);
@@ -1021,6 +1106,8 @@ var speechModule=(function(){
     t=t.replace(/[\(\)\[\]\{\}«»""'']/g,' ');
     t=t.replace(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{2190}-\u{21FF}\u{2B00}-\u{2BFF}\u{FE0F}\u{200D}]/gu,' ');
     t=digitsToWords(t);
+    t=t.replace(/\s[—–]\s/g,'، ');
+    t=applyFusha(t);
     t=t.replace(/[!?؟]{2,}/g,'!').replace(/\.{2,}/g,'.');
     t=t.replace(/\s+/g,' ').trim();
     return t;
@@ -1036,10 +1123,10 @@ var speechModule=(function(){
   var P={PRAISE:1,CLOSE:2,QUESTION:3,INFO:4};
   var GAP=240,GAP_TOP=420,SFX_PAD=80,SETTLE=150,START_GUARD=3500,PART_GAP=70,BUSY_MAX=3000,CHUNK=150;
   var STYLES={
-    normal:{ar:[.88,1.02],en:[.82,1.0]},
-    praise:{ar:[.96,1.16],en:[.9,1.14]},
-    retry:{ar:[.88,1.07],en:[.85,1.05]},
-    close:{ar:[.9,1.08],en:[.85,1.05]}
+    normal:{ar:[.85,1.0],en:[.82,1.0]},
+    praise:{ar:[.93,1.12],en:[.9,1.14]},
+    retry:{ar:[.86,1.04],en:[.85,1.05]},
+    close:{ar:[.88,1.05],en:[.85,1.05]}
   };
   var queue=[],current=null,pumpT=null,lastEnd=0,lastPrio=4,seq=0,sfxFn=null,stateFn=null,busySince=0,speakingNow=false;
 
@@ -1180,6 +1267,8 @@ var speechModule=(function(){
     isBusy:function(){return !!current||queue.length>0},
     isSupported:function(){return supported},
     hasArabic:function(){return !!pickArabicVoice()},
+    isMSA:isMSAVoice,
+    voiceName:function(){var v=pickArabicVoice();return v?v.name+' ('+v.lang+')':''},
     P:P
   };
 })();
@@ -1230,6 +1319,8 @@ if(!speechOk){
   setTimeout(function(){
     if(!speechModule.hasArabic()&&speechOk)
       {var _vn;try{_vn=localStorage.getItem('voiceNote')}catch(e){}if(!_vn){try{localStorage.setItem('voiceNote','1')}catch(e){}showToast('ℹ️ لا يوجد صوت عربي على جهازك',3500)}}
+    else if(speechOk&&!speechModule.isMSA())
+      {var _vm;try{_vm=localStorage.getItem('voiceNoteMsa')}catch(e){}if(!_vm){try{localStorage.setItem('voiceNoteMsa','1')}catch(e){}showToast('ℹ️ لأفضل نطق فصيح ثبّت صوتاً عربياً (السعودية) من إعدادات الجهاز',5000)}}
   },1500);
 }
 
@@ -1506,7 +1597,7 @@ function ask(){
         lock=true;b.classList.add('ok');
         if(!missed){stars++;qCorrect++;sessCorrect++;streak++;totalCorrect++}
         upd();
-        if(streak>=3){bigCheer({text:'رائع، '+streak+' إجابات متتالية'});burst(true);$('fb').textContent='رائع! سلسلة '+streak+'! 🔥'}
+        if(streak>=3){bigCheer({text:'رائع، '+(['','','','ثلاث','أربع','خمس'][streak]||'خمس')+' إجابات متتالية'});burst(true);$('fb').textContent='رائع! سلسلة '+streak+'! 🔥'}
         else{cheer();burst(false);$('fb').textContent='أحسنت! 🎉'}
         $('fb').classList.add('show');vibrate(40);save();later(ask,1700);
       }else{
