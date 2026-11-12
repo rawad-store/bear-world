@@ -1,10 +1,10 @@
 /* ══════════════════════════════════════════════════════════════
-   Service Worker — عالم الدب الصغير v59
+   Service Worker — عالم الدب الصغير v55
    يضمن أن وضع عدم الاتصال = آخر تحديث مخزَّن للتطبيق
    ══════════════════════════════════════════════════════════════ */
 
 /* ⚠️ غيّر هذا الرقم مع كل إصدار جديد من التطبيق */
-const VERSION = 'bear-world-v59';
+const VERSION = 'bear-world-v60';
 
 /* إلزامي: إن فشل تخزينه يفشل التثبيت ويُعاد لاحقًا بدل تفعيل عامل بلا صفحة مخزّنة */
 const REQUIRED = ['./index.html'];
@@ -91,7 +91,8 @@ async function cachedAppShell() {
   const keys = await caches.keys();
   const oldKeys = keys
     .filter((k) => k.startsWith('bear-world-') && k !== VERSION)
-    .sort((a, b) => (parseInt(b.replace(/\D+/g, ''), 10) || 0) - (parseInt(a.replace(/\D+/g, ''), 10) || 0)); // الأحدث رقمًا أولًا
+    .sort() // الأحدث لاحقًا حسب اسم الإصدار
+    .reverse();
   for (const k of oldKeys) {
     const c = await caches.open(k);
     const h =

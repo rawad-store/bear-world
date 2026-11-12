@@ -309,6 +309,17 @@ body.draw-fullscreen .draw-header{display:none}
 .hole span{display:block;transform:translateY(130%);transition:transform .14s}
 .hole.up span{transform:none}
 @media(prefers-reduced-motion:reduce){.fi{animation-duration:var(--d)!important}#ftm{transition-duration:25s!important}}
+
+#toasts{position:fixed;left:0;right:0;bottom:max(86px,calc(env(safe-area-inset-bottom,0px) + 80px));display:flex;flex-direction:column;align-items:center;gap:8px;z-index:200;pointer-events:none}
+#toasts .toast{background:#17324d;color:#fff;padding:12px 18px;border-radius:16px;font-weight:800;font-size:15px;max-width:min(92%,520px);text-align:center;box-shadow:0 10px 30px #0004;direction:rtl;animation:toastIn .3s ease-out;transition:opacity .4s}
+@keyframes toastIn{from{transform:translateY(14px);opacity:0}to{transform:none;opacity:1}}
+.world:first-child{grid-column:span 1}
+@media(min-width:760px){.world:first-child{grid-column:span 3}}
+@media(max-width:520px){.world:first-child,.world:last-child{grid-column:span 2}}
+html,body,.scr{overscroll-behavior:none}
+.skb.new{background:#fde68a;color:#7c2d12}
+@media(prefers-reduced-motion:reduce){#toasts .toast{animation:none}}
+@media(max-width:520px){.skg .card:last-child:nth-child(odd){grid-column:1/-1}}
 </style>
 </head>
 <body>
@@ -447,7 +458,7 @@ body.draw-fullscreen .draw-header{display:none}
       <a class="btn gold sm" href="#" data-ext="https://rawad-store.github.io/" rel="noopener" style="margin-top:8px">🌐 زيارة موقع المكتبة</a>
       <p style="margin-top:12px;font-size:12px;line-height:1.8;color:#61758a;font-weight:700">ملاحظة تعليمية: المحتوى للتعلم العام والمراجعة، وليس بديلاً عن المقرر الدراسي. تُذكر الأذكار بصيغها المشهورة، ويُستحسن الرجوع إلى المصادر الشرعية المعتمدة للتوسع والتوثيق.</p>
       <p style="margin-top:8px;font-size:12px;line-height:1.8;color:#61758a;font-weight:700">الخصوصية: يحفظ التطبيق التقدّم والرسومات على هذا الجهاز فقط، ولا يجمع بيانات شخصية ولا يرسلها لأي جهة. الخطوط مضمَّنة مع التطبيق ولا يتصل بأي خدمة خارجية لتحميلها.</p>
-      <p style="margin-top:18px;font-size:14px">الإصدار 36.1</p>
+      <p style="margin-top:18px;font-size:14px">الإصدار 36.4</p>
       <div class="copy">
         تطوير وإنتاج<br>
         <b>مكتبة الرواد للطباعة والتصوير</b><br>
@@ -705,7 +716,7 @@ var patterns=[
 ];
 var ordinals=parse('الأول,١,,,الأول يأتي في البداية|الثاني,٢,,,الثاني يأتي بعد الأول|الثالث,٣,,,الثالث يأتي بعد الثاني|الرابع,٤,,,الرابع يأتي بعد الثالث|الخامس,٥,,,الخامس يأتي بعد الرابع|السادس,٦,,,السادس يأتي بعد الخامس|السابع,٧,,,السابع يأتي بعد السادس|الثامن,٨,,,الثامن يأتي بعد السابع|التاسع,٩,,,التاسع يأتي قبل العاشر|العاشر,١٠,,,العاشر هو آخر الترتيب في العشرة');
 var dirs=parse('فوق,⬆️,,,الطائر فوق الشجرة|تحت,⬇️,,,القطة تحت الطاولة|يمين,➡️,,,اليمين جهة اليد اليمنى|يسار,⬅️,,,اليسار جهة اليد اليسرى|داخل,📥,,,الكرة داخل الصندوق|خارج,📤,,,الكرة خارج الصندوق|أمام,🚗🏠,,,السيارة أمام المنزل|خلف,🏠🌳,,,الحديقة خلف المنزل|بجانب,📕✏️,,,الكتاب بجانب القلم|بين,🌳🌸🌳,,,الزهرة بين الشجرتين');
-var opp=parse('كبير وصغير,🐘↔🐭,,,الفيل كبير والفأر صغير|طويل وقصير,🦒↔🐶,,,الزرافة طويلة والكلب قصير|ساخن وبارد,🔥↔🧊,,,النار ساخنة والثلج بارد|ثقيل وخفيف,🪨↔🪶,,,الحجر ثقيل والريشة خفيفة|سريع وبطيء,🐆↔🐢,,,الفهد سريع والسلحفاة بطيئة|نهار وليل,☀️↔🌙,,,نرى الشمس في النهار والقمر في الليل|فارغ وممتلئ,🥛↔🫙,,,الكوب فارغ أو ممتلئ|نظيف ومتسخ,✨↔🧽,,,اليد نظيفة أو متسخة|سعيد وحزين,😀↔😢,,,الوجه سعيد أو حزين|قريب وبعيد,📍↔🗺️,,,البيت قريب أو بعيد');
+var opp=parse('كبير وصغير,🐘↔🐭,,,الفيل كبير والفأر صغير|طويل وقصير,🦒↔🐶,,,الزرافة طويلة والكلب قصير|ساخن وبارد,🔥↔🧊,,,النار ساخنة والثلج بارد|ثقيل وخفيف,🪨↔🪶,,,الحجر ثقيل والريشة خفيفة|سريع وبطيء,🐆↔🐢,,,الفهد سريع والسلحفاة بطيئة|نهار وليل,☀️↔🌙,,,نرى الشمس في النهار والقمر في الليل|فارغ وممتلئ,🥛↔⬜,,,الكوب فارغ أو ممتلئ|نظيف ومتسخ,✨↔🧽,,,اليد نظيفة أو متسخة|سعيد وحزين,😀↔😢,,,الوجه سعيد أو حزين|قريب وبعيد,📍↔🗺️,,,البيت قريب أو بعيد');
 
 var _svgHead='<svg viewBox="0 0 200 100" role="img" aria-label="',_svgTail='" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block">';
 var _svgs={
@@ -809,7 +820,7 @@ var riddles=[
 {w:'ما لونه أصفر ويضيء في النهار؟',f:'الشمس',g:'☀️',lvl:1},
 {w:'ما الذي نراه في الليل ويتلألأ؟',f:'النجوم',g:'✨',lvl:1},
 {w:'بيت بلا أبواب ولا نوافذ؟',f:'البيضة',g:'🥚',lvl:1},
-{w:'له أسنان ولا يعض؟',f:'المشط',g:'🪮',lvl:1},
+{w:'له أسنان ولا يعض؟',f:'المشط',g:'💇',lvl:1},
 {w:'ما هو الشيء الذي يكتب ولا يقرأ؟',f:'القلم',g:'✏️',lvl:1},
 {w:'ما هو الشيء الذي يجري ولا يمشي؟',f:'النهر',g:'🏞️',lvl:1},
 {w:'ما الشيء الذي يرفرف ولا يطير؟',f:'العلم',g:'🏳️',lvl:1},
@@ -900,12 +911,13 @@ function click(){tone(440,.07,'square',.09)}
 
 function showToast(m,ms){
   try{
-    var t=document.createElement('div');
-    t.setAttribute('role','status');t.setAttribute('aria-live','polite');
-    t.style.cssText='position:fixed;top:calc(env(safe-area-inset-top,0px) + 12px);left:50%;transform:translateX(-50%);background:#17324d;color:#fff;padding:12px 18px;border-radius:14px;font-weight:800;z-index:200;font-size:14px;max-width:90%;text-align:center;box-shadow:0 10px 30px #0004;direction:rtl';
-    t.textContent=m;
-    document.body.appendChild(t);
-    setTimeout(function(){t.style.transition='opacity .4s';t.style.opacity='0';setTimeout(function(){try{t.remove()}catch(e){}},400)},ms||4000);
+    var box=document.getElementById('toasts');
+    if(!box){box=document.createElement('div');box.id='toasts';box.setAttribute('role','status');box.setAttribute('aria-live','polite');document.body.appendChild(box)}
+    var old=box.children;for(var k=0;k<old.length;k++)if(old[k].textContent===m)return;
+    while(box.children.length>=2)box.removeChild(box.firstChild);
+    var t=document.createElement('div');t.className='toast';t.textContent=m;
+    box.appendChild(t);
+    setTimeout(function(){t.style.opacity='0';setTimeout(function(){try{t.remove()}catch(e){}},400)},ms||4000);
   }catch(e){}
 }
 
@@ -1066,6 +1078,12 @@ function later(f,ms){var id=setTimeout(function(){TT=TT.filter(function(x){retur
 function clearT(){TT.forEach(clearTimeout);TT=[]}
 function disp(it){if(cur.m==='riddle')return it.f;return cur.m==='num'||cur.m==='let'?it.l:(it.c||it.g)}
 
+/* العودة إلى القائمة الرئيسية (قائمة العوالم) لاختيار درس، مع تصفير العالم المفتوح */
+function goMenu(){
+  gWorld=null;
+  go('home');
+  try{$('home').scrollTop=0}catch(e){}
+}
 function go(id){
   exitDrawFs();
   clearT();stopSay();stopAuto();
@@ -2535,7 +2553,7 @@ function initDraw(){
 
 if($('back6'))$('back6').onclick=function(){
   if(drawInitDone&&canvas&&baseInk){forceAutosave()}
-  click();go('home');
+  click();goMenu();
 };
 
 document.addEventListener('keydown',function(e){
@@ -2773,7 +2791,10 @@ var SKG=[
 {k:'cob',n:'عُدّ معي',e:'🔢',d:'العدّ وحس الأرقام',c:'#0891b2'},
 {k:'ord',n:'رتّب الأعداد',e:'📶',d:'من الأصغر إلى الأكبر',c:'#65a30d'},
 {k:'cmp',n:'الأكثر أم الأقل؟',e:'⚖️',d:'المقارنة والتقدير',c:'#c026d3'},
-{k:'ph',n:'مَن يبدأ بحرف؟',e:'🔤',d:'الأصوات والمفردات',c:'#ea580c'}];
+{k:'ph',n:'مَن يبدأ بحرف؟',e:'🔤',d:'الأصوات والمفردات',c:'#ea580c'},
+{k:'sum',n:'اجمع بالصور',e:'➕',d:'اجمع الفواكه وعُدّها',c:'#db2777'},
+{k:'clr',n:'ألوان الدب',e:'🎨',d:'ما اسم هذا اللون؟',c:'#4f46e5'}];
+var NEWK=['sum','clr','bal','fsh'];
 function rnd(n){return Math.floor(Math.random()*n)}
 function shuf(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=rnd(i+1),t=a[i];a[i]=a[j];a[j]=t}return a}
 function skStars(n){return '⭐'.repeat(n)+'☆'.repeat(3-n)}
@@ -2782,7 +2803,7 @@ function skSurprise(ex){var L=SKG.filter(function(g){return g.k!==ex});skStart(L
 function skHub(){
   skIn=false;clearT();stopSay();
   $('skTitle').textContent='🧠 نادي الذكاء';
-  $('sk').innerHTML='<p class="home-subtitle" style="margin:6px 0 14px">اختر لعبة ودرّب عقلك مع الدب! 🐻<br><small>أنجزتَ '+ar(SKG.filter(function(g){return g.k==='mem'?(SK.best.mem3||SK.best.mem4||SK.best.mem6):SK.best[g.k]}).length)+' من '+ar(SKG.length)+' ألعاب</small></p><div class="skrow" style="margin:0 0 14px"><button class="btn gold sm" id="skSur">🎲 لعبة مفاجأة</button></div><div class="skg">'+SKG.map(function(g){var b=g.k==='mem'?Math.max(SK.best.mem||0,SK.best.mem3||0,SK.best.mem4||0,SK.best.mem6||0):(SK.best[g.k]||0);return '<button class="card" data-g="'+g.k+'" style="background:'+g.c+'" aria-label="'+g.n+'"><span class="e" aria-hidden="true">'+g.e+'</span>'+g.n+'<small>'+g.d+'</small>'+(b?'<em class="skb">'+skStars(Math.min(b,3))+'</em>':'')+'</button>'}).join('')+'</div>';
+  $('sk').innerHTML='<p class="home-subtitle" style="margin:6px 0 14px">اختر لعبة ودرّب عقلك مع الدب! 🐻<br><small>أنجزتَ '+ar(SKG.filter(function(g){return g.k==='mem'?(SK.best.mem3||SK.best.mem4||SK.best.mem6):SK.best[g.k]}).length)+' من '+ar(SKG.length)+' ألعاب</small></p><div class="skrow" style="margin:0 0 14px"><button class="btn gold sm" id="skSur">🎲 لعبة مفاجأة</button></div><div class="skg">'+SKG.map(function(g){var b=g.k==='mem'?Math.max(SK.best.mem||0,SK.best.mem3||0,SK.best.mem4||0,SK.best.mem6||0):(SK.best[g.k]||0);return '<button class="card" data-g="'+g.k+'" style="background:'+g.c+'" aria-label="'+g.n+'"><span class="e" aria-hidden="true">'+g.e+'</span>'+g.n+'<small>'+g.d+'</small>'+(b?'<em class="skb">'+skStars(Math.min(b,3))+'</em>':NEWK.indexOf(g.k)>=0?'<em class="skb new">✨ جديد</em>':'')+'</button>'}).join('')+'</div>';
   $('sk').querySelectorAll('.card').forEach(function(b){b.onclick=function(){click();skStart(b.getAttribute('data-g'))}});
   $('skSur').onclick=function(){click();skSurprise('')};
 }
@@ -2888,7 +2909,17 @@ function genCmp(r){var e=shuf(EM.slice(0,10))[0],mx=r<2?5:9,b=1+rnd(mx),a=b;
   var more=rnd(2)===0,c=[a,b],ans=more?(a>b?0:1):(a<b?0:1);
   return{q:'⚖️',t:'أيّ المجموعتين فيها '+(more?'أكثر':'أقل')+'؟',s:'أي المجموعتين فيها '+(more?'أكثر':'أقل'),a:ans,
     o:c.map(function(n){return '<span style="font-size:.3em;line-height:1.15;display:block;padding:4px;word-break:break-all">'+new Array(n+1).join(e)+'</span>'})}}
-var GEN={odd:genOdd,pat:genPat,cnt:genCnt,shd:genShd,cob:genCob,ph:genPh,cmp:genCmp};
+function genSum(r){
+  var F=['🍎','🍌','🍓','🍊','🍇'],f=F[rnd(F.length)],m=r<2?3:5,a=1+rnd(m),b=1+rnd(m),t=a+b,o=[t];
+  while(o.length<3){var v=Math.max(1,t+rnd(5)-2);if(o.indexOf(v)<0)o.push(v)}
+  o=shuf(o);
+  return{q:f.repeat(a)+' ➕ '+f.repeat(b),t:'كم المجموع؟',o:o.map(function(v){return ar(v)}),a:o.indexOf(t),s:'كم المجموع؟'};
+}
+function genClr(r){
+  var C=[['أحمر','#ef4444'],['أزرق','#2563eb'],['أخضر','#16a34a'],['أصفر','#facc15'],['برتقالي','#f97316'],['بنفسجي','#8b5cf6'],['وردي','#ec4899'],['بنّي','#8b5a2b']],p=shuf(C).slice(0,3),a=rnd(3);
+  return{q:'<span style="display:inline-block;width:1.3em;height:1.3em;border-radius:50%;border:4px solid #fff;box-shadow:0 4px 10px rgba(0,0,0,.25);background:'+p[a][1]+'"></span>',t:'ما اسم هذا اللون؟',o:p.map(function(x){return x[0]}),a:a,s:'ما اسم هذا اللون؟'};
+}
+var GEN={sum:genSum,clr:genClr,odd:genOdd,pat:genPat,cnt:genCnt,shd:genShd,cob:genCob,ph:genPh,cmp:genCmp};
 function skFin(k,e,title,msg,ok,T){var n=ok>=T?3:ok>=T-1?2:ok>=T-2?1:0;if(n>=2)skWin(k,n);skDone(k,n>=2?e:'💪',n>=2?title:'محاولة جميلة!',msg,n)}
 function skBar(r,T){return '<div class="prog" style="margin:4px auto 10px"><div class="bar" style="width:'+(r/T*100)+'%"></div></div>'}
 /* ما الذي اختفى؟ — ذاكرة بصرية */
@@ -3000,22 +3031,24 @@ $('iosModal').addEventListener('click',function(e){if(e.target===this)closeIos()
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeIos()});
 if(isStandalone())instMark('bearInstalled');
 updInstall();
-$('skBack').onclick=function(){click();if(skIn)skHub();else go('home')};
+$('skBack').onclick=function(){click();if(skIn)skHub();else goMenu()};
 
 /* ═════════ 🎡 ركن المرح — ألعاب ترفيهية يربحها الطفل بالتعلّم (تذكرة لكل درس منجز) ═════════ */
 var TK=0,funIn=false,FB={},funAbort=null;
-try{var _fb=JSON.parse(safeGet('bearfun','{}'));if(_fb&&typeof _fb==='object'&&!Array.isArray(_fb))['bub','str','rab'].forEach(function(k){var v=+_fb[k];if(isFinite(v))FB[k]=Math.max(0,Math.min(999,Math.floor(v)))})}catch(e){FB={}}
+try{var _fb=JSON.parse(safeGet('bearfun','{}'));if(_fb&&typeof _fb==='object'&&!Array.isArray(_fb))['bub','str','rab','bal','fsh'].forEach(function(k){var v=+_fb[k];if(isFinite(v))FB[k]=Math.max(0,Math.min(999,Math.floor(v)))})}catch(e){FB={}}
 function tkSet(n){TK=Math.max(0,Math.min(99,Math.floor(n)||0));try{localStorage.setItem('beartk',String(TK))}catch(e){}var e=$('tkc');if(e)e.textContent=ar(TK)}
 (function(){var v=safeGet('beartk',null);tkSet(v===null?2:+v)})();
-var FG=[{k:'bub',n:'فقاعات الفرح',e:'🫧',d:'اضغط الفقاعات قبل أن تهرب',c:'#0ea5e9'},
+var FG=[{k:'bub',n:'فقاعات الفرح',e:'🔮',d:'اضغط الفقاعات قبل أن تهرب',c:'#0ea5e9'},
 {k:'str',n:'مطر النجوم',e:'🌟',d:'اجمع النجوم والثمار الساقطة',c:'#d97706'},
-{k:'rab',n:'أرنب الحقل',e:'🐰',d:'اضغط الأرنب عندما يطلّ',c:'#16a34a'}];
-var FTH={bub:[12,22,32],str:[10,18,26],rab:[8,14,20]},BCOL=['#60a5fa','#f472b6','#34d399','#fbbf24','#a78bfa','#fb7185'];
+{k:'rab',n:'أرنب الحقل',e:'🐰',d:'اضغط الأرنب عندما يطلّ',c:'#16a34a'},
+{k:'bal',n:'بالونات الحفلة',e:'🎈',d:'فرقع البالونات الملوّنة',c:'#e11d48'},
+{k:'fsh',n:'صيد الأسماك',e:'🐠',d:'اضغط الأسماك قبل أن تسبح بعيداً',c:'#0891b2'}];
+var FTH={bub:[12,22,32],str:[10,18,26],rab:[8,14,20],bal:[12,22,32],fsh:[10,18,26]},BCOL=['#60a5fa','#f472b6','#34d399','#fbbf24','#a78bfa','#fb7185'];
 function funHub(){
   funIn=false;clearT();stopSay();$('funTitle').textContent='🎡 ركن المرح';
-  $('fn').innerHTML='<p class="home-subtitle" style="margin:6px 0 10px">ألعاب مرحة تربحها بالتعلّم! 🎁</p><div class="skrow" style="margin:0 0 8px"><span class="pill" style="background:#fff5cc;border-color:#ffe18a">🎟️ تذاكرك: '+ar(TK)+'</span></div><div class="sub" style="text-align:center;font-size:15px;margin:0 0 12px">اربح تذكرة بإكمال أي درس واجتياز اختباره (٣ إجابات صحيحة من ٥)، وتذكرتين إذا أجبت عن الكل صحيحاً</div><div class="skg">'+FG.map(function(g){var b=FB[g.k]||0;return '<button class="card" data-f="'+g.k+'" style="background:'+g.c+'" aria-label="'+g.n+'"><span class="e" aria-hidden="true">'+g.e+'</span>'+g.n+'<small>'+g.d+'</small>'+(b?'<em class="skb">🏆 '+ar(b)+'</em>':'')+'</button>'}).join('')+'</div><div class="skrow"><button class="btn b" id="funLearn">📚 اذهب للتعلّم</button></div>';
+  $('fn').innerHTML='<p class="home-subtitle" style="margin:6px 0 10px">ألعاب مرحة تربحها بالتعلّم! 🎁</p><div class="skrow" style="margin:0 0 8px"><span class="pill" style="background:#fff5cc;border-color:#ffe18a">🎟️ تذاكرك: '+ar(TK)+'</span></div><div class="sub" style="text-align:center;font-size:15px;margin:0 0 12px">اربح تذكرة بإكمال أي درس واجتياز اختباره (٣ إجابات صحيحة من ٥)، وتذكرتين إذا أجبت عن الكل صحيحاً</div><div class="skg">'+FG.map(function(g){var b=FB[g.k]||0;return '<button class="card" data-f="'+g.k+'" style="background:'+g.c+'" aria-label="'+g.n+'"><span class="e" aria-hidden="true">'+g.e+'</span>'+g.n+'<small>'+g.d+'</small>'+(b?'<em class="skb">🏆 '+ar(b)+'</em>':NEWK.indexOf(g.k)>=0?'<em class="skb new">✨ جديد</em>':'')+'</button>'}).join('')+'</div><div class="skrow"><button class="btn b" id="funLearn">📚 اذهب للتعلّم</button></div>';
   $('fn').querySelectorAll('.card').forEach(function(b){b.onclick=function(){click();funPlay(b.getAttribute('data-f'))}});
-  $('funLearn').onclick=function(){click();go('home')};
+  $('funLearn').onclick=function(){click();goMenu()};
 }
 function funPlay(k){
   if(TK<1){oops();showToast('🎟️ لا توجد تذاكر! أكمل درساً واجتز اختباره لتربح تذكرة',3600);return}
@@ -3035,11 +3068,11 @@ function funPlay(k){
   }
   function spawn(){
     if(k==='rab'){var fr=hs.filter(function(h){return !h.classList.contains('up')}),h=fr[rnd(fr.length)];if(!h)return;h.firstChild.textContent='🐰';h.classList.add('up');later(function(){h.classList.remove('up')},Math.max(650,1100-sc*15));return}
-    var H=A.clientHeight,W=A.clientWidth,bub=k==='bub',s=bub?44+rnd(44):46+rnd(20),b=document.createElement('button'),gold=!bub&&rnd(7)===0,v=gold?3:1;
+    var H=A.clientHeight,W=A.clientWidth,bub=k==='bub',up=bub||k==='bal'||k==='fsh',s=bub?44+rnd(44):46+rnd(20),b=document.createElement('button'),gold=!bub&&rnd(7)===0,v=gold?3:1;
     b.className='fi'+(bub?' bb':'');b.type='button';b.setAttribute('aria-label','التقط');
-    b.style.cssText='width:'+s+'px;height:'+s+'px;left:'+rnd(Math.max(1,W-s))+'px;'+(bub?'bottom':'top')+':-'+s+'px;font-size:'+Math.round(s*.78)+'px';
-    b.style.setProperty('--d',((bub?4.2:3.2)+Math.random()*2)+'s');b.style.setProperty('--dy',((bub?-1:1)*(H+s+10))+'px');
-    if(bub)b.style.setProperty('--bc',BCOL[rnd(6)]);else b.textContent=gold?'🌟':['⭐','🍎','🍌','🍇','🍓','🍊'][rnd(6)];
+    b.style.cssText='width:'+s+'px;height:'+s+'px;left:'+rnd(Math.max(1,W-s))+'px;'+(up?'bottom':'top')+':-'+s+'px;font-size:'+Math.round(s*.78)+'px';
+    b.style.setProperty('--d',((up?4.2:3.2)+Math.random()*2)+'s');b.style.setProperty('--dy',((up?-1:1)*(H+s+10))+'px');
+    if(bub)b.style.setProperty('--bc',BCOL[rnd(6)]);else if(k==='bal'){b.textContent=gold?'🎁':'🎈';if(!gold)b.style.filter='hue-rotate('+rnd(360)+'deg)'}else if(k==='fsh')b.textContent=gold?'🐳':['🐟','🐠','🐡','🦀','🐙'][rnd(5)];else b.textContent=gold?'🌟':['⭐','🍎','🍌','🍇','🍓','🍊'][rnd(6)];
     b.addEventListener('pointerdown',function(ev){ev.preventDefault();if(over||b.dataset.x)return;b.dataset.x='1';var c=at(b);fx(c[0],c[1],gold?'🌟':'✨');b.remove();hit(v)});
     b.addEventListener('animationend',function(){b.remove()});
     A.appendChild(b);
@@ -3053,13 +3086,13 @@ function funPlay(k){
     upd();
     $('fn').innerHTML='<div class="skq"><div class="skbig">'+(n>=2?'🏆':'🎉')+'</div><h2 style="margin:6px 0;color:#1c4775">'+(n>=2?'رائع يا بطل!':'أحسنت!')+'</h2><div class="stars">'+skStars(n)+'</div><div class="sub">جمعتَ '+ar(sc)+(n>=2?' ونلتَ نجمة جديدة ⭐':'')+'</div><div class="skrow">'+(TK>0?'<button class="btn g" id="fAgain">🔁 مرة أخرى (🎟️ '+ar(TK)+')</button>':'')+'<button class="btn b" id="fMenu">🎡 الألعاب</button><button class="btn gold" id="fLearn">📚 تعلّم لتربح تذاكر</button></div></div>';
     if($('fAgain'))$('fAgain').onclick=function(){click();funPlay(k)};
-    $('fMenu').onclick=function(){click();funHub()};$('fLearn').onclick=function(){click();go('home')};
+    $('fMenu').onclick=function(){click();funHub()};$('fLearn').onclick=function(){click();goMenu()};
     say('أحسنت، جمعت '+sc);
   }
   funAbort=function(){if(!over&&sc===0)tkSet(TK+1);over=true};
   loop();later(end,T*1000);
 }
-$('funBack').onclick=function(){click();if(funIn){if(funAbort){funAbort();funAbort=null}funHub()}else go('home')};
+$('funBack').onclick=function(){click();if(funIn){if(funAbort){funAbort();funAbort=null}funHub()}else goMenu()};
 $('rfun').onclick=function(){click();go('fun');funHub()};
 /* ═════════ 🔥 أيام متتالية + تنبيه راحة للعينين ═════════ */
 (function(){
@@ -3067,7 +3100,8 @@ $('rfun').onclick=function(){click();go('fun');funHub()};
   if(last!==t){
     n=(last===f(new Date(d.getFullYear(),d.getMonth(),d.getDate()-1)))?n+1:1;
     try{localStorage.setItem('bearday',String(t));localStorage.setItem('bearstreak',String(n))}catch(e){}
-    setTimeout(function(){showToast(n>1?'🔥 '+ar(n)+' أيام متتالية! أنت بطل 🌟':'👋 أهلاً بك يا بطل! هيّا نلعب ونتعلّم',3800)},1300);
+    tkSet(TK+1);
+    setTimeout(function(){showToast((n>1?'🔥 '+ar(n)+' أيام متتالية! ':'👋 أهلاً بك يا بطل! ')+'🎁 هديتك اليوم: تذكرة مرح 🎟️',4600)},1300);
   }
   setTimeout(function(){showToast('🌿 لعبتَ وقتاً جميلاً! استرح قليلاً وانظر بعيداً لتحمي عينيك',6500)},15*60*1000);
 })();
