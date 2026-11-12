@@ -331,6 +331,7 @@ html,body,.scr{overscroll-behavior:none}
 @media(min-width:1000px){#grid>.card{min-height:162px}}
 @media(max-width:520px){#grid,.skg{--n:2;--g:10px}.skg .card{min-height:172px}#grid>.world{min-height:196px}#grid>.card{min-height:124px}
  #grid>.world:first-child,#grid>.world:last-child{flex-basis:100%}}
+.cg{font-size:.5em}@media(min-width:600px){.cg{font-size:.38em}}
 </style>
 </head>
 <body>
@@ -469,7 +470,7 @@ html,body,.scr{overscroll-behavior:none}
       <a class="btn gold sm" href="#" data-ext="https://rawad-store.github.io/" rel="noopener" style="margin-top:8px">🌐 زيارة موقع المكتبة</a>
       <p style="margin-top:12px;font-size:12px;line-height:1.8;color:#61758a;font-weight:700">ملاحظة تعليمية: المحتوى للتعلم العام والمراجعة، وليس بديلاً عن المقرر الدراسي. تُذكر الأذكار بصيغها المشهورة، ويُستحسن الرجوع إلى المصادر الشرعية المعتمدة للتوسع والتوثيق.</p>
       <p style="margin-top:8px;font-size:12px;line-height:1.8;color:#61758a;font-weight:700">الخصوصية: يحفظ التطبيق التقدّم والرسومات على هذا الجهاز فقط، ولا يجمع بيانات شخصية ولا يرسلها لأي جهة. الخطوط مضمَّنة مع التطبيق ولا يتصل بأي خدمة خارجية لتحميلها.</p>
-      <p style="margin-top:18px;font-size:14px">الإصدار 36.7</p>
+      <p style="margin-top:18px;font-size:14px">الإصدار 36.9</p>
       <div class="copy">
         تطوير وإنتاج<br>
         <b>مكتبة الرواد للطباعة والتصوير</b><br>
@@ -915,9 +916,27 @@ function upd(){$('st').textContent=stars;document.querySelectorAll('.stc').forEa
 function ctx(){try{if(!AC)AC=new(window.AudioContext||window.webkitAudioContext)();if(AC.state==='suspended')AC.resume()}catch(e){}return AC}
 function tone(f,d,t,v,w){if(!on)return;var a=ctx();if(!a)return;var s=a.currentTime+(w||0),o=a.createOscillator(),g=a.createGain();o.type=t||'triangle';o.frequency.setValueAtTime(f,s);o.frequency.exponentialRampToValueAtTime(Math.max(f*1.45,40),s+d*.55);g.gain.setValueAtTime(v||.2,s);g.gain.exponentialRampToValueAtTime(.001,s+d);o.connect(g);g.connect(a.destination);o.start(s);o.stop(s+d+.05);o.onended=function(){try{o.disconnect();g.disconnect()}catch(e){}}}
 function pop(){tone(620,.15,'triangle',.22)}
-function cheer(){mascot('mjump',['أحسنت! 🌟','رائع! 👏','ممتاز! 🎉','يا بطل! 💪'][Math.floor(Math.random()*4)]);[523,659,784,1047].forEach(function(f,i){tone(f,.28,'triangle',.2,i*.09)})}
-function bigCheer(){mascot('mspin','مبروك!! 🎉');[523,659,784,1047,1319].forEach(function(f,i){tone(f,.35,'triangle',.22,i*.08)})}
-function oops(){mascot('mshake','حاول مرة أخرى 💪');tone(230,.28,'sine',.2);tone(175,.3,'sine',.16,.12)}
+/* ═ تشجيع ناطق: يُقال بصوت الطفل-الودود عند كل إجابة صحيحة، مع مكافأة للتتابع ═ */
+var PRAISE=[['أحسنت! 🌟','أحسنت'],['رائع! 👏','رائع'],['ممتاز! 🎉','ممتاز'],['يا بطل! 💪','يا بطل'],['إجابة صحيحة! ✅','إجابة صحيحة'],['أنت عبقري! 🧠','أنت عبقري'],['مذهل! 🤩','مذهل'],['برافو! 👏','برافو'],['ما شاء الله! ✨','ما شاء الله']];
+var STREAK={3:['ثلاثة متتالية! 🔥','ثلاث إجابات صحيحة متتالية، ما شاء الله'],5:['خمسة متتالية! 🚀','خمس إجابات صحيحة متتالية، أنت بطل خارق'],8:['ثمانية متتالية! 👑','ثماني إجابات متتالية، أنت ملك الذكاء']};
+var RETRY=[['حاول مرة أخرى 💪','حاول مرة أخرى، أنت تستطيع'],['لا بأس، جرّب ثانية 🌈','لا بأس، جرب ثانية'],['قريب جداً! 🎯','قريب جدا، حاول مرة ثانية']];
+var _stk=0,_stkT=0,_lastP=-1,_praiseUntil=0;
+function sayPraise(t){
+  _praiseUntil=Date.now()+Math.max(1000,t.length*80);
+  if(!on||!speechOk)return;
+  if(_sayTimer){clearTimeout(_sayTimer);_sayTimer=null}
+  try{speechModule.speak(prepareSpeech(t))}catch(e){}
+}
+function cheer(){
+  var now=Date.now();_stk=(now-_stkT<45000)?_stk+1:1;_stkT=now;
+  var p;
+  if(STREAK[_stk])p=STREAK[_stk];
+  else{var n;do{n=Math.floor(Math.random()*PRAISE.length)}while(n===_lastP&&PRAISE.length>1);_lastP=n;p=PRAISE[n]}
+  mascot('mjump',p[0]);sayPraise(p[1]);
+  [523,659,784,1047].forEach(function(f,i){tone(f,.28,'triangle',.2,i*.09)})
+}
+function bigCheer(){mascot('mspin','مبروك!! 🎉');sayPraise('مبروك، أنت بطل');[523,659,784,1047,1319].forEach(function(f,i){tone(f,.35,'triangle',.22,i*.08)})}
+function oops(){_stk=0;var p=RETRY[Math.floor(Math.random()*RETRY.length)];mascot('mshake',p[0]);sayPraise(p[1]);tone(230,.28,'sine',.2);tone(175,.3,'sine',.16,.12)}
 function click(){tone(440,.07,'square',.09)}
 
 function showToast(m,ms){
@@ -1061,6 +1080,8 @@ function say(t){
   if(!on||!t||!speechOk)return;
   t=prepareSpeech(t);
   if(_sayTimer){clearTimeout(_sayTimer);_sayTimer=null}
+  var _w=_praiseUntil-Date.now();
+  if(_w>0){_sayTimer=setTimeout(function(){_sayTimer=null;speechModule.speak(t)},_w+120);return}
   try{
     if(speechSynthesis.speaking||speechSynthesis.pending){
       speechModule.stop();
@@ -2834,7 +2855,7 @@ function skQuiz(k,gen){
   var r=0,ok=0,lock=false,T=5;
   function next(){
     if(r>=T){var n=ok>=5?3:ok>=4?2:ok>=3?1:0;if(n>=2)skWin(k,n);return skDone(k,n>=2?'🏆':'💪',n>=2?'أحسنت يا بطل!':'محاولة جميلة!','أجبت '+ar(ok)+' من '+ar(T)+' إجابات صحيحة',n)}
-    var q=gen(r);lock=false;
+    var q=gen(r);lock=false;var _rr=r;later(function(){if(!lock&&r===_rr){mascot('mwave','فكّر جيداً، أنت تستطيع! 💡');say('فكر جيدا، أنت تستطيع')}},20000);
     $('sk').innerHTML='<div class="prog" style="margin:4px auto 10px"><div class="bar" style="width:'+(r/T*100)+'%"></div></div><div class="skq"><div class="sks">السؤال '+ar(r+1)+' من '+ar(T)+'</div><div class="skt" dir="ltr">'+q.q+'</div><div class="skp">'+esc(q.t)+'</div><div class="skopts">'+q.o.map(function(h,i){return '<button class="opt" data-i="'+i+'" dir="ltr">'+h+'</button>'}).join('')+'</div><div id="skf" class="skf" aria-live="polite"></div></div>';
     if(q.s)say(q.s);
     var bs=$('sk').querySelectorAll('.opt');
@@ -2919,7 +2940,7 @@ function genCmp(r){var e=shuf(EM.slice(0,10))[0],mx=r<2?5:9,b=1+rnd(mx),a=b;
   while(Math.abs(a-b)<(r<2?2:1)||a<1||a>9){a=1+rnd(mx)}
   var more=rnd(2)===0,c=[a,b],ans=more?(a>b?0:1):(a<b?0:1);
   return{q:'⚖️',t:'أيّ المجموعتين فيها '+(more?'أكثر':'أقل')+'؟',s:'أي المجموعتين فيها '+(more?'أكثر':'أقل'),a:ans,
-    o:c.map(function(n){return '<span style="font-size:.3em;line-height:1.15;display:block;padding:4px;word-break:break-all">'+new Array(n+1).join(e)+'</span>'})}}
+    o:c.map(function(n){return '<span class="cg" style="line-height:1.1;display:grid;grid-template-columns:repeat('+(n>4?3:2)+',auto);gap:3px;justify-items:center;align-items:center">'+new Array(n+1).join('<i style="font-style:normal">'+e+'</i>')+'</span>'})}}
 function genSum(r){
   var F=['🍎','🍌','🍓','🍊','🍇'],f=F[rnd(F.length)],m=r<2?3:5,a=1+rnd(m),b=1+rnd(m),t=a+b,o=[t];
   while(o.length<3){var v=Math.max(1,t+rnd(5)-2);if(o.indexOf(v)<0)o.push(v)}
