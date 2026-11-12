@@ -279,6 +279,22 @@ body.draw-fullscreen .draw-header{display:none}
 @supports not (width:1cqw){.scr{padding:16px;padding-top:max(16px,env(safe-area-inset-top))}#bear{width:clamp(120px,23vw,210px)}.hero-glow{width:clamp(140px,24vw,240px);height:clamp(140px,24vw,240px)}h1{font-size:clamp(26px,6vw,44px)}.home-subtitle{font-size:clamp(15px,3.2vw,20px)}.card{min-height:clamp(112px,22vw,158px);font-size:clamp(15px,3.4vw,22px)}.card span.e{font-size:clamp(38px,10vw,64px)}#big .m{font-size:clamp(76px,22vw,140px)}#big .r{font-size:clamp(55px,16vw,96px)}#big .w{font-size:clamp(30px,9vw,60px)}#big .fact{font-size:clamp(16px,4vw,22px)}#q .t{font-size:clamp(22px,6vw,36px)}#q .p{font-size:clamp(56px,16vw,100px)}.opt{width:clamp(88px,26vw,140px);font-size:clamp(38px,10vw,64px)}.sw{width:clamp(100px,28vw,170px);height:clamp(100px,28vw,170px)}.btn{font-size:clamp(15px,3.8vw,19px)}.pill{font-size:clamp(12px,3vw,15px)}}
 
 .bg-white{background:#fff}.bg-sky-b{background:#bae6fd}.bg-field-b{background:#bbf7d0}.bg-beach-b{background:#fde68a}.bg-night-b{background:#312e81}.bg-candy-b{background:#fbcfe8}
+
+/* ═════════ لمسات الجاذبية والسعادة v35.1 ═════════ */
+.medals{flex-wrap:nowrap;gap:clamp(4px,1.6cqw,10px)}
+.medal{width:clamp(38px,9cqw,50px);height:clamp(38px,9cqw,50px);font-size:clamp(18px,4.6cqw,24px);flex:none}
+@media(max-width:520px){#mascot{width:46px;height:46px;font-size:27px;bottom:calc(8px + env(safe-area-inset-bottom,0px));border-width:2px}}
+.card:hover,.world:hover{box-shadow:0 8px 0 rgba(26,54,82,.14),0 20px 32px rgba(36,66,101,.24)}
+.prog .bar{background-image:linear-gradient(90deg,#36c98f,#a7f0d0,#36c98f);background-size:200% 100%;animation:shim 2.2s linear infinite}
+@keyframes shim{to{background-position:-200% 0}}
+.opt.ok{animation:pop .3s,glow .9s}
+@keyframes glow{50%{box-shadow:0 0 0 10px rgba(67,200,149,.35)}}
+.skq{animation:enter .3s ease-out}
+.skg .card{min-height:clamp(120px,22cqw,150px)}
+.skg .card:nth-child(odd):hover .e{animation:mspin .7s}
+.skb{background:rgba(255,255,255,.25);border-radius:99px;padding:1px 8px}
+.btn.gold#skSur{animation:instp 2.4s ease-in-out infinite}
+@media(prefers-reduced-motion:reduce){.prog .bar,.btn.gold#skSur{animation:none}}
 </style>
 </head>
 <body>
@@ -415,7 +431,7 @@ body.draw-fullscreen .draw-header{display:none}
       <a class="btn gold sm" href="#" data-ext="https://rawad-store.github.io/" rel="noopener" style="margin-top:8px">🌐 زيارة موقع المكتبة</a>
       <p style="margin-top:12px;font-size:12px;line-height:1.8;color:#61758a;font-weight:700">ملاحظة تعليمية: المحتوى للتعلم العام والمراجعة، وليس بديلاً عن المقرر الدراسي. تُذكر الأذكار بصيغها المشهورة، ويُستحسن الرجوع إلى المصادر الشرعية المعتمدة للتوسع والتوثيق.</p>
       <p style="margin-top:8px;font-size:12px;line-height:1.8;color:#61758a;font-weight:700">الخصوصية: يحفظ التطبيق التقدّم والرسومات على هذا الجهاز فقط، ولا يجمع بيانات شخصية ولا يرسلها لأي جهة. الخطوط مضمَّنة مع التطبيق ولا يتصل بأي خدمة خارجية لتحميلها.</p>
-      <p style="margin-top:18px;font-size:14px">الإصدار 35.0</p>
+      <p style="margin-top:18px;font-size:14px">الإصدار 35.1</p>
       <div class="copy">
         تطوير وإنتاج<br>
         <b>مكتبة الرواد للطباعة والتصوير</b><br>
@@ -2736,11 +2752,13 @@ function rnd(n){return Math.floor(Math.random()*n)}
 function shuf(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=rnd(i+1),t=a[i];a[i]=a[j];a[j]=t}return a}
 function skStars(n){return '⭐'.repeat(n)+'☆'.repeat(3-n)}
 function skWin(k,score){stars++;completedLessons['نادي الذكاء']=1;if(score>(SK.best[k]||0))SK.best[k]=score;try{localStorage.setItem('bearsk',JSON.stringify(SK.best))}catch(e){}upd();burst(true);bigCheer();vibrate([40,60,40])}
+function skSurprise(ex){var L=SKG.filter(function(g){return g.k!==ex});skStart(L[rnd(L.length)].k)}
 function skHub(){
   skIn=false;clearT();stopSay();
   $('skTitle').textContent='🧠 نادي الذكاء';
-  $('sk').innerHTML='<p class="home-subtitle" style="margin:6px 0 14px">اختر لعبة ودرّب عقلك مع الدب! 🐻<br><small>أنجزتَ '+ar(SKG.filter(function(g){return g.k==='mem'?(SK.best.mem3||SK.best.mem4||SK.best.mem6):SK.best[g.k]}).length)+' من '+ar(SKG.length)+' ألعاب</small></p><div class="skg">'+SKG.map(function(g){var b=g.k==='mem'?Math.max(SK.best.mem||0,SK.best.mem3||0,SK.best.mem4||0,SK.best.mem6||0):(SK.best[g.k]||0);return '<button class="card" data-g="'+g.k+'" style="background:'+g.c+'" aria-label="'+g.n+'"><span class="e" aria-hidden="true">'+g.e+'</span>'+g.n+'<small>'+g.d+'</small>'+(b?'<em class="skb">'+skStars(Math.min(b,3))+'</em>':'')+'</button>'}).join('')+'</div>';
+  $('sk').innerHTML='<p class="home-subtitle" style="margin:6px 0 14px">اختر لعبة ودرّب عقلك مع الدب! 🐻<br><small>أنجزتَ '+ar(SKG.filter(function(g){return g.k==='mem'?(SK.best.mem3||SK.best.mem4||SK.best.mem6):SK.best[g.k]}).length)+' من '+ar(SKG.length)+' ألعاب</small></p><div class="skrow" style="margin:0 0 14px"><button class="btn gold sm" id="skSur">🎲 لعبة مفاجأة</button></div><div class="skg">'+SKG.map(function(g){var b=g.k==='mem'?Math.max(SK.best.mem||0,SK.best.mem3||0,SK.best.mem4||0,SK.best.mem6||0):(SK.best[g.k]||0);return '<button class="card" data-g="'+g.k+'" style="background:'+g.c+'" aria-label="'+g.n+'"><span class="e" aria-hidden="true">'+g.e+'</span>'+g.n+'<small>'+g.d+'</small>'+(b?'<em class="skb">'+skStars(Math.min(b,3))+'</em>':'')+'</button>'}).join('')+'</div>';
   $('sk').querySelectorAll('.card').forEach(function(b){b.onclick=function(){click();skStart(b.getAttribute('data-g'))}});
+  $('skSur').onclick=function(){click();skSurprise('')};
 }
 function skStart(k){
   skIn=true;clearT();var g=SKG.filter(function(x){return x.k===k})[0];
@@ -2749,8 +2767,8 @@ function skStart(k){
   else if(k==='ord')ordGame();else if(k==='miss')missGame();else skQuiz(k,GEN[k]);
 }
 function skDone(k,e,title,msg,n){
-  $('sk').innerHTML='<div class="skq"><div class="skbig">'+e+'</div><h2 style="margin:6px 0;color:#1c4775">'+title+'</h2><div class="stars">'+skStars(n)+'</div><div class="sub">'+msg+'</div><div class="skrow"><button class="btn g" id="skAgain">🔄 مرة أخرى</button><button class="btn b" id="skMenu">🎮 الألعاب</button></div></div>';
-  $('skAgain').onclick=function(){click();skStart(k)};$('skMenu').onclick=function(){click();skHub()};
+  $('sk').innerHTML='<div class="skq"><div class="skbig">'+e+'</div><h2 style="margin:6px 0;color:#1c4775">'+title+'</h2><div class="stars">'+skStars(n)+'</div><div class="sub">'+msg+'</div><div class="skrow"><button class="btn g" id="skAgain">🔄 مرة أخرى</button><button class="btn b" id="skMenu">🎮 الألعاب</button><button class="btn gold" id="skRnd">🎲 لعبة مفاجأة</button></div></div>';
+  $('skAgain').onclick=function(){click();skStart(k)};$('skMenu').onclick=function(){click();skHub()};$('skRnd').onclick=function(){click();skSurprise(k)};
   say(title+'. '+msg);
 }
 /* أسئلة بخمس جولات */
@@ -2958,6 +2976,16 @@ if(isStandalone())instMark('bearInstalled');
 updInstall();
 $('skBack').onclick=function(){click();if(skIn)skHub();else go('home')};
 
+/* ═════════ 🔥 أيام متتالية + تنبيه راحة للعينين ═════════ */
+(function(){
+  var d=new Date(),f=function(x){return x.getFullYear()*10000+(x.getMonth()+1)*100+x.getDate()},t=f(d),last=+safeGet('bearday',0)||0,n=Math.max(0,Math.min(9999,+safeGet('bearstreak',0)||0));
+  if(last!==t){
+    n=(last===f(new Date(d.getFullYear(),d.getMonth(),d.getDate()-1)))?n+1:1;
+    try{localStorage.setItem('bearday',String(t));localStorage.setItem('bearstreak',String(n))}catch(e){}
+    setTimeout(function(){showToast(n>1?'🔥 '+ar(n)+' أيام متتالية! أنت بطل 🌟':'👋 أهلاً بك يا بطل! هيّا نلعب ونتعلّم',3800)},1300);
+  }
+  setTimeout(function(){showToast('🌿 لعبتَ وقتاً جميلاً! استرح قليلاً وانظر بعيداً لتحمي عينيك',6500)},15*60*1000);
+})();
 })(); // 👈 إغلاق التطبيق بالكامل
 </script>
 </body>
